@@ -5,7 +5,12 @@ Utilities used in Software Carpentry tools.
 import re
 import cStringIO
 import xml.etree.ElementTree as ET
-import htmlentitydefs
+try:  # Python 3
+    import html.entities
+    ENTITIES = html.entities.entitydefs
+except ImportError:  # Python 2
+    import htmlentitydefs
+    ENTITIES = htmlentitydefs.entitydefs
 
 #-------------------------------------------------------------------------------
 
@@ -24,7 +29,7 @@ def read_xml(filename, mangle_entities=False):
             with open(filename, 'r') as reader:
                 parser = ET.XMLParser()
                 parser.parser.UseForeignDTD(True)
-                parser.entity.update(htmlentitydefs.entitydefs)
+                parser.entity.update(ENTITIES)
                 return ET.parse(reader, parser=parser)
     except ET.ParseError as e:
         assert False, \
