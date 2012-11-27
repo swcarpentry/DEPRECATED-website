@@ -14,6 +14,6 @@ for filename in sys.argv[1:]:
         tree = ET.parse(reader, parser=parser)
         reader.close()
     except ET.ParseError as e:
-        print 'Unable to parse %s: %s' % (filename, e)
+        print('Unable to parse {0}: {1}'.format(filename, e))
     except Exception as e:
-        print 'Unable to read %s: %s' % (filename, e)
+        print('Unable to read {0}: {1}'.format(filename, e))
