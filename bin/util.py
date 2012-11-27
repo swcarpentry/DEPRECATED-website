@@ -26,7 +26,7 @@ def read_xml(filename, mangle_entities=False):
                 parser.parser.UseForeignDTD(True)
                 parser.entity.update(htmlentitydefs.entitydefs)
                 return ET.parse(reader, parser=parser)
-    except ET.ParseError, e:
+    except ET.ParseError as e:
         assert False, \
                'Unable to parse %s: %s' % (filename, e)
 
