@@ -376,7 +376,8 @@ class GenericPage(object):
         Render and save this page.
         """
         if self.app.verbosity > 0:
-            print >> sys.stderr, self.filename
+            sys.stderr.write(self.filename)
+            sys.stderr.write('\n')
 
         # Render.
         template = self.app.env.get_template(self.filename)
