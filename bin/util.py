@@ -28,7 +28,7 @@ def read_xml(filename, mangle_entities=False):
                 return ET.parse(reader, parser=parser)
     except ET.ParseError as e:
         assert False, \
-               'Unable to parse %s: %s' % (filename, e)
+               'Unable to parse {0}: {1}'.format(filename, e)
 
 #-------------------------------------------------------------------------------
 
