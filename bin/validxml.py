@@ -13,7 +13,7 @@ for filename in sys.argv[1:]:
         reader = open(filename, 'r')
         tree = ET.parse(reader, parser=parser)
         reader.close()
-    except ET.ParseError, e:
+    except ET.ParseError as e:
         print 'Unable to parse %s: %s' % (filename, e)
-    except Exception, e:
+    except Exception as e:
         print 'Unable to read %s: %s' % (filename, e)
