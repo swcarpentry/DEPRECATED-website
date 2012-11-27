@@ -359,7 +359,7 @@ class GenericPage(object):
         # If anything was globbed, sort everything (including children
         # that were loaded explicitly).
         if sort:
-            self.children.sort(lambda x, y: cmp(x._sort_key, y._sort_key))
+            self.children.sort(key=lambda x: (x._sort_key, id(x)))
 
     def _finalize_children(self):
         """
