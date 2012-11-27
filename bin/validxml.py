@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 import sys
 import xml.etree.ElementTree as ET
-import htmlentitydefs
-
-ENTITIES = htmlentitydefs.entitydefs
+try:  # Python 3
+    import html.entities
+    ENTITIES = html.entities.entitydefs
+except ImportError:  # Python 2
+    import htmlentitydefs
+    ENTITIES = htmlentitydefs.entitydefs
 
 for filename in sys.argv[1:]:
     try:
