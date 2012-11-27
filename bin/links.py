@@ -64,7 +64,7 @@ def show_missing(all_files, links):
     """
     for (source, normalized, raw) in links:
         if normalized not in all_files:
-            print '%s: %s (%s)' % (source, raw, normalized)
+            print('{0}: {1} ({2})'.format(source, raw, normalized))
 
 #-------------------------------------------------------------------------------
 
