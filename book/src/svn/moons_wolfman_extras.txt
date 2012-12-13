@@ -1,0 +1,8 @@
+Name            Orbital Radius  Orbital Period  Mass            Radius
+Amalthea        181.4           0.498179        0.075           131
+Io              421.6           1.769138        893.2           1821.6
+Europa          670.9           3.551181        480.0           1560.8
+Ganymede        1070.4          7.154553        1481.9          2631.2
+Callisto        1882.7          16.689018       1075.9          2410.3
+Himalia         11460           250.5662        0.095           85.0
+Elara           11740           259.6528        0.008           40.0

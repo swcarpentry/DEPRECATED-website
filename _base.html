@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<!-- pageclass: GenericPage -->
+
+{% macro youtube(title, stem, time) -%}
+  <div class="youtube">
+    <iframe title="{{title}}"
+            src="http://www.youtube.com/embed/{{stem}}"
+            time="{{time}}"
+            width="640" height="506"
+            frameborder="0"
+            allowfullscreen="allowfullscreen"></iframe>
+  </div>
+{%- endmacro %}
+
+{% macro nav_left() -%}
+  {% if page.prev %}
+    <li class="previous"><a id="id_prev_link" href="{{page.prev}}">&larr; Previous</a></li>
+  {% else %}
+    <li class="previous"><a id="id_up_link" href="{{page.uplink}}">&uarr; Up</a></li>
+  {% endif %}
+{%- endmacro %}
+
+{% macro nav_right() -%}
+  {% if page.next %}
+    <li class="next"><a id="id_next_link" href="{{page.next}}">Next &rarr;</a></li>
+  {% else %}
+    <li class="next"><a id="id_up_link" href="{{page.uplink}}">&uarr; Up</a></li>
+  {% endif %}
+{%- endmacro %}
+
+{% macro disqus(title, ident) -%}
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'software-carpentry';
+  var disqus_developer = 1;
+  var disqus_identifier = '{{ident}}';
+  var disqus_title = '{{title}}';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+{%- endmacro %}
+
+{% macro navhighlight(section) -%}
+<script type="text/javascript">
+  document.getElementById('nav-{{section}}').setAttribute('class', 'active');
+</script>
+{%- endmacro %}
+
+  <head>
+    <link rel="shortcut icon" type="image/x-icon" href="{{root_path}}/img/favicon.ico" />
+    {% block css %}
+    <link href="{{root_path}}/css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{{root_path}}/css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{root_path}}/css/swc.css" />
+    <link rel="stylesheet" type="text/css" href="{{root_path}}/css/swc-bootstrap.css" />
+    <link rel="alternate" type="application/rss+xml" title="The Software Carpentry Blog RSS Feed" href="{{site}}/feed.xml"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% endblock css %}
+    {% block metadata %}{% endblock metadata %}
+    {% block file_metadata %}{% endblock file_metadata %}
+    {% block pagetitle %}<title>Software Carpentry: {{page.title}}</title>{% endblock pagetitle %}
+    {% block javascript %}{% endblock javascript %}
+  </head>
+
+  <body>
+    <div class="container shadow">
+
+      <div class="banner">
+        <a href="{{root_path}}/index.html" title="Software Carpentry Home">
+          <img src="{{root_path}}/img/software-carpentry-banner.png" alt="Software Carpentry banner" />
+        </a>
+      </div>
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li id="nav-home"><a href="{{root_path}}/index.html">Home</a></li>
+            <li id="nav-about"><a href="{{root_path}}/about/index.html">About</a></li>
+            <li id="nav-lessons"><a href="{{root_path}}/4_0/index.html">Lessons</a></li>
+            <li id="nav-bootcamps"><a href="{{root_path}}/bootcamps/index.html">Boot Camps</a></li>
+            <li id="nav-blog"><a href="{{root_path}}/blog/index.html">Blog</a></li>
+            <li id="nav-license"><a href="{{root_path}}/license.html">License</a></li>
+          </ul>
+          <form class="navbar-search pull-right" method="get" action="http://www.google.com/search">
+            <input type="hidden" name="sitesearch" value="{{site}}" />
+            <input name="q" type="text" class="search-query" placeholder="Search" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block navhighlight %}{% endblock navhighlight %}
+
+  {% block title %}
+  <div class="title">
+    <h1>{{page.title}}</h1>
+  </div>
+  {% endblock title %}
+
+      {% block files %}{% endblock files %}
+
+      <div class="row-fluid">
+        <div class="span10 offset1">
+        {% block content %}{% endblock content %}
+	{% block details %}{% endblock details %}
+	{% block comments %}{{disqus(page.title, page.filename)}}{% endblock comments %}
+        </div>
+      </div>
+
+      <div class="footer">
+        <a href="{{root_path}}/license.html"><img src="{{root_path}}/img/creative-commons-attribution-license.png" alt="Creative Commons Attribution License" /></a>
+      </div>
+
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{root_path}}/js/bootstrap/bootstrap.min.js"></script>
+  </body>
+</html>

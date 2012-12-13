@@ -1,0 +1,147 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Boot Camp FAQ" />
+{% endblock file_metadata %}
+
+{% block navhighlight %}{{navhighlight('bootcamps')}}{% endblock navhighlight %}
+
+{% block content %}
+
+<ul>
+  <li><a href="#what-is-swc">What is Software Carpentry?</a></li>
+  <li><a href="#what-is-boot-camp">What is a boot camp?</a></li>
+  <li><a href="#why-boot-camp">Why boot camps?</a></li>
+  <li><a href="#boot-camp-format">What does a typical boot camp look like?</a></li>
+  <li><a href="#how-attend-boot-camp">How can I attend a boot camp?</a></li>
+  <li><a href="#how-organise-boot-camp">How can I organise a boot camp?</a></li>
+  <li><a href="#how-help-boot-camp">How can I help to run a boot camp as a helper or an instructor?</a></li>
+  <li><a href="#more-info">Where can I learn more?</a></li>
+  <li><a href="http://software-carpentry.eventbrite.com/">What boot camps are coming up?</a></li>
+</ul>
+
+<p id="what-is-swc"><em><strong>What is Software Carpentry?</strong></em></p>
+
+<p>The goal of Software Carpentry is to make scientists and engineers
+more productive by teaching them basic computing skills like program
+design, version control, testing, and task automation&mdash;things they
+should know <em>before</em> they try to tackle anything with "peta" or
+"cloud" in its name. Since 1997, we have found that a few days of
+training can save researchers a day a week for the rest of their
+professional lives, and also improve the quality of their
+computational work. Rather than adopting a position of <em>these
+skills are good because software developers say they are</em>,
+Software Carpentry teaches the software skills in the context of how
+they contribute to correct, reproducible and reusable research.</p>
+
+<p id="what-is-boot-camp"><em><strong>What is a boot camp?</strong></em></p>
+
+<p>A boot camp is an in-person, example-driven workshop, typically two
+or three days long. A boot camp covers the core skills needed to be
+productive in a small research team: basic programming skills, version
+control, testing, using the shell, and relational databases.</p>
+
+<p>Short tutorials alternate with hands-on practical exercises, and
+participants are encouraged both to help one another, and to try
+applying what they have learned to their own research problems during
+and between sessions. Participants usually work on their own computers
+(typically laptops), using either native software or a standard set of
+packages running in a virtual machine. This ensures that they have a
+working environment when the boot camp is done.</p>
+
+<p id="why-boot-camp"><em><strong>Why boot camps?</strong></em></p>
+
+<p>Software Carpentry was originally taught using in-lab lectures, but
+we have been experimenting since 2007 with various forms of online
+delivery. Our experience is consistent with recent research: students
+learn best in a <em>blended</em> environment that combines directed
+in-person instruction with self-directed online learning. We have
+therefore borrowed the boot camp format used so successfully by the
+University of Wisconsin - Madison's
+<a href="https://github.com/thehackerwithin">Hacker Within</a> group,
+and are using it as a lead-in to our online material.</p>
+
+<p>As well as improving learning, boot camps solve two other recurring
+problems. Researchers are busy people who often cannot make time for a
+semester-long traditional course. However, most can find two or three
+days to get started (and to get past installation and configuration
+hurdles if they are working on their own machines). At the same time,
+it can be hard to stay motivated when working in isolation; by
+bringing people together, boot camps create help peer support
+communities in selected disciplines or geographic regions.</p>
+
+<p id="boot-camp-format"><em><strong>What does a typical boot camp look like?</strong></em></p>
+
+<p>Boot camps are usually full-day affairs, starting at 8:30 and
+ running to 4:30 or 5:00 with breaks for coffee and lunch. They
+ usually have 20-50 participants and 2-4 instructors, plus a variable
+ number of helpers wandering the room answering questions during
+ practical sessions. (The instructors usually do this as well if their
+ schedules permit.)</p>
+
+<p>Participants are usually graduate students in science and
+engineering, though faculty and industrial researchers frequently also
+take part. They typically use their own laptop computers to do
+practical exercises, though they may also use machines provided in a
+departmental lab. Instructors and helpers are usually volunteers, and
+participation is usually either free, or subject to a small fee to
+cover the cost of refreshments.</p>
+
+<p id="how-attend-boot-camp"><em><strong>How can I attend a boot camp?</strong></em></p>
+
+<p>Dates and venues of upcoming boot camps are on
+our <a href="{{root_path}}/bootcamps/">calendar page</a>. They will also be announced on
+our <a href="{{root_path}}/blog/">blog</a> and
+on <a href="{{twitter_url}}">Twitter</a>.</p>
+
+<p id="how-organise-boot-camp"><em><strong>How can I organise a boot camp?</strong></em></p>
+
+<p>Anyone who wants to can organize and run a boot camp&mdash;all Software
+Carpentry materials are freely available under a
+<a href="{{root_path}}/license.html">Creative Commons license</a>,
+so you are free to re-use and re-mix them when and how you
+want. If you want to know more about what is involved in running a
+boot camp, please see our guide on
+<a href="{{root_path}}/bootcamps/how-to.html">how to run a boot camp</a>.</p>
+
+<p>We support groups who want to organise a workshop for their
+institution or research community. We look for people who can act as
+a <em>local organiser</em> who will handle the logistics of selecting
+a suitable date, finding and booking a venue and catering, local
+publicity, and finding a few researchers or students interested in
+being helpers. Most importantly, a local organiser should be able to
+gather a group of students, from their institution or community, to
+attend the boot camp.</p>
+
+<p>In return, we can help identify and arrange for instructors to come
+and present lectures and lead practical sessions, we will also provide
+guidance on how to organise the boot camp, help the local organiser to
+promote it, and provide any other assistance that might be
+required.</p>
+
+<p>If you'd like us to help with planning, advertising, and
+recruiting, please contact us by email
+at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.</p>
+
+<p id="how-help-boot-camp"><em><strong>How can I help to run a boot camp as a helper or an instructor?</strong></em></p>
+
+<p>Researchers attend boot camps, learn from them and become familiar
+with how they are run. Ideally, we hope that some of those researchers
+will attend future boot camps as helpers. Helpers provide support
+during practicals to students (and get to add the experience to their
+resume or CV). Eventually, we hope that some of the helpers will
+become instructors, who will deliver lectures and run practicals at
+future boot camps.</p>
+
+<p>If you are interested in helping out or instructing on a boot camp
+then please contact us by email
+at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.</p>
+
+<p id="more-info"><em><strong>Where can I learn more?</strong></em></p>
+
+<p>For more information, please
+see <a href="http://software-carpentry.org/">http://software-carpentry.org</a>,
+or contact us by email
+at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.</p>
+
+{% endblock content %}

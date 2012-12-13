@@ -1,0 +1,707 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Instructor's Guide" />
+{% endblock file_metadata %}
+
+{% block content %}
+    <ol class="toc">
+      <li><a href="#s:understand">What Does It Mean to Understand Computing?</a></li>
+      <li><a href="#s:conceptual">There Are No Blank Slates</a></li>
+      <li><a href="#s:relevance">Relevance and Empowerment</a></li>
+      <li><a href="#s:load">Cognitive Load</a></li>
+      <li><a href="#s:scaling">Scaling Instruction</a></li>
+      <li><a href="#s:summary">Summing Up</a></li>
+    </ol>
+
+    <p>
+      Moses Messenger has just been awarded tenure at Euphoric State University.
+      He knows how important basic computing skills are to scientists,
+      so he'd like to start offering a computational methods course
+      to grad students at ESU.
+      He'd also like to become a better teacher:
+      he remembers being inspired by a couple of profs when he was an undergrad,
+      and almost changing majors to avoid another one with a reputation for being an awful lecturer.
+    </p>
+    <p class="fixme">
+      ARB: I'm not sure about Moses here. We introduce him and then abandon him.
+      I'm not sufficiently familiar with the Software Carpentry material yet
+      to know how you handle the character case studies in other chapters,
+      but it seems to me that at the very least we should include Moses in the
+      summing up section at the end &mdash; how is he going to apply this new
+      knowledge? How will he start? Ideally, we would sprinkle Moses throughout
+      the chapter and talk about how he can apply each nugget of information in
+      his classes.
+    </p>
+    <p class="fixme">
+      ARB: Or else we could get rid of him altogether. It's a little meta having
+      a character in the chapter which is intended for the instructors. The
+      other characters are intended to represent someone who can use the 
+      information in the course; Moses is intended to represent the people
+      who will be teaching the course (kind of, except he's portrayed as
+      someone teaching a different course). I guess I'm a little confused
+      about Moses's role in this chapter.
+     </p>
+
+    <p>
+      Broadly speaking,
+      teachers need three kinds of knowledge:
+    </p>
+
+    <ul>
+
+      <li>
+        <em>content knowledge</em>,
+        such as the "what" of programming;
+      </li>
+
+      <li>
+        <em>general pedagogical knowledge</em>,
+        i.e., an understanding of the psychology of learning; and
+      </li>
+
+      <li>
+        the <em>pedagogical content knowledge</em> that connects the two,
+        which is things like when to teach the notion of a call stack
+        and what examples to use when doing so.
+      </li>
+
+    </ul>
+
+    <p>
+      In this chapter,
+      we will assume you know enough about programming to teach it,
+      and will talk about general pedagogical principles.
+      We hope that this will help you make sense of
+      the pedagogical content knowledge that is implicitly presented
+      in everything that has come before.
+    </p>
+
+    <section id="s:understand">
+
+      <h2>What Does It Mean to Understand Computing?</h2>
+
+      <p>
+        Our starting point is the most basic question of all:
+        what are we trying to accomplish?
+        What do we want people to understand when we're finished teaching?
+        "How to write a loop" and "how to fetch records from a database"
+        are the practical skills we want them to be able to apply,
+        but these aren't useful on their own&mdash;without
+        some higher-level understanding of what computing <em>is</em>,
+        people will still be stuck in a tweak-and-pray world.
+      </p>
+
+      <p class="fixme">
+	I'm not sure how Jon Udell's list fits in here.
+	     We seem to introduce it only to say it's not sufficient. In
+	     fact, this whole paragraph could probably go and we can skip to
+	     the concepts that are useful. --ARB
+      </p>
+      <p>
+        Most definitions of what it means to understanding computing aren't very useful.
+        In particular,
+        the term "computational thinking" has been adopted by so many people
+        that it now means little more than, "Whatever the speaker thinks is important about computing."
+        Jon Udell's
+        "<a href="http://blog.jonudell.net/2011/01/24/seven-ways-to-think-like-the-web/">Seven Ways to Think Like the Web</a>"
+        is much more helpful&mdash;to him,
+        the key ideas needed to really understand the web are:
+      </p>
+
+      <ol>
+        <li>Be the authoritative source for your own data.</li>
+        <li>Pass by reference not by value.</li>
+        <li>Know the difference between structured and unstructured data.</li>
+        <li>Create and adopt disciplined naming conventions.</li>
+        <li>Push your data to the widest appropriate scope.</li>
+        <li>Participate in pub/sub networks as both a publisher and a subscriber.</li>
+        <li>Reuse components and services.</li>
+      </ol>
+
+      <p>
+        His list inspired the one we present in <a href="concl.html">our conclusion</a>,
+        but neither is a general answer.
+        For that,
+        we need to turn to Mark Guzdial,
+        who has been studying computing and education for almost two decades.
+        <a href="http://computinged.wordpress.com/2012/05/24/defining-what-does-it-mean-to-understand-computing/">His answer</a>
+        depends on two definitions.
+        First,
+        a <a href="glossary.html#mental-model">mental model</a>
+        is a person's internal mental representation of something in the real world.
+        My mental model of how airplanes fly,
+        for example,
+        includes things like lift, thrust, banking, and fuel consumption.
+        It isn't physically accurate,
+        but it's close enough that I can predict what planes can and can't do
+        well enough for my everyday needs.
+      </p>
+
+      <p>
+        Second,
+        a <a href="glossary.html#notional-machine">notional machine</a>
+        is something with predictable behavior that will execute our programs.
+        The notional machine that most C programmers work with
+        is different from the one used by Python programmers.
+        The underlying hardware is the same,
+        but they treat memory and data types quite differently.
+      </p> 
+      <p class="fixme">I'm not clear on what a notional machine is from
+      this description; or rather, I think I understand after the first sentence, but then the second sentence confuses me. But then I'm not the target audience; maybe it makes more sense to coders? --ARB</p>
+
+      <p>
+        Given these two definitions,
+        we can say that,
+        "To understand computing is to have a robust mental model of a notional machine."
+        In other words,
+        someone understands some aspect of computing
+        when their mental model of what the computer is doing
+        allows them to (more or less) predict how programs will behave.
+        For example,
+        people don't need to know <em>how</em> pipes work in the shell in order to understand the shell;
+        what they need to know is how pipes behave.
+        One way to test this is to check that they understand the difference between:
+      </p>
+
+<pre>
+$ <span class="in">head -10 data.txt | wc</span>
+</pre>
+
+      <p class="continue">
+        and:
+      </p>
+
+<pre>
+$ <span class="in">head -10 | wc data.txt</span>
+</pre>
+
+      <p class="continue">
+        If they can explain why the answers are different,
+        and why the second will never finish if left undisturbed,
+        then they understand pipes.
+        Putting it another way,
+        if someone can identify the mistakes in something,
+        and debug something systematically
+        rather than simply making random changes until it appears to work,
+        they probably understand it.
+      </p>
+
+    </section>
+
+    <section id="s:conceptual">
+
+      <h2>There Are No Blank Slates</h2>
+
+      <p>
+        If understanding is where we're going,
+        what's our starting point?
+        The answer is definitely <em>not</em> "a blank slate,"
+        because there is no such thing.
+        Everyone has some mental model of the world&mdash;some conceptual categories
+        they use when assimilating new knowledge.
+        This is true even at birth:
+        our visual cortex is wired for edge detection,
+        and other parts of our brain are wired for face recognition,
+        and we cannot help but put things in those mental boxes.
+      </p>
+
+      <p id="p:misunderstanding">
+        This fact explains the key difference between novice and competent practitioners in any field.
+        To paraphrase Tolstoy,
+        everyone who understands something understands it the same way,
+        but everyone who misunderstands,
+        misunderstands differently.
+        The reason is that by definition,
+        novices don't yet have the right conceptual categories for what they're learning,
+        so they are putting new knowledge into old boxes,
+        and those boxes are the wrong ones for this domain.
+        Everyone who has taught novices has seen first-hand
+        how often their questions simply don't make sense;
+        this is the reason.
+      </p>
+
+      <div class="box">
+
+        <h3>If You Use Robots To Teach, You Teach People To Be Robots</h3>
+
+        <p>
+          This difference between what novices are doing when they learn,
+          and what competent practitioners are doing,
+          is one of the reasons we have stopped trying to teach via recorded video
+          with auto-graded drill exercises.
+          Any recorded content is as ineffective for most learners as broadcast television,
+          or as a professor standing in front of 400 people in a lecture hall,
+          because neither can intervene to clear up specific learners' misconceptions.
+          Some people happen to already have the right conceptual categories for a subject,
+          or happen to form them correctly early on;
+          these are the ones who stick with most massive online courses,
+          but many discussions of the effectiveness of such courses
+          ignore this survivor bias.
+        </p>
+
+      </div>
+
+        <!-- I changed this from "is precisely" to "is no more and no less than"
+	because it's an important concept and I didn't feel that "precisely"
+	gave it enough weight; and it's a word which isn't used in that
+	context often enough for the meaning of the sentence to be crystal
+	clear. "no more and no less than" is clunky but I couldn't come up 
+	with anything pithier which is still clear. -->
+      <p>
+        The transition from novice to competent practitioner is no more
+	and no less than
+        the construction of correct (enough) categories,
+        i.e.,
+        the construction of a new mental model of this new intellectual domain.
+        The goal of education for novices is, therefore,
+        to help them form the right categories.
+        Until they've done that,
+        trying to impart "mere information" just confuses them.
+      </p>
+
+      <div class="box">
+
+        <h3>The Documentation Is Useless</h3>
+
+        <p>
+          This is one of the reasons software documentation is so often frustrating.
+          Reference material is opaque to someone who doesn't know what they're looking for,
+          such as a novice who doesn't yet have a mental map of the domain.
+          On the other hand,
+          tutorials meant to help people build such a map
+          are too slow and too diffuse for people who already have one.
+          It is possible to craft something that serves both communities,
+          but it's often simpler to address their needs separately.
+        </p>
+
+      </div>
+
+      <p>
+        As an example of this idea's practical implications,
+        our introduction to the Unix shell only introduces 12 commands,
+        and we usually spend two and a half hours working through it.
+        Twelve and a half minutes per command may seem glacially slow,
+        but that's because our real goal isn't to teach specific commands:
+        it's to help learners construct the mental model and notional machine
+        that these commands fit into.
+        That model includes things like:
+      </p>
+
+      <ul>
+
+        <li>
+          Anything you repeat manually, you'll eventually get wrong
+	  (so let the computer repeat things for you by using tab completion
+	  and the <code>history</code> command)
+        </li>
+        <li>
+	  Lots of little tools, combined as needed, are more productive than a
+	  handful of "kitchen sink" programs.
+          (This motivates the pipe-and-filter model.)
+        </li>
+
+      </ul>
+
+      <p>
+        These two example illustrate something else as well.
+        Learning consists of more than "just" building mental models
+        and pouring information into them;
+        creating linkages between concepts and facts is as least as important.
+        Telling people that they shouldn't repeat things,
+        and that they should try to think in terms of little pieces loosely joined,
+        both set the stage for <a href="funclib.html">our discussion of functions</a>.
+        Explicitly referring back to the shell when introducing functions
+        helps solidify both ideas.
+      </p>
+
+    </section>
+
+    <section id="s:relevance">
+
+      <h2>Relevance and Empowerment</h2>
+
+      <p>
+        Discussion of the practical implications of learning concepts
+        brings us to our next big idea:
+        people learn best when they care about the topic <em>and</em> believe they can master it.
+        Neither fact is particularly surprising,
+        but their practical implications have a lot of impact on what we teach,
+        and the order in which we teach it.
+      </p>
+
+      <p>
+        First,
+        most scientists don't actually want to program.
+        They want to do scientific research,
+        and programming is just a tax they have to pay along the way.
+        They don't care <a href="setdict.html#s:storage">how hash tables work</a>,
+        or even that hash tables exist;
+        they just want to know how to process data faster.
+        We therefore have to make sure that everything we teach is useful right away,
+        and conversely that we don't teach anything just because it's "fundamental".
+      </p>
+
+      <div class="box">
+
+        <h3>You Are Not Normal</h3>
+
+        <p>
+          If you are thinking about teaching Software Carpentry,
+          then you almost certainly enjoy programming more than most scientists.
+          Try not to let this show...
+        </p>
+
+      </div>
+
+      <p>
+        Second,
+        believing that something will be hard to learn is a self-fulfilling prophecy.
+        This is why it's important not to say that something is easy:
+        if someone who has been told that tries it,
+        and it doesn't work,
+        they are more likely to become discouraged.
+      </p>
+
+      <p>
+        It's also why installing and configuring software is
+        a much bigger problem for us than experienced programmers like to acknowledge.
+        It isn't just the time we lose at the start of workshops
+        as we try to get a Unix shell working on Windows,
+        or set up a version control client on some idiosyncratic Linux distribution.
+        It isn't even the unfairness of asking students to debug things
+        that depend on precisely the knowledge they have come to learn,
+        but which they don't yet have.
+        The real problem is that every such failure reinforces the belief that computing is hard,
+        and that they'd have a better chance of making next Thursday's conference submission deadline
+        if they kept doing things the way they always have.
+      </p>
+
+      <p>
+        For these reasons,
+        we have adopted a "teach most immediately useful first" approach.
+        Imagine a 3&times;3 grid who axes are labeled
+        "mean time to master" and "usefulness once mastered".
+	<span class="fixme">Why a 3&times;3 grid? Why not just a graph?</span>
+        Everything in the upper left&mdash;i.e.,
+        everything that's quick to master, and immediately useful&mdash;should be taught first.
+	<span class="fixme">In my head the quick/useful corner is the lower
+	right... perhaps we should remove the reference to the location of
+	the corner?</span>
+        Things in the opposite corner,
+        which are hard to learn and have little near-term application,
+        don't belong in this course.
+      </p>
+
+      <p>
+        And note:
+        any useful estimate of how long something takes to master
+        must take into account how frequent failures are
+        and how much time is lost to them.
+        For example,
+        "edit a text file" might seem like a simple request,
+        but most GUI editors save things to the user's desktop or home directory.
+        If people need to run shell commands on the files they've edited,
+        a substantial fraction won't be able to navigate to the right directory without help.
+      </p>
+
+      <div class="box">
+
+        <h3>Software Carpentry Is Not Computer Science</h3>
+
+        <p>
+          Many of the foundational concepts of computer science,
+          such as computability,
+          inhabit the lower-right corner of the grid described above.
+          This does <em>not</em> mean that they aren't important,
+          or aren't worth learning,
+          but if our aim is to convince people that they can learn this stuff,
+          and that doing so will help them do more science faster,
+          they are less compelling than things like automating repetitive tasks.
+        </p>
+
+      </div>
+
+      <p>
+        As an example,
+        consider the way we teach <a href="svn.html">version control</a>.
+        We introduce it as "a better Dropbox";
+        i.e.,
+        as a way for one person to move files back and forth between machines
+        more reliably than email or a USB stick.
+        We then show scientists how to
+        <a href="svn.html#s:provenance">embed revision numbers in files</a>,
+        and how to use those numbers to construct a provenance trail for their data;
+        most scientists can immediately see how this will make their lives better.
+        We never actually show them how to recover old versions of files,
+        even though this is one of the things version control was invented for,
+        because doing so depends on merging,
+        and we have found that merging fails too often in novices' hands
+        to be included in a 90-minute lesson.
+      </p>
+
+      <p>
+        Another concept related to learners' belief in their ability to learn
+        is <a href="glossary.html#stereotype-threat">stereotype threat</a>.
+        In brief,
+        reminding people of negative stereotypes increases their nervousness
+        and therefore their likelihood of failure.
+        It's not surprising this would happen to the stereotyped group;
+        what <em>is</em> surprising is that it can also affect members of the unstereotyped group as well
+        (because it makes them afraid of letting their side down).
+      </p>
+
+      <p>
+        In particular,
+        Carol Dweck and others have found that
+        if you tell people that ability at some task is intrinsic
+        (i.e., that you either have the gene or you don't),
+        <em>everyone</em> does worse,
+        including the supposedly advantaged.
+        The reason is that if they don't get it at first,
+        they figure they just don't have the gene,
+        which biases future performance.
+        On the other hand,
+        if you tell people that something only comes with practice,
+        everybody does better on average.
+      </p>
+
+      <p>
+        The biggest negative stereotypes in computing are gender-related.
+        Depending on whose numbers you trust,
+        only 12-18% of programmers are women,
+        and those figures have actually been getting worse
+        over the last 20 years.
+        One reason is that computers and games are overwhelmingly marketed at and for boys;
+        another is that people tend not to go into fields where they are visibly a minority.
+        (For a thorough evidence-based discussion,
+        see Margolis and Fisher's <cite>Unlocking the Clubhouse</cite>,
+        or Whitecraft and Williams' survey chapter in <cite>Making Software</cite>.)
+      </p>
+
+      <p>
+        We try to act on this in two ways.
+        First,
+        we repeatedly emphasize that practice makes perfect.
+        We also code live in front of our learners
+        instead of using slides,
+        so that they can see us make mistakes.
+        In a way,
+        doing this gives them permission to make mistakes too&mdash;after all,
+        if we're not perfect,
+        they can't be expected to be either.
+      </p>
+
+      <p>
+        Second,
+        we have found that learners get more out of workshops
+        if they attend in groups,
+        e.g.,
+        they sign up in team of four or more,
+        or are all drawn from the same (or closely-related) disciplines.
+        Doing this ensures that everyone in the room knows from the outset
+        that they aren't going to be on their own.
+	<span class="fixme">I'm not sure how this is related to either mindset
+	or stereotype threat.  Can you either tie it in more explicitly or
+	rewrite so it stands alone?</span>
+      </p>
+
+    </section>
+
+    <section id="s:load">
+
+      <h2>Cognitive Load</h2>
+
+      <p>
+        Motivation, empowerment, and stereotype threat are fairly abstract concepts;
+        <a href="glossary.html#cognitive-load">cognitive load</a> is not.
+        The theory behind it is sometimes criticized,
+        but instruction based on it has been proven effective,
+        and it's a good framework for tying together several other ideas about learning.
+      </p>
+
+      <p>
+        In brief,
+        people's brains are dealing with three kinds of load when they're learning:
+      </p>
+
+      <ul>
+
+        <li>
+          <em>Intrinsic</em> load is what they have to keep in mind
+          in order to carry out a learning task.
+        </li>
+
+        <li>
+          <em>Germane</em> load is the (desirable) mental effort required
+          to create linkages between new information and old
+          (which is one of the things that distinguishes learning from memorization).
+        </li>
+
+        <li>
+          <em>Extraneous</em> load is everything else&mdash;everything
+          that distracts or gets in the way.
+        </li>
+
+      </ul>
+
+      <p>
+        The key idea is pretty simple:
+        eliminating extraneous cognitive load accelerates learning.
+        The hard part is to figure out what's extraneous,
+        but research over the last three decades has identified a few factors.
+        One example is the work by Richard Mayer and others on the
+        <a href="glossary.html#split-attention-effect">split-attention effect</a>.
+        Correlating linguistic, auditory, and visual streams of information takes cognitive effort:
+        the brain can't help but check that it's getting the same information from those channels.
+        Learning is therefore more effective when
+        the same information is <em>not</em> being presented simultaneously in two different channels.
+        For example,
+        audio narration with on-screen captions is harder to learn from than either on its own,
+        while speech and images is more effective <em>without</em> captions.
+	<span class="fixme">"While" implies that the second clause is
+	a contrast to the first, but actually they both suggest "captions
+	aren't helpful". Rewrite?</span>
+      </p>
+
+      <p>
+        Second,
+        searching for a solution strategy is itself a large cognitive load.
+        This load can be reduced by giving learners worked examples;
+        i.e.,
+        by showing them a problem and a detailed step-by-step solution.
+        To maximize their impact,
+        worked examples should immediately be followed by a series of
+        <a href="glossary.html#faded-example">faded examples</a>,
+        which are exercises in which learners are presented with a problem
+        and a solution in which some parts are left blank for them to fill in.
+        For example,
+        after having had this code explained to them:
+      </p>
+
+<pre>
+def get_word_lengths(words):
+    word_lengths = []
+    for item in words:
+        word_lengths.append(len(item))
+    return word_lengths
+
+print word_lengths(['hello', 'world'])
+<span class="out">[2, 2]</span>
+</pre>
+
+      <p class="continue">
+        learners could be asked to fill in the blanks in:
+      </p>
+
+<pre>
+def word_lengths(words):
+    word_lengths = ____
+    for item in range(len(____)):
+        word_lengths.append(len(____))
+    return word_lengths
+</pre>
+
+      <p class="continue">
+        and then work up to:
+      </p>
+
+<pre>
+def word_lengths(words):
+    return [____ for ____ in ____]
+</pre>
+
+      <p>
+        Faded examples are less intimidating than a blank screen&mdash;in particular,
+        learners are much less likely to feel that they don't even know where to start.
+        They also encourage learners to think about
+        the similarities and differences between various approaches,
+        which helps shape the conceptual categories we want them to form.
+      </p>
+
+    </section>
+
+    <section id="s:scaling">
+
+      <h2>Scaling Instruction</h2>
+
+      <p>
+        We said earlier that clearing up novices' misconceptions
+        is more important than imparting "mere information".
+        However,
+        we also said that when novices misunderstand something,
+        they can all misunderstand it differently.
+        How can one instructor clear up
+        the different misconceptions of forty or four hundred people at a time?
+      </p>
+
+      <p>
+        The best solution we have so far is called
+        <a href="glossary.html#peer-instruction">peer instruction</a>.
+        Originally developed by Eric Mazur,
+        it has been studied extensively in a wide variety of contexts.
+        When it is used,
+        the basic learning cycle is typically something like this:
+      </p>
+
+      <ol>
+        <li>The instructor presents a multiple-choice question.</li>
+        <li>Learners choose an answer (typically using clickers or holding up multi-colored cards).</li>
+        <li>Learners discuss their answers in small groups (typically 3-4 people) and re-vote.</li>
+        <li>The instructor presents and explains the correct answer.</li>
+        <li>Learners re-group to discuss the solution.</li>
+      </ol>
+
+      <p>
+        The second discussion stage is crucial,
+        because that's where group members clear up each other's misconceptions.
+        This part of the cycle is what makes the technique scale:
+        with three or four people per group,
+        the odds are that at least one person will understand what a partner has misunderstood,
+        and be able to clarify it for them.
+      </p>
+
+      <p>
+        As of the time of writing,
+        we haven't used this exact kind of peer instruction systematically in our workshops.
+        What we've done instead is require learners to do exercises in pairs,
+        i.e.,
+        have two (or three) people share a laptop
+        and talk to each other
+        as they do each exercise.
+        This practice is widely used in industry,
+        where it is called <a href="glossary.html#pair-programming">pair programming</a>.
+        It works because weak learners get individualized explanations,
+        while stronger ones learn from explaining things.
+        It's particularly effective if pairs are re-formed periodically;
+        that is,
+        if people are required to sit beside someone new after every break
+        so that weak-weak and strong-strong pairs don't persist.
+        (On the other hand, this make make some people more inhibited,
+        since eventually they'll be paired with a stranger.)
+      </p>
+
+    </section>
+
+    <section id="s:summary">
+
+      <h2>Summing Up</h2>
+
+      <p>
+        Teaching may be a performing art,
+        but anyone who wants to do it well
+        can draw on an enormous body of research.
+        The book <cite>How Learning Works</cite>
+        is the best introduction to this research that we have found;
+        others,
+        like <cite>Teaching What You Don't Know</cite>,
+        <cite>What the Best College Teachers Do</cite>,
+        and <cite>100 Things Every Presenter Needs to Know About People</cite>,
+        have also struck a good balance between usefulness and rigor.
+        The most important thing is to realize that while practice makes perfect,
+        feedback makes perfect faster:
+        teaching with a partner is the best way to improve what you do and how you do it.
+      </p>
+
+    </section>
+{% endblock content %}

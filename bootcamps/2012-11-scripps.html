@@ -1,0 +1,18 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Scripps Research Institute" />
+  <meta name="date" content="November 2012" />
+  <meta name="startdate" content="2012-11-15" />
+  <meta name="enddate" content="2012-11-16" />
+  <meta name="eventbrite_key" content="3869222950" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where</strong>: Scripps Research Institute, La Jolla, California.</p>
+<p><strong>When</strong>: November 15-16, 2012. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}

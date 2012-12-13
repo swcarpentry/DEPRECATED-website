@@ -1,0 +1,15 @@
+{% extends "_blog.html" %}
+
+{% block file_metadata %}
+<meta name="post_id" content="3287" />
+<meta name="post_date" content="2010-05-04" />
+<meta name="author_id" content="wilson.g" />
+<meta name="title" content="Day 1: Shuffling Sticky Notes Around" />
+<meta name="category" content="lectures" />
+<meta name="category" content="versions/version-4" />
+{% endblock file_metadata %}
+
+{% block content %}
+<p>Day 1 of Software Carpentry Version 4: Jason, Jon, and I spent the afternoon shuffling sticky notes around on a whiteboard, trying to map out key concepts for our databases lecture(s) and their dependencies. The result isn't all that different from what's in Version 3, but there was one important insight. J&amp;J commented that many of the students in the winter run of the course had understood the material, but been unable to apply it to their own problems. Our tentative explanation is that in order to apply what they have learned about SQL to their own data, students have to (a) pre-process that data (e.g., read a CSV file, then parse the cells in certain columns to extract timing values embedded in other data) and (b) figure out how to store those values in a database (i.e., do some data modeling and schema design). Our lesson plan for Version 4 already has a slot for a lecture on modeling: maybe this should be given more emphasis?</p>
+<p>Tomorrow, we hope to go through the same exercise for spreadsheets.</p>
+{% endblock content %}

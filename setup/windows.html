@@ -1,0 +1,121 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Boot Camp Setup (Windows)" />
+{% endblock file_metadata %}
+
+{% block content %}
+<p>[Tested using Windows 7 Enterprise, SP1 2009]</p>
+<p>For Windows we use Cygwin which provides for Linux/UNIX interaction but fully integrated with the Windows file-system (unlike, for example, a virtual machine).</p>
+<h2>Install Cygwin for bash, make, text editors, SQLite, Mercurial and Python</h2>
+<ul>
+<li>Download setup.exe from <a href="http://www.cygwin.com/">http://www.cygwin.com/</a></li>
+<li>Right-click setup.exe and select <strong>Run as administrator</strong></li>
+<li>Cygwin Setup window appears</li>
+<li>Click <strong>Next&gt;</strong></li>
+<li>Choose Installation Type window appears</li>
+<li>Select <strong>Install from Internet</strong></li>
+<li>Click <strong>Next&gt;</strong></li>
+<li>Choose Installation Directory window appears</li>
+<li>Click <strong>Browse...</strong> and select a Root Directory, or use the suggested default</li>
+<li>For Install For, select <strong>All Users</strong></li>
+<li>Click <strong>Next&gt;</strong></li>
+<li>Select Local Package Directory window appears</li>
+<li>Click <strong>Browse...</strong> and select a Local Package Directory, or use the suggested default</li>
+<li>Click<strong> Next&gt;</strong></li>
+<li>Select Connection Type window appears</li>
+<li>Select<strong> Direct Connection</strong></li>
+<li>Click <strong>Next&gt;</strong></li>
+<li>Choose A Download Site window appears</li>
+<li>Select a mirror site or add one closer to you. I wanted a UK one, so entered User URL: <code>http://www.mirrorservice.org</code> and clicked <strong>Add</strong></li>
+<li>Click <strong>Next&gt;</strong></li>
+<li>If you have not installed Cygwin before a Setup Alert dialog may appear, so just click <strong>OK</strong></li>
+<li>Select Packages window appears</li>
+</ul>
+<p>Now, finally, you can select the packages to install...</p>
+<ul>
+<li>Click <strong>Database</strong></li>
+<li>Scroll to sqlite3</li>
+<li>Click <strong>New column</strong> until it toggles to 3.7.3-1 (or, the latest version)</li>
+<li>Click <strong>Devel</strong></li>
+<li>Scroll to make</li>
+<li>Click <strong>New column</strong> until it toggles to 3.82.90.1 (or, the latest version)</li>
+<li>Scroll to mercurial</li>
+<li>Click <strong>New column</strong> until it toggles to 2.3.1-1 (or, the latest version)</li>
+<li>Click <strong>Editors</strong></li>
+<li>Pick your favourite editor...</li>
+<li>Scroll to nano</li>
+<li>Click <strong>New column</strong> until it toggles to 2.2.5-1 (or, the latest version)</li>
+<li>Scroll to vim</li>
+<li>Click <strong>New column</strong> until it toggles to 7.3.646-1 (or, the latest version)</li>
+<li>Scroll to xemacs</li>
+<li>Click <strong>New column</strong> until it toggles to 21.4.22-1 (or, the latest version)</li>
+<li>Click <strong>Python</strong></li>
+<li>Scroll to python</li>
+<li>Click <strong>New column</strong> until it toggles to 2.6.8-2 (or, the latest Python 2.x version)</li>
+<li>Click <strong>Shells</strong></li>
+<li>Scroll to bash</li>
+<li>Check <strong>New column </strong>until it toggles to 4.1.10-4 (or, the latest version)</li>
+<li>Click <strong>Next&gt;</strong></li>
+<li>Resolving Dependencies window appears</li>
+<li>Click <strong>Next&gt;</strong></li>
+<li>Wait until it's all done!</li>
+</ul>
+<p>Now, set up the path...</p>
+<ul>
+<li>Find <strong>Computer</strong> on the desktop or in Windows Explorer</li>
+<li>Right Click and select <strong>Properties</strong></li>
+<li>System window appears</li>
+<li>Click <strong>Advanced system settings</strong>.</li>
+<li>Enter your local administrator password</li>
+<li>System properties window appears</li>
+<li>Click <strong>Advanced</strong> tab</li>
+<li>Click <strong>Environment Variables...</strong></li>
+<li>In the System variables list, select <strong>Path</strong></li>
+<li>Click <strong>Edit...</strong></li>
+<li>Edit System Variable dialog appears</li>
+<li>Add <code>;C:\cygwin\bin</code> to the end of the Variable value.</li>
+<li>Click <strong>OK</strong> to close Edit System Variable</li>
+<li>Click <strong>OK</strong> to close Environment Variables</li>
+<li>Click <strong>OK</strong> to close System properties</li>
+</ul>
+<h2>Install Python setuptools</h2>
+<ul>
+<li>Visit <a href="http://pypi.python.org/pypi/setuptools">http://pypi.python.org/pypi/setuptools</a> and download the egg file corresponding to your Python version. Download a standard egg and not the Windows installer. For example, I downloaded <code>setuptools-0.6c11-py2.6.egg</code></li>
+<li><code></code>Save your egg into your Cygwin home directory, for example<br />
+<code><br />
+C:\MikeLocal\cygwin\home\mjj<br />
+</code></li>
+<li>Right-click <strong>Cygwin Terminal</strong> icon</li>
+<li>Select <strong>Run as administrator</strong></li>
+<li>Enter your local administrator password.</li>
+<li>Execute the egg,<br />
+<code><br />
+$ cd /home/mjj<br />
+$ sh setuptools-0.6c9-py2.4.egg<br />
+</code></li>
+</ul>
+<h2>Install Python nose</h2>
+<ul>
+<li>Right-click <strong>Cygwin Terminal</strong> icon</li>
+<li>Select <strong>Run as administrator</strong></li>
+<li>Enter your local administrator password</li>
+<li>At the prompt, run<br />
+<code><br />
+$ easy_install nose<br />
+</code></li>
+<li>And check<br />
+<code><br />
+$ nosetests<br />
+----------------------------------------------------------------------<br />
+Ran 0 tests in 0.003s<br />
+OK<br />
+</code></li>
+</ul>
+<h2>Install EasyMercurial</h2>
+<p>Download the EasyMercurial Windows installer from <a href="http://easyhg.org/download.html">http://easyhg.org/download.html</a>.</p>
+<p>Double-click on the installer e.g. <code>EasyMercurial-1.2.2-Setup.msi</code>.</p>
+<h2>Install Firefox</h2>
+<p>You can download Firefox from the Mozilla web site at <a href="http://www.mozilla.org/en-US/firefox/new/">http://www.mozilla.org/en-US/firefox/new/</a>.</p>
+
+{% endblock content %}

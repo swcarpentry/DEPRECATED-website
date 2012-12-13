@@ -1,0 +1,18 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Virginia Tech" />
+  <meta name="date" content="January 2013" />
+  <meta name="startdate" content="2013-01-31" />
+  <meta name="enddate" content="2013-02-01" />
+  <meta name="eventbrite_key" content="4444112460" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Virginia Tech.</p>
+<p><strong>When:</strong> January 31-February 1, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}

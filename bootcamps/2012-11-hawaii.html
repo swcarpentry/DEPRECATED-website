@@ -1,0 +1,18 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="University of Hawaii" />
+  <meta name="date" content="November 2012" />
+  <meta name="startdate" content="2012-11-30" />
+  <meta name="enddate" content="2012-12-01" />
+  <meta name="eventbrite_key" content="4314420548" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Hawaii Institute of Marine Biology.</p>
+<p><strong>When:</strong> November 30-December 1, 2012. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}

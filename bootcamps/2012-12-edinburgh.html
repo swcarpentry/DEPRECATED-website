@@ -1,0 +1,33 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="University of Edinburgh" />
+  <meta name="date" content="December 2012" />
+  <meta name="startdate" content="2012-12-04" />
+  <meta name="enddate" content="2012-12-05" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> University of Edinburgh.</p>
+<p><strong>When:</strong> December 4-5, 2012. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+
+<p><strong>Requirements:</strong> Before coming to the boot camp please ensure you have the following software installed on your laptop: Bash shell, Make, a text editor, Python 2.6+, Mercurial, Python setuptools and nose, sqlite, Firefox and Firefox's SQLite Manager plug-in. You should also register for a free account on <a href="https://bitbucket.org/">BitBucket</a>. For instructions as to how to check if you already have these, and how to install these if you don't, please see our <a href="{{root_path}}/setup/">set up page</a> lists the software we expect you to have installed on your laptop before you come to the boot camp. If you have any problems please e-mail the <a href="mailto:michaelj@epcc.ed.ac.uk">boot camp organiser</a>.</p>
+
+<p><strong>Content:</strong></p>
+<p>Tuesday 4th:</p>
+<ul>
+<li>Introduction and what we know about software development</li>
+<li>Using the shell to do more in less time</li>
+<li>Using version control to manage and share information</li>
+<li>Automation and make</li>
+</ul>
+<p>Wednesday 5th:</p>
+<ul>
+<li>Basic Python programming</li>
+<li>How (and how much) to test programs</li>
+<li>Putting it all together and feedback from attendees</li>
+</ul>
+
+{% include "_contact.html" %}
+<p><strong>Registration:</strong> registration can be done via the PRACE <a href="https://events.prace-ri.eu/conferenceDisplay.py?confId=94">registration form</a>.</p>
+{% endblock content %}

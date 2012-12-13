@@ -1,0 +1,15 @@
+<formulas>
+  <formula name="ammonia">
+    <atom symbol="N" number="1"/>
+    <atom symbol="H" number="3"/>
+  </formula>
+  <formula name="water">
+    <atom symbol="H" number="2"/>
+    <atom symbol="O" number="1"/>
+  </formula>
+  <formula name="methanol">
+    <atom symbol="C" number="1"/>
+    <atom symbol="O" number="1"/>
+    <atom symbol="H" number="4"/>
+  </formula>
+</formulas>

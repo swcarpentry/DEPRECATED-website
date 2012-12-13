@@ -1,0 +1,54 @@
+<!-- pageclass: BootCampPage -->
+{% extends "_base.html" %}
+
+{% macro eventbrite(key, venue, date) -%}
+  {% if key %}
+    <p>
+      <strong>Registration:</strong>
+      {% if varargs %}
+        {{varargs[0]}}
+      {% endif %}
+    </p>
+    <div style="width: 100%; text-align: left;">
+    <p><iframe src="http://www.eventbrite.com/tickets-external?eid={{key}}&amp;ref=etckt"
+               frameborder="0"
+               marginwidth="5"
+               marginheight="5"
+               scrolling="auto"
+               width="100%"
+               height="192"></iframe></p>
+    <div style="font-family: Helvetica, Arial; font-size: 10px; padding: 5px 0 5px; margin: 2px; width: 100%; text-align: left;">
+      <a style="color: #ddd; text-decoration: none;" href="http://www.eventbrite.com/r/etckt" target="_blank">Event Registration Online</a>
+      <span style="color: #ddd;"> for </span>
+      <a style="color: #ddd; text-decoration: none;" href="http://www.eventbrite.com/event/{{key}}?ref=etckt" target="_blank">
+        Software Carpentry Boot Camp: {{venue}}/{{date}}
+      </a>
+      <span style="color: #ddd;"> powered by </span>
+      <a style="color: #ddd; text-decoration: none;" href="http://www.eventbrite.com?ref=etckt" target="_blank">Eventbrite</a></div>
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+{% block metadata %}
+  <meta name="bootcamp_slug" content="{{page.slug}}" />
+{% endblock metadata %}
+
+{% block pagetitle %}<title>{{page.venue}}: {{page.date}}</title>{% endblock pagetitle %}
+
+{% block navhighlight %}{{navhighlight('bootcamps')}}{% endblock navhighlight %}
+
+{% block title %}
+  <div class="title">
+    <ul class="pager">
+      {{nav_left()}}
+      {{nav_right()}}
+    </ul>
+    <h1>{{page.venue}}: {{page.date}}</h1>
+  </div>
+{% endblock title %}
+
+{% block content %}
+  <p>No content provided.</p>
+{% endblock content %}
+
+{% block comments %}{{disqus(page.venue + ': ' + page.date, page.filename)}}{% endblock comments %}

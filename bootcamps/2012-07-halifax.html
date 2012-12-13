@@ -1,0 +1,16 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Halifax" />
+  <meta name="date" content="July 2012 " />
+  <meta name="startdate" content="2012-07-16" />
+  <meta name="enddate" content="2012-07-17" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Rm 255, Sobey Building, Saint Mary's University, Halifax, Nova Scotia.</p>
+<p><strong>When:</strong> July 16-17, 2012. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="University of California Berkeley" />
+  <meta name="date" content="October 2012" />
+  <meta name="startdate" content="2012-10-20" />
+  <meta name="enddate" content="2012-10-21" />
+  <meta name="eventbrite_key" content="3942004642" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> University of California Berkeley, Goldman School of Public Policy, Room 150</p>
+<p><strong>When:</strong> October 20-21, 2012. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+<p><strong>Requirements:</strong> Visit the <a href="http://swcarpentry.github.com/2012-10-ucb/">bootcamp web page</a> for installation instructions and schedule information.</p>
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}

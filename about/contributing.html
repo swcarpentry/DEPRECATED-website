@@ -1,0 +1,72 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="How to Contribute" />
+{% endblock file_metadata %}
+
+{% block navhighlight %}{{navhighlight('about')}}{% endblock navhighlight %}
+
+{% block content %}
+
+<p>Software Carpentry is an open project. Like all such projects, it needs your help to grow, and you can contribute in many ways, large and small.</p>
+
+<dl>
+
+  <dt id="bugs">Report Bugs</dt>
+  <dd>
+    If you see a mistake in our lectures or example programs, please add a comment to the appropriate page, or <a href="mailto:{{contact_email}}">mail us</a>, and we'll fix it as quickly as we can.
+  </dd>
+
+  <dt id="improve">Suggest Improvements</dt>
+  <dd>
+    Is one of our lessons too long?  Do they move too quickly or too slowly, or give too much or too little detail?  Did we miss anything important, or include things you're sure you'll never need?  If so, please <a href="mailto:{{contact_email}}">let us know</a>.  When doing so, please tell us a bit about your background and needs so that we know how best to interpret your feedback.
+  </dd>
+
+  <dt id="teach">Teach</dt>
+  <dd>
+    All of our slides, notes, and example programs are in our Subversion repository
+    at <a href="http://svn.software-carpentry.org/swc">http://svn.software-carpentry.org/swc</a>,
+    and you are free to use them however you want
+    (so long as you <a href="{{root_path}}/license.html">give us attribution</a>).
+    Everything is designed so that individuals can work through what they need on their own,
+    but universities, research labs, companies, and self-study groups have also used it
+    in week-long crash courses and as part of longer classroom courses.
+    If you would like to deliver the course in one of these formats,
+    or in one we haven't seen yet,
+    please let us know&mdash;we'd be glad to help.
+    Please also blog your experiences so that we can share what you learn with others.
+  </dd>
+
+  <dt id="create">Create</dt>
+  <dd>
+    This is what Software Carpentry needs most, and the good news is, it's easier than you think.
+    Suppose you have a small program that illustrates an important idea:
+    something like our <a href="{{root_path}}/4_0/matrix/recommend.html">recommendation engine</a>,
+    <a href="{{root_path}}/4_0/setdict/nanotech.html">nanotech warehouse</a>,
+    <a href="{{root_path}}/4_0/setdict/phylogen.html">phylogenetic tree</a>,
+    or <a href="{{root_path}}/4_0/media/stars.html">star counting</a> examples.
+    The only other thing we need is a few minutes' worth of slides and an audio recording of you going through them.
+    The slides and recording don't have to be perfect:
+    we can reformat the former, and edit out any mistakes or retakes in the latter.
+    We will put the slides and the edited audio together and post them to our site,
+    along with a link back to you as the author.
+    If this sounds interesting, please <a href="mailto:{{contact_email}}">get in touch</a>.
+  </dd>
+
+  <dt id="develop">Develop</dt>
+  <dd>
+    If you are interested in devoping the Software Carpentry content directly,
+    use <a href="http://subversion.apache.org/">Subversion</a> to checkout the source:
+<pre>
+$ svn checkout http://svn.software-carpentry.org/swc
+</pre>
+    If you make changes, you can create patches with
+<pre>
+$ svn diff > my-fix.patch
+</pre>
+    Send the patch to <a href="mailto:info@software-carpentry.org">info@software-carpentry.org</a>,
+    and we'll consider merging it into the master repository.
+  </dd>
+
+</dl>
+{% endblock content %}

@@ -1,0 +1,432 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Conclusion" />
+{% endblock file_metadata %}
+
+{% block content %}
+    <ol class="toc">
+      <li><a href="#s:meaning">Computers Don't Understand, They Obey</a></li>
+      <li><a href="#s:turing">Programs Are Data Too</a></li>
+      <li><a href="#s:modelview">Models for Computers, Views for People</a></li>
+      <li><a href="#s:perf">Programming is a Human Activity</a></li>
+      <li><a href="#s:paranoia">Paranoia Makes Us Productive</a></li>
+      <li><a href="#s:algo">Better Algorithms Beat Better Hardware</a></li>
+      <li><a href="#s:tools">The Tool Shapes the Hand</a></li>
+      <li><a href="#s:summary">Summary</a></li>
+    </ol>
+
+    <p>
+      Our real goal in the preceding chapters was not to teach you
+      the syntax of Python
+      or how to commit a file to version control.
+      Our real goal was to convey eight big ideas
+      that every good scientific programmer knows,
+      whether she realizes it or not.
+    </p>
+
+    <section id="s:meaning">
+
+      <h2>Computers Don't Understand, They Obey</h2>
+
+      <p>
+        If you look at <a href="#f:word_data">Figure 1</a>,
+        you can't help but see the word "data":
+      </p>
+
+      <figure id="f:word_data">
+        <img src="img/concl/word_data.png" alt="The Word 'Data'" />
+      </figure>
+      
+      <p>
+        A machine doesn't.
+        It doesn't even see four blobs of blue pixels on a gray background,
+        because it doesn't "see" anything.
+        The computer stores this image as bits in memory.
+        If those bits happen to correspond to pixels arranged in a certain way,
+        then an optical character recognition program might output 'd', 'a', 't', 'a',
+        but <em>it doesn't understand</em>.
+      </p>
+
+      <p>
+        What it does instead is obey.
+        Depending on what instructions we tell the computer to execute,
+        the thirty-two bits 01100100011000010111100001100001 can be:
+      </p>
+
+      <ul>
+
+        <li>
+          the word "data";
+        </li>
+
+        <li>
+          the integer 1,684,108,385;
+        </li>
+
+        <li>
+          the floating-point number 1.6635613602263159e+22;
+        </li>
+
+        <li>
+          a bluish-gray pixel that's slightly transparent;
+        </li>
+
+        <li>
+          four and a half microseconds of a high 'A'
+          that's slightly louder in the left channel than the right,
+        </li>
+
+        <li>
+          an instruction to copy the contents of register 100
+          to the location in memory whose address is stored in register 116; or
+        </li>
+
+        <li>
+          a point on the outer edge of a superconducting magnets a CAD model of a CAT scanner.
+        </li>
+
+      </ul>
+      
+      <p>
+        The fact is,
+        computers don't understand what they're doing:
+        they just obey the instructions they're given.
+      </p>
+
+      <div class="box">
+
+        <h3>Examples:</h3>
+
+        <ul>
+          <li><a href="shell.html#k:filedir">Most files' names are <code>something.extension</code>; the extension isn't required, and doesn't guarantee anything, but is normally used to indicate the type of data in the file.</a></li>
+          <li><a href="shell.html#k:find">Everything is stored as bytes, but the bytes in binary files do not represent characters.</a></li>
+          <li><a href="python.html#k:types">Strings and numbers cannot be added because the behavior is ambiguous: convert one to the other type first.</a></li>
+        </ul>
+
+      </div>
+
+    </section>
+
+    <section id="s:turing">
+
+      <h2>Programs Are Data Too</h2>
+
+      <p>
+        The corollary of our first big idea is that programs are data too:
+        in fact,
+        this is the key insight that all of modern computing is built on.
+        The source code for a program is just a bunch of text files,
+        no different from a thesis.
+        Translating that text into bytes
+        that happen to represent instructions the machine can execute
+        is no different from translating the bytes that represent red-green-blue values
+        into pretty lights on your screen.
+        And once a program's text is compiled into instructions,
+        pushing those bytes around is no different from
+        correcting a typo in an address list
+        or changing the color of a pixel in an image file.
+      </p>
+
+      <div class="box">
+
+        <h3>Examples:</h3>
+
+        <ul>
+          <li><a href="funclib.html#k:libraries">Any Python file can be imported as a library.</a></li>
+          <li><a href="funclib.html#k:funcobj">A function is just another kind of data.</a></li>
+        </ul>
+
+      </div>
+
+    </section>
+
+    <section id="s:modelview">
+
+      <h2>Models for Computers, Views for People</h2>
+
+      <p>
+        Another corollary of our first idea is that
+        computers should work with models,
+        and people should work with views.
+        A model (or to give its full name, a "data model")
+        is a digital representation of facts and relationships,
+        while a view is a way of displaying part or all of a model
+        that human beings can comprehend.
+        For example,
+        an HTML document logically consists of elements with attributes
+        that may contain other elements and blocks of text
+        (<a href="#f:html_page">Figure 2</a>):
+      </p>
+
+      <figure id="f:html_page">
+        <img src="img/concl/html_page.png" alt="An HTML Page" />
+      </figure>
+
+      <p>
+        That model can be rendered in a browser,
+        turned into speech for someone who is visually impaired,
+        or displayed as text using angle brackets, quotes, and some indentation.
+        None of these <em>is</em> the model:
+        they're all views that make the model's content accessible to human beings in different contexts.
+        The model itself isn't just easier for the computer to work with:
+        it's essential,
+        since as we said in the previous section,
+        the computer can't "see" the views that we create for human beings.
+      </p>
+
+      <p>
+        Turning one of those views back into a model is hard:
+        parsing the textual representation of HTML takes thousands of lines of code,
+        and doing OCR or speech recognition takes millions.
+        What this big idea implies,
+        therefore,
+        is that structured data is better than unstructured data,
+        because it makes the view-to-model translation faster, simpler, and more accurate.
+        To borrow an example from Jon Udell,
+        a PDF with a cartoon whose caption says,
+        "The knitting circle meets on the second Tuesday of every month"
+        is a lot easier for human beings to understand than a blob of iCal-formatted text,
+        but the second is much easier for the computer to process
+        (<a href="#f:structured_data">Figure 3</a>):
+      </p>
+
+      <figure id="f:structured_data">
+        <img src="img/concl/structured_data.png" alt="Structured vs. Unstructured Data" />
+      </figure>
+
+      <div class="box">
+
+        <h3>Examples:</h3>
+
+        <ul>
+          <li><a href="db.html#k:select">A relational database stores information in tables with fields and records.</a></li>
+          <li><a href="db.html#k:design">Each field in a database table should store a single atomic value.</a></li>
+          <li><a href="db.html#k:design">No fact in a database should ever be duplicated.</a></li>
+          <li><a href="db.html#k:join">Every record in a table should be uniquely identified by the value of its primary key.</a></li>
+        </ul>
+
+      </div>
+
+    </section>
+
+    <section id="s:perf">
+
+      <h2>Programming is a Human Activity</h2>
+
+      <p>
+        Our fourth big idea is that
+        the real bottleneck in most computing today
+        is not in our machines:
+        it's between our ears.
+        The time required to solve a problem is the sum of
+        the time required to write correct code
+        and the time spent running it.
+        While computers are getting faster every day,
+        our brains are not,
+        so the first term in this sum is increasingly the most important.
+        When we're trying to solve a computational problem,
+        it therefore makes sense to minimize how long it will take to build the program we need,
+        even if that means the program itself will run slower than it otherwise might.
+      </p>
+
+      <div class="box">
+
+        <h3>Examples:</h3>
+
+        <ul>
+          <li><a href="shell.html#k:pipefilter">Use wildcards to match filenames.</a></li>
+          <li><a href="shell.html#k:loop">Use a <code>for</code> loop to repeat commands once for every thing in a list.</a></li>
+          <li><a href="shell.html#k:loop">Use the up-arrow key to scroll up through previous commands to edit and repeat them.</a></li>
+          <li><a href="shell.html#k:loop">Use <code>history</code> to display recent commands, and <code>!<em>number</em></code> to repeat a command by number.</a></li>
+          <li><a href="shell.html#k:scripts">Save commands in files (usually called shell scripts) for re-use.</a></li>
+          <li><a href="svn.html#k:basics">It also keeps a complete history of changes made to the master so that old versions can be recovered reliably.</a></li>
+          <li><a href="svn.html#k:basics">Each change should be commented to make the history more readable.</a></li>
+          <li><a href="python.html#k:basic">Use meaningful, descriptive names for variables.</a></li>
+          <li><a href="funclib.html#k:basics">Grouping operations in functions makes code easier to understand and re-use.</a></li>
+          <li><a href="funclib.html#k:global">Programmers often write constants' names in upper case to make their intention easier to recognize.</a></li>
+          <li><a href="funclib.html#k:global">Functions should <em>not</em> communicate by modifying global variables.</a></li>
+          <li><a href="funclib.html#k:args">Define default values for parameters to make functions more convenient to use.</a></li>
+          <li><a href="db.html#k:filter">Build up queries a bit at a time, and test them against small data sets.</a></li>
+          <li><a href="numpy.html#k:basics">High-level libraries are usually more efficient for numerical programming than hand-coded loops.</a></li>
+          <li><a href="quality.html#k:defensive">Assertions help people understand how programs work.</a></li>
+          <li><a href="quality.html#k:unit">Writing tests helps us design better code by clarifying our intentions.</a></li>
+          <li><a href="quality.html#k:testable">Separating interface from implementation makes code easier to test and re-use.</a></li>
+          <li><a href="dev.html#k:grid">Get something simple working, then start to add features, rather than putting everything in the program at the start.</a></li>
+          <li><a href="dev.html#k:assembly">Put programs together piece by piece.</a></li>
+          <li><a href="dev.html#k:performance">Before speeding a program up, ask, "Does it need to be faster?" and, "Is it correct?"</a></li>
+        </ul>
+
+      </div>
+
+    </section>
+
+    <section id="s:paranoia">
+
+      <h2>Paranoia Makes Us Productive</h2>
+
+      <p>
+        Big idea number five is a consequence of big idea number four:
+        the best way to improve productivity (in fact, the only way)
+        is to improve quality,
+        and that this starts before we write the first line of code.
+        "I want to count all the stars in this photograph" is easy to say,
+        but what does it actually mean?
+        What constitutes a star?
+        When do you decide that a lumpy blob of pixels is two stars rather than one,
+        or three instead of two?
+        Every program embodies decisions about questions like these,
+        even if you don't realize that there was a question and that you made a choice.
+        The sooner we worry about this,
+        the less time we'll waste building the wrong thing.
+      </p>
+
+      <p>
+        Of course, we don't stop worrying once we've typed our code in.
+        We check that data is formatted properly to protect ourselves against "garbage in, garbage out".
+        We put checks in our code to make sure that parameters are sensible,
+        data structures consistent,
+        files aren't empty,
+        and so on.
+        And we write tests,
+        and run them after every code change,
+        to catch errors as soon as possible.
+        This might feel like it's slowing us down at first,
+        but study after study has shown that it works.
+      </p>
+
+      <p>
+        One of the best ways to apply this principle is to automate everything.
+        As Alfred North Whitehead said,
+        "Civilization advances by extending
+        the number of important operations which we can perform
+        without thinking about them."
+        We don't just write programs because we want to do things quickly:
+        we write them because we don't want to do some things ever again.
+        Version control systems keep track of our work for us;
+        spreadsheets update graphs and summary statistics whenever a single value changes,
+        and so on.
+        Every time we automate a task,
+        we reduce the chances of getting it wrong the next time,
+        and have more time to think about things that machines <em>can't</em> do for us.
+        And it's not just a one-time saving:
+        if we automate things well, that extra time is ours over and over again.
+      </p>
+
+      <div class="box">
+
+        <h3>Examples:</h3>
+
+        <ul>
+          <li><a href="shell.html#k:loop">Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping.</a></li>
+          <li><a href="shell.html#k:loop">Use the up-arrow key to scroll up through previous commands to edit and repeat them.</a></li>
+          <li><a href="shell.html#k:loop">Use <code>history</code> to display recent commands, and <code>!<em>number</em></code> to repeat a command by number.</a></li>
+          <li><a href="shell.html#k:scripts">Save commands in files (usually called shell scripts) for re-use.</a></li>
+          <li><a href="svn.html#k:basics">The version control system prevents people from overwriting each other's work by forcing them to merge concurrent changes before committing.</a></li>
+          <li><a href="svn.html#k:provenance">Put version numbers in programs' output to establish provenance for data.</a></li>
+          <li><a href="python.html#k:provenance">Put version numbers in programs' output to establish provenance for data.</a></li>
+          <li><a href="funclib.html#k:filter">Programs that explicitly test values' types are more brittle than ones that rely on those values' common properties.</a></li>
+          <li><a href="quality.html#k:defensive">Design programs to catch both internal errors and usage errors.</a></li>
+          <li><a href="quality.html#k:defensive">Use assertions to check whether things that ought to be true in a program actually are.</a></li>
+          <li><a href="quality.html#k:defensive">When bugs are fixed, add assertions to the program to prevent their reappearance.</a></li>
+          <li><a href="quality.html#k:unit">Every test should be able to run independently: tests should <em>not</em> depend on one another.</a></li>
+          <li><a href="quality.html#k:coverage">Use a coverage analyzer to see which parts of a program have been tested and which have not.</a></li>
+          <li><a href="setdict.html#k:examples">Initialize values from actual data instead of trying to guess what values could "never" occur.</a></li>
+          <li><a href="dev.html#k:assembly">Put programs together piece by piece.</a></li>
+          <li><a href="dev.html#k:bugs">Test programs with successively more complex cases.</a></li>
+        </ul>
+
+      </div>
+
+    </section>
+
+    <section id="s:algo">
+
+      <h2>Better Algorithms Beat Better Hardware</h2>
+
+      <p>
+        Of course,
+        machine performance does matter,
+        and that's where big idea number six comes in.
+        One of the greatest mathematical advances of the Twentieth Century was
+        the idea of <em>algorithmic complexity</em>:
+        we can estimate how the number of operations an algorithm will do
+        increases as the problem we're trying to solve grows larger,
+        and use this to predict a program's performance.
+        It turns out that some algorithms slow down gently as their inputs get larger,
+        while others slow down so much that even if the whole universe was one large computer,
+        it couldn't solve any problem big enough to be interesting.
+        Faster chips help,
+        but the real key to speed is to focus on what we're doing,
+        not what we're doing it with.
+      </p>
+
+      <p>
+        But algorithms are nothing without data structures to operate on,
+        just as data structures are pointless without algorithms to manipulate them.
+        That's why the two topics are usually taught together:
+        arrays with loops,
+        trees with recursion,
+        and so on.
+      </p>
+
+      <div class="box">
+
+        <h3>Examples:</h3>
+
+        <ul>
+          <li><a href="setdict.html#k:storage">Sets are stored in hash tables, which guarantee fast access for arbitrary keys.</a></li>
+          <li><a href="setdict.html#k:phylotree">Problems that are described using matrices can often be solved more efficiently using dictionaries.</a></li>
+          <li><a href="dev.html#k:performance">Analyze algorithms to predict how a program's performance will change with problem size.</a></li>
+          <li><a href="dev.html#k:lazy">Better algorithms are better than better hardware.</a></li>
+        </ul>
+
+      </div>
+
+    </section>
+
+    <section id="s:tools">
+
+      <h2>The Tool Shapes the Hand</h2>
+
+      <p>
+        Our last big idea is something that artisans have known for thousands of years:
+        the tool shapes the hand (and the mind).
+        Building software changes how you use software;
+        making computers do new things changes your understanding of what computers can do.
+        That's why this course asks you to write programs
+        as well as use pre-existing ones:
+        however frustrating it may sometimes be,
+        it's the only way to show you what's possible.
+      </p>
+
+      <div class="box">
+
+        <h3>Examples:</h3>
+
+        <ul>
+          <li><a href="shell.html#k:pipefilter">The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).</a></li>
+          <li><a href="shell.html#k:scripts">Letting users decide what files to process is more flexible and more consistent with built-in Unix commands.</a></li>
+          <li><a href="setdict.html#k:sets">Use sets to store distinct unique values.</a></li>
+          <li><a href="setdict.html#k:dict">Use dictionaries to store key-value pairs with distinct keys.</a></li>
+          <li><a href="dev.html#k:profile">Use a profiler to determine which parts of a program are responsible for most of its running time.</a></li>
+        </ul>
+
+      </div>
+
+    </section>
+
+    <section id="s:summary">
+
+      <h2>Summary</h2>
+
+      <p>
+        And that's it:
+        that's pretty much what you need to know
+        to get more done with computers in less time.
+        We hope you have as much fun learning to think this way as we've had&mdash;thank you for listening,
+        and may you always see the world with the eyes of a child.
+      </p>
+
+    </section>
+{% endblock content %}

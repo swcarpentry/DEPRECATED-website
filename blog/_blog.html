@@ -1,0 +1,20 @@
+<!-- pageclass: BlogPostPage -->
+{% extends "_base.html" %}
+
+{% block pagetitle %}<title>Software Carpentry: {{page.title}}</title>{% endblock pagetitle %}
+
+{% block title %}
+<div class="title">
+  <ul class="pager">
+    {{nav_left()}}
+    {{nav_right()}}
+  </ul>
+  <h1>{{page.title}}</h1>
+</div>
+{% endblock title %}
+
+{% block navhighlight %}{{navhighlight('blog')}}{% endblock navhighlight %}
+
+{% block details %}
+<p>Originally posted {{page.post_date}}{% if page.author_id %} by {{page.author_id}}{% endif %}{% if page.category %} in {{page.category|join(', ')}}{% endif %}.</p>
+{% endblock details %}

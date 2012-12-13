@@ -1,0 +1,28 @@
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+AddDefaultCharset UTF-8
+
+#
+# word-press blog URLs
+#
+
+# redirect URLs to a day to the main blog page 
+RewriteCond %{REQUEST_URI} ^/\d\d\d\d/\d\d/\d\d/$
+RewriteRule ^(.*) /blog/index.html [R,L]
+
+# redirect URLs that have a year and day to the /blog/ folder
+RewriteCond %{REQUEST_URI} ^/\d\d\d\d/\d\d/
+RewriteRule ^(.*) /blog/$1 [R,L]
+
+# redirect URL to just /blog/ to /blog/index.html
+RewriteCond %{REQUEST_URI} ^/blog/?$
+RewriteRule .* /blog/index.html [R,L]
+
+# redirect blog URLs that don't end in .html so that they do
+RewriteCond %{REQUEST_URI} ^/blog
+RewriteCond %{REQUEST_URI} !.html$
+RewriteRule ^(.*?)/?$ $1.html [R,L]
+
+</IfModule>

@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Home Page" />
+  <meta name="subfile" content="license.html" />
+  <meta name="subfile" content="about/index.html" />
+  <meta name="subfile" content="bootcamps/index.html" />
+  <meta name="subfile" content="bootcamps/faq.html" />
+  <meta name="subfile" content="bootcamps/how-to.html" />
+  <meta name="subfile" content="setup/index.html" />
+  <meta name="subfile" content="blog/index.html" />
+  <meta name="subfile" content="book/index.html" />
+  <meta name="subfile" content="4_0/index.html" />
+  <meta name="subfile" content="3_0/index.html" />
+{% endblock file_metadata %}
+
+{% block title %}{% endblock title %}
+
+{% block navhighlight %}{{navhighlight('home')}}{% endblock navhighlight %}
+
+{% block content %}
+
+<p>
+  Our mission is to help scientists be more productive by teaching
+  them basic computing skills. Our approach combines short, intensive
+  boot camps with self-paced online instruction. The benefits are more
+  reliable results and higher productivity: a day a week is common,
+  and a ten-fold improvement isn't rare. Can Software Carpentry help
+  you?  These <a href="{{root_path}}/about/testimonials.html">testimonials</a> from former
+  students can help you decide.
+</p>
+
+<p>
+  <strong>Boot camps</strong><br />
+  Our boot camps cover the core skills needed to be productive in
+  a small team: program design, version control, testing, the
+  shell, and data management. Short tutorials alternate with
+  hands-on practical sessions for two full days.
+  See our <a href="{{root_path}}/bootcamps/index.html">list of boot camps</a>
+  for upcoming dates and locations.
+</p>
+
+<p>
+  <strong>Online Lessons</strong><br />
+  Our <a href="{{root_path}}/4_0/index.html">video lectures</a> cover all of our
+  core topics and much else as well. (The notes from Version 3 of this
+  course are <a href="{{root_path}}/3_0/index.html">also available</a>.)  All of our
+  <a href="{{root_path}}/about/contributing.html#develop">content</a> can be freely re-used under
+  <a href="{{root_path}}/license.html">open access licenses</a>.
+</p>
+
+<p>
+  <strong>Contact</strong><br />
+  For more information, check out our
+  <a href="{{root_path}}/blog/index.html">blog</a>,
+  follow us on Twitter
+  as <a href="{{twitter_url}}">{{twitter_name}}</a>,
+  or contact us by email
+  at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.
+</p>
+
+{% endblock content %}
+
+{% block comments %}{% endblock comments %}

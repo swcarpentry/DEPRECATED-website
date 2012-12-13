@@ -1,0 +1,87 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Boot Camps" />
+  <meta name="subglob" content="*-*-*.html" />
+{% endblock file_metadata %}
+
+{% block navhighlight %}{{navhighlight('bootcamps')}}{% endblock navhighlight %}
+
+{% block content %}
+
+<p>A boot camp is an in-person, example-driven workshop, typically two
+or three days long. A boot camp covers the core skills needed to be
+productive in a small research team: basic programming skills, version
+control, testing, using the shell, and relational databases.</p>
+
+<p>Short tutorials alternate with hands-on practical exercises, and
+participants are encouraged both to help one another, and to try
+applying what they have learned to their own research problems during
+and between sessions. Participants usually work on their own computers
+(typically laptops), using either native software or a standard set of
+packages running in a virtual machine. This ensures that they have a
+working environment when the boot camp is done.</p>
+
+<p>Want to know more?  See our <a href="faq.html">FAQ</a>.  Want to
+organize one?  See our <a href="how-to.html">how-to</a> guide.</p>
+
+<h2 id="future">Future Workshops</h2>
+<div class="bootcamps">
+<table class="table table-striped bootcamps" style="max-width: 500px">
+{% for bootcamp in page.children %}
+  {% if bootcamp.startdate >= today %}
+    <tr>
+      <td class="link">
+        <a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a>
+      </td>
+      <td class="spacer">&nbsp;...&nbsp;</td>
+      <td class="date">
+        {{bootcamp.date}}
+      </td>
+    </tr>
+  {% endif %}
+{% endfor %}
+</table>
+
+<p>
+  <iframe src="http://maps.google.com/maps/ms?msid=212356616065693906545.0004b6bbb5cd44a72e278&amp;msa=0&amp;ie=UTF8&amp;t=m&amp;z=2&amp;vpsrc=6&amp;output=embed"
+          frameborder="0"
+          marginwidth="0"
+          marginheight="0"
+          scrolling="no"
+          width="700"
+          height="500"></iframe>
+  <br />
+  <small>View <a style="color: #0000ff; text-align: left;" href="http://maps.google.com/maps/ms?msid=212356616065693906545.0004b6bbb5cd44a72e278&amp;msa=0&amp;ie=UTF8&amp;t=m&amp;vpsrc=6&amp;source=embed">Software Carpentry Workshop Locations</a> in a larger map</small>
+</p>
+
+<p>
+  <iframe style="border: 0pt none;"
+          src="https://www.google.com/calendar/embed?src=workshops%40software-carpentry.org&amp;ctz=America/Toronto"
+          frameborder="0"
+          scrolling="no"
+          width="700"
+          height="500"></iframe>
+</p>
+</div>
+
+<h2 id="past">Past Workshops</h2>
+<div class="bootcamps">
+<table class="table table-striped bootcamps">
+{% for bootcamp in page.children|reverse %}
+  {% if bootcamp.startdate < today %}
+    <tr>
+      <td class="link">
+        <a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a>
+      </td>
+      <td class="spacer">&nbsp;...&nbsp;</td>
+      <td class="date">
+        {{bootcamp.date}}
+      </td>
+    </tr>
+  {% endif %}
+{% endfor %}
+</table>
+</div>
+
+{% endblock content %}

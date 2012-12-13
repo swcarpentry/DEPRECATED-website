@@ -1,0 +1,15 @@
+{% extends "_blog.html" %}
+
+<meta name="journal" content="True" />
+{% block file_metadata %}
+<meta name="post_id" content="4518" />
+<meta name="post_date" content="2012-02-07" />
+<meta name="author_id" content="wilson.g" />
+<meta name="title" content="Why We Don't Teach Parallel Computing in Software Carpentry" />
+<meta name="category" content="education" />
+<meta name="category" content="opinion" />
+{% endblock file_metadata %}
+
+{% block content %}
+<p>Konrad Hinsen recently wrote a blog post that explains <a href="http://khinsen.wordpress.com/2012/02/06/teaching-parallel-computing-in-python/">why teaching parallel computing with Python is hard</a>. To make a long story short, Python's multiprocessing module can fail on simple problems in a whole bunch of ways that require fairly advanced understanding to diagnose and repair&mdash;and that's even before you try doing things on Windows.</p>
+{% endblock content %}

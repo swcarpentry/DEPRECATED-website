@@ -1,0 +1,13 @@
+{% extends "_blog.html" %}
+
+{% block file_metadata %}
+<meta name="post_id" content="960" />
+<meta name="post_date" content="2007-06-11" />
+<meta name="author_id" content="wilson.g" />
+<meta name="title" content="Praising the Good" />
+<meta name="category" content="content" />
+{% endblock file_metadata %}
+
+{% block content %}
+<p>I frequently gripe about how backward scientific software development is, so it's only fair that I give praise where praise is due.  <a href="http://www.cs.toronto.edu/~sme">Steve Easterbrook</a> pointed me at the UK Met Office's <a href="http://www.metoffice.gov.uk/research/collaboration/fcm"> Flexible Configuration Management</a> system, which combines code management using <a href="http://subversion.tigris.org">Subversion</a> and <a href="http://trac.edgewall.org">Trac</a> with a <a href="http://www.gnu.org/software/make/">GNU Make</a>-based build and an extraction system that pulls data out of the repository and builds it for particular platforms.  This <a href="http://collab.metoffice.gov.uk/twiki/pub/Support/FCM/doc/user_guide/fcm_overview.png">image</a> shows how the three parts fit together; it ain't rocket science, but it's very professional, and a good model for others to follow.</p>
+{% endblock content %}

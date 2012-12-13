@@ -1,0 +1,30 @@
+insert_or_increment( [] , marlin , 5 )
+new species, so returning with [['marlin', 5]]
+insert_or_increment( [['marlin', 5]] , shark , 2 )
+...checking against marlin 5
+new species, so returning with [['marlin', 5], ['shark', 2]]
+insert_or_increment( [['marlin', 5], ['shark', 2]] , marlin , 1 )
+...checking against marlin 5
+...species matched, so returning with [['marlin', 5], ['shark', 2]]
+insert_or_increment( [['marlin', 5], ['shark', 2]] , turtle , 5 )
+...checking against marlin 5
+...checking against shark 2
+new species, so returning with [['marlin', 5], ['shark', 2], ['turtle', 5]]
+insert_or_increment( [['marlin', 5], ['shark', 2], ['turtle', 5]] , herring , 3 )
+...checking against marlin 5
+...checking against shark 2
+...checking against turtle 5
+new species, so returning with [['marlin', 5], ['shark', 2], ['turtle', 5], ['herring', 3]]
+insert_or_increment( [['marlin', 5], ['shark', 2], ['turtle', 5], ['herring', 3]] , herring , 4 )
+...checking against marlin 5
+...checking against shark 2
+...checking against turtle 5
+...checking against herring 3
+...species matched, so returning with [['marlin', 5], ['shark', 2], ['turtle', 5], ['herring', 3]]
+insert_or_increment( [['marlin', 5], ['shark', 2], ['turtle', 5], ['herring', 3]] , marlin , 1 )
+...checking against marlin 5
+...species matched, so returning with [['marlin', 5], ['shark', 2], ['turtle', 5], ['herring', 3]]
+herring: 3
+marlin: 5
+shark: 2
+turtle: 5

@@ -1,0 +1,7 @@
+marlin,5
+shark,2
+marlin,1
+turtle,5
+herring,3
+herring,4
+marlin,1

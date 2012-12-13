@@ -1,0 +1,9 @@
+Name            Orbital Radius  Orbital Period  Mass            Radius
+                (10^3 km)       (days)          (10^20 kg)      (km)
+Amalthea        181.4           0.498179          0.075      131 x 73 x 67
+Io              421.6           1.769138        893.2          1,821.6
+Europa          670.9           3.551181        480.0          1,560.8
+Ganymede      1,070.4           7.154553      1,481.9          2,631.2
+Callisto      1,882.7          16.689018      1,075.9          2,410.3
+Himalia      11,460           250.5662            0.095           85.0
+Elara        11,740           259.6528            0.008           40.0

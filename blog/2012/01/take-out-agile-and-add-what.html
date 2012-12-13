@@ -1,0 +1,23 @@
+{% extends "_blog.html" %}
+
+<meta name="journal" content="True" />
+{% block file_metadata %}
+<meta name="post_id" content="4424" />
+<meta name="post_date" content="2012-01-24" />
+<meta name="author_id" content="wilson.g" />
+<meta name="title" content="Take Out Agile, and Add...What?" />
+<meta name="category" content="content" />
+<meta name="category" content="versions/version-5-0" />
+{% endblock file_metadata %}
+
+{% block content %}
+<p>Based on the feedback we've received so far (both as comments and by email), it looks like we should take development methodologies (i.e., agile development) out of the <a href="{{root_path}}/blog/2012/01/revising-the-curriculum.html">core curriculum</a> and replace it with two hours on:</p>
+<ol>
+<li>Nothing: there's already too much in the core.</li>
+<li>Spreadsheets: because many scientists use them badly.</li>
+<li>NumPy and/or Pandas: because many of them are crunching matrices/doing stats.</li>
+<li>Visualization: which in practice would mean the basics of matplotlib.</li>
+<li>Image manipulation: because it's fun as well as useful, and lets us talk about binary vs. text data.</li>
+</ol>
+<p>I am quite arbitrarily limiting options to those five. Please cast your vote (one vote, not three out of five) in comments. We'd be grateful if you could include a brief explanation as well.</p>
+{% endblock content %}

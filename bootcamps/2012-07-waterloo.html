@@ -1,0 +1,35 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="University of Waterloo" />
+  <meta name="date" content="July 2012" />
+  <meta name="startdate" content="2012-07-12" />
+  <meta name="enddate" content="2012-07-13" />
+  <meta name="eventbrite_key" content="3558725243" />
+{% endblock file_metadata %}
+{% block content %}
+<p>data1.txt</p>
+<pre>Date,Species,Count
+2012-07-01,squirrel,23
+2012-07-01,goose,9
+2012-07-01,raccoon,4
+2012-07-02,squirrel,14
+2012-07-02,skunk,1
+2012-07-03,goose,5
+2012-07-03,bat,1</pre>
+<p>data2.txt</p>
+<pre>Date,Species,Count
+2012-07-01,squirrel,15
+2012-07-01,goose,5
+2012-07-01,raccoon,1
+2012-07-02,squirrel,10
+2012-07-03,goose,5
+2012-07-03,raccoon,1</pre>
+<p><strong>Where:</strong> Davis Centre DC 1568, University of Waterloo, 200 University Avenue West, Waterloo, Ontario.</p>
+<p><strong>When:</strong> July 12-13, 2012. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}

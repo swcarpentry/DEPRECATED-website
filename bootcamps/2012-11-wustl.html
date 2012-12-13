@@ -1,0 +1,18 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Washington University in St. Louis" />
+  <meta name="date" content="November 2012" />
+  <meta name="startdate" content="2012-11-10" />
+  <meta name="enddate" content="2012-11-11" />
+  <meta name="eventbrite_key" content="4262808174" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Life Sciences Building, Washington University in St. Louis.</p>
+<p><strong>When:</strong> November 10-11, 2012. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}
