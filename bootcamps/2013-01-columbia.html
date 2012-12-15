@@ -1,0 +1,68 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Columbia University" />
+  <meta name="date" content="January 2013" />
+  <meta name="startdate" content="2013-01-30" />
+  <meta name="enddate" content="2013-02-02" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Columbia University</p>
+<p><strong>When:</strong> January 30-February 2, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_requirements.html" %}
+<p>
+  <strong>Content:</strong> On January 30 and 31, we will teach:
+</p>
+<ul>
+  <li>Unix shell
+    <ul>
+      <li>basic commands for manipulating files and directories</li>
+      <li>the pipe-and-filter model</li>
+      <li>using 'history' and shell scripts to repeat and automate work</li>
+    </ul>
+  </li>
+  <li>Version control
+    <ul>
+      <li>version control</li>
+      <li>the update/edit/commit cycle</li>
+      <li>managing conflicts</li>
+      <li>when/where/how to set up a repository</li>
+    </ul>
+  </li>
+  <li>SQL
+    <ul>
+      <li>the relational data model</li>
+      <li>selecting and filtering data</li>
+      <li>aggregating information</li>
+      <li>handling missing data</li>
+      <li>combining information from multiple sources</li>
+    </ul>
+  </li>
+</ul>
+<p>On February 1 and 2, we will teach:</p>
+<ul>
+  <li>Python
+    <ul>
+      <li>basic mechanics: assignment, lists, loops, conditionals, file I/O</li>
+      <li>how and why to use libraries</li>
+      <li>how/when/why to create functions</li>
+      <li>debugging</li>
+    </ul>
+  </li>
+  <li>Data analysis
+    <ul>
+      <li>using Pandas to manipulate and analyze data</li>
+      <li>vectorizing computations</li>
+    </ul>
+  </li>
+  <li>Testing
+    <ul>
+      <li>how to create unit tests</li>
+      <li>test-driven development</li>
+      <li>techniques for testing numerical software</li>
+    </ul>
+  </li>
+</ul>
+{% include "_contact.html" %}
+<p>Participation in this workshop is restricted to students at Columbia University.</p>
+{% endblock content %}
