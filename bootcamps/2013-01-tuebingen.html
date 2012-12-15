@@ -1,0 +1,18 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Max Planck Institute Tuebingen" />
+  <meta name="date" content="January 2013" />
+  <meta name="startdate" content="2013-01-25" />
+  <meta name="enddate" content="2013-01-26" />
+  <meta name="eventbrite_key" content="5014203618" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> 41 Spemannstrasse, 72076 Tuebingen, Germany</p>
+<p><strong>When:</strong> January 25-26, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}
