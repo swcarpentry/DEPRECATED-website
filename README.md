@@ -20,5 +20,6 @@ Building
 Compiling the website requires [Python](http://python.org) and
 [Jinja2](http://jinja.pocoo.org/).
 
-Use the `make site` command to compile. The compiled site is put it in `/tmp/swc`.
-Type just `make` to see a list of all available commands.
+* Type `make` to see a list of all available commands.
+* Type `make check` to build everything in ./build for testing purposes.
+* Type `make install` to build into $HOME/software-carpentry.org when logged into software-carpentry.org to update the live web site.
