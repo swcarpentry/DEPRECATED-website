@@ -102,6 +102,23 @@ div.box {
     outline-style: solid;
 }
 
+/* Explanatory call-out boxes, for setup/index.html. */
+div.box2 {
+    width: 30em;
+    background-color: AntiqueWhite;
+    display: block;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline-color: gray;
+    outline-width: 1px;
+    outline-style: solid;
+}
+
 /* Level 2 headings inside pages. */
 div.content div h3 {
     border-bottom: 1px solid #CCCCCC;
