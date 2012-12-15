@@ -1,27 +1,25 @@
 {% extends "_base.html" %}
 
 {% block file_metadata %}
-<meta name="title" content="Boot Camp Setup" />
-<meta name="subfile" content="common.html" />
-<meta name="subfile" content="osx.html" />
-<meta name="subfile" content="redhatsl6.html" />
-<meta name="subfile" content="terminal.html" />
-<meta name="subfile" content="ubuntu.html" />
-<meta name="subfile" content="windows.html" />
+<meta name="title" content="Testing Your Software" />
 {% endblock file_metadata %}
 
+{% block navhighlight %}{{navhighlight('about')}}{% endblock navhighlight %}
+
 {% block content %}
+
+<p>[[UNDER CONSTRUCTION]]</p>
+
 <p>Try executing these short tests to see if you have all the necessary software installed on your machine. If a test fails, then follow the <a href="uhoh.html">Uh-oh, I'm missing something!</a> tutorial for help installing the appropriate software.</p>
 
 <div class="box2">
     
-    <!--> Test 1 <-->
+    <!-- Test 1 -->
     <h3>1 The Terminal Window</h3>
     <p>All computers come with a native terminal window (also commonly called a command-line <a href="http://en.wikipedia.org/wiki/Shell_%28computing%29">shell</a>). If you are unfamiliar with the terminal or how to find it on your computer, see the page <a href="terminal.html">On Getting a Terminal Window</a>.</p>
     
-    <img src="{{root_path}}/img/setup/terminal/1.png" alt="The terminal" />
+    <img src="{{root_path}}/img/setup/1.png" alt="The terminal screenshot 1" />
     </br>
-    <img src="../img/setup/terminal/1.png" alt="The terminal" />
     
     <p>Now try a series of commands in your terminal. The $ represents your information that the terminal prints automatically (like your username or the host name). At the prompt, exter:</p>
     <pre>$ whoami</pre>
@@ -32,14 +30,15 @@
     <p>A version number should be printed:</p>
     <pre>GNU MAKE 3.81</pre>
     
-    <img src="{{root_path}}/img/setup/terminal/2.png" alt="The terminal" />
-    </br>
-    <img src="../img/setup/terminal/2.png" alt="The terminal" />
+    <img src="{{root_path}}/img/setup/terminal2.png" alt="The terminal screenshot 2" />
     </br>
     
     <p>You have now completed the first software setup test!</p>
-    
-    <!--> Test 2 <-->
+</div>
+</br>
+
+<div class="box2">    
+    <!-- Test 2 -->
     <h3>2 Text Editors for Code</h3>
     
     <p>In this boot camp, you will be writing your own code, which requires a text editor. The choice of which editor to use is up to you. Some suggestions are: nano, VI, Emacs, and XEmacs. Decide which editor you want to use, and then make sure it is installed by attempting to create a new file using that editor or checking the version (as shown below). If the editor is not yet installed, follow the links provided above to the editor's website and follow their installation instructions.</p>
@@ -75,8 +74,11 @@
     <pre>XEmacs 21.5 (beta31) "ginger"</pre>
     <img src="http://www.xemacs.org/Images/custom.png" alt="XEmacs screenshot" />
     </br>
-    
-    <!--> Test 3 <-->
+</div>
+</br>
+
+<div class="box2">        
+    <!-- Test 3 -->
     <h3>3 Python for Scripting</h3>
     
     <p>Any Python 2 version will suffice for this class. We will <em>not</em> be teaching Python 3, so please make sure that you have either Python 2.6 or 2.7 versions.</p>
@@ -106,144 +108,37 @@
     
     <p>If all is fine it won't complain.</p>
     
-    <img src="{{root_path}}/img/setup/index/1.png" alt="Test your Python installation" />
+    <img src="{{root_path}}/img/setup/python1.png" alt="Python test screenshot" />
     </br>
     
     <p> If any portion of this test did not pass, then you probably do not have Python 2.6 or later installed. See On Installing Python for installation guidelines.</p>
-    
-    <!--> Test 4 <-->    
-    <h3>4 Python setuptools for Installing Python Packages</h3>
-    
-    <!--> Test 5 <-->
+</div>
+</br>
+
+<div class="box2">        
+    <!-- Test 4 -->    
+    <h3>4 Python setuptools for Installing Python Packages</h3>    
+</div>
+</br>
+
+<div class="box2">    
+    <!-- Test 5 -->
     <h3>5 Python nose for Running Unit Tests</h3>
+</div>
+</br>
+
+<div class="box2">        
+    <!-- Test 6 -->
+    <h3>6 Version Control </h3>
+    
+    <p>BitBucket, github tests, Mercurial</p>
+</div>
+</br>
+
+<div class="box2">        
+    <!-- Test 7 -->
+    <h3>7 SQLite</h3>
     
 </div>
-
-
----------------------------------------------------------------------
-
-
-<p>You can run through the check-list below to see you've got the necessary software installed.</p>
-
-
-<h2>What to do if you do not have a piece of required software</h2>
-
-<p>Please see the operating system-specific installation instructions</p>
-<ul>
-    <li><a href="common.html">Instructions common to all</a></li>
-    <li><a href="ubuntu.html">Ubuntu</a></li>
-    <li><a href="redhatsl6.html">RedHat/Scientific Linux 6</a></li>
-    <li><a href="windows.html">Windows</a></li>
-    <li><a href="osx.html">Mac OSX</a></li>
-</ul>
-
-<p>then pop back to this page to validate.</p>
-
----------------------------------------------------------------------
-
-
-<h2>Python setuptools for installing Python packages</h2>
-<p>At the prompt, enter:</p>
-<pre>
-    $ easy_install --version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-    distribute 0.6.10
-</pre>
-
-<p>or a warning:</p>
-<pre>
-    usage: easy_install [options] requirement_or_url ...
-    or: easy_install --help
-    error: option --version not recognized
-</pre>
-
-<h2>Python nose for running unit tests</h2>
-
-<p>At the prompt, enter:</p>
-<pre>
-    $ nosetests --version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-    nosetests version 0.10.4
-</pre>
-
-<p>At the prompt, enter:</p>
-<pre>
-    $ nosetests
-</pre>
-
-<p>You should be given a test report, e.g.:</p>
-<pre>
-    ........
-    Ran 0 tests in 0.003s
-    OK
-</pre>
-
-<h2>BitBucket for using remote version control repositories</h2>
-
-<p>For version control practicals, we use BitBucket to enable 
-repositories to be used remotely and to be shared. To get a BitBucket 
-account for version control practicals, just sign up for free at
-<a href="https://bitbucket.org/">https://bitbucket.org/</a>.</p>
-
-<h2>Mercurial for distributed version control</h2>
-
-<p>At the prompt, enter:</p>
-<pre>
-    $ hg --version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-    Mercurial Distributed SCM (version 1.4)
-</pre>
-<p><a href="http://mercurial.selenic.com/">http://mercurial.selenic.com/</a></p>
-
-<h2>EasyMercurial for version control via a GUI</h2>
-<ul>
-    <li>Create a directory (folder) somewhere on your computer.</li>
-    <li>Start EasyMercurial either by selecting it from a menu, double-clicking an icon or running:
-        <pre>
-            $ ./EasyMercurial
-        </pre>
-        at the command-line, depending upon your operating system</li>
-    <li>Open Repository dialog will appear</li>
-    <li>Click <strong>File folder</strong></li>
-    <li>Click <strong>Browse...</strong> and select your directory</li>
-    <li>Click <strong>OK</strong></li>
-</ul>
-<p><a href="http://easyhg.org/">http://easyhg.org/</a></p>
-
-<h2>SQLite for a lightweight relational database</h2>
-<p>At the prompt, enter:</p>
-<pre>
-    $ sqlite3 -version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-    3.6.20
-</pre>
-<p><a href="http://www.sqlite.org/">http://www.sqlite.org/</a></p>
-
-<h2>Firefox for the SQLite manager below</h2>
-<p>Depending upon your operating system either start up Firefox from its menu or icon, or, at the prompt, enter:</p>
-<pre>
-    $ firefox
-</pre>
-<p><a href="http://www.mozilla.org/en-US/firefox/new/">http://www.mozilla.org/en-US/firefox/new/</a></p>
-<h2>Firefox SQLite manager for a relational database</h2>
-<p>Once Firefox is running:</p>
-<ul>
-    <li>Select <strong>Tools</strong> =&gt; <strong>SQLite Manager</strong></li>
-    <li>SQLite Manager window appears</li>
-    <li>Select <strong>Database</strong> =&gt; <strong>New database</strong></li>
-</ul>
-<p><a href="http://code.google.com/p/sqlite-manager/">http://code.google.com/p/sqlite-manager/</a></p>
 
 {% endblock content %}
