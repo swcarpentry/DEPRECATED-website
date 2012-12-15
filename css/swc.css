@@ -141,6 +141,16 @@ div.footer {
     border-top: 1px solid #A6A6A6;
 }
 
+/* Bug report link on footer */
+div.footer .bugreport {
+    margin-top: 4px;   /* unseemly hack to centre the text */
+}
+
+/* github link on footer */
+div.footer .label a {
+   color: white;
+}
+
 /* Main menu at the top of every page. */
 div.mainmenu {
     clear: both;
@@ -297,4 +307,5 @@ table.bootcamps td.date {
     width: 50%;
     text-align: right;
 }
+
 
