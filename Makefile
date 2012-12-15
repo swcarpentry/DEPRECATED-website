@@ -97,10 +97,11 @@ install :
 
 ## check        : rebuild entire site locally for checking purposes.
 check : $(STATIC_DST) $(OUT_DIR)/.htaccess
+	@make ascii-chars
 	$(COMPILE) -m blog/metadata.json -r $(BLOG_RSS_FILE) index.html
-	@make journal
-	@make links
-	@make figref
+	@make blog-journal
+	@make check-links
+	@make book-figref
 
 ## blog-next-id : find the next blog entry ID to use.
 blog-next-id :
@@ -109,54 +110,19 @@ blog-next-id :
 	| sort -n \
 	| tail -1)
 
-#------------------------------------------------------------
-
-## check-about  : make the 'about' pages.
-check-about :
-	$(COMPILE) about/index.html
-
-## check-blog   : make the blog alone
-check-blog :
-	$(COMPILE) -m blog/metadata.json blog/index.html
-
-## check-book   : make the book alone
-check-book :
-	$(COMPILE) book/index.html
-	@make figref
-
-## check-boot   : make the bootcamps alone
-check-boot :
-	$(COMPILE) bootcamps/index.html
-
-## check-3.0    : make the 3.0 notes alone
-check-3.0 :
-	$(COMPILE) 3_0/index.html
-
-## check-4.0    : make the 4.0 notes alone
-check-4.0 :
-	$(COMPILE) 4_0/index.html
-
-## figref       : patch cross-references in figures
-figref :
-	@python bin/fignumber.py $(BOOK_CHAPTERS_HTML)
-
-## journal      : make journal-format version of blog
-journal :
+## blog-journal : make journal-format version of blog
+blog-journal :
 	python bin/journal.py ${OUT_DIR}/blog/*/*/*.html > ${OUT_DIR}/blog/journal.html
 
-#------------------------------------------------------------
-
-## valid        : check that generated HTML is valid.
-valid :
-	@python bin/validxml.py $(BLOG_RSS_FILE) $$(find $(OUT_DIR) -name '*.html' -print)
-
-## links        : check that local links resolve in generated HTML.
-links :
+## check-links  : check that local links resolve in generated HTML.
+check-links :
 	@find $(OUT_DIR) -type f -print | python bin/links.py $(OUT_DIR)
 
-## chars        : check for non-ASCII characters or tab characters.
-chars :
+## ascii-chars  : check for non-ASCII characters or tab characters.
+ascii-chars :
 	@python bin/chars.py $$(find . -name '*.html' -print)
+
+#------------------------------------------------------------
 
 # Copy static files.
 $(STATIC_DST) : $(OUT_DIR)/% : %
@@ -168,70 +134,74 @@ $(OUT_DIR)/.htaccess : _htaccess
 
 #------------------------------------------------------------
 
-## bib          : check for undefined/unused bibliography references.
-bib :
+## book-bib     : check for undefined/unused bibliography references.
+book-bib :
 	@bin/book.py bibundef $(BOOK_CHAPTERS_HTML)
 	@bin/book.py bibunused $(BOOK_CHAPTERS_HTML)
 
-## book         : run all checks.
-book :
+## book-book    : run all checks.
+book-book :
 	@for i in unknown gloss images source structure bib fig; do \
 	  echo '----' $$i '----'; \
 	  make $$i; \
 	done
 
-## classes      : list all classes used in the generated HTML files.
-classes :
+## book-classes : list all classes used in the generated HTML files.
+book-classes :
 	@bin/book.py classes $$(find $(OUT_DIR) -name '*.html' -print)
 
-## fig          : check figure formatting and for undefined/unused figures.
-fig :
+## book-fig     : check figure formatting and for undefined/unused figures.
+book-fig :
 	@bin/book.py figformat $(BOOK_CHAPTERS_HTML)
 	@bin/book.py figundef $(BOOK_CHAPTERS_HTML)
 	@bin/book.py figunused $(BOOK_CHAPTERS_HTML)
 
-## fix          : count FIXME markers in files.
-fix :
+## book-figref  : patch cross-references in figures
+book-figref :
+	@python bin/fignumber.py $(BOOK_CHAPTERS_HTML)
+
+## book-fix     : count FIXME markers in files.
+book-fix :
 	@bin/book.py fix $(BOOK_CHAPTERS_HTML)
 
-## gloss        : check glossary formatting and for undefined/unused glossary entries.
-gloss :
+## book-gloss   : check glossary formatting and for undefined/unused glossary entries.
+book-gloss :
 	@bin/book.py glossformat $(BOOK_CHAPTERS_HTML)
 	@bin/book.py glossundef $(BOOK_CHAPTERS_HTML)
 	@bin/book.py glossunused $(BOOK_CHAPTERS_HTML)
 
-## ideas        : extract key ideas.
-ideas :
+## book-ideas   : extract key ideas.
+book-ideas :
 	@bin/book.py ideas $(BOOK_CHAPTERS_HTML)
 
-## images       : check for undefined/unused images.
-images :
+## book-images  : check for undefined/unused images.
+book-images :
 	@bin/book.py imgundef img $(BOOK_CHAPTERS_HTML)
 	@bin/book.py imgunused img $(BOOK_CHAPTERS_HTML)
 
-## source       : check for undefined/unused source code fragments.
-source :
+## book-source  : check for undefined/unused source code fragments.
+book-source :
 	@bin/book.py srcundef src $(BOOK_CHAPTERS_HTML)
 	@bin/book.py srcunused src $(BOOK_CHAPTERS_HTML)
 
-## structure    : check overall structure of files.
-structure :
+## book-struct  : check overall structure of files.
+book-struct :
 	@bin/book.py structure $(BOOK_CHAPTERS_HTML)
 
-## summaries    : extract section summaries (learning goals and keypoints).
-summaries :
+## book-summary : extract section summaries (learning goals and keypoints).
+book-summary :
 	@bin/book.py summaries $(BOOK_CHAPTERS_HTML)
 
-## unknown      : check for unexpected HTML files.
-unknown :
+## book-unknown : check for unexpected HTML files.
+book-unknown :
 	@bin/book.py unknown vol1 $(BOOK_CHAPTERS_HTML)
 
-## words-a      : count words in files (report alphabetically).
-words-a :
+## book-words-a : count words in files (report alphabetically).
+book-words-a :
 	@bin/book.py words $(BOOK_CHAPTERS_HTML)
 
-## words-n      : count words in files (report numerically).
-words-n :
+## book-words-n : count words in files (report numerically).
+book-words-n :
 	@bin/book.py words $(BOOK_CHAPTERS_HTML) | sort -n -r -k 2
 
 #------------------------------------------------------------
