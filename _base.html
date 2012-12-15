@@ -119,8 +119,8 @@
       <div class="row-fluid">
         <div class="span10 offset1">
         {% block content %}{% endblock content %}
-	{% block details %}{% endblock details %}
-	{% block comments %}{{disqus(page.title, page.filename)}}{% endblock comments %}
+        {% block details %}{% endblock details %}
+        {% block comments %}{{disqus(page.title, page.filename)}}{% endblock comments %}
         </div>
       </div>
 

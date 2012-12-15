@@ -39,10 +39,10 @@
       <th class="left"><a href="#{{year}}">{{year}}</a></th>
       {% for month in page.months %}
         <td>
-	  {% if page.posts(year, month) %}<a href="#{{year}}-{{month}}">{% endif %}
-	    {{page.posts(year, month)|length}}
-	  {% if page.posts(year, month) %}</a>{% endif %}
-	</td>
+          {% if page.posts(year, month) %}<a href="#{{year}}-{{month}}">{% endif %}
+            {{page.posts(year, month)|length}}
+          {% if page.posts(year, month) %}</a>{% endif %}
+        </td>
       {% endfor %}
     </tr>
   {% endfor %}
@@ -57,12 +57,12 @@
     {% if page.posts(year, month) %}
       <h4 id="{{year}}-{{month}}">{{page.month_name(month)}}</h4>
       <table class="table table-striped table-condensed blogindex">
-	{% for post in page.posts(year, month)|reverse %}
-	  <tr>
-	    <td class="date">{{post.post_date}}:</td>
-	    <td><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></td>
-	  </tr>
-	{% endfor %}
+        {% for post in page.posts(year, month)|reverse %}
+          <tr>
+            <td class="date">{{post.post_date}}:</td>
+            <td><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></td>
+          </tr>
+        {% endfor %}
       </table>
     {% endif %}
   {% endfor %}
