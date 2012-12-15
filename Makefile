@@ -130,10 +130,6 @@ figref :
 journal :
 	python bin/journal.py ${OUT_DIR}/blog/*/*/*.html > ${OUT_DIR}/blog/journal.html
 
-## setup      : make the setup alone
-setup :
-	$(COMPILE) setup/index.html
-
 #------------------------------------------------------------
 
 ## valid      : check that generated HTML is valid.
