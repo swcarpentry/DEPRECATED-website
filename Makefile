@@ -16,7 +16,7 @@ BLOG_RSS_FILE = $(OUT_DIR)/feed.xml
 
 # Standard site compilation arguments.
 COMPILE = \
-	python bin/compile.py \
+	python2.7 bin/compile.py \
 	-d $$(date "+%Y-%m-%d") \
 	-o $(OUT_DIR) \
 	-p . -p bootcamps -p 3_0 -p 4_0 -p blog \

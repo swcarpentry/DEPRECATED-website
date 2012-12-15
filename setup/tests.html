@@ -1,0 +1,144 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+<meta name="title" content="Testing Your Software" />
+{% endblock file_metadata %}
+
+{% block navhighlight %}{{navhighlight('about')}}{% endblock navhighlight %}
+
+{% block content %}
+
+<p>[[UNDER CONSTRUCTION]]</p>
+
+<p>Try executing these short tests to see if you have all the necessary software installed on your machine. If a test fails, then follow the <a href="uhoh.html">Uh-oh, I'm missing something!</a> tutorial for help installing the appropriate software.</p>
+
+<div class="box2">
+    
+    <!-- Test 1 -->
+    <h3>1 The Terminal Window</h3>
+    <p>All computers come with a native terminal window (also commonly called a command-line <a href="http://en.wikipedia.org/wiki/Shell_%28computing%29">shell</a>). If you are unfamiliar with the terminal or how to find it on your computer, see the page <a href="terminal.html">On Getting a Terminal Window</a>.</p>
+    
+    <img src="{{root_path}}/img/setup/1.png" alt="The terminal screenshot 1" />
+    </br>
+    
+    <p>Now try a series of commands in your terminal. The $ represents your information that the terminal prints automatically (like your username or the host name). At the prompt, exter:</p>
+    <pre>$ whoami</pre>
+    <p>You should be told your user name, e.g.:</p>
+    <pre>caitlynpickens</pre>
+    <p>Next, try an automated build:</p>
+    <pre>$ make --version</pre>
+    <p>A version number should be printed:</p>
+    <pre>GNU MAKE 3.81</pre>
+    
+    <img src="{{root_path}}/img/setup/terminal2.png" alt="The terminal screenshot 2" />
+    </br>
+    
+    <p>You have now completed the first software setup test!</p>
+</div>
+</br>
+
+<div class="box2">    
+    <!-- Test 2 -->
+    <h3>2 Text Editors for Code</h3>
+    
+    <p>In this boot camp, you will be writing your own code, which requires a text editor. The choice of which editor to use is up to you. Some suggestions are: nano, VI, Emacs, and XEmacs. Decide which editor you want to use, and then make sure it is installed by attempting to create a new file using that editor or checking the version (as shown below). If the editor is not yet installed, follow the links provided above to the editor's website and follow their installation instructions.</p>
+    
+    <h4><a href="http://www.nano-editor.org/">nano</a>:</h4>
+    <p>nano is designed as a free replacement for the Pico text editor. To see if you have nano installed, enter the following command at the prompt:</p>
+    <pre>$ nano --version</pre>
+    <p>You should be given a version number, e.g.:</p>
+    <pre>GNU nano version 2.0.6 (compiled 10:55:37, May 25 2011)</pre>
+    <img src="http://www.nano-editor.org/nanodefault2.png" alt="Nano default settings" />
+    </br>
+    
+    <h4><a href="http://www.vim.org/">VI</a>:</h4>
+    <p>VIM is a highly configurable text editor designed to enable efficient text editing. To see if you have VIM installed, enter the following command at the prompt:</p>
+    <pre>$ vi --version</pre>
+    <p>You should be given a version number, e.g.:</p>
+    <pre>VIM - Vi IMproved 7.3 (2010 Aug 15, compiled Feb 21 2012 18:42:47)</pre>
+    
+    <h4><a href="http://www.gnu.org/software/emacs/">Emacs</a>:</h4>
+    <p>Emacs is an open-source text editor. To see if you have Emacs installed, enter the following command at the prompt:</p>
+    <pre>$ emacs --version</pre>
+    <p>You should be given a version number, e.g.:</p>
+    <pre>GNU Emacs 22.1.1</pre>
+    <img src="http://www.gnu.org/software/emacs/tour/images/gdb.png" alt="Emacs tour" />
+    </br>
+    
+    <h4><a href="hhttp://www.xemacs.org/">XEmacs</a>:</h4>
+    <p>XEmacs is the next-generation version of Emacs. It is extremely customizable. To see if you have XEmacs installed, enter the following command at the prompt:</p>
+    <pre>$ xemacs --version</pre>
+    <p>You should be given a version number, e.g.:</p>
+    <pre>-bash: xemacs: command not found</pre>
+    <p>This error message appeared because XEmacs is not yet installed. If I want to use XEMacs as my primary text editor, I still need to install it. After install, I test the version again:</p>
+    <pre>XEmacs 21.5 (beta31) "ginger"</pre>
+    <img src="http://www.xemacs.org/Images/custom.png" alt="XEmacs screenshot" />
+    </br>
+</div>
+</br>
+
+<div class="box2">        
+    <!-- Test 3 -->
+    <h3>3 Python for Scripting</h3>
+    
+    <p>Any Python 2 version will suffice for this class. We will <em>not</em> be teaching Python 3, so please make sure that you have either Python 2.6 or 2.7 versions.</p>
+    
+    <p>To check that it's installed and what version you have, at the prompt, enter:</p>
+    
+    <pre>
+        $ python --version
+    </pre>
+    
+    <p>You should be given a version number, e.g.:</p>
+    <pre>
+        Python 2.7.3
+    </pre>
+    
+    <p>Now, check its behavior:</p>
+    <pre>
+        $ python
+        &gt;&gt;&gt; print 2+2
+        4
+    </pre>
+    
+    <p>And, check it has the sqlite3 library if your boot camp is covering relational databases:</p>
+    <pre>
+        &gt; import sqlite3
+    </pre>
+    
+    <p>If all is fine it won't complain.</p>
+    
+    <img src="{{root_path}}/img/setup/python1.png" alt="Python test screenshot" />
+    </br>
+    
+    <p> If any portion of this test did not pass, then you probably do not have Python 2.6 or later installed. See On Installing Python for installation guidelines.</p>
+</div>
+</br>
+
+<div class="box2">        
+    <!-- Test 4 -->    
+    <h3>4 Python setuptools for Installing Python Packages</h3>    
+</div>
+</br>
+
+<div class="box2">    
+    <!-- Test 5 -->
+    <h3>5 Python nose for Running Unit Tests</h3>
+</div>
+</br>
+
+<div class="box2">        
+    <!-- Test 6 -->
+    <h3>6 Version Control </h3>
+    
+    <p>BitBucket, github tests, Mercurial</p>
+</div>
+</br>
+
+<div class="box2">        
+    <!-- Test 7 -->
+    <h3>7 SQLite</h3>
+    
+</div>
+
+{% endblock content %}
