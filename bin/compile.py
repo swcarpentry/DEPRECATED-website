@@ -427,26 +427,41 @@ class BootCampPage(GenericPage):
         Merge start and end dates into human-readable form.
         """
         start, end = self.startdate, self.enddate
+
         start_year, start_month, start_day = start.split('-')
-        end_year, end_month, end_day = end.split('-')
         start_month_name = MONTHS[start_month]
+
+        # One-day workshop.
+        if end is None:
+            self.date = '%s %s, %s' % \
+                        (start_month_name, start_day, start_year)
+            return
+
+        end_year, end_month, end_day = end.split('-')
         end_month_name = MONTHS[end_month]
+
+        # Spans two years.
         if start_year < end_year:
-            result = '%s %s, %s - %s %s, %s' % \
-                     (start_month_name, start_day, start_year,
-                      end_month_name, end_day, end_year)
+            self.date = '%s %s, %s - %s %s, %s' % \
+                        (start_month_name, start_day, start_year,
+                         end_month_name, end_day, end_year)
+
+        # Spans two months.
         elif start_month < end_month:
-            result = '%s %s - %s %s, %s' % \
-                     (start_month_name, start_day,
-                      end_month_name, end_day, end_year)
+            self.date = '%s %s - %s %s, %s' % \
+                        (start_month_name, start_day,
+                         end_month_name, end_day, end_year)
+
+        # All in one month.
         elif start_day < end_day:
-            result = '%s %s-%s, %s' % \
-                     (start_month_name, start_day,
-                      end_day, end_year)
+            self.date = '%s %s-%s, %s' % \
+                        (start_month_name, start_day,
+                         end_day, end_year)
+
+        # End date is before start date?
         else:
             assert False, \
                    'Bad date range %s -- %s' % (start, end)
-        self.date = result
 
 #----------------------------------------
 
