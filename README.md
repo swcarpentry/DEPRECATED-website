@@ -25,6 +25,14 @@ Compiling the website requires [Python](http://python.org) and
 * Type `make check` to build everything in ./build for testing purposes.
 * Type `make install` to build into $HOME/software-carpentry.org when logged into software-carpentry.org to update the live web site.
 
+Useful Links
+------------
+
+* [Software Carpentry RSS feed](http://software-carpentry.org/feed.xml)
+* [Software Carpentry comments on Disqus](http://software-carpentry.disqus.com/latest.rss)
+* [Open Software Carpentry issues on GitHub](https://github.com/swcarpentry/website/issues?state=open)
+* [Teaching Software Carpentry](http://teaching.software-carpentry.org)
+
 Issue Labels
 ------------
 
