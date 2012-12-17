@@ -8,6 +8,10 @@ try:  # Python 3
 except:  # Python 2
     from cStringIO import StringIO
 import xml.etree.ElementTree as ET
+try:  # ElementTree 1.3
+    from xml.etree.ElementTree import ParseError
+except ImportError:  # earlier versions (e.g. with Python 2.6.5)
+    from xml.parsers.expat import ExpatError as ParseError
 try:  # Python 3
     import html.entities
     ENTITIES = html.entities.entitydefs
@@ -31,10 +35,11 @@ def read_xml(filename, mangle_entities=False):
         else:
             with open(filename, 'r') as reader:
                 parser = ET.XMLParser()
-                parser.parser.UseForeignDTD(True)
+                if hasattr(parser, 'parser'):
+                    parser.parser.UseForeignDTD(True)
                 parser.entity.update(ENTITIES)
                 return ET.parse(reader, parser=parser)
-    except ET.ParseError as e:
+    except ParseError as e:
         assert False, \
                'Unable to parse {0}: {1}'.format(filename, e)
 
