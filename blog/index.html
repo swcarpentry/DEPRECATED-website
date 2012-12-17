@@ -11,7 +11,7 @@
 {% block content %}
 <h2>Recent Posts
   <a href="http://software-carpentry.org/feed.xml">
-    <img class="pull-right" src="../img/rss-icon-gray.png"/></a></h2>
+    <img class="pull-right" src="../img/rss-icon-blue.png"/></a></h2>
 
 {% for post in page.children[-page.blog_history_length:]|reverse %}
   <h3><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></h3>
