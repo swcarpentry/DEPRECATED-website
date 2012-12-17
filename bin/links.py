@@ -52,8 +52,12 @@ def get_links(root_dir, filenames):
     links = set()
     for f in filenames:
         doc = read_xml(f)
+        try:
+            tags = doc.findall('.//a[@href]')
+        except SyntaxError:  # ElementTree 1.2 lacks attribute XPath support
+            tags = [t for t in doc.findall('.//a') if 'href' in t.attrib]
         links.update(set(normalize(root_dir, f, r.attrib['href'])
-                         for r in doc.findall('.//a[@href]')))
+                         for r in tags))
     return set(lnk for lnk in links if lnk)  # filter out None's
 
 #-------------------------------------------------------------------------------
