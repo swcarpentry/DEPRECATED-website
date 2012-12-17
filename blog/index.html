@@ -6,11 +6,12 @@
   <meta name="subglob" content="*/*/*.html" />
 {% endblock file_metadata %}
 
-{% block content %}
-
 {% block navhighlight %}{{navhighlight('blog')}}{% endblock navhighlight %}
 
-<h2>Recent Posts</h2>
+{% block content %}
+<h2>Recent Posts
+  <a href="http://software-carpentry.org/feed.xml">
+    <img class="pull-right" src="../img/rss-icon-gray.png"/></a></h2>
 
 {% for post in page.children[-page.blog_history_length:]|reverse %}
   <h3><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></h3>
