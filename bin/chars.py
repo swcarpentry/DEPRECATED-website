@@ -13,8 +13,9 @@ for filename in sys.argv[1:]:
     tabs = True
     for (i, line) in enumerate(lines):
         if tabs and ('\t' in line):
-            print filename, i+1, 'tab'
+            print('{0} {1} {2}'.format(filename, i+1, 'tab'))
             tabs = False
         for (j, c) in enumerate(line):
             if ord(c) > 128:
-                print filename, i+1, j+1, ord(c), '&#%x;' % ord(c)
+                print('{0} {1} {2} {3} &#{3};'.format(
+                        filename, i+1, j+1, ord(c)))
