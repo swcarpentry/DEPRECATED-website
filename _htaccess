@@ -3,6 +3,11 @@ RewriteEngine On
 RewriteBase /
 AddDefaultCharset UTF-8
 
+# Wordpress Feed URL 
+# this has to happen before the rewrites for /blog
+RewriteCond %{REQUEST_URI} ^(/feed/?|/blog/feed/?)$
+RewriteRule ^(.*) /feed.xml [R,L]
+
 # redirect URLs to a day to the main blog page 
 RewriteCond %{REQUEST_URI} ^/\d\d\d\d/\d\d/\d\d/$
 RewriteRule ^(.*) /blog/index.html [R,L]
@@ -47,9 +52,5 @@ RewriteRule ^(.*?)/?$ $1.html [R,L]
 # reading list 
 RewriteCond %{REQUEST_URI} ^/4_0/reading/?$
 RewriteRule ^(.*) /about/biblio.html [R,L]
-
-# Wordpress Feed URL 
-RewriteCond %{REQUEST_URI} ^/feed/?$
-RewriteRule ^(.*) /feed.xml [R,L]
 
 </IfModule>
