@@ -3,7 +3,10 @@ Utilities used in Software Carpentry tools.
 """
 
 import re
-import cStringIO
+try:  # Python 3
+    from io import StringIO
+except:  # Python 2
+    from cStringIO import StringIO
 import xml.etree.ElementTree as ET
 try:  # Python 3
     import html.entities
@@ -23,7 +26,7 @@ def read_xml(filename, mangle_entities=False):
             with open(filename, 'r') as reader:
                 data = reader.read()
                 data = data.replace('&', '@@@@')
-                wrapper = cStringIO.StringIO(data)
+                wrapper = StringIO(data)
                 return ET.parse(wrapper)
         else:
             with open(filename, 'r') as reader:
