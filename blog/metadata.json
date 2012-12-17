@@ -1,6 +1,7 @@
 {
     "author_id" : {
         "anderson.c" : "Carlos Anderson",
+        "bostroem.a" : "Azalee Bostroem",
         "buske.o" : "Orion Buske",
         "cannam.c" : "Chris Cannam",
         "chapman.h" : "Hanah Chapman",
@@ -60,6 +61,7 @@
         "venues/cef-2011" : "CEF 2011",
         "venues/columbia-university" : "Columbia University",
         "venues/ebi-cambridge" : "EBI Cambridge",
+        "venues/edinburgh" : "University of Edinburgh",
         "venues/halifax" : "Halifax",
         "venues/ictp" : "International Center for Theoretical Physics",
         "venues/indiana-university" : "Indiana University",
