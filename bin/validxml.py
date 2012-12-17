@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 import sys
 import xml.etree.ElementTree as ET
-import htmlentitydefs
-
-ENTITIES = htmlentitydefs.entitydefs
+try:  # Python 3
+    import html.entities
+    ENTITIES = html.entities.entitydefs
+except ImportError:  # Python 2
+    import htmlentitydefs
+    ENTITIES = htmlentitydefs.entitydefs
 
 for filename in sys.argv[1:]:
     try:
@@ -13,7 +16,7 @@ for filename in sys.argv[1:]:
         reader = open(filename, 'r')
         tree = ET.parse(reader, parser=parser)
         reader.close()
-    except ET.ParseError, e:
-        print 'Unable to parse %s: %s' % (filename, e)
-    except Exception, e:
-        print 'Unable to read %s: %s' % (filename, e)
+    except ET.ParseError as e:
+        print('Unable to parse {0}: {1}'.format(filename, e))
+    except Exception as e:
+        print('Unable to read {0}: {1}'.format(filename, e))
