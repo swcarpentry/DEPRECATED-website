@@ -52,9 +52,9 @@ def get_links(root_dir, filenames):
     links = set()
     for f in filenames:
         doc = read_xml(f)
-        links.update({normalize(root_dir, f, r.attrib['href'])
-                      for r in doc.findall('.//a[@href]')})
-    return {lnk for lnk in links if lnk} # filter out None's
+        links.update(set(normalize(root_dir, f, r.attrib['href'])
+                         for r in doc.findall('.//a[@href]')))
+    return set(lnk for lnk in links if lnk)  # filter out None's
 
 #-------------------------------------------------------------------------------
 
@@ -72,7 +72,7 @@ def main(root_dir):
     """
     Main command-line driver.
     """
-    filenames = {os.path.abspath(f.strip()) for f in sys.stdin}
+    filenames = set(os.path.abspath(f.strip()) for f in sys.stdin)
     links = get_links(root_dir, [f for f in filenames if f.endswith('.html')])
     show_missing(filenames, links)
 
