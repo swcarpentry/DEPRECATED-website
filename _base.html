@@ -66,6 +66,9 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     {% endblock css %}
+		{% block rel_vcs %}
+		<link rel="vcs-git" href="https://github.com/swcarpentry/website.git" title="Software Carpentry Git repository" />
+		{% endblock rel_vcs %}
     {% block metadata %}{% endblock metadata %}
     {% block file_metadata %}{% endblock file_metadata %}
     {% block pagetitle %}<title>Software Carpentry: {{page.title}}</title>{% endblock pagetitle %}
