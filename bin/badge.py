@@ -24,9 +24,9 @@ BADGE_KINDS = BADGE_DESCRIPTIONS.keys()
 BADGE_KINDS.sort()
 
 USAGE = '''Usage:
-  create: badge.py -c base_dir username email [%(kinds)s]
-  erase:  badge.py -e base_dir username [%(kinds)s]
-  help:   badge.py -h''' % {'kinds' : '|'.join(BADGE_KINDS)}
+  create: badge.py create [%(kinds)s] base_dir username email
+  erase:  badge.py erase [%(kinds)s] base_dir username
+  help:   badge.py help''' % {'kinds' : '|'.join(BADGE_KINDS)}
 
 JSON_TEMPLATE = '''{
   "recipient" : "%(email)s",
@@ -142,17 +142,17 @@ if __name__ == '__main__':
 
     assert len(sys.argv) > 1, USAGE
 
-    if sys.argv[1] == '-c':
+    if sys.argv[1] == 'create':
         assert len(sys.argv) == 6, USAGE
-        base_dir, username, email, kind = sys.argv[2:]
+        kind, base_dir, username, email = sys.argv[2:6]
         create(base_dir, username, email, kind)
 
-    elif sys.argv[1] == '-e':
-        assert len(sys.argv) == 5, USAGE
-        base_dir, username, kind = sys.argv[2:]
+    elif sys.argv[1] == 'erase':
+        assert len(sys.argv) >= 5, USAGE
+        kind, base_dir, username = sys.argv[2:5]
         erase(base_dir, username, kind)
 
-    elif sys.argv[1] == '-h':
+    elif sys.argv[1] in ('-h', '--help', 'help'):
         usage()
         sys.exit(0)
 
