@@ -74,10 +74,10 @@ def extract(filename):
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1, 'Need at least one post filename'
-    print HEADER
+    print(HEADER)
     entries = [extract(filename) for filename in sys.argv[1:]]
     entries = [e for e in entries if e]
     entries.sort()
     for e in entries:
-        print e[1]
-    print FOOTER
+        print(e[1])
+    print(FOOTER)

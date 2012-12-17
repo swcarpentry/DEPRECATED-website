@@ -52,9 +52,13 @@ def get_links(root_dir, filenames):
     links = set()
     for f in filenames:
         doc = read_xml(f)
-        links.update({normalize(root_dir, f, r.attrib['href'])
-                      for r in doc.findall('.//a[@href]')})
-    return {lnk for lnk in links if lnk} # filter out None's
+        try:
+            tags = doc.findall('.//a[@href]')
+        except SyntaxError:  # ElementTree 1.2 lacks attribute XPath support
+            tags = [t for t in doc.findall('.//a') if 'href' in t.attrib]
+        links.update(set(normalize(root_dir, f, r.attrib['href'])
+                         for r in tags))
+    return set(lnk for lnk in links if lnk)  # filter out None's
 
 #-------------------------------------------------------------------------------
 
@@ -64,7 +68,7 @@ def show_missing(all_files, links):
     """
     for (source, normalized, raw) in links:
         if normalized not in all_files:
-            print '%s: %s (%s)' % (source, raw, normalized)
+            print('{0}: {1} ({2})'.format(source, raw, normalized))
 
 #-------------------------------------------------------------------------------
 
@@ -72,7 +76,7 @@ def main(root_dir):
     """
     Main command-line driver.
     """
-    filenames = {os.path.abspath(f.strip()) for f in sys.stdin}
+    filenames = set(os.path.abspath(f.strip()) for f in sys.stdin)
     links = get_links(root_dir, [f for f in filenames if f.endswith('.html')])
     show_missing(filenames, links)
 

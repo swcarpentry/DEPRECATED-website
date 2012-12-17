@@ -3,9 +3,21 @@ Utilities used in Software Carpentry tools.
 """
 
 import re
-import cStringIO
+try:  # Python 3
+    from io import StringIO
+except:  # Python 2
+    from cStringIO import StringIO
 import xml.etree.ElementTree as ET
-import htmlentitydefs
+try:  # ElementTree 1.3
+    from xml.etree.ElementTree import ParseError
+except ImportError:  # earlier versions (e.g. with Python 2.6.5)
+    from xml.parsers.expat import ExpatError as ParseError
+try:  # Python 3
+    import html.entities
+    ENTITIES = html.entities.entitydefs
+except ImportError:  # Python 2
+    import htmlentitydefs
+    ENTITIES = htmlentitydefs.entitydefs
 
 #-------------------------------------------------------------------------------
 
@@ -18,17 +30,18 @@ def read_xml(filename, mangle_entities=False):
             with open(filename, 'r') as reader:
                 data = reader.read()
                 data = data.replace('&', '@@@@')
-                wrapper = cStringIO.StringIO(data)
+                wrapper = StringIO(data)
                 return ET.parse(wrapper)
         else:
             with open(filename, 'r') as reader:
                 parser = ET.XMLParser()
-                parser.parser.UseForeignDTD(True)
-                parser.entity.update(htmlentitydefs.entitydefs)
+                if hasattr(parser, 'parser'):
+                    parser.parser.UseForeignDTD(True)
+                parser.entity.update(ENTITIES)
                 return ET.parse(reader, parser=parser)
-    except ET.ParseError, e:
+    except ParseError as e:
         assert False, \
-               'Unable to parse %s: %s' % (filename, e)
+               'Unable to parse {0}: {1}'.format(filename, e)
 
 #-------------------------------------------------------------------------------
 

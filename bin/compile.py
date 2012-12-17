@@ -359,7 +359,7 @@ class GenericPage(object):
         # If anything was globbed, sort everything (including children
         # that were loaded explicitly).
         if sort:
-            self.children.sort(lambda x, y: cmp(x._sort_key, y._sort_key))
+            self.children.sort(key=lambda x: (x._sort_key, id(x)))
 
     def _finalize_children(self):
         """
@@ -376,7 +376,8 @@ class GenericPage(object):
         Render and save this page.
         """
         if self.app.verbosity > 0:
-            print >> sys.stderr, self.filename
+            sys.stderr.write(self.filename)
+            sys.stderr.write('\n')
 
         # Render.
         template = self.app.env.get_template(self.filename)
