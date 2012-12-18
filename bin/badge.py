@@ -6,6 +6,7 @@ import os
 import datetime
 import urllib2
 import getopt
+import png
 
 #-------------------------------------------------------------------------------
 
@@ -22,11 +23,6 @@ BADGE_DESCRIPTIONS = {
 
 BADGE_KINDS = BADGE_DESCRIPTIONS.keys()
 BADGE_KINDS.sort()
-
-USAGE = '''Usage:
-  create: badge.py create [%(kinds)s] base_dir username email
-  erase:  badge.py erase [%(kinds)s] base_dir username
-  help:   badge.py help''' % {'kinds' : '|'.join(BADGE_KINDS)}
 
 JSON_TEMPLATE = '''{
   "recipient" : "%(email)s",
@@ -46,88 +42,115 @@ JSON_TEMPLATE = '''{
 }
 '''
 
-BASE_URL = "http://beta.openbadges.org/baker?assertion=http://software-carpentry.org"
+REQUEST_URL = "http://beta.openbadges.org/baker?assertion=http://software-carpentry.org/"
+
+USAGE = '''Usage:
+badge.py create  image_src_dir badge_root_dir [%(kinds)s] username email
+badge.py dummy   image_src_dir badge_root_dir [%(kinds)s] username email
+badge.py erase   badge_root_dir [%(kinds)s] username
+badge.py extract filename...
+badge.py help''' % {'kinds' : '|'.join(BADGE_KINDS)}
 
 #-------------------------------------------------------------------------------
 
-def make_paths(base_dir, username, kind, cannot_exist=True):
-    '''Create, check, and return the paths used by handlers.'''
+def main(args):
+    '''Main program driver.'''
 
-    # Sanity checks.
-    assert kind in BADGE_DESCRIPTIONS, \
-           'Unknown kind "%s"' % kind
+    assert len(args) > 1, USAGE
 
-    assert os.path.isdir(base_dir), \
-           'Base directory "%s" not found' % base_dir
+    if args[1] in ('create', '--create', '-c'):
+        assert len(args) == 7, USAGE
+        image_src_dir, badge_root_dir, kind, username, email = args[2:7]
+        create(image_src_dir, badge_root_dir, kind, username, email)
 
-    json_dir = os.path.join(base_dir, 'badges', kind)
-    assert os.path.isdir(json_dir), \
-           'No such directory "%s"' % json_dir
+    if args[1] in ('dummy', '--dummy', '-d'):
+        assert len(args) == 7, USAGE
+        image_src_dir, badge_root_dir, kind, username, email = args[2:7]
+        dummy(image_src_dir, badge_root_dir, kind, username, email)
 
-    img_src_path = os.path.join(base_dir, 'img', 'badges', '%s.png' % kind)
-    assert os.path.isfile(img_src_path), \
-           'No such image file "%s"' % img_src_path
+    elif args[1] in ('erase', '--erase', '-e'):
+        assert len(args) == 5, USAGE
+        badge_root_dir, kind, username = args[2:5]
+        erase(badge_root_dir, kind, username)
 
-    # Construct and return paths and URL.
-    json_name = '%s.json' % username
-    json_path = os.path.join(json_dir, json_name)
-    if cannot_exist:
-        assert not os.path.isfile(json_path), \
-               'JSON file "%s" already exists' % json_path
+    elif args[1] in ('extract', '--extract', '-x'):
+        assert len(args) >= 2, USAGE
+        filenames = args[2:]
+        extract(filenames)
 
-    img_dst_name = '%s-%s.png' % (username, kind)
-    img_dst_path = os.path.join(base_dir, 'img', 'badges', img_dst_name)
-    if cannot_exist:
-        assert not os.path.isfile(img_dst_path), \
-               'PNG file "%s" already exists' % img_dst_path
+    elif args[1] in ('help', '--help', '-h'):
+        usage()
+        sys.exit(0)
 
-    json_url = os.path.join('/badges', kind, json_name)
-    full_url = BASE_URL + json_url
-
-    return json_path, img_dst_path, full_url
+    else:
+        print >> sys.stderr, USAGE
+        sys.exit(1)
 
 #-------------------------------------------------------------------------------
 
-def create(base_dir, username, email, kind):
+def create(image_src_dir, badge_root_dir, kind, username, email):
     '''Create a new badge.'''
 
-    # Paths
-    json_path, img_path, url = make_paths(base_dir, username, kind)
+    assertion, url, json_dst_path = \
+        _setup(image_src_dir, badge_root_dir, kind, username, email)
 
-    # When is the badge being created?
-    when = datetime.date.today().isoformat()
-
-    # Create and save the JSON blob.
-    values = {'username'    : username,
-              'email'       : email,
-              'kind'        : kind,
-              'when'        : when,
-              'name'        : BADGE_DESCRIPTIONS[kind][0],
-              'description' : BADGE_DESCRIPTIONS[kind][1]}
-    blob = JSON_TEMPLATE % values
-    writer = open(json_path, 'w')
-    writer.write(blob)
-    writer.close()
+    # Save assertion.
+    with open(json_dst_path, 'w') as writer:
+        writer.write(assertion)
     print 'JSON badge manifest saved to', json_path
 
-    # Create and save the signed badge.
-    reader = urllib2.urlopen(url)
-    data = reader.read()
-    reader.close()
-    writer = open(img_path, 'wb')
-    writer.write(data)
-    writer.close()
-    print 'PNG image saved to', img_path
+    # Create and save the baked badge image.
+    with urllib2.urlopen(url) as reader:
+        data = reader.read()
+    with open(image_dst_path, 'wb') as writer:
+        writer.write(data)
+    print 'PNG image saved to', image_dst_path
 
 #-------------------------------------------------------------------------------
 
-def erase(base_dir, username, kind):
-    '''Erase an existing badge.'''
-    json_path, img_path, url = make_paths(base_dir, username, kind, False)
-    if os.path.isfile(json_path):
-        os.unlink(json_path)
-    if os.path.isfile(img_path):
-        os.unlink(img_path)
+def dummy(image_src_dir, badge_root_dir, kind, username, email):
+    '''Construct and display everything that would be used to generate a badge.'''
+
+    assertion, url, image_dst_path, json_dst_path = \
+        _setup(image_src_dir, badge_root_dir, kind, username, email)
+
+    print 'URL:', url
+    print 'Baked badge:', image_dst_path
+    print 'JSON file:', json_dst_path
+    print 'Assertion:'
+    print assertion
+
+#-------------------------------------------------------------------------------
+
+def erase(badge_root_dir, kind, username):
+    '''Erase an existing badge's image and JSON files.'''
+
+    _, image_dst_path, json_dst_path, _ = \
+        _make_paths(image_src_dir, badge_root_dir, kind, username, False)
+
+    if os.path.isfile(json_dst_path):
+        os.unlink(json_dst_path)
+
+    if os.path.isfile(image_dst_path):
+        os.unlink(image_dst_path)
+
+#-------------------------------------------------------------------------------
+
+def extract(filenames):
+    '''Extract metadata URL from files.'''
+    for f in filenames:
+        try:
+            p = png.Reader(filename=f)
+            for chunk_type, chunk_data in p.chunks():
+                if chunk_type == 'tEXt':
+                    who, what = chunk_data.split('\x00')
+                    if who == 'openbadges':
+                        print '%s: %s' % (filename, what)
+                        break
+            else:
+                print >> sys.stderr, 'No open badges metadtata found in', f
+        except Exception, e:
+            print >> sys.stderr, "error in %s:" % f, e
 
 #-------------------------------------------------------------------------------
 
@@ -138,24 +161,71 @@ def usage():
 
 #-------------------------------------------------------------------------------
 
+def _setup(image_src_dir, badge_root_dir, kind, username, email):
+    '''Set up for badge generation (shared between creation and dummy run).'''
+
+    # Paths
+    image_src_path, image_dst_path, json_dst_path, url = \
+        _make_paths(image_src_dir, badge_root_dir, kind, username)
+
+    # When is the badge being created?
+    when = datetime.date.today().isoformat()
+
+    # Create and save the JSON assertion.
+    values = {'username'    : username,
+              'email'       : email,
+              'kind'        : kind,
+              'when'        : when,
+              'name'        : BADGE_DESCRIPTIONS[kind][0],
+              'description' : BADGE_DESCRIPTIONS[kind][1]}
+    assertion = JSON_TEMPLATE % values
+
+    return assertion, url, image_dst_path, json_dst_path
+
+#-------------------------------------------------------------------------------
+
+def _make_paths(image_src_dir, badge_root_dir, kind, username, cannot_exist=True):
+    '''Create, check, and return the paths used by handlers.'''
+
+    # Badge type is recognized.
+    assert kind in BADGE_DESCRIPTIONS, \
+           'Unknown kind "%s"' % kind
+
+    # Badge image source exists.
+    assert os.path.isdir(image_src_dir), \
+           'Image source directory "%s" not found' % image_src_dir
+    image_src_path = os.path.join(image_src_dir, '%s.png' % kind)
+    assert os.path.isfile(image_src_path), \
+           'No such image file "%s"' % image_src_path
+
+    # Badge storage directory exists.
+    assert os.path.isdir(badge_root_dir), \
+           'Badge root directory "%s" not found' % badge_root_dir
+    badge_dst_dir = os.path.join(badge_root_dir, kind)
+    assert os.path.isdir(badge_dst_dir), \
+           'Badge destination directory "%s" not found' % badge_dst_dir
+
+    # Baked badge image.
+    image_dst_path = os.path.join(badge_dst_dir, '%s.png' % username)
+    if cannot_exist:
+        assert not os.path.isfile(image_dst_path), \
+               'Baked badge image file "%s" already exists' % image_dst_path
+
+    # Name of JSON file.
+    json_name = '%s.json' % username
+
+    # JSON file.
+    json_dst_path = os.path.join(badge_dst_dir, json_name)
+    if cannot_exist:
+        assert not os.path.isfile(json_dst_path), \
+               'JSON file "%s" already exists' % json_dst_path
+
+    # URL for badge baking request.
+    url = REQUEST_URL + os.path.join(badge_root_dir, kind, json_name)
+
+    return image_src_path, json_dst_path, image_dst_path, url
+
+#-------------------------------------------------------------------------------
+
 if __name__ == '__main__':
-
-    assert len(sys.argv) > 1, USAGE
-
-    if sys.argv[1] == 'create':
-        assert len(sys.argv) == 6, USAGE
-        kind, base_dir, username, email = sys.argv[2:6]
-        create(base_dir, username, email, kind)
-
-    elif sys.argv[1] == 'erase':
-        assert len(sys.argv) >= 5, USAGE
-        kind, base_dir, username = sys.argv[2:5]
-        erase(base_dir, username, kind)
-
-    elif sys.argv[1] in ('-h', '--help', 'help'):
-        usage()
-        sys.exit(0)
-
-    else:
-        print >> sys.stderr, USAGE
-        sys.exit(1)
+    main(sys.argv)
