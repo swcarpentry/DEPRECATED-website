@@ -147,7 +147,7 @@ class Application(object):
             root_path = '.'
         else:
             root_path = '/'.join([os.pardir] * depth)
-        timestamp = time.strftime('%Y-%m-%dT%H:%M:%S')
+        timestamp = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         return {'contact_email' : CONTACT_EMAIL,
                 'filename'      : filename,
                 'root_path'     : root_path,
