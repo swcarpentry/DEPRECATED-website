@@ -716,23 +716,46 @@ class PageFactory(object):
 
 #----------------------------------------
 
+class ContentEncodedRSSItem(RSSItem): 
+    def __init__(self, **kwargs): 
+        self.content = kwargs.get('content', None)
+        if 'content' in kwargs: 
+            del kwargs['content']
+        RSSItem.__init__(self, **kwargs)
+
+    def publish_extensions(self, handler): 
+        if self.content:
+            handler._out.write('<%(e)s><![CDATA[%(c)s]]></%(e)s>' %
+                { 'e':'content:encoded', 'c':self.content})
+                
+class ContentEncodedRSS2(RSS2): 
+    def __init__(self, **kwargs):
+        RSS2.__init__(self, **kwargs)
+        self.rss_attrs['xmlns:content']='http://purl.org/rss/1.0/modules/content/' 
+
+
 def create_rss(filename, site, posts):
     """
     Generate RSS2 feed.xml file for blog.
     """
-
+    
     items = []
     slice = posts[-BLOG_HISTORY_LENGTH:]
     slice.reverse()
+
     for post in slice:
+        template_vars = post.app.standard(post.filename)
+        template_vars['root_path'] = site
         path = os.path.join(site, 'blog', post.index_link())
-        items.append(RSSItem(title=post.title,
+        rendered_content = jinja2.Template(post.content).render(**template_vars)
+        items.append(ContentEncodedRSSItem(title=post.title,
                              author=post.author_id,
                              link=path,
                              description=post.excerpt(),
+                             content=rendered_content,
                              pubDate=post.post_date))
 
-    rss = RSS2(title=BLOG_TITLE,
+    rss = ContentEncodedRSS2(title=BLOG_TITLE,
                link=site,
                description=BLOG_DESCRIPTION,
                lastBuildDate=datetime.datetime.utcnow(),
