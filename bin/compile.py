@@ -84,6 +84,7 @@ import re
 import getopt
 import json
 import jinja2
+import time
 import datetime
 from PyRSS2Gen import RSS2, RSSItem, Guid
 
@@ -146,10 +147,12 @@ class Application(object):
             root_path = '.'
         else:
             root_path = '/'.join([os.pardir] * depth)
+        timestamp = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         return {'contact_email' : CONTACT_EMAIL,
                 'filename'      : filename,
                 'root_path'     : root_path,
                 'site'          : self.site,
+                'timestamp'     : timestamp,
                 'today'         : self.today,
                 'twitter_name'  : TWITTER_NAME,
                 'twitter_url'   : TWITTER_URL}
