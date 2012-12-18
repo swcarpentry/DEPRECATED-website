@@ -7,7 +7,10 @@ import getopt
 import datetime
 import urllib2
 import getopt
-import png
+try:
+    import png
+except ImportError:
+    sys.stderr.write('Unable to import PNG library\n')
 
 #-------------------------------------------------------------------------------
 
@@ -136,7 +139,7 @@ def main(args):
 #-------------------------------------------------------------------------------
 
 def create(image_src_dir, website_dir, badge_dir, kind, username, email, bake=True):
-    '''Create a new badge.  If 'bake' is True, bake a real badge; if it's false,
+    '''Create a new badge.  If 'bake' is True, bake a real badge; if it is False,
     just copy the badge image file (for testing).'''
 
     # Paths
@@ -159,26 +162,31 @@ def create(image_src_dir, website_dir, badge_dir, kind, username, email, bake=Tr
     print assertion
 
     # Save assertion.
-    with open(json_dst_path, 'w') as writer:
-        writer.write(assertion)
+    writer = open(json_dst_path, 'w')
+    writer.write(assertion)
+    writer.close()
     print 'JSON badge manifest path:', json_dst_path
 
     # Create and save the baked badge image?
     if bake:
         print 'Badge baking URL:', url
-        with urllib2.urlopen(url) as reader:
-            data = reader.read()
+        reader = urllib2.urlopen(url)
+        data = reader.read()
+        reader.close()
     else:
-        with open(image_src_path, 'rb') as reader:
-            data = reader.read()
-    with open(image_dst_path, 'wb') as writer:
-        writer.write(data)
+        reader = open(image_src_path, 'rb')
+        data = reader.read()
+        reader.close()
+
+    writer = open(image_dst_path, 'wb')
+    writer.write(data)
+    writer.close()
     print 'Badge image path:', image_dst_path
 
 #-------------------------------------------------------------------------------
 
 def erase(website_dir, badge_dir, kind, username):
-    '''Erase an existing badge's image and JSON files.'''
+    '''Erase the image and JSON files of an existing badge.'''
 
     _, image_dst_path, json_dst_path, _ = \
         _make_paths(website_dir, badge_dir, kind, username, cannot_exist=False)
@@ -200,7 +208,7 @@ def extract(filenames):
                 if chunk_type == 'tEXt':
                     who, what = chunk_data.split('\x00')
                     if who == 'openbadges':
-                        print '%s: %s' % (filename, what)
+                        print '%s => %s' % (f, what)
                         break
             else:
                 print >> sys.stderr, 'No open badges metadtata found in', f
