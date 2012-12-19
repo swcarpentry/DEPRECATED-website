@@ -715,7 +715,7 @@ class PageFactory(object):
             if os.path.isfile(f):
                 return f
         assert False, \
-               'File %s not found in search path %s' % (filename, app.search_path)
+               'File %s not found in search path %s' % (filename, self.app.search_path)
 
 #----------------------------------------
 
