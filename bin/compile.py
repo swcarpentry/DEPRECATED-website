@@ -111,6 +111,12 @@ BLOG_TAG_REPLACEMENT_PATTERN = re.compile(r'<[^>]+>')
 
 #----------------------------------------
 
+def timestamp():
+    """Return the current UTC time formatted in ISO 8601
+    """
+    return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+
+
 class Application(object):
     """
     Manage the application:
@@ -147,12 +153,11 @@ class Application(object):
             root_path = '.'
         else:
             root_path = '/'.join([os.pardir] * depth)
-        timestamp = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         return {'contact_email' : CONTACT_EMAIL,
                 'filename'      : filename,
                 'root_path'     : root_path,
                 'site'          : self.site,
-                'timestamp'     : timestamp,
+                'timestamp'     : timestamp(),
                 'today'         : self.today,
                 'twitter_name'  : TWITTER_NAME,
                 'twitter_url'   : TWITTER_URL}
