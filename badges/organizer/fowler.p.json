@@ -1,0 +1,16 @@
+{
+  "recipient" : "philip.fowler@bioch.ox.ac.uk",
+  "issued_on" : "2012-12-20",
+  "badge" : {
+    "version" : "5.0",
+    "name" : "Organizer",
+    "image" : "/img/badges/organizer.png",
+    "description" : "Organizing workshops and learning groups",
+    "criteria" : "/badges/organizer.html",
+    "issuer" : {
+      "origin" : "http://software-carpentry.org",
+      "name" : "Software Carpentry",
+      "contact" : "admin@software-carpentry.org"
+    }
+  }
+}

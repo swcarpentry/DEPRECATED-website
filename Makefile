@@ -27,25 +27,14 @@ COMPILE = \
 	-v
 
 # Static files.
-STATIC_SRC = $(wildcard ./css/*.css) \
-             $(wildcard ./css/bootstrap/*.css) \
-             $(wildcard ./css/bootstrap/img/*.png) \
-             $(wildcard ./files/*.bib) \
-             $(wildcard ./files/papers/*.pdf) \
-             $(wildcard ./files/*/*/*.*) \
-             $(wildcard ./img/*.ico) \
-             $(wildcard ./img/*.png) \
-             $(wildcard ./img/*/*.gif) \
-             $(wildcard ./img/*/*.jpg) \
-             $(wildcard ./img/*/*.png) \
-             $(wildcard ./js/*.js) \
-             $(wildcard ./js/bootstrap/*.js) \
-             $(wildcard ./3_0/*/*.jpg) \
+STATIC_SRC = $(wildcard ./3_0/*/*.jpg) \
              $(wildcard ./3_0/*/*.png) \
              $(wildcard ./4_0/*/*.odp) \
              $(wildcard ./4_0/*/*.pdf) \
              $(wildcard ./4_0/*/*/*.mp3) \
              $(wildcard ./4_0/*/*/*.png) \
+             $(wildcard ./badges/*/*.json) \
+             $(wildcard ./badges/*/*.png) \
              $(wildcard ./book/img/*/*.jpg) \
              $(wildcard ./book/img/*/*.png) \
              $(wildcard ./book/src/*/*.csv) \
@@ -53,7 +42,20 @@ STATIC_SRC = $(wildcard ./css/*.css) \
              $(wildcard ./book/src/*/*.py) \
              $(wildcard ./book/src/*/*.sql) \
              $(wildcard ./book/src/*/*.txt) \
-             $(wildcard ./book/src/*/*.xml) 
+             $(wildcard ./book/src/*/*.xml) \
+             $(wildcard ./css/*.css) \
+             $(wildcard ./css/bootstrap/*.css) \
+             $(wildcard ./css/bootstrap/img/*.png) \
+             $(wildcard ./files/*.bib) \
+             $(wildcard ./files/*/*/*.*) \
+             $(wildcard ./files/papers/*.pdf) \
+             $(wildcard ./img/*.ico) \
+             $(wildcard ./img/*.png) \
+             $(wildcard ./img/*/*.gif) \
+             $(wildcard ./img/*/*.jpg) \
+             $(wildcard ./img/*/*.png) \
+             $(wildcard ./js/*.js) \
+             $(wildcard ./js/bootstrap/*.js)
 STATIC_DST = $(subst ./,$(OUT_DIR)/,$(STATIC_SRC))
 
 # Chapters in book version.
