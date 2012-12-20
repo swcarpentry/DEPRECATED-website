@@ -61,7 +61,7 @@ STATIC_DST = $(subst ./,$(OUT_DIR)/,$(STATIC_SRC))
 # Chapters in book version.
 BOOK_SUBJECTS_STEMS = \
   shell \
-  svn \
+  version-control \
   python \
   funclib \
   db \

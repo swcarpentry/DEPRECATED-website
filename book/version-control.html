@@ -103,7 +103,7 @@
       </p>
 
       <figure id="f:repository">
-        <img src="img/svn/repository.png" alt="A Version Control Repository" />
+        <img src="img/version-control/repository.png" alt="A Version Control Repository" />
       </figure>
 
       <p id="a:commit">
@@ -117,7 +117,7 @@
       </p>
 
       <figure id="f:workflow">
-        <img src="img/svn/workflow.png" alt="Version Control Workflow" />
+        <img src="img/version-control/workflow.png" alt="Version Control Workflow" />
       </figure>
 
       <p>
@@ -150,7 +150,7 @@
       </p>
 
       <figure id="f:merge_first_commit">
-        <img src="img/svn/merge_first_commit.png" alt="Wolfman Commits First" />
+        <img src="img/version-control/merge_first_commit.png" alt="Wolfman Commits First" />
       </figure>
 
       <p class="continue">
@@ -161,7 +161,7 @@
       </p>
 
       <figure id="f:merge_second_commit">
-        <img src="img/svn/merge_second_commit.png" alt="Dracula Has a Conflict" />
+        <img src="img/version-control/merge_second_commit.png" alt="Dracula Has a Conflict" />
       </figure>
 
       <p class="continue">
@@ -253,7 +253,7 @@ Checked out revision 6.</span>
 </pre>
 
       <figure id="f:example_repo">
-        <img src="img/svn/example_repo.png" alt="Example Repository" />
+        <img src="img/version-control/example_repo.png" alt="Example Repository" />
       </figure>
 
       <p class="continue">
@@ -377,7 +377,7 @@ Thoughts on Mons Olympus (probably too obvious)
       </p>
 
       <figure id="f:version_numbering">
-        <img src="img/svn/version_numbering.png" alt="Version Numbering in CVS and Subversion" />
+        <img src="img/version-control/version_numbering.png" alt="Version Numbering in CVS and Subversion" />
       </figure>
 
       <p>
@@ -393,7 +393,7 @@ Thoughts on Mons Olympus (probably too obvious)
         and fills it with information about Io, Europa, Ganymede, and Callisto:
       </p>
 
-<pre src="src/svn/moons_initial.txt">
+<pre src="src/version-control/moons_initial.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
 Io              421.6           1.769138        893.2           1821.6
 Europa          670.9           3.551181        480.0           1560.8
@@ -452,7 +452,7 @@ Committed revision 7.</span>
       </p>
 
       <figure id="f:updated_repo">
-        <img src="img/svn/updated_repo.png" alt="Updated Repository" />
+        <img src="img/version-control/updated_repo.png" alt="Updated Repository" />
       </figure>
 
       <p id="a:define-head">
@@ -475,7 +475,7 @@ Committed revision 7.</span>
         Wolfman edits that line of the file:
       </p>
 
-<pre src="src/svn/moons_spelling.txt">
+<pre src="src/version-control/moons_spelling.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
 Io              421.6           1.769138        893.2           1821.6
 Europa          670.9           3.551181        480.0           1560.8
@@ -488,7 +488,7 @@ Ganymede        1070.4          7.154553        1481.9          2631.2
         which he thinks might be a good site for a secret lair despite its small size:
       </p>
 
-<pre src="src/svn/moons_amalthea.txt">
+<pre src="src/version-control/moons_amalthea.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
 <span class="highlight">Amalthea        181.4           0.498179        0.075           125.0</span>
 Io              421.6           1.769138        893.2           1821.6
@@ -746,7 +746,7 @@ $ <span class="in">svn diff -r HEAD</span>
         from a single number to a triple to reflect its irregular shape:
       </p>
 
-<pre src="src/svn/moons_dracula_triple.txt">
+<pre src="src/version-control/moons_dracula_triple.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
 <span class="highlight">Amalthea        181.4           0.498179        0.075           131 x 73 x 67</span>
 Io              421.6           1.769138        893.2           1821.6
@@ -762,7 +762,7 @@ Callisto        1882.7          16.689018       1075.9          2410.3
       </p>
 
       <figure id="f:after_dracula_commits">
-        <img src="img/svn/after_dracula_commits.png" alt="After Dracula Commits" />
+        <img src="img/version-control/after_dracula_commits.png" alt="After Dracula Commits" />
       </figure>
 
       <p>
@@ -772,7 +772,7 @@ Callisto        1882.7          16.689018       1075.9          2410.3
         Himalia and Elara:
       </p>
 
-<pre src="src/svn/moons_wolfman_extras.txt">
+<pre src="src/version-control/moons_wolfman_extras.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
 Amalthea        181.4           0.498179        0.075           131
 Io              421.6           1.769138        893.2           1821.6
@@ -831,7 +831,7 @@ svn: resource out of date; try updating</span>
         he adds a line to the file:
       </p>
 
-<pre src="src/svn/moons_wolfman_units.txt">
+<pre src="src/version-control/moons_wolfman_units.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
 <span class="highlight">                (10**3 km)      (days)          (10**20 kg)     (km)</span>
 Amalthea        181.4           0.498179        0.075           131 x 73 x 67
@@ -850,7 +850,7 @@ Elara           11740           259.6528        0.008           40.0
         Dracula inserts a different line at the top of the file:
       </p>
 
-<pre src="src/svn/moons_dracula_units.txt">
+<pre src="src/version-control/moons_dracula_units.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
 <span class="highlight">                * 10^3 km       * days          * 10^20 kg      * km</span>
 Amalthea        181.4           0.498179        0.075           131 x 73 x 67
@@ -873,7 +873,7 @@ Elara           11740           259.6528        0.008           40.0
         so Subversion asks Dracula what he wants to do:
       </p>
 
-<pre src="src/svn/moons_dracula_conflict.txt">
+<pre src="src/version-control/moons_dracula_conflict.txt">
 $ <span class="in">svn update</span>
 <span class="out">Conflict discovered in 'jupiter/moons.txt'.
 Select: (p) postpone, (df) diff-full, (e) edit,
@@ -921,7 +921,7 @@ Select: (p) postpone, (df) diff-full, (e) edit,
         He changes it to:
       </p>
 
-<pre src="src/svn/moons_dracula_resolved.txt">
+<pre src="src/version-control/moons_dracula_resolved.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
 <span class="highlight">                (10^3 km)       (days)          (10^20 kg)      (km)</span>
 Amalthea        181.4           0.498179        0.075           131 x 73 x 67
@@ -986,7 +986,7 @@ Elara           11740           259.6528        0.008           40.0
       </p>
 
       <figure id="f:diff_viewer">
-        <img src="img/svn/diff_viewer.png" alt="A Difference Viewer" />
+        <img src="img/version-control/diff_viewer.png" alt="A Difference Viewer" />
       </figure>
 
       <p class="continue">
@@ -1060,7 +1060,7 @@ Elara           11740           259.6528        0.008           40.0
         so his changes don't make a lot of sense:
       </p>
 
-<pre src="src/svn/poetry.txt">
+<pre src="src/version-control/poetry.txt">
 Just one moon can make me growl
 Four would make me want to howl
 ...
@@ -1110,7 +1110,7 @@ $ <span class="in">svn revert moons.txt</span>
         He edits the file to put them in:
       </p>
 
-<pre src="src/svn/moons_commas.txt">
+<pre src="src/version-control/moons_commas.txt">
 Name            Orbital Radius  Orbital Period  Mass            Radius
                 (10^3 km)       (days)          (10^20 kg)      (km)
 Amalthea        181.4           0.498179          0.075      131 x 73 x 67
@@ -1135,7 +1135,7 @@ Elara        11<span class="highlight">,</span>740           259.6528           
       </p>
 
       <figure id="f:before_undoing">
-        <img src="img/svn/before_undoing.png" alt="Before Undoing" />
+        <img src="img/version-control/before_undoing.png" alt="Before Undoing" />
       </figure>
 
       <p class="continue">
@@ -1149,7 +1149,7 @@ Elara        11<span class="highlight">,</span>740           259.6528           
       </p>
 
       <figure id="f:merging_history">
-        <img src="img/svn/merging_history.png" alt="Merging History" />
+        <img src="img/version-control/merging_history.png" alt="Merging History" />
       </figure>
 
       <p class="continue">
@@ -1227,7 +1227,7 @@ U  moons.txt</span>
       </p>
 
       <figure id="f:branch_merge">
-        <img src="img/svn/branch_merge.png" alt="Branching and Merging" />
+        <img src="img/version-control/branch_merge.png" alt="Branching and Merging" />
       </figure>
 
       <p>
@@ -1301,7 +1301,7 @@ U  moons.txt</span>
       </p>
 
       <figure id="f:repo_four_things">
-        <img src="img/svn/repo_four_things.png" alt="What's Needed for a Repository" />
+        <img src="img/version-control/repo_four_things.png" alt="What's Needed for a Repository" />
       </figure>
 
       <p>
