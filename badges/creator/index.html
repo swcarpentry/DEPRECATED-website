@@ -1,0 +1,57 @@
+{% extends "_base.html" %}
+{% block file_metadata %}
+  <meta name="title" content="Creator Badge" />
+{% endblock file_metadata %}
+{% block navhighlight %}{{navhighlight('badges')}}{% endblock navhighlight %}
+{% block content %}
+<div class="media">
+  <img class="media-object pull-left" src="{{root_path}}/img/badges/creator.png" alt="Software Carpentry 'Creator' Badge" />
+  <div class="media-body">Awarded for creating teaching materials for Software Carpentry.<br/>Please click on the download icon to fetch the individual badge.</div>
+</div>
+<table>
+  <tr>
+    <td><a href="guy.t.png"><i class="icon-download"></i></a></td>
+    <td><a href="{{root_path}}/about/team.html#guy.t">Richard "Tommy" Guy</a></td>
+  </tr>
+  <tr>
+    <td><a href="jackson.m.png"><i class="icon-download"></i></a></td>
+    <td><a href="{{root_path}}/about/team.html#jackson.m">Mike Jackson</a></td>
+  </tr>
+  <tr>
+    <td><a href="pipitone.j.png"><i class="icon-download"></i></a></td>
+    <td><a href="{{root_path}}/about/team.html#pipitone.j">Jon Pipitone</a></td>
+  </tr>
+  <tr>
+    <td><a href="white.e.png"><i class="icon-download"></i></a></td>
+    <td><a href="{{root_path}}/about/team.html#white.e">Ethan White</a></td>
+  </tr>
+  <tr>
+    <td><a href="wilson.g.png"><i class="icon-download"></i></a></td>
+    <td><a href="{{root_path}}/about/team.html#wilson.g">Greg Wilson</a></td>
+  </tr>
+</table>
+<!--
+<table>
+  <tr>
+    <td><a href="guy.t.png"><img src="{{root_path}}/img/badge-link.png"/></a></td>
+    <td><a href="{{root_path}}/about/team.html#guy.t">Richard "Tommy" Guy</a></td>
+  </tr>
+  <tr>
+    <td><a href="jackson.m.png"><img src="{{root_path}}/img/badge-link.png"/></a></td>
+    <td><a href="{{root_path}}/about/team.html#jackson.m">Mike Jackson</a></td>
+  </tr>
+  <tr>
+    <td><a href="pipitone.j.png"><img src="{{root_path}}/img/badge-link.png"/></a></td>
+    <td><a href="{{root_path}}/about/team.html#pipitone.j">Jon Pipitone</a></td>
+  </tr>
+  <tr>
+    <td><a href="white.e.png"><img src="{{root_path}}/img/badge-link.png"/></a></td>
+    <td><a href="{{root_path}}/about/team.html#white.e">Ethan White</a></td>
+  </tr>
+  <tr>
+    <td><a href="wilson.g.png"><img src="{{root_path}}/img/badge-link.png"/></a></td>
+    <td><a href="{{root_path}}/about/team.html#wilson.g">Greg Wilson</a></td>
+  </tr>
+</table>
+-->
+{% endblock content %}
