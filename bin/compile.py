@@ -95,6 +95,19 @@ from PyRSS2Gen import RSS2, RSSItem, Guid
 
 #----------------------------------------
 
+USAGE = """compile.py [options] initial_file_path: rebuild Software Carpentry web site
+-c calendar_file_name                   optional
+-d today's date                         YYY-MM-DD
+-h                                      show this help and exit
+-m blog_metadata_json_file_path
+-o output_directory_path
+-p jinja2_template_search_path          may be used multiple times
+-r blog_rss_file_path
+-s site_url
+-v                                      make verbose
+-x                                      shorten blog excerpts
+"""
+
 CONTACT_EMAIL = 'info@software-carpentry.org'
 TWITTER_NAME = '@swcarpentry'
 TWITTER_URL = 'https://twitter.com/swcarpentry'
@@ -115,12 +128,6 @@ BLOG_CONTENT_PATTERN = re.compile(r'{% block content %}(.+){% endblock content %
 BLOG_TAG_REPLACEMENT_PATTERN = re.compile(r'<[^>]+>')
 
 #----------------------------------------
-
-def timestamp():
-    """Return the current UTC time formatted in ISO 8601
-    """
-    return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
-
 
 class Application(object):
     """
@@ -144,6 +151,7 @@ class Application(object):
         self.site = None
         self.today = None
         self.verbosity = 0
+        self.shorten_blog_excerpts = False
 
         self.filenames = self._parse(args)
         self._build_env()
@@ -172,7 +180,7 @@ class Application(object):
         """
         Parse command-line options.
         """
-        options, filenames = getopt.getopt(args, 'c:d:m:o:p:r:s:v')
+        options, filenames = getopt.getopt(args, 'c:d:hm:o:p:r:s:vx')
         for opt, arg in options:
             if opt == '-c':
                 assert self.icalendar_filename is None, \
@@ -180,6 +188,8 @@ class Application(object):
                 self.icalendar_filename = arg
             elif opt == '-d':
                 self.today = arg
+            elif opt == '-h':
+                usage(0)
             elif opt == '-m':
                 assert self.metadata is None, \
                        'Blog metadata specified multiple times'
@@ -200,6 +210,8 @@ class Application(object):
                 self.site = arg
             elif opt == '-v':
                 self.verbosity += 1
+            elif opt == '-x':
+                self.shorten_blog_excerpts = True
             else:
                 assert False, \
                 'Unknown option %s' % opt
@@ -636,14 +648,24 @@ class BlogPostPage(GenericPage):
         div or span in the blog posts, but that's not what we inherited
         from WordPress.
         """
-        result = 'No description available'
-        if self.content:
+
+        # No text in blog post.
+        if not self.content:
+            result = ''
+
+        # Show the whole thing.
+        elif not self.app.shorten_blog_excerpts:
+            result = self.content
+
+        # Have content and want to shorten it, so shorten it.
+        else:
             result = BLOG_TAG_REPLACEMENT_PATTERN.sub('', self.content)
             result = result[:BLOG_EXCERPT_LENGTH]
             if ' ' in result:
                 result = result[:result.rindex(' ')]
             if result:
                 result += ' [...]'
+
         return result
 
     def _finalize_self(self):
@@ -768,39 +790,6 @@ class ContentEncodedRSS2(RSS2):
         RSS2.__init__(self, **kwargs)
         self.rss_attrs['xmlns:content']='http://purl.org/rss/1.0/modules/content/' 
 
-
-#----------------------------------------
-
-def create_rss(filename, site, posts):
-    """
-    Generate RSS2 feed.xml file for blog.
-    """
-    
-    items = []
-    slice = posts[-BLOG_HISTORY_LENGTH:]
-    slice.reverse()
-
-    for post in slice:
-        template_vars = post.app.standard(post.filename)
-        template_vars['root_path'] = site
-        path = os.path.join(site, 'blog', post.index_link())
-        rendered_content = jinja2.Template(post.content).render(**template_vars)
-        items.append(ContentEncodedRSSItem(title=post.title,
-                             author=post.author_id,
-                             link=path,
-                             description=post.excerpt(),
-                             content=rendered_content,
-                             pubDate=post.post_date))
-
-    rss = ContentEncodedRSS2(title=BLOG_TITLE,
-               link=site,
-               description=BLOG_DESCRIPTION,
-               lastBuildDate=datetime.datetime.utcnow(),
-               items=items)
-
-    with open(filename, 'w') as writer:
-        rss.write_xml(writer)
-
 #----------------------------------------
 
 class ICalendarWriter(object):
@@ -858,6 +847,55 @@ class ICalendarWriter(object):
             value = value.replace(char, '\\' + char)
         value.replace('\n', '\\n')
         return value
+
+#----------------------------------------
+
+def create_rss(filename, site, posts):
+    """
+    Generate RSS2 feed.xml file for blog.
+    """
+    
+    items = []
+    slice = posts[-BLOG_HISTORY_LENGTH:]
+    slice.reverse()
+
+    for post in slice:
+        template_vars = post.app.standard(post.filename)
+        template_vars['root_path'] = site
+        path = os.path.join(site, 'blog', post.index_link())
+        rendered_content = jinja2.Template(post.content).render(**template_vars)
+        items.append(ContentEncodedRSSItem(title=post.title,
+                             author=post.author_id,
+                             link=path,
+                             description=post.excerpt(),
+                             content=rendered_content,
+                             pubDate=post.post_date))
+
+    rss = ContentEncodedRSS2(title=BLOG_TITLE,
+               link=site,
+               description=BLOG_DESCRIPTION,
+               lastBuildDate=datetime.datetime.utcnow(),
+               items=items)
+
+    with open(filename, 'w') as writer:
+        rss.write_xml(writer)
+
+#----------------------------------------
+
+def timestamp():
+    """
+    Return the current UTC time formatted in ISO 8601
+    """
+    return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+
+#----------------------------------------
+
+def usage(exit_status):
+    """
+    Show usage and exit.
+    """
+    print >> sys.stderr, USAGE
+    sys.exit(exit_status)
 
 #----------------------------------------
 
