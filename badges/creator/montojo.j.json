@@ -1,0 +1,16 @@
+{
+  "recipient" : "jrrmzz@gmail.com",
+  "issued_on" : "2012-12-20",
+  "badge" : {
+    "version" : "5.0",
+    "name" : "Creator",
+    "image" : "/img/badges/creator.png",
+    "description" : "Creating learning materials and other content",
+    "criteria" : "/badges/creator.html",
+    "issuer" : {
+      "origin" : "http://software-carpentry.org",
+      "name" : "Software Carpentry",
+      "contact" : "admin@software-carpentry.org"
+    }
+  }
+}
