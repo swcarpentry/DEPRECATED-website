@@ -832,6 +832,7 @@ class ICalendarWriter(object):
             'SUMMARY:{0}'.format(self.escape(
                     '{0}, {1}'.format(bootcamp.venue, bootcamp.date))),
             'DESCRIPTION;ALTREP="{0}":{0}'.format(url),
+            'URL:{0}'.format(url),
             'LOCATION:{0}'.format(self.escape(bootcamp.venue)),
         ]
         if bootcamp.latlng:
