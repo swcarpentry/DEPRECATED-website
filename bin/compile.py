@@ -172,9 +172,13 @@ class Application(object):
         """
         Parse command-line options.
         """
-        options, filenames = getopt.getopt(args, 'd:m:o:p:r:c:s:v')
+        options, filenames = getopt.getopt(args, 'c:d:m:o:p:r:s:v')
         for opt, arg in options:
-            if opt == '-d':
+            if opt == '-c':
+                assert self.icalendar_filename is None, \
+                       'iCalendar filename specified multiple times'
+                self.icalendar_filename = arg
+            elif opt == '-d':
                 self.today = arg
             elif opt == '-m':
                 assert self.metadata is None, \
@@ -192,10 +196,6 @@ class Application(object):
                 assert self.blog_filename is None, \
                        'RSS filename specified multiple times'
                 self.blog_filename = arg
-            elif opt == '-c':
-                assert self.icalendar_filename is None, \
-                       'iCalendar filename specified multiple times'
-                self.icalendar_filename = arg
             elif opt == '-s':
                 self.site = arg
             elif opt == '-v':
@@ -204,14 +204,14 @@ class Application(object):
                 assert False, \
                 'Unknown option %s' % opt
 
+        assert self.today is not None, \
+               'No date set (use -d)'
         assert self.output_dir is not None, \
                'No destination directory specified (use -o)'
         assert self.search_path, \
                'No search path directories specified (use -p)'
         assert self.site is not None, \
                'No site specified (use -s)'
-        assert self.today is not None, \
-               'No date set (use -d)'
 
         return filenames
 
@@ -230,9 +230,8 @@ class Application(object):
         if self.metadata is None:
             self.metadata = {}
         else:
-            reader = open(self.metadata, 'r')
-            self.metadata = json.load(reader)
-            reader.close()
+            with open(self.metadata, 'r') as reader:
+                self.metadata = json.load(reader)
 
 #----------------------------------------
 
@@ -762,11 +761,15 @@ class ContentEncodedRSSItem(RSSItem):
             handler._out.write('<%(e)s><![CDATA[%(c)s]]></%(e)s>' %
                 { 'e':'content:encoded', 'c':self.content})
                 
+#----------------------------------------
+
 class ContentEncodedRSS2(RSS2): 
     def __init__(self, **kwargs):
         RSS2.__init__(self, **kwargs)
         self.rss_attrs['xmlns:content']='http://purl.org/rss/1.0/modules/content/' 
 
+
+#----------------------------------------
 
 def create_rss(filename, site, posts):
     """
@@ -795,39 +798,35 @@ def create_rss(filename, site, posts):
                lastBuildDate=datetime.datetime.utcnow(),
                items=items)
 
-    writer = open(filename, 'w')
-    rss.write_xml(writer)
-    writer.close()
+    with open(filename, 'w') as writer:
+        rss.write_xml(writer)
 
+#----------------------------------------
 
-class ICalendarWriter (object):
-    """iCalendar generator for boot camps.
-
-    The format is defined in RFC 5545.
-
-    http://tools.ietf.org/html/rfc5545
+class ICalendarWriter(object):
     """
+    iCalendar generator for boot camps.
+    The format is defined in RFC 5545: http://tools.ietf.org/html/rfc5545
+    """
+
     def __call__(self, filename, site, bootcamps):
         lines = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
             'PRODID:-//Software Carpentry/Boot Camps//NONSGML v1.0//EN',
-            ]
+        ]
         for bootcamp in bootcamps:
             lines.extend(self.bootcamp(site, bootcamp))
-        lines.extend([
-                'END:VCALENDAR',
-                ''])
+        lines.extend(['END:VCALENDAR', ''])
         content = '\r\n'.join(lines)
         # From RFC 5545, section 3.1.4 (Character Set):
-        #   The default charset for an iCalendar stream is UTF-8
-        with open(filename, 'wb') as f:
-            f.write(content.encode('utf-8'))
+        # The default charset for an iCalendar stream is UTF-8.
+        with open(filename, 'wb') as writer:
+            writer.write(content.encode('utf-8'))
 
     def bootcamp(self, site, bootcamp):
-        uid = '{0}@{1}'.format(
-            bootcamp.link().replace('.html', ''),
-            urlparse(site).netloc or 'software-carpentry.org')
+        uid = '{0}@{1}'.format(bootcamp.link().replace('.html', ''),
+                               urlparse(site).netloc or 'software-carpentry.org')
         url = urljoin(site, bootcamp.index_link())
         if bootcamp.enddate:
             end_fields = [int(x) for x in bootcamp.enddate.split('-')]
@@ -839,21 +838,21 @@ class ICalendarWriter (object):
             'BEGIN:VEVENT',
             'UID:{0}'.format(uid),
             'DTSTAMP:{0}'.format(timestamp()),
-            'DTSTART;VALUE=DATE:{0}'.format(
-                bootcamp.startdate.replace('-', '')),
+            'DTSTART;VALUE=DATE:{0}'.format(bootcamp.startdate.replace('-', '')),
             'DTEND;VALUE=DATE:{0}'.format(dtend.strftime('%Y%m%d')),
             'SUMMARY:{0}'.format(self.escape(
                     '{0}, {1}'.format(bootcamp.venue, bootcamp.date))),
             'DESCRIPTION;ALTREP="{0}":{0}'.format(url),
             'LOCATION:{0}'.format(self.escape(bootcamp.venue)),
-            ]
+        ]
         if bootcamp.latlng:
             lines.append('GEO:{0}'.format(bootcamp.latlng.replace(',', ';')))
         lines.append('END:VEVENT')
         return lines
 
     def escape(self, value):
-        """Escape text following RFC 5545
+        """
+        Escape text following RFC 5545.
         """
         for char in ['\\', ';', ',']:
             value = value.replace(char, '\\' + char)
