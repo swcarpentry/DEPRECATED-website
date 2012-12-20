@@ -1,0 +1,16 @@
+{
+  "recipient" : "michaelj@epcc.ed.ac.uk",
+  "issued_on" : "2012-12-20",
+  "badge" : {
+    "version" : "5.0",
+    "name" : "Instructor",
+    "image" : "/img/badges/instructor.png",
+    "description" : "Teaching at workshops or online",
+    "criteria" : "/badges/instructor.html",
+    "issuer" : {
+      "origin" : "http://software-carpentry.org",
+      "name" : "Software Carpentry",
+      "contact" : "admin@software-carpentry.org"
+    }
+  }
+}
