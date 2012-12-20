@@ -14,6 +14,9 @@ SITE = $(OUT_DIR)
 # Blog feed index.
 BLOG_RSS_FILE = $(OUT_DIR)/feed.xml
 
+# iCalendar feed
+ICALENDAR_FILE = $(OUT_DIR)/bootcamps.ics
+
 # Standard site compilation arguments.
 COMPILE = \
 	python bin/compile.py \
@@ -98,7 +101,7 @@ install :
 ## check        : rebuild entire site locally for checking purposes.
 check : $(STATIC_DST) $(OUT_DIR)/.htaccess
 	@make ascii-chars
-	$(COMPILE) -m blog/metadata.json -r $(BLOG_RSS_FILE) index.html
+	$(COMPILE) -m blog/metadata.json -r $(BLOG_RSS_FILE) -c $(ICALENDAR_FILE) index.html
 	@make blog-journal
 	@make check-links
 	@make book-figref
