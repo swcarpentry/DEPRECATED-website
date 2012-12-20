@@ -86,6 +86,11 @@ import json
 import jinja2
 import time
 import datetime
+try:  # Python 3
+    from urllib.parse import urlparse, urljoin
+except ImportError:  # Python 2
+    from urlparse import urlparse, urljoin
+
 from PyRSS2Gen import RSS2, RSSItem, Guid
 
 #----------------------------------------
@@ -111,6 +116,12 @@ BLOG_TAG_REPLACEMENT_PATTERN = re.compile(r'<[^>]+>')
 
 #----------------------------------------
 
+def timestamp():
+    """Return the current UTC time formatted in ISO 8601
+    """
+    return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+
+
 class Application(object):
     """
     Manage the application:
@@ -128,6 +139,7 @@ class Application(object):
         self.metadata = None
         self.output_dir = None
         self.blog_filename = None
+        self.icalendar_filename = None
         self.search_path = []
         self.site = None
         self.today = None
@@ -147,12 +159,11 @@ class Application(object):
             root_path = '.'
         else:
             root_path = '/'.join([os.pardir] * depth)
-        timestamp = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         return {'contact_email' : CONTACT_EMAIL,
                 'filename'      : filename,
                 'root_path'     : root_path,
                 'site'          : self.site,
-                'timestamp'     : timestamp,
+                'timestamp'     : timestamp(),
                 'today'         : self.today,
                 'twitter_name'  : TWITTER_NAME,
                 'twitter_url'   : TWITTER_URL}
@@ -161,7 +172,7 @@ class Application(object):
         """
         Parse command-line options.
         """
-        options, filenames = getopt.getopt(args, 'd:m:o:p:r:s:v')
+        options, filenames = getopt.getopt(args, 'd:m:o:p:r:c:s:v')
         for opt, arg in options:
             if opt == '-d':
                 self.today = arg
@@ -181,6 +192,10 @@ class Application(object):
                 assert self.blog_filename is None, \
                        'RSS filename specified multiple times'
                 self.blog_filename = arg
+            elif opt == '-c':
+                assert self.icalendar_filename is None, \
+                       'iCalendar filename specified multiple times'
+                self.icalendar_filename = arg
             elif opt == '-s':
                 self.site = arg
             elif opt == '-v':
@@ -408,12 +423,21 @@ class GenericPage(object):
 class BootCampPage(GenericPage):
     """
     Represent information about a boot camp.
+    The 'Instances' class variable keeps track of all created instances,
+    so that they can be used to render the iCalendar feed.
     """
 
     KEYS = GenericPage.KEYS + \
-           ['venue', 'date', 'startdate', 'enddate', 'eventbrite_key']
+           ['venue', 'latlng', 'date', 'startdate', 'enddate',
+            'eventbrite_key']
 
     UPLINK = 'index.html'
+
+    Instances = []
+
+    def __init__(self, *args):
+        GenericPage.__init__(self, *args)
+        BootCampPage.Instances.append(self)
 
     def _finalize_self(self):
         """
@@ -466,6 +490,13 @@ class BootCampPage(GenericPage):
         else:
             assert False, \
                    'Bad date range %s -- %s' % (start, end)
+
+    def index_link(self):
+        """
+        Link from index page to this post.
+        FIXME: must be a better way than special-casing this.
+        """
+        return 'bootcamps/{0}'.format(self.link())
 
 #----------------------------------------
 
@@ -768,6 +799,67 @@ def create_rss(filename, site, posts):
     rss.write_xml(writer)
     writer.close()
 
+
+class ICalendarWriter (object):
+    """iCalendar generator for boot camps.
+
+    The format is defined in RFC 5545.
+
+    http://tools.ietf.org/html/rfc5545
+    """
+    def __call__(self, filename, site, bootcamps):
+        lines = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Software Carpentry/Boot Camps//NONSGML v1.0//EN',
+            ]
+        for bootcamp in bootcamps:
+            lines.extend(self.bootcamp(site, bootcamp))
+        lines.extend([
+                'END:VCALENDAR',
+                ''])
+        content = '\r\n'.join(lines)
+        # From RFC 5545, section 3.1.4 (Character Set):
+        #   The default charset for an iCalendar stream is UTF-8
+        with open(filename, 'wb') as f:
+            f.write(content.encode('utf-8'))
+
+    def bootcamp(self, site, bootcamp):
+        uid = '{0}@{1}'.format(
+            bootcamp.link().replace('.html', ''),
+            urlparse(site).netloc or 'software-carpentry.org')
+        url = urljoin(site, bootcamp.index_link())
+        if bootcamp.enddate:
+            end_fields = [int(x) for x in bootcamp.enddate.split('-')]
+        else:  # one day boot camp?
+            end_fields = [int(x) for x in bootcamp.startdate.split('-')]
+        end = datetime.date(*end_fields)
+        dtend = end + datetime.timedelta(1)  # non-inclusive end date
+        lines = [
+            'BEGIN:VEVENT',
+            'UID:{0}'.format(uid),
+            'DTSTAMP:{0}'.format(timestamp()),
+            'DTSTART;VALUE=DATE:{0}'.format(
+                bootcamp.startdate.replace('-', '')),
+            'DTEND;VALUE=DATE:{0}'.format(dtend.strftime('%Y%m%d')),
+            'SUMMARY:{0}'.format(self.escape(
+                    '{0}, {1}'.format(bootcamp.venue, bootcamp.date))),
+            'DESCRIPTION;ALTREP="{0}":{0}'.format(url),
+            'LOCATION:{0}'.format(self.escape(bootcamp.venue)),
+            ]
+        if bootcamp.latlng:
+            lines.append('GEO:{0}'.format(bootcamp.latlng.replace(',', ';')))
+        lines.append('END:VEVENT')
+        return lines
+
+    def escape(self, value):
+        """Escape text following RFC 5545
+        """
+        for char in ['\\', ';', ',']:
+            value = value.replace(char, '\\' + char)
+        value.replace('\n', '\\n')
+        return value
+
 #----------------------------------------
 
 def main(args):
@@ -785,6 +877,9 @@ def main(args):
         page.render()
     if app.blog_filename:
         create_rss(app.blog_filename, app.site, BlogPostPage.Instances)
+    if app.icalendar_filename:
+        icw = ICalendarWriter()
+        icw(app.icalendar_filename, app.site, BootCampPage.Instances)
 
 #----------------------------------------
 
