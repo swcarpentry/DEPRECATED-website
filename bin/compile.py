@@ -144,6 +144,7 @@ class Application(object):
         self.site = None
         self.today = None
         self.verbosity = 0
+        self.shorten_blog_excerpts = False
 
         self.filenames = self._parse(args)
         self._build_env()
@@ -172,7 +173,7 @@ class Application(object):
         """
         Parse command-line options.
         """
-        options, filenames = getopt.getopt(args, 'c:d:m:o:p:r:s:v')
+        options, filenames = getopt.getopt(args, 'c:d:m:o:p:r:s:vx')
         for opt, arg in options:
             if opt == '-c':
                 assert self.icalendar_filename is None, \
@@ -200,6 +201,8 @@ class Application(object):
                 self.site = arg
             elif opt == '-v':
                 self.verbosity += 1
+            elif opt == '-x':
+                self.shorten_blog_excerpts = True
             else:
                 assert False, \
                 'Unknown option %s' % opt
@@ -636,14 +639,24 @@ class BlogPostPage(GenericPage):
         div or span in the blog posts, but that's not what we inherited
         from WordPress.
         """
-        result = 'No description available'
-        if self.content:
+
+        # No text in blog post.
+        if not self.content:
+            result = ''
+
+        # Show the whole thing.
+        elif not self.app.shorten_blog_excerpts:
+            result = self.content
+
+        # Have content and want to shorten it, so shorten it.
+        else:
             result = BLOG_TAG_REPLACEMENT_PATTERN.sub('', self.content)
             result = result[:BLOG_EXCERPT_LENGTH]
             if ' ' in result:
                 result = result[:result.rindex(' ')]
             if result:
                 result += ' [...]'
+
         return result
 
     def _finalize_self(self):
