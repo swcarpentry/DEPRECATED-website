@@ -148,7 +148,7 @@ book-bib :
 book-book :
 	@for i in unknown gloss images source structure bib fig; do \
 	  echo '----' $$i '----'; \
-	  make $$i; \
+	  make book-$$i; \
 	done
 
 ## book-classes : list all classes used in the generated HTML files.
