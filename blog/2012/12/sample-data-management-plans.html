@@ -1,0 +1,26 @@
+{% extends "_blog.html" %}
+{% block file_metadata %}
+<meta name="journal" content="True" />
+<meta name="post_id" content="5374" />
+<meta name="author_id" content="wilson.g" />
+<meta name="title" content="Sample Data Management Plans" />
+<meta name="post_date" content="2012-12-21" />
+<meta name="category" content="community" />
+<meta name="category" content="noticed" />
+{% endblock file_metadata %}
+{% block content %}
+<p><a href="http://www.epcc.ed.ac.uk/about-us/staff/chue-hong-neil/">Neil Chue Hong</a> recently pointed us at DataONE's <a href="http://www.dataone.org/data-management-planning">Data Management Planning</a> page, which has two really useful things:</p>
+<ol>
+  <li>a link to <a href="https://dmp.cdlib.org/">DMPTool</a>, which will help you build a data management plan for your project; and</li>
+  <li>
+    <a href="http://www.dataone.org/sites/all/documents/DMP_MaunaLoa_Formatted.pdf">five</a>
+    <a href="http://www.dataone.org/sites/all/documents/DMP_Hydrologic_Formatted.pdf">sample</a>
+    <a href="http://www.dataone.org/sites/all/documents/DMP_HDFMap_Formatted.pdf">data</a>
+    <a href="http://www.dataone.org/sites/all/documents/DMP_NutNet_Formatted.pdf">management</a>
+    <a href="http://www.dataone.org/sites/all/documents/DMP_Copepod_Formatted.pdf">plans</a>,
+    all written for the NSF,
+    which people can use as reference models.
+  </li>
+</ol>
+<p>Data management is something we deliberately left out of <a href="{{root_path}}/blog/2012/10/best-practices-for-scientific-computing.html">"Best Practices"</a> paper&mdash;it would have increased the paper's length by half again&mdash;but what we should put together is some sample code management plans.  Any volunteers?</p>
+{% endblock content %}
