@@ -12,27 +12,27 @@
 <p><em>Today's guest post comes from <a href="http://limare.perso.math.cnrs.fr/">Nicolas Limare</a>.</em></p>
 
 <p>Here are three problems I encountered while introducing fellow grad
-students and post-docs to <code>git</code>. These are situations where <code>git</code> seems
+students and post-docs to Git. These are situations where Git seems
 not to provide the solution we need, either because it requires the
 addition of an external service provider, unusual configuration
 steps not adapted to beginners, or simply because the functionality
-is missing in <code>git</code>. Or maybe did I just ignore the perfect command or
+is missing in Git. Or maybe did I just ignore the perfect command or
 option which would have answered all my wishes?</p>
 
-<h1 id="simplecollaboration">1. Simple Collaboration</h1>
+<h2 id="simplecollaboration">1. Simple Collaboration</h2>
 
 <p>Two or three people want to work together on a single repository, like
-they are used to with <code>svn</code>. No branch, no pull request, no github,
-just a shared bare repo on the lab server, cloned and sync&rsquo;d
-onto everyone&rsquo;s own laptop via SSH. The problem is to allow proper
+they are used to with Subversion. No branch, no pull request, no GitHub,
+just a shared bare repo on the lab server, cloned and sync'd
+onto everyone's own laptop via SSH. The problem is to allow proper
 read/write permissions for everyone. Basic UNIX groups are not
 practical, for example because they require to go through the local
 sysadmin for every new project, and to define a new group per project.
 In that case, my solution is to use POSIX extended ACLs:</p>
 
-<pre><code>setfacl -Rm u:USER:rwX &#39;~/code/project.git&#39;
+<pre>setfacl -Rm u:USER:rwX &#39;~/code/project.git&#39;
 setfacl -Rm d:u:USER:rwX &#39;~/code/project.git&#39;
-</code></pre>
+</pre>
 
 <p>It is fairly clean, standard, and works perfectly, but these ACLs are
 usually not enabled by default on filesystems and sysadmins may not
@@ -40,44 +40,43 @@ want to allow them. Moreover, non-admin users are not used to work
 with this kind of permissions and having to touch them to collaborate
 feels somehow abnormal.</p>
 
-<h1 id="sharingbinarydata">2. Sharing Binary Data</h1>
+<h2 id="sharingbinarydata">2. Sharing Binary Data</h2>
 
 <p>I had a group of students working on a shared dataset. One person
 would produce the input data, and other persons would process them, in
-chain, each with their own program. Everything is in a git repo,
-everyone&rsquo;s program is stored in source code and built with a <code>makefile</code>,
-the data is processed in chain with a <code>makefile</code> too, and so far
-everything is fine. But the input data is regularly updated, and it&rsquo;s
+chain, each with their own program. Everything is in a Git repo,
+everyone's program is stored in source code and built with Make,
+the data is processed in chain with Make too, and so far
+everything is fine. But the input data is regularly updated, and it's
 a hundred of 10 Mpixel JPEG images. So the size of the repository
-quickly becomes quite heavy on everyone&rsquo;s machine (JPEG is already
-compressed, and doesn&rsquo;t shrink any further in <code>git</code>, and binary diff
+quickly becomes quite heavy on everyone's machine (JPEG is already
+compressed, and doesn't shrink any further in Git, and binary diff
 of JPEG files is, or was, inefficient).</p>
 
 <p>This huge weight is the problem. We want to keep the history and to be
 able to go back to previous versions of the data, but we absolutely
-don&rsquo;t want every one in the group to have on their own machine 25
+don't want every one in the group to have on their own machine 25
 different versions of a 100MB dataset. The solution may be
-<code>git-annex</code>, but it didn&rsquo;t exist at this time and it is not part of
-the standard <code>git</code> toolset. It&rsquo;s certainly also possible with <code>git
+<code>git annex</code>, but it didn't exist at this time and it is not part of
+the standard Git toolset. It's certainly also possible with <code>git
 rebase</code> and <code>squash</code> every time the input data is updated, but this
-git-fu is too too complex for our simple needs. I want people to be
+git-fu is too complex for our simple needs. I want people to be
 able to configure their local repo so that it only keeps less than a
 configurable amount of data locally, something like a permanent
 shallow clone.</p>
 
-<h1 id="mirroring">3. Mirroring</h1>
+<h2 id="mirroring">3. Mirroring</h2>
 
-<p>I was also trying to sell <code>git</code> as a good solution to replicate files
+<p>I was also trying to sell Git as a good solution to replicate files
 between two machines, either for website or web app deployment, or to
-maintain a workspace in different places. A sort of improved <code>rsync</code>,
+maintain a workspace in different places. A sort of improved Rsync,
 with diff transfers and the full history.</p>
 
-<p>But to do that with <code>git</code>, pushing updates from one machines to
-another, the receiving git repo needs to automatically perform a
+<p>But to do that with Git, pushing updates from one machines to
+another, the receiving repo needs to automatically perform a
 checkout. This step requires some hook configuration (this is
 non-trivial for beginners), and the checkout must be very carefully
 configured to be performed at the right place, and to behave correctly
 when some files need to be deleted or local changes overwritten. This
 is too esoteric for a simple need.</p>
-
 {% endblock content %}
