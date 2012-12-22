@@ -61,7 +61,7 @@ STATIC_DST = $(subst ./,$(OUT_DIR)/,$(STATIC_SRC))
 # Chapters in book version.
 BOOK_SUBJECTS_STEMS = \
   shell \
-  svn \
+  version-control \
   python \
   funclib \
   db \
@@ -107,6 +107,7 @@ check : $(STATIC_DST) $(OUT_DIR)/.htaccess
 	@make blog-journal
 	@make check-links
 	@make book-figref
+	@make swc-tags
 
 ## blog-next-id : find the next blog entry ID to use.
 blog-next-id :
@@ -126,6 +127,10 @@ check-links :
 ## ascii-chars  : check for non-ASCII characters or tab characters.
 ascii-chars :
 	@python bin/chars.py $$(find . -name '*.html' -print)
+
+## swc-tags     : replace <swc-*> tags with dynamic content
+swc-tags :
+	@find $(OUT_DIR)/book -type f -name '*.html' -exec bin/swc-tags.py -vvv '{}' '+'
 
 #------------------------------------------------------------
 

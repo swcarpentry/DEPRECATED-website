@@ -1,0 +1,1220 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Version Control With Subversion" />
+{% endblock file_metadata %}
+
+{% block content %}
+    <ol class="toc">
+      <li><a href="#s:setup">Setting up a Repository</a></li>
+      <li><a href="#s:basics">Basic Use</a></li>
+      <li><a href="#s:merge">Merging Conflicts</a></li>
+      <li><a href="#s:rollback">Recovering Old Versions</a></li>
+      <li><a href="#s:provenance">Provenance</a></li>
+      <li><a href="#s:summary">Summing Up</a></li>
+    </ol>
+
+    <p>
+      Suppose that Wolfman and Dracula have been hired by Universal Monsters Inc.
+      to figure out where the company should put its next secret lair.
+      They want to be able to work on the plans at the same time,
+      but they have run into problems doing this in the past.
+      If they take turns,
+      each one will spend a lot of time waiting for the other to finish.
+      On the other hand,
+      if they work on their own copies and email changes back and forth
+      they know that things will be lost, overwritten, or duplicated.
+    </p>
+
+    <p>
+      The right solution is to use a <a href="glossary.html#version-control-system">version control system</a>
+      to manage their work.
+      Version control is better than mailing files back and forth because:
+    </p>
+
+    <ol>
+
+      <li>
+        It's hard (but not impossible) to accidentally overlook or overwrite someone's changes,
+        because the version control system highlights them automatically.
+      </li>
+
+      <li>
+        There are no arguments about whose copy is the most up to date.
+      </li>
+
+      <li>
+        Nothing that is committed to version control is ever lost.
+        This means it can be used like the "undo" feature in an editor,
+        and since all old versions of files are saved
+        it's always possible to go back in time to see exactly who wrote what on a particular day,
+        or what version of a program was used to generate a particular set of results.
+      </li>
+
+    </ol>
+
+    <p>
+      Version control systems do have one important shortcoming.
+      While it is easy for them to find, display, and merge differences in text files,
+      images, MP3s, PDFs, or Microsoft Word or Excel files aren't stored as text&mdash;they
+      use specialized binary data formats.
+      Most version control systems don't know how to deal with these formats,
+      so all they can say is, "These files differ."
+      The rest is up to you.
+    </p>
+
+    <p>
+      Even with this limitation,
+      version control is one of the most important concepts in this book.
+      The rest of this chapter will explore how to use
+      <a href="http://git-scm.com/">Git</a>,
+      a popular open source version control system.
+    </p>
+
+    <section id="s:setup">
+
+      <h2>Setting up a Repository</h2>
+
+      <div class="understand" id="u:setup">
+        <h3>Understand:</h3>
+        <ul>
+          <li>How to create a repository.</li>
+        </ul>
+      </div>
+
+      <h2>
+        Repository Setup
+      </h2>
+
+      <p>
+        To track a project with version control,
+        Dracula needs to create a <a href="glossary.html#repository">repository</a> to hold the project's history.
+        Dracula's been involved in a few projects over the years,
+        and he stays organized by keeping all the source code in a <code>~/src</code> subdirectory of his home directory.
+        He create a directory for this new project
+      </p>
+
+<swc-script>
+<swc-newuser>dracula</swc-newuser>
+<swc-command user="dracula" display="mkdir ~/src/monsters">
+mkdir -p ~/src/monsters
+</swc-command>
+</swc-script>
+
+      <p>
+        Then he changes into that directory and initializes the repository.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+cd ~/src/monsters
+</swc-command>
+<swc-command user="dracula">
+git init
+</swc-command>
+</swc-script>
+
+      <p>
+        This creates a new subdirectory (<code>.git</code>) that holds all the repository data needed by Git.
+        Because this is his first project using Git,
+        Dracula should tell Git his name and email,
+        which will be stored in any commits he makes.
+      </p>
+
+<swc-script>
+<swc-command user="dracula"
+            display="git config --global user.name Dracula">
+git config user.name Dracula
+</swc-command>
+<swc-command user="dracula"
+            display="git config --global user.email dracula@umi.com">
+git config user.email dracula@umi.com
+</swc-command>
+</swc-script>
+
+      <p>
+        Without the <code>--global</code> option,
+        these configuration options would only apply to the <code>monsters</code> project.
+      </p>
+
+      <div class="keypoints" id="k:setup">
+        <h3>Summary</h3>
+        <ul>
+          <li><code>git init</code> creates a new repository.</li>
+          <li><code>git config</code> should be used to tell Git your name and email address.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section id="s:basics">
+
+      <h2>Basic Use</h2>
+
+      <div class="understand" id="u:basics">
+        <h3>Understand:</h3>
+        <ul>
+          <li>Where version control stores information.</li>
+          <li>How to check out a working copy of a repository.</li>
+          <li>How to view the history of changes to a project.</li>
+          <li>How to add files to a project.</li>
+          <li>How to merge changes from a remote repository.</li>
+          <li>How to update a working copy to get changes made to a remote repository.</li>
+          <li>How to check the status of a working copy.</li>
+        </ul>
+      </div>
+
+      <p>
+        As we said in the introduction,
+        Dracula and Wolfman are trying to figure out
+        where Universal Monsters should hide its next secret lair.
+        It's Monday night.
+        Dracula thinks it might be a good idea to put the lair on one of Jupiter's moons,
+        so he starts working on a file full of physical constants using his editor of choice.
+      </p>
+
+<swc-script>
+<swc-file src="moons-initial.txt"/>
+<swc-copy src="moons-initial.txt" target="moons.txt" user="dracula"/>
+</swc-script>
+
+      <p>
+        Four moons is enough to consider for one day,
+        so Dracula wants to commit the file to his repository,
+        checkpointing the file at its current state.
+        First, he tells Git that it should track the file.
+        This isn't the same as creating it&mdash;Dracula has already done that with his editor.
+        Instead, adding the file tells Git to start keeping track of changes to that file.
+        It's quite common,
+        particularly in programming projects,
+        to have backup files or artifacts of compilation in a directory that aren't worth storing in the repository.
+        This is why version control requires you to explicitly tell it which files are to be managed.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+git add moons.txt
+</swc-command>
+</swc-script>
+
+      <p>
+        Now, he can commit the file in its current state.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+git commit -m "Add Jupiter's moons (Io, Europa, Ganymede, and Calisto)." moons.txt
+</swc-command>
+</swc-script>
+
+
+      <div class="box" id="a:git-gui">
+        <h3>There's More Than One Way To Do It</h3>
+
+        <p>
+          We will drive Git from the command line in our examples,
+          but if you prefer using a GUI,
+          there are <a href="http://git-scm.com/downloads/guis">several</a> for you to choose from.
+          <a href="http://git-scm.com/docs/git-gui"><code>git gui</code></a>
+          is even distributed with the core Git tools
+          (although it may be packaged separately for your system,
+          e.g. as <code>git-gui</code> on <a href="http://www.debian.org">Debian</a>).
+        </p>
+
+      </div>
+
+      <p>
+        Since the commit comment he wants to provide is short,
+        he gives it to Git on the command line
+        using the <code>-m</code> flag.
+        (He puts it in quotation marks so that the shell will treat it as a single string&mdash;without
+        them, it would think the first word of the comment was the argument to <code>-m</code>
+        and then complain that it didn't understand the rest of the sentence).
+        If he doesn't provide a comment with <code>-m</code>,
+        Git will run <a href="http://www.kernel.org/pub/software/scm/git/docs/git-var.html#GIT_EDITOR">his editor</a> and give him a chance to write something there.
+      </p>
+
+      <p>
+        The commit message after <code>-m</code> can be anything you like,
+        but Dracula knows that moons can make Wolfman a little crazy and
+        wants to give him a helpful hint about which planet they are orbiting.
+        Good comments are as important in version control as they are in coding.
+        Without them, it can be very difficult to figure out what the initial committer was thinking when you trying and debug their code in three years.
+        We can use comments like, &ldquo;Changed things,&rdquo; and, &ldquo;Fixed it,&rdquo; if we want,
+        but we'll only be creating trouble for our future selves.
+      </p>
+
+      <p>
+        In order to create his own copy of the repository,
+        Wolfman has to <a href="glossary.html#clone">clone</a> Dracula's repository.
+        He only has to do this once per project:
+        once he has a working copy,
+        he can update it over and over again to get other people's work:
+      </p>
+
+      <p class="fixme">picture of distributed development</p>
+
+      <p>
+        To clone Dracula's repository,
+        Wolfman needs to know the
+        <a href="http://www.kernel.org/pub/software/scm/git/docs/git-clone.html#URLS">URL</a>
+        of the repository,
+        which tells Git where to look.
+        Because Wolfman has file system access to Dracula's repository,
+        he can use the <code>~dracula/src/monsters</code> for the URL.
+        This is Wolfman's first project,
+        but Dracula told him that staying organized is important,
+        so he creates a source directory to store all his project.
+        Then Wolfman clones Dracula's repository.
+      </p>
+
+<swc-script>
+<swc-newuser>wolfman</swc-newuser>
+<swc-command user="wolfman">mkdir ~/src</swc-command>
+<swc-command user="wolfman">cd ~/src</swc-command>
+<swc-command user="wolfman">git clone ~dracula/src/monsters</swc-command>
+</swc-script>
+
+      <p>
+        When Wolfman runs the <code>clone</code> command,
+        Git retrieves the repository data from Dracula's repository
+        and stores them in a new subdirectory of Wolfman's current directory.
+        Once the clone is complete,
+        Wolfman can change into the new directory and see Dracula's work.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">cd monsters</swc-command>
+<swc-command user="wolfman">cat moons.txt</swc-command>
+</swc-script>
+
+      <p>
+        Wolfman can find out more about the history of the project by using Git's <code>log</code> command.
+        When he runs <code>git log</code>,
+        Git displays a summary of all the changes made to the project so far.
+        This list includes the <a href="glossary.html#hash">commit hash</a>,
+        the name of the person who made the change,
+        the date the change was made,
+        and whatever comment the user provided when the change was submitted.
+        As we can see,
+        there has only been one commit to the <code>monsters</code> project so far,
+        and it was made by Dracula:
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">git log</swc-command>
+</swc-script>
+
+      <p>
+        Notice that the commit is named with a <a href="glossary.html#hash">hash</a>.
+        Centralized version control systems usually use an incremented integer (&ldquo;version 1&rdquo;, followed by &ldquo;version 2&rdquo;, followed by &ldquo;version 3&rdquo;, &hellip;).  
+        This is less common in distributed systems,
+        because when you change version 1,
+        you'd expect to create version 2.
+        However, your co-developer may have already altered version 1,
+        and thinks that their commit should be version 2,
+        and yours should be version 3.
+        Rather than argue over this sort of thing,
+        distributed version control systems generate commit hashes that uniquely represent a commit,
+        and use these hashes to refer to the commits
+        (&ldquo;version 7c0da882b9df3b3fe003b7caa05ba6faff9c8b90&rdquo;).
+        Because the full hash is a pain to type,
+        you can abbreviate it as much as you like,
+        so long as the abbreviation is unambiguous.
+        For example, if there was another commit 7c0da0&hellip;,
+        you could refer to Dracula's commit as 7c0da8
+        (or 7c0da88, or 7c0da882, &hellip;).
+      </p>
+
+      <p>
+        The commit hash applies to the commit message and a particular state of each versioned file.
+        When we talk about &ldquo;version 7c0da8&rdquo;, we mean,
+        &ldquo;The state of all files and directories at that point.&rdquo;
+        Older version control systems like CVS gave each file a new version number when it was updated,
+        which meant that version 38 of one file could correspond in time to version 17 of another:
+      </p>
+
+      <p class="fixme">picture of CVS and Git version numbering</p>
+
+      <p class="continue">
+        Experience shows that
+        global commit hashes numbers that apply to everything in the repository
+        are easier to manage than
+        per-file version numbers,
+        so that's what Git uses.
+      </p>
+
+      <p>
+        Wolfman expects to be making changes to Git repositories,
+        and he has yet to tell Git his preferred name and email,
+        so he does that now.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman" display="git config --global user.name Wolfman">
+git config user.name Wolfman
+</swc-command>
+<swc-command user="wolfman"
+            display="git config --global user.email wolf@umi.com">
+git config user.email wolf@umi.com
+</swc-command>
+</swc-script>
+
+      <p>
+        Looking in the new file <code>moons.txt</code>,
+        Wolfman notices that Dracula has misspelled &ldquo;Callisto&rdquo;
+        (it is supposed to have two L's.)
+        Wolfman edits that line of the file:
+      </p>
+
+<swc-script>
+<swc-file src="moons-spelling.txt"/>
+<swc-copy src="moons-spelling.txt" target="moons.txt" user="wolfman"/>
+</swc-script>
+
+      <p class="continue">
+        He then commits his changes to his repository.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">
+git commit -m "moons: fix typo Calisto -&gt; Callisto." moons.txt
+</swc-command>
+</swc-script>
+
+      <p>
+        He also adds a line about Amalthea,
+        which he thinks might be a good site for a secret lair despite its small size:
+      </p>
+
+<swc-script>
+<swc-file src="moons-amalthea.txt"/>
+<swc-copy src="moons-amalthea.txt" target="moons.txt" user="wolfman"/>
+</swc-script>
+
+      <p class="continue">
+        He then commits the Amalthea addition.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman" git-tick="no">
+git commit -m "moons: add Amalthea" moons.txt
+</swc-command>
+</swc-script>
+
+      <p>
+        Hmm, perhaps that commit message could have been more detailed.
+        Wolfman re-commits, using a more detailed commit message.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">
+git commit --amend -m "moons: add Amalthea (nicer view of Jupiter)." moons.txt
+</swc-command>
+</swc-script>
+
+      <p class="box" id="a:edit-history">
+        This is one of the situations where Git is different from many other
+        version control systems.
+        Git provides a rich set of commands for editing your history.
+        For more involved reconstruction,
+        you can <a href="#s:rollback">rewind earlier commits</a>,
+        <a href="http://www.kernel.org/pub/software/scm/git/docs/git-rebase.html">
+          rebase earlier commits</a>, or
+        <a href="http://www.kernel.org/pub/software/scm/git/docs/git-filter-branch.html">
+          use scripts to rewrite your whole history</a>.
+        For basic version control,
+        you won't need to dig this deep into the Git toolbox,
+        but it's good to know these features are there if you need them.
+        See the
+        <a href="http://www.kernel.org/pub/software/scm/git/docs/git-rebase.html#_recovering_from_upstream_rebase">
+          <code>RECOVERING FROM UPSTREAM REBASE</code></a> section of
+        <a href="http://www.kernel.org/pub/software/scm/git/docs/git-rebase.html">
+          <code>git rebase --help</code></a>
+        for warnings against altering public commits.
+        Altering private commits,
+        where noone else has had a chance to pull the commit,
+        does not suffer from these complications.
+      </p>
+
+      <p>
+        Wolfman's getting into the swing of things now,
+        so he also adds information about Himalia and Elara.
+      </p>
+
+<swc-script>
+<swc-copy src="moons-wolfman-extras.txt" target="moons.txt" user="wolfman"/>
+<swc-command user="wolfman">
+git commit -m "moons: add Himalia and Elara (small, but closer to big moons)." moons.txt
+</swc-command>
+</swc-script>
+
+      <div class="box" id="a:transaction">
+
+        <h3>Working With Multiple Files</h3>
+
+        <p>
+          Our example only includes one file,
+          but version control can work on any number of files at once.
+          For example,
+          if Wolfman noticed that a dozen data files had the same incorrect header,
+          he could change it in all 12 files,
+          then commit all those changes at once.
+          This is actually the best way to work:
+          every logical change to the project should be a single commit,
+          and every commit should include everything involved in one logical change.
+        </p>
+
+      </div>
+
+      <p>
+        That night,
+        when Dracula rises from his coffin to start work,
+        the first thing he wants to do is get Wolfman's changes.
+        He hasn't told Git where to find Wolfman's repository yet,
+        so he does that now,
+        adding a <a href="glossary.html#remote-repository">remote repository</a>.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+git remote add wolfman ~wolfman/src/monsters
+</swc-command>
+</swc-script>
+
+      <p>
+        Dracula uses Git's <code>fetch</code> command to fetch all the commits from Wolfman's repository.
+        This doesn't affect Dracula's development,
+        it just downloads Wolfman's data so Dracula can look through it.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">git fetch wolfman</swc-command>
+</swc-script>
+
+      <p>
+        Wolfman's committed work show up as a new <a href="glossary.html#branch">branch</a>.
+        Dracula can then see what has changed in Wolfman's branch relative to his own <a href="glossary.html#head">head</a>.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">git log HEAD..wolfman/master</swc-command>
+</swc-script>
+
+     <p>
+       Dracula things those all sound like reasonable things to do,
+       but he also wants to see exactly what Wolfman did with all those changes, so he uses Git's <code>diff</code> command.
+       There are a number of options you can pass <code>diff</code> to get the exact output format you want.
+       In this case,
+       Dracula wants colored word-by-word differences
+       (<code>--word-diff=color</code>)
+       and he wants to see changes from his working directory to Wolfmans branch
+       (<code>-R</code>).
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+git diff --word-diff=color -R wolfman/master
+</swc-command>
+</swc-script>
+
+      <p>Everything looks good!  Time to merge</p>
+
+<swc-script>
+<swc-command user="dracula" git-tick="no">git merge wolfman/master</swc-command>
+</swc-script>
+
+      <p>
+        It's worth noticing here how important Wolfman's comments about his changes were.
+        Without Wolfman's comments,
+        Dracula might have wasted time wondering why Wolfman was bothering with the tiny moons.
+      </p>
+
+      <p>
+        This is a very common workflow,
+        and is the basic heartbeat of most developers' days.
+        To recap,
+        the steps are:
+      </p>
+
+      <ol>
+
+        <li>
+          Check to see if there are changes in remote repositories to download.
+        </li>
+
+        <li>
+          Merge remote changes into our working copy.
+        </li>
+
+        <li>
+          Do our own work.
+        </li>
+
+        <li>
+          Commit our changes to the repository.
+        </li>
+
+        <li>
+          Publish your changes so that others can get them.
+        </li>
+      </ol>
+
+      <div class="keypoints" id="k:basics">
+        <h3>Summary</h3>
+        <ul>
+          <li>Version control is a better way to manage shared files than email or shared folders.</li>
+          <li>Versioned files are stored in a repository.</li>
+          <li>People share changes by committing them to a public repository or updating their local copy from other public repositories.</li>
+          <li idea="paranoia">The version control system prevents people from overwriting each other's work by forcing them to merge concurrent changes before committing.</li>
+          <li idea="perf">It also keeps a complete history of changes made to the master so that old versions can be recovered reliably.</li>
+          <li>Version control systems work best with text files, but can also handle binary files such as images and Word documents.</li>
+          <li>Every repository is identified by a URL.</li>
+          <li>Each changed to the master copy is identified by a unique revision ID.</li>
+          <li>Revisions identify snapshots of the entire repository, not changes to individual files.</li>
+          <li idea="perf">Each change should be commented to make the history more readable.</li>
+          <li>The basic workflow for version control is update-change-commit.</li>
+          <li><code>git add <em>things</em></code> tells Git to start managing particular files or directories.</li>
+          <li><code>git remote add <em>name</em> <em>url</em></code> tells Git about a remote repository.</li>
+          <li><code>git fetch <em>name</em></code> fetches commits from a remote repository.</li>
+          <li><code>git commit -m "<em>message</em>" <em>things</em></code> commits changes to the local repository.</li>
+          <li><code>git log</code> shows the history of the current branch.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section id="s:merge">
+
+      <h2>Merging Conflicts</h2>
+
+      <div class="understand" id="u:merge">
+        <h3>Understand:</h3>
+        <ul>
+          <li>What a conflict in an update is.</li>
+          <li>How to resolve conflicts when updating.</li>
+        </ul>
+      </div>
+
+      <p>
+        Dracula now edits his copy to change Amalthea's radius
+        from a single number to a triple to reflect its irregular shape:
+      </p>
+
+<swc-script>
+<swc-file src="moons-dracula-triple.txt"/>
+<swc-copy src="moons-dracula-triple.txt" target="moons.txt" user="dracula"/>
+</swc-script>
+
+      <p class="continue">
+        He then commits his work,
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+git commit -m "moons: Amalthea isn't round, give three radii." moons.txt
+</swc-command>
+</swc-script>
+
+      <p>
+        But while Dracula is doing this,
+        Wolfman is editing <em>his</em> copy
+        to add information about two other minor moons,
+        Himalia and Elara:
+      </p>
+
+<swc-script>
+<swc-file src="moons-wolfman-more-extras.txt"/>
+<swc-copy src="moons-wolfman-more-extras.txt" target="moons.txt"
+         user="wolfman"/>
+<swc-command user="wolfman">
+git commit -m "moons: add Sinope and Pasiphaë (far out)." moons.txt
+</swc-command>
+</swc-script>
+
+      <p>
+        A few minutes after their commits,
+        Wolfman decides to syncronize with Dracula.
+        He fetches Dracula's repository data
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">git fetch</swc-command>
+</swc-script>
+
+      <p class="continue">
+        and he takes a look at what's changed.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">git log HEAD..origin/master</swc-command>
+</swc-script>
+
+      <p>
+        Hmm, let's take a look at a graphical view of the history of
+        all the branches Wolfman knows about.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">git log --graph --all</swc-command>
+</swc-script>
+
+      <p>
+        Ah, the branches have diverged.
+        Wolfman checks the content differences.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">
+git diff --word-diff=color -R origin/master
+</swc-command>
+</swc-script>
+
+      <p class="continue">
+        The differences don't seem to overlap,
+        so Wolfman tries to merge in Dracula's changes.
+        Luckily,
+        Dracula and Wolfman's edits are sufficiently separated,
+        so Git can merge the differences automatically:
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">
+git merge -m "Merge Dracula's Amalthea radii" origin/master
+</swc-command>
+</swc-script>
+
+      <p>
+        Wolfman's branch history now looks like
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">git log --graph</swc-command>
+</swc-script>
+
+      <p>
+        Wolfman's branch is now at commit a2f10432,
+        but Dracula's is one behind at commit b28000b6.
+        At this point, they both decide to add measurement units to the columns in <code>moons.txt</code>.
+        Wolfman is quicker off the mark this time;
+        he adds a line to the file:
+      </p>
+
+<swc-script>
+<swc-file src="moons-wolfman-units.txt"/>
+<swc-copy src="moons-wolfman-units.txt" target="moons.txt" user="wolfman"/>
+</swc-script>
+
+      <p class="continue">
+        and commits it.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">
+git commit -m "moons: add units header." moons.txt
+</swc-command>
+</swc-script>
+
+      <p>
+        While he is doing this, though, Dracula starts editing his copy.
+        He also inserts a line at the top of the file,
+        but not the same one as Wolfman:
+      </p>
+
+<swc-script>
+<swc-file src="moons-dracula-units.txt"/>
+<swc-copy src="moons-dracula-units.txt" target="moons.txt" user="dracula"/>
+<swc-command user="dracula">
+git commit -m "moons: add units for physical data columns." moons.txt
+</swc-command>
+</swc-script>
+
+      <p>
+        Now Dracula decides to synchronize with Wolfman,
+        so he fetches Wolfman's repository and looks at the differences.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">git fetch wolfman</swc-command>
+<swc-command user="dracula">git log --graph --all</swc-command>
+</swc-script>
+
+      <p>
+        Dracula wants to merge Wolfman's two new commits.
+        However, when Dracula tries to merge Wolfman's changes,
+      </p>
+
+<swc-script>
+<swc-command user="dracula" expect="1">git merge wolfman/master</swc-command>
+</swc-script>
+
+      <p class="continue">
+        Git tells him he can't.
+        There is an actual conflict in the file.
+        To help you resolve the conflict,
+        Git modifies the file in question (<code>moons.txt</code>)
+        in a way that interleaves Dracula's changes
+        and the changes from Wolfman's branch.
+        Wherever there is a conflict,
+        Git inserts the line <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>
+        followed by the lines from the local copy of the file.
+        It then inserts the separator <code>=======</code>,
+        followed by the lines from the repository's file that are in conflict with that section,
+        and puts <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; wolfman/master</code> at the end:
+      </p>
+
+<swc-script>
+<swc-command user="dracula">cat moons.txt</swc-command>
+</swc-script>
+
+      <p>
+        Dracula has to edit his copy of the file to resolve that conflict:
+      </p>
+
+<swc-script>
+<swc-file src="moons-dracula-resolved.txt"/>
+<swc-copy src="moons-dracula-resolved.txt" target="moons.txt" user="dracula"/>
+</swc-script>
+
+      <p>
+        Once he is done, he tells Git that the conflict is resolved
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+git add moons.txt
+</swc-command>
+</swc-script>
+
+      <p class="continue">
+        and commits the merge.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+git commit -m "merge Wolfman's moon units and additions"
+</swc-command>
+<swc-command user="dracula">
+git log --graph
+</swc-command>
+</swc-script>
+
+      <p>
+        If Dracula doesn't like working with the interpolated changes directly
+        (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>,
+        <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>,
+        there are several tools for displaying differences,
+        or <a href="glossary.html#diff">diffs</a>,
+        and helping to merge them.
+        Git's <code>mergetool</code> command provides a simple interface for using those tools to help with a Git merge.
+      </p>
+
+<swc-script>
+<swc-command user="dracula" display="git mergetool --help">
+<swc-stdout>&hellip;
+OPTIONS
+       -t &lt;tool&gt;, --tool=&lt;tool&gt;
+           Use the merge resolution program specified by &lt;tool&gt;. Valid merge
+           tools are: araxis, bc3, diffuse, ecmerge, emerge, gvimdiff, kdiff3,
+           meld, opendiff, p4merge, tkdiff, tortoisemerge, vimdiff and xxdiff.
+&hellip;</swc-stdout>
+</swc-command>
+</swc-script>
+
+      <p>
+        In this case, the conflict was small and easy to fix.
+        However, if two or more people on a team are repeatedly creating conflicts for one another,
+        it's usually a signal of deeper communication problems:
+        either they aren't talking as often as they should,
+        or their responsibilities overlap.
+        If used properly,
+        the version control system can help the team find and fix these issues
+        so that the team will be more productive in future.
+      </p>
+
+      <div class="box">
+
+        <h3>Working With Multiple Files</h3>
+
+        <p>
+          As mentioned <a href="#a:transaction">earlier</a>,
+          every logical change to a project should result in a single commit,
+          and every commit should represent one logical change.
+          This is especially true when resolving conflicts:
+          the work done to reconcile one person's changes with another are often complicated,
+          so it should be a single entry in the project's history,
+          with other, later, changes coming after it.
+        </p>
+
+      </div>
+
+      <div class="keypoints" id="k:merge">
+        <h3>Summary</h3>
+        <ul>
+          <li>Conflicts must be resolved before a commit can be completed.</li>
+          <li>Git puts markers in text files to show regions of conflict.</li>
+          <li>For each conflicted file, Subversion creates auxiliary files containing the common parent, the master version, and the local version.</li>
+          <li><code>svn resolve <em>files</em></code> tells Subversion that conflicts have been resolved.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section id="s:rollback">
+
+      <h2>Recovering Old Versions</h2>
+
+      <div class="understand" id="u:rollback">
+        <h3>Understand:</h3>
+        <ul>
+          <li>How to undo changes to a working copy.</li>
+          <li>How to recover old versions of files.</li>
+        </ul>
+      </div>
+
+      <p>
+        Now that we have seen how to merge files and resolve conflicts,
+        we can look at how to use version control as an &ldquo;infinite undo&rdquo;.
+        Suppose that Wolfman is working late one night.
+        His copy of the <code>monsters</code> project is in sync with Dracula's at 59aebf7c.
+        He decides to edit the file <code>moons.txt</code>,
+        but unfortunately forgot that there was a full moon,
+        so his changes don't make a lot of sense:
+      </p>
+
+<swc-script>
+<swc-file src="moons-poetry.txt"/>
+<swc-copy src="moons-poetry.txt" target="moons.txt" user="wolfman"/>
+</swc-script>
+
+      <p>
+        When he's back in human form the next day, he wants to undo his changes.
+        Without version control, his choices would be grim.
+        He could try to edit them back into their original state by hand
+        (which for some reason hardly ever seems to work),
+        or ask his colleagues to send him their copies of the files
+        (which is almost as embarrassing as chasing the neighbor's cat when in wolf form).
+      </p>
+
+      <p>
+        Since he's using Git, though,
+        and hasn't committed his work to the repository,
+        all he has to do is <a href="glossary.html#revert">revert</a> his local changes.
+        Subversion's <code>checkout</code> command simply throws away local changes to files
+        and puts things back the way they were before those changes were made.
+      </p>
+
+      <p>
+        To start, Wolfman uses <code>diff</code> to look at
+        what the differences actually are between
+        his file and the master copy in the repository.
+        He doesn't want to keep his changes, so checks out the master copy.
+      </p>
+
+<swc-script>
+<swc-command user="wolfman">git checkout moons.txt</swc-command>
+<swc-command user="wolfman">cat moons.txt</swc-command>
+</swc-script>
+
+      <p>
+        What if someone <em>has</em> committed their changes,
+        but still wants to undo them?
+        For example,
+        suppose Dracula decides that the numbers in <code>moons.txt</code> would look better with commas.
+        He edits the file:
+      </p>
+
+<swc-script>
+<swc-file src="moons-commas.txt"/>
+<swc-copy src="moons-commas.txt" target="moons.txt" user="dracula"/>
+</swc-script>
+
+      <p class="continue">
+        and then commits his changes to create commit dc7ec289.
+      </p>
+
+<swc-script>
+<swc-command user="dracula">
+git commit -m "moons: add commas and align decimal point." moons.txt
+</swc-command>
+</swc-script>
+
+      <p>
+        A little while later,
+        the Mummy sees the change and orders Dracula to put things back the way they were.
+        What should Dracula do?
+        In Git, the <code>HEAD</code> of a branch is just a pointer to a particular commit in the commit graph
+        (in this case Dracula's <code>HEAD</code> now points to commit dc7ec28).
+        If Dracula wants to pretend the comma commit never happened,
+        he can just move his <code>HEAD</code> back to point to a commit that he does like.
+        For example,
+        <code>HEAD^</code> represents the commit before the current <code>HEAD</code>.
+      </p>
+ 
+<swc-script>
+<swc-command user="dracula">git reset --hard HEAD^</swc-command>
+</swc-script>
+
+     <p>
+        This works well if Dracula hasn't published his repository since making the abandoned commit.
+        If he had published the commit and Wolfman had pulled it,
+        rewinding <code>HEAD</code> to drop commit dc7ec28 would have no effect.
+        Wolfman will still base his future work off the commit,
+        and Dracula will have to pull it back in the next time he merges Wolfman's branch.
+        A safer course would be for Dracula to make a new commit explicitly reverting the bad commit.
+      </p>
+
+<swc-script>
+<swc-command user="dracula" hidden="yes">
+git reset --hard dc7ec28 --
+</swc-command>
+<swc-command user="dracula">git revert dc7ec28</swc-command>
+<swc-command user="dracula">git log</swc-command>
+</swc-script>
+
+      <p>
+        One benefit of the <code>revert</code> command over the <code>reset</code> command is that it can be used to revert an earlier commit even if you have made subsequent commits on top of the bad commit.
+      </p>
+
+      <div class="keypoints" id="k:rollback">
+        <h3>Summary</h3>
+        <ul>
+          <li>Old versions of files can be recovered by merging their old state with their current state.</li>
+          <li>Recovering an old version of a file does not erase the intervening changes.</li>
+          <li>Use branches to support parallel independent development.</li>
+          <li><code>git checkout <em>file</em></code> undoes local changes to a file.</li>
+          <li><code>git reset --hard HEAD^</code> erases the last commit.</li>
+          <li><code>git revert <em>commit</em></code> adds a new commit that reverts an earlier commit.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section id="s:branches">
+
+      <h2>
+        Branched Development
+      </h2>
+
+      <p>
+        The most frequent use of merging is to manage parallel streams of development in large projects,
+        where the merging is not as frequent as it was in the <code>moons.txt</code> example above.
+        Suppose that Universal Monsters has just released a new program for designing secret lairs.
+        Dracula and Wolfman are supposed to start adding a few features
+        that had to be left out of the first release because time ran short.
+        At the same time, Frankenstein and the Mummy are doing technical support:
+        their job is to fix any bugs that users find.
+        All sorts of things could go wrong if both teams were constantlytried to work on the same code at the same time.
+        For example,
+        if Frankenstein fixed a bug and sent a new copy of the program to a user in Greenland,
+        it would be all too easy for him to accidentally include
+        the half-completed shark tank control feature that Wolfman was working on.
+      </p>
+
+      <p>
+        The usual way to handle this situation is
+        to create a <a href="glossary.html#branch">branch</a> in the repository for each major sub-project.
+        While Wolfman and Dracula work on the <a href="glossary.html#master">master branch</a>,
+        Frankenstein and the Mummy create a branch,
+        which is just another nickname for a commit in the commit graph.
+        They can work in their branch without disturbing Wolfman and Dracula and vice versa:
+      </p>
+
+<pre>
+      x---y---z  [shark-tank]
+     /         \
+I---a---b---c---d---e  [master]
+     \       :
+      r-------s  [1.0.x]
+</pre>
+
+      <p>
+        With development at commit <code>a</code>,
+        Dracula could create the <code>shark-tank</code> branch with Git's <code>branch</code> command.
+        Then he can change to the <code>shark-tank</code> branch using Git's <code>checkout</code> command.</p>
+
+<swc-script>
+<swc-command user="dracula">git branch --all</swc-command>
+<swc-command user="dracula">git branch shark-tank</swc-command>
+<swc-command user="dracula">git checkout shark-tank</swc-command>
+<swc-command user="dracula">git branch --all</swc-command>
+</swc-script>
+
+      <p>
+        Branches in version control repositories are often described as &ldquo;parallel universes&rdquo;.
+        Each branch starts off as a clone of the project at some moment in time
+        (typically each time the software is released,
+        or whenever work starts on a major new feature.
+        Commit <code>a</code> in the above figure).
+        Changes made to a branch only affect that branch,
+        just as changes made to the files in one directory don't affect files in other directories.
+        However,
+        the branches are all stored in the same repository,
+        so it is easy to compare and merge the two code bases.
+      </p>
+
+      <p>
+        When development of the shark tank controller finishes in commit <code>z</code>,
+        the code is merged back into the master branch with commit <code>d</code>.
+        Meanwhile, Frankenstein and Mummy fixed a bug that only applied to the 1.0.x release with <code>r</code>.
+        Then they <code>cherry-picked</code> another bugfix from commit <code>c</code> with commit <code>s</code>.
+        With each change to the 1.0.x branch,
+        they make a bugfix release
+        (e.g. <code>a</code> is 1.0.0, <code>r</code> is 1.0.1, &hellip;).
+      </p>
+
+      <p>
+        Merging with a branch from within your repository is the same as merging with a branch from a remote repository.
+        In the <code>moons.txt</code> example,
+        Dracula merged Wolfman's master branch with:
+      </p>
+
+<swc-script>
+<swc-command user="dracula" display="git merge wolfman/master"/>
+</swc-script>
+
+      <p>
+        When development on the <code>shark-tank</code> branch finishes,
+        he'll merge it into the <code>master</code> branch with.
+      </p>
+
+<swc-script>
+<swc-command user="dracula" display="git checkout master"/>
+<swc-command user="dracula" display="git merge shark-tank"/>
+</swc-script>
+
+      <p>
+        Branching helps projects scale up by letting sub-teams work independently,
+        but too many branches can cause as many problems as they solve.
+        Karl Fogel's excellent book
+        <a href="bibliography.html#fogel-producing-oss"><cite>Producing Open Source Software</cite></a>,
+        and Laura Wingerd and Christopher Seiwald's paper
+        &ldquo;<a href="bibliography.html#wingerd-seiwald-scm">High-level Best Practices in Software Configuration Management</a>&rdquo;,
+        talk about branches in much more detail.
+        Projects usually don't need to do this until they have a dozen or more developers,
+        or until several versions of their software are in simultaneous use,
+        but using branches is a key part of switching from carpentry to
+        <a href="engineering.html">engineering</a>.
+      </p>
+
+    </section>
+
+    <section id="s:publish">
+
+      <h2>
+        Setting up a Public Repository
+      </h2>
+
+      <p>
+        In the <code>moons.txt</code> example,
+        Dracula and Wolfman could fetch each other's repository directly from a shared file system.
+        However, you will often want to collaborate on development where you don't have such a simple way to share your work.
+        There are a number of ways to setup a public repository,
+        you can
+      </p>
+
+      <ul>
+
+        <li>
+          ask your system administrator to set it up for you or
+        </li>
+
+        <li>
+          use a hosting service like <a href="http://http://gitorious.org/">Gitorious</a>
+          or <a href="https://github.com/">GitHub</a>.
+        </li>
+
+      </ul>
+
+      <p class="continue">
+        If you choose the second option,
+        please check with whoever handles intellectual property at your institution
+        to make sure that putting your work on a commercially-operated machine
+        that is probably in some other legal jurisdiction
+        isn't going to cause trouble.
+        Many people assume that it's &ldquo;just OK&rdquo;,
+        while others act as if not having asked will be an acceptable defense later on.
+        Unfortunately,
+        neither is true&hellip;
+      </p>
+
+      <p>
+        If you want to host your own repository, you can host a
+        private repository via secure shell (SSH) or host a public
+        repository via
+      </p>
+
+      <ul>
+
+        <li>
+          <code>git-daemon</code> (<code>git://</code>),
+        </li>
+
+        <li>
+          <code>git-http-backend</code> (efficient <code>http://</code>), or
+        </li>
+
+        <li>
+          <code>hooks/post-update</code> (inefficient <code>http://</code>).
+        </li>
+
+      </ul>
+
+    </section>
+
+    <section id="s:provenance">
+
+      <h2>Provenance</h2>
+
+      <div class="understand" id="u:provenance">
+        <h3>Understand:</h3>
+        <ul>
+          <li>What data provenance is.</li>
+          <li>How to record version information about a program in its output.</li>
+        </ul>
+      </div>
+
+      <p>
+        In art,
+        the <a href="glossary.html#provenance">provenance</a> of a work
+        is the history of who owned it, when, and where.
+        In science,
+        it's the record of how a particular result came to be:
+        what raw data was processed by what version of what program to create which intermediate files,
+        what was used to turn those files into which figures of which papers,
+        and so on.
+      </p>
+
+      <p>
+        One of the central ideas of this course is that
+        wen can automatically track the provenance of scientific data.
+        FIXME: discuss submodules?  git-annex?
+      </p>
+
+    </section>
+
+    <section id="s:summary">
+
+      <h2>Summing Up</h2>
+
+      <p>
+        Correlation does not imply causality,
+        but there is a very strong correlation between
+        using version control
+        and doing good computational science.
+        There's an equally strong correlation
+        between <em>not</em> using it and wasting effort,
+        so today (the middle of 2012),
+        I will not review a paper if the software used in it
+        is not under version control.
+        Its authors' work might be interesting,
+        but without the kind of record-keeping that version control provides,
+        there's no way to know exactly what they did and when.
+        Just as importantly,
+        if someone doesn't know enough about computing to use version control,
+        the odds are good that they don't know enough
+        to do the programming right either.
+      </p>
+
+    </section>
+{% endblock content %}
