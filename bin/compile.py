@@ -684,10 +684,14 @@ class BlogPostPage(GenericPage):
         m = BLOG_CONTENT_PATTERN.search(self._block)
         if m:
             self.content = m.group(1)
+            content = '\n'.join([
+                    "{% from '_content_macros.html' import youtube %}",
+                    self.content,
+                    ])
+            template = self.app.env.from_string(content)
             template_vars = self.app.standard(self.filename)
             template_vars['root_path'] = self.app.site
-            self.rendered_content = jinja2.Template(self.content).render(
-                **template_vars)
+            self.rendered_content = template.render(page=self, **template_vars)
 
         for key in self.app.metadata:
             if key not in self.__dict__:
