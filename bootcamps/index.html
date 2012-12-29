@@ -5,6 +5,78 @@
   <meta name="subglob" content="*-*-*.html" />
 {% endblock file_metadata %}
 
+{% block javascript %}
+  {{ super() }}
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script type="text/javascript">
+  function MarkerPin(color) {
+    var pin = new google.maps.MarkerImage(
+        "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color,
+        new google.maps.Size(21, 34),
+        new google.maps.Point(0,0),
+        new google.maps.Point(10, 34));
+    return pin;
+  }
+
+  function set_info_window(map, marker, info_window, content) {
+    google.maps.event.addListener(marker, 'click', function () {
+      info_window.setContent(content);
+      info_window.open(map, marker);
+    })
+  }
+
+  function initialize_map() {
+    var mapOptions = {
+      zoom: 2,
+      center: new google.maps.LatLng(0,0),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var oldPin = MarkerPin("FE7569");
+    var newPin = MarkerPin("6975FE");
+
+    var pinShadow = new google.maps.MarkerImage(
+        "http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+        new google.maps.Size(40, 37),
+        new google.maps.Point(0, 0),
+        new google.maps.Point(12, 35));
+
+    var info_window = new google.maps.InfoWindow({});
+
+    var map = new google.maps.Map(document.getElementById('map_canvas'),
+        mapOptions);
+
+{% for bootcamp in page.children %}
+  {% if bootcamp.latlng %}
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng({{bootcamp.latlng}}),
+        map: map,
+        title: "{{bootcamp.venue}}, {{bootcamp.date}}",
+    {% if bootcamp.startdate >= today %}
+        icon: newPin,
+    {% else %}
+        icon: oldPin,
+    {% endif %}
+        shadow: pinShadow,
+        });
+
+    var info_string = '<div id="info-window">' +
+        '<h5>{{bootcamp.venue}}</h5><h6>{{bootcamp.date}}</h6>' +
+        '<p>Visit the ' +
+        '<a href="{{bootcamp.slug}}.html">' +
+        'boot camp page</a> for more info.</p>' +
+        '</div>';
+
+    set_info_window(map, marker, info_window, info_string);
+  {% endif %}
+{% endfor %}
+
+  }
+  </script>
+{% endblock javascript %}
+
+{% block onload %} onload="initialize_map()" {% endblock onload %}
+
 {% block navhighlight %}{{navhighlight('bootcamps')}}{% endblock navhighlight %}
 
 {% block content %}
@@ -47,17 +119,7 @@ attendees to have an enjoyable and fulfilling experience..</p>
 {% endfor %}
 </table>
 
-<p>
-  <iframe src="http://maps.google.com/maps/ms?msid=212356616065693906545.0004b6bbb5cd44a72e278&amp;msa=0&amp;ie=UTF8&amp;t=m&amp;z=2&amp;vpsrc=6&amp;output=embed"
-          frameborder="0"
-          marginwidth="0"
-          marginheight="0"
-          scrolling="no"
-          width="98%"
-          height="500"></iframe>
-  <br />
-  <small>View <a style="color: #0000ff; text-align: left;" href="http://maps.google.com/maps/ms?msid=212356616065693906545.0004b6bbb5cd44a72e278&amp;msa=0&amp;ie=UTF8&amp;t=m&amp;vpsrc=6&amp;source=embed">Software Carpentry Workshop Locations</a> in a larger map</small>
-</p>
+<div id="map_canvas" style="width: 98%; height: 500px; margin-left:auto; margin-right: auto"></div>
 
 <p>
   <iframe style="border: 0pt none;"
