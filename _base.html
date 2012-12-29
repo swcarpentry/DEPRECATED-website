@@ -2,16 +2,7 @@
 <html>
 <!-- pageclass: GenericPage -->
 
-{% macro youtube(title, stem, time) -%}
-  <div class="youtube">
-    <iframe title="{{title}}"
-            src="http://www.youtube.com/embed/{{stem}}"
-            time="{{time}}"
-            width="640" height="506"
-            frameborder="0"
-            allowfullscreen="allowfullscreen"></iframe>
-  </div>
-{%- endmacro %}
+{% from '_content_macros.html' import youtube %}
 
 {% macro nav_left() -%}
   {% if page.prev %}
