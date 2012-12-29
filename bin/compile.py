@@ -650,16 +650,16 @@ class BlogPostPage(GenericPage):
         """
 
         # No text in blog post.
-        if not self.content:
+        if not self.rendered_content:
             result = ''
 
         # Show the whole thing.
         elif not self.app.shorten_blog_excerpts:
-            result = self.content
+            result = self.rendered_content
 
         # Have content and want to shorten it, so shorten it.
         else:
-            result = BLOG_TAG_REPLACEMENT_PATTERN.sub('', self.content)
+            result = BLOG_TAG_REPLACEMENT_PATTERN.sub('', self.rendered_content)
             result = result[:BLOG_EXCERPT_LENGTH]
             if ' ' in result:
                 result = result[:result.rindex(' ')]
@@ -680,10 +680,14 @@ class BlogPostPage(GenericPage):
         self._sort_key = int(self.post_id)
         self.year, self.month, self.name = self.filename.split('/')[-3:]
 
-        self.content = None
+        self.content = self.rendered_content = None
         m = BLOG_CONTENT_PATTERN.search(self._block)
         if m:
             self.content = m.group(1)
+            template_vars = self.app.standard(self.filename)
+            template_vars['root_path'] = self.app.site
+            self.rendered_content = jinja2.Template(self.content).render(
+                **template_vars)
 
         for key in self.app.metadata:
             if key not in self.__dict__:
@@ -861,15 +865,12 @@ def create_rss(filename, site, posts):
     slice.reverse()
 
     for post in slice:
-        template_vars = post.app.standard(post.filename)
-        template_vars['root_path'] = site
         path = os.path.join(site, 'blog', post.index_link())
-        rendered_content = jinja2.Template(post.content).render(**template_vars)
         items.append(ContentEncodedRSSItem(title=post.title,
                              author=post.author_id,
                              link=path,
                              description=post.excerpt(),
-                             content=rendered_content,
+                             content=post.rendered_content,
                              pubDate=post.post_date))
 
     rss = ContentEncodedRSS2(title=BLOG_TITLE,
