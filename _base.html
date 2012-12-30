@@ -73,7 +73,7 @@
     {% block javascript %}{% endblock javascript %}
   </head>
 
-  <body>
+  <body {%- block onload %}{% endblock onload -%} >
     <div class="container shadow">
 
       <div class="banner">
