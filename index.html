@@ -27,71 +27,87 @@
 
 {% block content %}
 
-<div class="hero-unit">
-  <h2>Software Carpentry helps researchers be more productive by teaching them basic computing skills.</h2>
-  <p>We run boot camps at dozens of sites around the world, and also provide open access material online for self-paced instruction. The benefits are more reliable results and higher productivity: a day a week is common, and a ten-fold improvement isn't rare.
-  </p>
+<div align="center">
+  <img src="{{root_path}}/img/bootcamps/2012-12-uta.png" alt="Boot Camp at the University of Texas, 2012" />
+  <h3><em>What I cannot create, I do not understand.<br />&mdash; Richard Feynman</em></h3>
 </div>
 
+<div class="row">
+  <div class="span6">
+    <h4>Our Mission</h4>
+    <p>
+      Software Carpentry helps researchers be more productive
+      by teaching them basic computing skills.
+      We run boot camps at dozens of sites around the world,
+      and also provide open access material online for self-paced instruction.
+      The benefits are more reliable results and higher productivity:
+      a day a week is common, and a ten-fold improvement isn't rare.
+    </p>
 
+    <h4>Who We Are</h4>
+    <p>
+      Software Carpentry is a volunteer organization supported by
+      the <a href="http://www.sloan.org">Alfred P. Sloan Foundation</a>
+      and the <a href="http://www.mozilla.org">Mozilla Foundation</a>.
+      Come and meet <a href="{{root_path}}/about/credits.html">our sponsors</a>
+      and <a href="{{root_path}}/about/team.html">our team</a>.
+    </p>
 
-<p>
-  <strong>Who We Are</strong><br />
-  Software Carpentry is a volunteer organization supported by
-  the <a href="http://www.sloan.org">Alfred P. Sloan Foundation</a>
-  and the <a href="http://www.mozilla.org">Mozilla Foundation</a>.
-  Come and meet <a href="{{root_path}}/about/credits.html">our sponsors</a>
-  and <a href="{{root_path}}/about/team.html">our team</a>.
-</p>
+    <h4>Testimonials</h4>
+    <p>
+      Can Software Carpentry help you?
+      These <a href="{{root_path}}/about/testimonials.html">stories from past participants</a>
+      and our <a href="{{root_path}}/about/audience.html">descriptions of typical learners</a>
+      can help you decide.
+    </p>
 
-<p>
-  <strong>Testimonials</strong><br />
-  Can Software Carpentry help you?
-  These <a href="{{root_path}}/about/testimonials.html">stories from past participants</a>
-  and our <a href="{{root_path}}/about/audience.html">descriptions of typical learners</a>
-  can help you decide.
-</p>
+  </div>
 
-<p>
-  <strong>Boot Camps</strong><br />
-  Our boot camps cover the core skills every scientist needs to get
-  more done in less time: program construction, version control,
-  testing, the command line, and data management. Short lessons
-  alternate with hands-on practical sessions for two full days.
-  Check out <a href="{{root_path}}/bootcamps/index.html">our calendar</a>
-  to find a boot camp near you.
-</p>
+  <div class="span6">
 
-<p>
-  <strong>Learn Online</strong><br />
-  Our <a href="{{root_path}}/4_0/index.html">video lectures</a> cover
-  all of our core topics and much else as well, and all of our
-  material can be freely re-used under
-  <a href="{{root_path}}/license.html">open access licenses</a>.
-  The <a href="{{root_path}}/3_0/index.html">previous version</a>
-  of our material is also available,
-  along with a <a href="{{root_path}}/about/biblio.html">reading list</a>.
-</p>
+    <h4>Boot Camps</h4>
+    <p>
+      Our boot camps cover the core skills every scientist needs to get
+      more done in less time: program construction, version control,
+      testing, the command line, and data management. Short lessons
+      alternate with hands-on practical sessions for two full days.
+      Check out <a href="{{root_path}}/bootcamps/index.html">our calendar</a>
+      to find a boot camp near you.
+    </p>
 
-<p>
-  <strong>Join Us</strong><br />
-  There are many ways you can
-  <a href="{{root_path}}/about/contributing.html">help us help scientists</a>:
-  hosting a boot camp,
-  teaching one yourself,
-  contributing new material,
-  and more.
-</p>
+    <h4>Learn Online</h4>
+    <p>
+      Our <a href="{{root_path}}/4_0/index.html">video lectures</a> cover
+      all of our core topics and much else as well, and all of our
+      material can be freely re-used under
+      <a href="{{root_path}}/license.html">open access licenses</a>.
+      The <a href="{{root_path}}/3_0/index.html">previous version</a>
+      of our material is also available,
+      along with a <a href="{{root_path}}/about/biblio.html">reading list</a>.
+    </p>
 
-<p>
-  <strong>Contact</strong><br />
-  For more information, check out our
-  <a href="{{root_path}}/blog/index.html">blog</a>,
-  follow us on Twitter
-  as <a href="{{twitter_url}}">{{twitter_name}}</a>,
-  or contact us by email
-  at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.
-</p>
+    <h4>Join Us</h4>
+    <p>
+      There are many ways you can
+      <a href="{{root_path}}/about/contributing.html">help us help scientists</a>:
+      hosting a boot camp,
+      teaching one yourself,
+      contributing new material,
+      and more.
+    </p>
+
+  </div>
+
+  <div align="center">
+    <p>
+      For more information, check out our
+      <a href="{{root_path}}/blog/index.html">blog</a>,
+      follow us on Twitter
+      as <a href="{{twitter_url}}">{{twitter_name}}</a>,
+      or contact us by email
+      at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.
+    </p>
+  </div>
 
 {% endblock content %}
 
