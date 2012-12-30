@@ -636,10 +636,12 @@ class BlogPostPage(GenericPage):
         """
         return '/'.join([self.year, self.month, self.name])
 
-    def excerpt(self):
+    def excerpt(self, excerpt_filename):
         """
         Return an excerpt of the page for display in the RSS reader by:
         * finding the content block
+        * expanding it
+        and optionally (if asked to shorten):
         * replacing HTML tags
         * taking the first few hundred characters
         * going back from the end of that to the first space
@@ -651,21 +653,22 @@ class BlogPostPage(GenericPage):
 
         # No text in blog post.
         if not self.content:
-            result = ''
+            return ''
 
-        # Show the whole thing.
-        elif not self.app.shorten_blog_excerpts:
-            result = self.content
+        # Translate the content block.
+        template = jinja2.Template(self.content)
+        result = template.render(page=self,
+                                 **self.app.standard(excerpt_filename))
+        if not self.app.shorten_blog_excerpts:
+            return result
 
         # Have content and want to shorten it, so shorten it.
-        else:
-            result = BLOG_TAG_REPLACEMENT_PATTERN.sub('', self.content)
-            result = result[:BLOG_EXCERPT_LENGTH]
-            if ' ' in result:
-                result = result[:result.rindex(' ')]
-            if result:
-                result += ' [...]'
-
+        result = BLOG_TAG_REPLACEMENT_PATTERN.sub('', result)
+        result = result[:BLOG_EXCERPT_LENGTH]
+        if ' ' in result:
+            result = result[:result.rindex(' ')]
+        if result:
+            result += ' [...]'
         return result
 
     def _finalize_self(self):
@@ -868,7 +871,7 @@ def create_rss(filename, site, posts):
         items.append(ContentEncodedRSSItem(title=post.title,
                              author=post.author_id,
                              link=path,
-                             description=post.excerpt(),
+                             description=post.excerpt(filename),
                              content=rendered_content,
                              pubDate=post.post_date))
 
