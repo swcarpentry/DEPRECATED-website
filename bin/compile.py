@@ -832,8 +832,7 @@ class ICalendarWriter(object):
             'DTSTAMP:{0}'.format(timestamp()),
             'DTSTART;VALUE=DATE:{0}'.format(bootcamp.startdate.replace('-', '')),
             'DTEND;VALUE=DATE:{0}'.format(dtend.strftime('%Y%m%d')),
-            'SUMMARY:{0}'.format(self.escape(
-                    '{0}, {1}'.format(bootcamp.venue, bootcamp.date))),
+            'SUMMARY:{0}'.format(self.escape(bootcamp.venue)),
             'DESCRIPTION;ALTREP="{0}":{0}'.format(url),
             'URL:{0}'.format(url),
             'LOCATION:{0}'.format(self.escape(bootcamp.venue)),
