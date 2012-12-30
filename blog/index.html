@@ -17,7 +17,7 @@
   <h3><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></h3>
   <div class="row-fluid">
     <p class="span11 offset1">
-      {{post.excerpt()|safe}}
+      {{post.excerpt(page.filename)|safe}}
       <br/>
       &mdash; {{post.post_date}}{% if post.author_id %} by {{post.author_id}}{% endif %}.
     </p>
