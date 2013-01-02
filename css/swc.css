@@ -129,8 +129,7 @@ div.footer .bugreport {
     margin-top: 4px;   /* unseemly hack to centre the text */
 }
 
-/* labels in footer */
-div.footer .label {
+.swc-blue-bg {
    background-color: #20267D;
 }
 
