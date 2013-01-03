@@ -296,7 +296,7 @@ class CommandDependency (Dependency):
             p = _subprocess.Popen(
                 [command] + list(self.version_options), stdin=popen_stdin,
                 stdout=_subprocess.PIPE, stderr=_subprocess.PIPE,
-                close_fds=True, shell=False, universal_newlines=True)
+                shell=False, universal_newlines=True)
         except OSError as e:
             raise DependencyError(
                 checker=self,
