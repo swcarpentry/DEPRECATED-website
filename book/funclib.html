@@ -913,7 +913,7 @@ print average3(x, y, z)
 print average3(1, 5)
 <span class="err">Traceback (most recent call last):
   File "src/funclib/average-3-wrong.py", line 4, in &lt;module&gt;
-    print 1, 5, '=&gt;', average3(1, 5)
+    print 1, 5, '&rarr;', average3(1, 5)
 TypeError: average3() takes exactly 3 arguments (2 given)</span>
 </pre>
 
@@ -973,10 +973,10 @@ def average_list(values):
     return result / len(values)
 
 for test in [[1.0], [1.0, 2.0], [1.0, 2.0, 5.0]]:
-    print test, '=&gt;', average_list(test)
-<span class="out">[1.0] =&gt; 1.0
-[1.0, 2.0] =&gt; 1.5
-[1.0, 2.0, 5.0] =&gt; 2.66666666667</span>
+    print test, '&rarr;', average_list(test)
+<span class="out">[1.0] &rarr; 1.0
+[1.0, 2.0] &rarr; 1.5
+[1.0, 2.0, 5.0] &rarr; 2.66666666667</span>
 </pre>
 
       <p class="continue">
@@ -1064,12 +1064,12 @@ def average_list(values, start=0, end=None):
 
 <pre src="src/funclib/average_with_defaults.py">
 numbers = [1.0, 2.0, 5.0]
-print '(', numbers, ') =&gt;', average_list(numbers)
-print '(', numbers, 1, ') =&gt;', average_list(numbers, 1)
-print '(', numbers, 1, 2, ') =&gt;', average_list(numbers, 1, 2)
-<span class="out">( [1.0, 2.0, 5.0] ) =&gt; 2.66666666667
-( [1.0, 2.0, 5.0] 1 ) =&gt; 3.5
-( [1.0, 2.0, 5.0] 1 2 ) =&gt; 2.0</span>
+print '(', numbers, ') &rarr;', average_list(numbers)
+print '(', numbers, 1, ') &rarr;', average_list(numbers, 1)
+print '(', numbers, 1, 2, ') &rarr;', average_list(numbers, 1, 2)
+<span class="out">( [1.0, 2.0, 5.0] ) &rarr; 2.66666666667
+( [1.0, 2.0, 5.0] 1 ) &rarr; 3.5
+( [1.0, 2.0, 5.0] 1 2 ) &rarr; 2.0</span>
 </pre>
 
       <figure id="f:calls_with_defaults">
@@ -1296,12 +1296,12 @@ def sign(num):
       </p>
 
 <pre src="src/funclib/sign.py">
-print -5, '=&gt;', sign(-5)
-print 0, '=&gt;', sign(0)
-print 241, '=&gt;', sign(241)
-<span class="out">-5 =&gt; -1
-0 =&gt; 0
-241 =&gt; 1</span>
+print -5, '&rarr;', sign(-5)
+print 0, '&rarr;', sign(0)
+print 241, '&rarr;', sign(241)
+<span class="out">-5 &rarr; -1
+0 &rarr; 0
+241 &rarr; 1</span>
 </pre>
 
       <p>
@@ -1463,12 +1463,12 @@ def sign(num):
         return 0
 <span class="comment">#    return 1</span>
 
-print -5, '=&gt;', sign(-5)
-print 0, '=&gt;', sign(0)
-print 241, '=&gt;', sign(241)
-<span class="out">-5 =&gt; -1
-0 =&gt; 0
-241 =&gt; None</span>
+print -5, '&rarr;', sign(-5)
+print 0, '&rarr;', sign(0)
+print 241, '&rarr;', sign(241)
+<span class="out">-5 &rarr; -1
+0 &rarr; 0
+241 &rarr; None</span>
 </pre>
 
       <p class="continue">
