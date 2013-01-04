@@ -3,6 +3,9 @@ RewriteEngine On
 RewriteBase /
 AddDefaultCharset UTF-8
 
+# Wordpress URLs that are gone
+RewriteRule .*/trackback/?$ - [gone,NC]
+
 # Wordpress Feed URL 
 # this has to happen before the rewrites for /blog
 RewriteCond %{REQUEST_URI} ^(/feed/?|/blog/feed/?)$
