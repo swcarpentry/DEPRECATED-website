@@ -61,10 +61,8 @@
         });
 
     var info_string = '<div id="info-window">' +
-        '<h5>{{bootcamp.venue}}</h5><h6>{{bootcamp.date}}</h6>' +
-        '<p>Visit the ' +
-        '<a href="{{bootcamp.slug}}.html">' +
-        'boot camp page</a> for more info.</p>' +
+        '<h5><a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a></h5>' +
+        '<h6><a href="{{bootcamp.slug}}.html">{{bootcamp.date}}</a></h6>' +
         '</div>';
 
     set_info_window(map, marker, info_window, info_string);
