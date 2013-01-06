@@ -416,8 +416,8 @@ for data in test_cases:
     sum = 0
     for i in range(limit):
         sum += data[i]
-    print data, "=&gt;", sum
-<span style="color: darkred; background-color: lightyellow;">[] =&gt; 0 [10] =&gt; 10 [10, 20] =&gt; 30 [10, 20, 30] =&gt; 60 [10, 20, 30, 40] =&gt; 60</span></pre>
+    print data, "&rarr;", sum
+<span style="color: darkred; background-color: lightyellow;">[] &rarr; 0 [10] &rarr; 10 [10, 20] &rarr; 30 [10, 20, 30] &rarr; 60 [10, 20, 30, 40] &rarr; 60</span></pre>
 <p>That looks right</p>
 <ul>
 <li>Though if there were 100 tests cases, we would want different output</li>
@@ -457,8 +457,8 @@ for data in test_cases:
         for i in range(i, limit):
             sum += data[i]
         result.append(sum)
-    print data, "=&gt;", result
-<span style="color: darkred; background-color: lightyellow;">[] =&gt; [] [10] =&gt; [10] [10, 20] =&gt; [30] [10, 20, 30] =&gt; [60] [10, 20, 30, 40] =&gt; [60, 40] [10, 20, 30, 40, 50, 60] =&gt; [60, 150] [10, 20, 30, 40, 50, 60, 70, 80] =&gt; [60, 150, 150]</span></pre>
+    print data, "&rarr;", result
+<span style="color: darkred; background-color: lightyellow;">[] &rarr; [] [10] &rarr; [10] [10, 20] &rarr; [30] [10, 20, 30] &rarr; [60] [10, 20, 30, 40] &rarr; [60, 40] [10, 20, 30, 40, 50, 60] &rarr; [60, 150] [10, 20, 30, 40, 50, 60, 70, 80] &rarr; [60, 150, 150]</span></pre>
 <p>Understand this in pieces</p>
 <p>Outer <code>for</code> loop is selecting a test case</p>
 <ul>
@@ -480,7 +480,7 @@ for data in test_cases:
 <p>How we actually understand this program is:</p>
 <pre>for data in test_cases:
     result = sum_by_threes(data)
-    print data, "=&gt;", result
+    print data, "&rarr;", result
 
 to sum_by_threes given a list data:
     result = []
