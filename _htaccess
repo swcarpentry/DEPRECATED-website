@@ -11,6 +11,7 @@ RewriteRule .*/trackback/?$ - [gone,NC]
 RewriteCond %{REQUEST_URI} ^(/feed/?|/blog/feed/?)$
 RewriteRule ^(.*) /feed.xml [R,L]
 
+### Wordpress Blog Redirects ### 
 # redirect URLs to a day to the main blog page 
 RewriteCond %{REQUEST_URI} ^/\d\d\d\d/\d\d/\d\d/$
 RewriteRule ^(.*) /blog/index.html [R,L]
@@ -35,6 +36,7 @@ RewriteCond %{REQUEST_URI} ^/blog
 RewriteCond %{REQUEST_URI} !.html$
 RewriteRule ^(.*?)/?$ $1.html [R,L]
 
+### Wordpress Page Redirects ###
 # wordpress bootcamps URLs
 RewriteCond %{REQUEST_URI} ^/boot-camps/
 RewriteRule ^(.*) /bootcamps/ [R,L]
@@ -55,5 +57,10 @@ RewriteRule ^(.*?)/?$ $1.html [R,L]
 # reading list 
 RewriteCond %{REQUEST_URI} ^/4_0/reading/?$
 RewriteRule ^(.*) /about/biblio.html [R,L]
+
+# Handle 4_0 episode links that don't end in .html 
+RewriteCond %{REQUEST_URI} ^/4_0/[^/]+/.+
+RewriteCond %{REQUEST_URI} !.html$
+RewriteRule ^(.*?)/?$ $1.html [R,L]
 
 </IfModule>
