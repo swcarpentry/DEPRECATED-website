@@ -2,6 +2,7 @@
 Utilities used in Software Carpentry tools.
 """
 
+import sys
 from lxml import etree as ET
 
 #-------------------------------------------------------------------------------
@@ -12,7 +13,11 @@ def read_xml(filename, mangle_entities=False):
     """
     parser = ET.HTMLParser()
     with open(filename, 'r') as reader:
-        return ET.parse(reader, parser)
+        try:
+            return ET.parse(reader, parser)
+        except ET.XMLSyntaxError as e:
+            print >> sys.stderr, filename, str(e)
+            sys.exit(1)
 
 #-------------------------------------------------------------------------------
 
