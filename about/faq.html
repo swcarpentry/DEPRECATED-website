@@ -1,23 +1,27 @@
 {% extends "_base.html" %}
 
 {% block file_metadata %}
-  <meta name="title" content="Boot Camp FAQ" />
+  <meta name="title" content="Frequently Asked Questions" />
 {% endblock file_metadata %}
 
-{% block navhighlight %}{{navhighlight('bootcamps')}}{% endblock navhighlight %}
+{% block navhighlight %}{{navhighlight('about')}}{% endblock navhighlight %}
 
 {% block content %}
 
 <ul>
   <li><a href="#what-is-swc">What is Software Carpentry?</a></li>
+  <li><a href="#team">Who created all this?</a></li>
+  <li><a href="#who-funds-swc">Who pays for it?</a></li>
   <li><a href="#what-is-boot-camp">What is a boot camp?</a></li>
   <li><a href="#why-boot-camp">Why boot camps?</a></li>
+  <li><a href="#boot-camp-audience">Who are boot camps for?</a></li>
   <li><a href="#boot-camp-format">What does a typical boot camp look like?</a></li>
+  <li><a href="#testimonials">Do boot camps really work?</a></li>
   <li><a href="#how-attend-boot-camp">How can I attend a boot camp?</a></li>
   <li><a href="#how-organise-boot-camp">How can I organise a boot camp?</a></li>
-  <li><a href="#how-help-boot-camp">How can I help to run a boot camp as a helper or an instructor?</a></li>
+  <li><a href="#how-help-boot-camp">How can I help run a boot camp?</a></li>
+  <li><a href="#how-contribute">How else can I contribute?</a></li>
   <li><a href="#more-info">Where can I learn more?</a></li>
-  <li><a href="http://software-carpentry.eventbrite.com/">What boot camps are coming up?</a></li>
 </ul>
 
 <p id="what-is-swc"><em><strong>What is Software Carpentry?</strong></em></p>
@@ -33,6 +37,22 @@ computational work. Rather than adopting a position of <em>these
 skills are good because software developers say they are</em>,
 Software Carpentry teaches the software skills in the context of how
 they contribute to correct, reproducible and reusable research.</p>
+
+<p id="team"><em><strong>Who created all this?</strong></em></p>
+
+<p><a href="{{root_path}}/about/team.html">Many people</a> have helped
+by creating content, teaching boot camps, and building this web
+site.</p>
+
+<p id="who-funds-swc"><em><strong>Who pays for it?</strong></em></p>
+
+<p>Over a <a href="{{root_path}}/about/credits.html">dozen
+organizations</a> have supported us since we ran our first class
+at <a href="http://lanl.gov">Los Alamos National Laboratory</a> in
+1998.  Our current work is sponsored by
+the <a href="http://www.sloan.org">Alfred P. Sloan Foundation</a> and
+the <a href="http://www.mozilla.org/foundation/">Mozilla
+Foundation</a>.</p>
 
 <p id="what-is-boot-camp"><em><strong>What is a boot camp?</strong></em></p>
 
@@ -69,22 +89,38 @@ it can be hard to stay motivated when working in isolation; by
 bringing people together, boot camps create help peer support
 communities in selected disciplines or geographic regions.</p>
 
+<p id="boot-camp-audience"><em><strong>Whoo are boot camps for?</strong></em></p>
+
+<p>Our learners are typically graduate students in science,
+engineering, and medicine who have written a few lines of code (either
+on their own or for an "Intro to Computing" class as undergrads), but
+aren't familiar with good "lab practices" in scientific computing like
+version control or unit testing.  If any
+of <a href="{{root_path}}/about/audience.html">these short bios</a>
+sounds like you, then we're here to help.</p>
+
 <p id="boot-camp-format"><em><strong>What does a typical boot camp look like?</strong></em></p>
 
 <p>Boot camps are usually full-day affairs, starting at 8:30 and
- running to 4:30 or 5:00 with breaks for coffee and lunch. They
- usually have 20-50 participants and 2-4 instructors, plus a variable
- number of helpers wandering the room answering questions during
- practical sessions. (The instructors usually do this as well if their
- schedules permit.)</p>
+running to 4:30 or 5:00 with breaks for coffee and lunch. They usually
+have 20-50 participants and 2-3 instructors, plus a variable number of
+helpers wandering the room answering questions during practical
+sessions. (The instructors usually do this as well if their schedules
+permit.)</p>
 
-<p>Participants are usually graduate students in science and
-engineering, though faculty and industrial researchers frequently also
-take part. They typically use their own laptop computers to do
-practical exercises, though they may also use machines provided in a
+<p>Learners typically use their own laptop computers to do practical
+exercises, though they may also use machines provided in a
 departmental lab. Instructors and helpers are usually volunteers, and
 participation is usually either free, or subject to a small fee to
 cover the cost of refreshments.</p>
+
+<p id="testimonials"><em><strong>Do boot camps really work?</strong></em></p>
+
+<p>Yes: two independent students in 2012 found that people really were
+learning useful things, and
+<a href="{{root_path}}/about/testimonials.html">these testimonials</a>
+from past participants show just how much difference a little training
+can make.</p>
 
 <p id="how-attend-boot-camp"><em><strong>How can I attend a boot camp?</strong></em></p>
 
@@ -122,7 +158,7 @@ required.</p>
 recruiting, please contact us by email
 at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.</p>
 
-<p id="how-help-boot-camp"><em><strong>How can I help to run a boot camp as a helper or an instructor?</strong></em></p>
+<p id="how-help-boot-camp"><em><strong>How can I help run a boot camp?</strong></em></p>
 
 <p>Researchers attend boot camps, learn from them and become familiar
 with how they are run. Ideally, we hope that some of those researchers
@@ -135,6 +171,12 @@ future boot camps.</p>
 <p>If you are interested in helping out or instructing on a boot camp
 then please contact us by email
 at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.</p>
+
+<p id="how-contribute"><em><strong>How else can I contribute?</strong></em></p>
+
+<p>There are many ways you can help: please
+see <a href="{{root_path}}/about/contributing.html">this page</a> for
+details.</p>
 
 <p id="more-info"><em><strong>Where can I learn more?</strong></em></p>
 
