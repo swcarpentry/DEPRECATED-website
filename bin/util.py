@@ -11,7 +11,7 @@ def read_xml(filename, mangle_entities=False):
     """
     Read in a document, returning the ElementTree doc node.
     """
-    parser = ET.HTMLParser()
+    parser = ET.HTMLParser(recover=False)
     with open(filename, 'r') as reader:
         try:
             return ET.parse(reader, parser)
