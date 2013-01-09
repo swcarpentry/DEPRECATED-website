@@ -25,6 +25,14 @@
     })
   }
 
+  function toggle_marker_visibility(marker) {
+    if (marker.getVisible()) {
+      marker.setVisible(false);
+    } else {
+      marker.setVisible(true);
+    };
+  }
+
   function initialize_map() {
     var mapOptions = {
       zoom: 2,
@@ -46,6 +54,8 @@
     var map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);
 
+    var past_markers = [];
+
 {% for bootcamp in page.children %}
   {% if bootcamp.latlng %}
     var marker = new google.maps.Marker({
@@ -54,11 +64,17 @@
         title: "{{bootcamp.venue}}, {{bootcamp.date}}",
     {% if bootcamp.startdate >= today %}
         icon: newPin,
+        visible: true,
     {% else %}
         icon: oldPin,
+        visible: false,
     {% endif %}
         shadow: pinShadow,
         });
+
+    {% if bootcamp.startdate < today %}
+      past_markers.push(marker);
+    {% endif %}
 
     var info_string = '<div id="info-window">' +
         '<h5><a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a></h5>' +
@@ -69,6 +85,43 @@
   {% endif %}
 {% endfor %}
 
+    // This last bit adds a button to the map that toggles the
+    // visibility of past boot camps.
+    // Create a div to hold the control.
+    var controlDiv = document.createElement('div');
+
+    // Set CSS styles for the DIV containing the control
+    // Setting padding to 5 px will offset the control
+    // from the edge of the map.
+    controlDiv.style.padding = '5px';
+
+    // Set CSS for the control border.
+    var controlUI = document.createElement('div');
+    controlUI.style.backgroundColor = 'white';
+    controlUI.style.borderStyle = 'solid';
+    controlUI.style.borderWidth = '1px';
+    controlUI.style.borderColor = 'rgb(113, 123, 135)';
+    controlUI.style.cursor = 'pointer';
+    controlUI.style.textAlign = 'center';
+    controlUI.style.boxShadow = 'rgba(0, 0, 0, 0.4) 0px 2px 4px'
+    controlUI.title = 'Toggle visibility of past boot camps.';
+    controlDiv.appendChild(controlUI);
+
+    // Set CSS for the control interior.
+    var controlText = document.createElement('div');
+    controlText.style.fontFamily = 'Arial,sans-serif';
+    controlText.style.fontSize = '12px';
+    controlText.style.padding = '1px 4px';
+    controlText.innerHTML = '<strong>Toggle Past Boot Camps</strong>';
+    controlUI.appendChild(controlText);
+
+    // Setup the click event listener
+    google.maps.event.addDomListener(controlUI, 'click', function() {
+      past_markers.forEach(toggle_marker_visibility)
+    });
+
+    // add control to the map
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
   }
   </script>
 {% endblock javascript %}
