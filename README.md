@@ -4,6 +4,9 @@ Software Carpentry Website
 This is the uncompiled source for the Software Carpentry website at
 http://software-carpentry.org.  If you have questions or suggestions,
 please [contact us by email](mailto:info@software-carpentry.org).
+Please see our [license](http://software-carpentry.org/license.html)
+for information on using our material, or [this page](CONTRIBUTING.html)
+for instructions on contributing.
 
 Cloning
 -------
