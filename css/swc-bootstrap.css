@@ -37,3 +37,21 @@ code {
   color: #ffffff;
   background-color: #20267D;
 }
+
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle,
+.navbar-inverse .nav li.dropdown.active > .dropdown-toggle,
+.navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
+  color: #ffffff;
+  background-color: #20267D;
+}
+
+.navbar-inverse .nav li.dropdown.active > .dropdown-toggle .caret {
+  border-top-color: #999999;
+  border-bottom-color: #999999;
+}
+
+.navbar-inverse .nav li.dropdown:hover > .dropdown-toggle .caret,
+.navbar-inverse .nav li.dropdown.active:hover > .dropdown-toggle .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
