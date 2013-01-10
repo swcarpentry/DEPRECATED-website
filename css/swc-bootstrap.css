@@ -50,8 +50,7 @@ code {
   border-bottom-color: #999999;
 }
 
-.navbar-inverse .nav li.dropdown:hover > .dropdown-toggle .caret,
-.navbar-inverse .nav li.dropdown.active:hover > .dropdown-toggle .caret {
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle .caret {
   border-top-color: #ffffff;
   border-bottom-color: #ffffff;
 }
