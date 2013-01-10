@@ -3,7 +3,10 @@ Utilities used in Software Carpentry tools.
 """
 
 import sys
+import html5lib
+from html5lib import treebuilders
 from lxml import etree as ET
+from lxml.html import html5parser
 
 #-------------------------------------------------------------------------------
 
@@ -11,13 +14,16 @@ def read_xml(filename, mangle_entities=False):
     """
     Read in a document, returning the ElementTree doc node.
     """
-    parser = ET.HTMLParser(recover=False)
-    with open(filename, 'r') as reader:
-        try:
-            return ET.parse(reader, parser)
-        except ET.XMLSyntaxError as e:
-            print >> sys.stderr, filename, str(e)
-            sys.exit(1)
+    tree = treebuilders.getTreeBuilder('lxml')
+    parser = html5lib.HTMLParser(strict=False, tree=tree)
+    doc = html5parser.parse(filename, parser=parser)
+
+    if parser.errors:
+        print >> sys.stderr, 'errors in {}'.format(filename)
+        for e in parser.errors:
+            print >> sys.stderr, '    {}'.format(e)
+
+    return doc
 
 #-------------------------------------------------------------------------------
 

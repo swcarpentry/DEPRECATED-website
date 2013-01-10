@@ -11,7 +11,7 @@ DEF_P = re.compile(r'<figure\s+id="(f:[^"]+)"[^>]*>')
 REF_P = re.compile(r'<a\s+href="#(f:[^"]+)">.*?</a>')
 FIG_P = re.compile(r'<figure\s+id="(f:[^"]+)"[^>]*>(\s+)<img\s+src="([^"]+)"\s+alt="([^"]+)"\s*/>(\s+)</figure>',
                    re.MULTILINE)
-FORMATTED_FIG = '<figure id="%(id)s">%(ws_1)s<img src="%(img)s" alt="%(cap)s" />%(ws_1)s<caption>Figure %(chap_num)d.%(fig_num)d: %(cap)s</caption>%(ws_2)s</figure>'
+FORMATTED_FIG = '<figure id="%(id)s">%(ws_1)s<img src="%(img)s" alt="%(cap)s" />%(ws_1)s<figcaption>Figure %(chap_num)d.%(fig_num)d: %(cap)s</figcaption>%(ws_2)s</figure>'
 
 #-------------------------------------------------------------------------------
 
