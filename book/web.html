@@ -255,12 +255,28 @@ Date         Experimenter        Subject          Test       Score
         </tr>
       </table>
 
-      <p class="continue">
-        And here is a simple HTML document that uses them:
+      <p>
+	Finally,
+	every well-formed document started with a <code>DOCTYPE</code> declaration,
+	which looks like:
       </p>
 
 <pre>
-&lt;html&gt;&lt;body&gt;&lt;h1&gt;Dimorphism&lt;/h1&gt;&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+&lt;!DOCTYPE html&gt;
+</pre>
+
+      <p class="continue">
+	This tells programs what kind of elements are allowed to appear in the document:
+	'html' (by far the most common case),
+	'math' for MathML,
+	and so on.
+        Here is a simple HTML document that uses everything we've seen so far:
+      </p>
+
+      <p class="continue">
+
+<pre>
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Dimorphism&lt;/h1&gt;&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
 </pre>
 
       <p>
@@ -337,6 +353,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre>
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 <span class="highlight">  </span>&lt;body&gt;
 <span class="highlight">    </span>&lt;h1&gt;Dimorphism&lt;/h1&gt;
@@ -591,6 +608,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre src="src/web/nested_lists.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;ul&gt;
@@ -625,6 +643,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre>
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;body&gt;
   &lt;ul&gt;
@@ -670,6 +689,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre src="src/web/simple_table.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;table&gt;
@@ -746,6 +766,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre src="src/web/simple_image.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;My daughter's first online chat:&lt;/p&gt;
@@ -784,6 +805,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre src="src/web/image_with_path.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;Yes, she knows she's cute:&lt;/p&gt;
@@ -800,6 +822,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre src="src/web/image_with_url.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;img src="http://software-carpentry.org/img/software-carpentry-logo.png"/&gt;
@@ -824,6 +847,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre>
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;My daughter's first online chat:&lt;/p&gt;
@@ -854,6 +878,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre src="src/web/simple_listing.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
@@ -951,6 +976,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre>
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;Dimorphism Defined&lt;title&gt;
