@@ -9,66 +9,70 @@
 {% block navhighlight %}{{navhighlight('blog')}}{% endblock navhighlight %}
 
 {% block content %}
-<h2>Recent Posts
-  <a href="http://software-carpentry.org/feed.xml">
-    <img class="pull-right" src="../img/rss-icon-blue.png"/></a></h2>
+<section id="recent-posts">
+  <h2>Recent Posts
+    <a href="http://software-carpentry.org/feed.xml">
+      <img class="pull-right" src="../img/rss-icon-blue.png"/></a></h2>
 
-{% for post in page.children[-page.blog_history_length:]|reverse %}
-  <h3><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></h3>
-  <div class="row-fluid">
-    <p class="span11 offset1">
-      {{post.excerpt(page.filename)|safe}}
-      <br/>
-      &mdash; {{post.post_date}}{% if post.author_id %} by {{post.author_id}}{% endif %}.
-    </p>
-  </div>
-{% endfor %}
+  {% for post in page.children[-page.blog_history_length:]|reverse %}
+    <h3><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></h3>
+    <div class="row-fluid">
+      <p class="span11 offset1">
+        {{post.excerpt(page.filename)|safe}}
+        <br/>
+        &mdash; {{post.post_date}}{% if post.author_id %} by {{post.author_id}}{% endif %}.
+      </p>
+    </div>
+  {% endfor %}
+</section>
 
-<h2>All Posts By Date</h2>
+<section id="all-posts">
+  <h2>All Posts By Date</h2>
 
-<table class="table table-striped blogcalendar">
+  <table class="table table-striped blogcalendar">
 
-  <tr>
-    <th class="top"></th>
-    {% for month in page.months %}
-      <th class="top">{{page.month_name(month)}}</th>
-    {% endfor %}
-  </tr>
-
-  {% for year in page.years %}
     <tr>
-      <th class="left"><a href="#{{year}}">{{year}}</a></th>
+      <th class="top"></th>
       {% for month in page.months %}
-        <td>
-          {% if page.posts(year, month) %}<a href="#{{year}}-{{month}}">{% endif %}
-            {{page.posts(year, month)|length}}
-          {% if page.posts(year, month) %}</a>{% endif %}
-        </td>
+        <th class="top">{{page.month_name(month)}}</th>
       {% endfor %}
     </tr>
-  {% endfor %}
 
-</table>
-
-{% for year in page.years|reverse %}
-
-  <h3 id="{{year}}">{{year}}</h3>
-
-  {% for month in page.months|reverse %}
-    {% if page.posts(year, month) %}
-      <h4 id="{{year}}-{{month}}">{{page.month_name(month)}}</h4>
-      <table class="table table-striped table-condensed blogindex">
-        {% for post in page.posts(year, month)|reverse %}
-          <tr>
-            <td class="date">{{post.post_date}}:</td>
-            <td><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></td>
-          </tr>
+    {% for year in page.years %}
+      <tr>
+        <th class="left"><a href="#{{year}}">{{year}}</a></th>
+        {% for month in page.months %}
+          <td>
+            {% if page.posts(year, month) %}<a href="#{{year}}-{{month}}">{% endif %}
+              {{page.posts(year, month)|length}}
+            {% if page.posts(year, month) %}</a>{% endif %}
+          </td>
         {% endfor %}
-      </table>
-    {% endif %}
-  {% endfor %}
+      </tr>
+    {% endfor %}
 
-{% endfor %}
+  </table>
+
+  {% for year in page.years|reverse %}
+
+    <h3 id="{{year}}">{{year}}</h3>
+
+    {% for month in page.months|reverse %}
+      {% if page.posts(year, month) %}
+        <h4 id="{{year}}-{{month}}">{{page.month_name(month)}}</h4>
+        <table class="table table-striped table-condensed blogindex">
+          {% for post in page.posts(year, month)|reverse %}
+            <tr>
+              <td class="date">{{post.post_date}}:</td>
+              <td><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+    {% endfor %}
+
+  {% endfor %}
+</section>
 
 {% endblock content %}
 
