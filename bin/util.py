@@ -19,9 +19,9 @@ def read_xml(filename, mangle_entities=False):
     doc = html5parser.parse(filename, parser=parser)
 
     if parser.errors:
-        print >> sys.stderr, 'errors in {}'.format(filename)
+        sys.stderr.write('errors in {}\n'.format(filename))
         for e in parser.errors:
-            print >> sys.stderr, '    {}'.format(e)
+            sys.stderr.write('    {}\n'.format(e))
 
     return doc
 
@@ -39,7 +39,7 @@ def write_xml(filename, doc, unmangle_entities=False):
 if __name__ == '__main__':
     import sys
     if len(sys.argv) not in (2, 3):
-        print >> sys.stderr, 'usage: util.py infile [outfile]'
+        sys.stderr.write('usage: util.py infile [outfile]\n')
     doc = read_xml(sys.argv[1])
     if len(sys.argv) == 3:
         write_xml(sys.argv[2], doc)
