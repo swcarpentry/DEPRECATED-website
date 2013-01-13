@@ -61,6 +61,7 @@ RewriteRule ^(.*) /about/biblio.html [R,L]
 # Handle 4_0 episode links that don't end in .html 
 RewriteCond %{REQUEST_URI} ^/4_0/[^/]+/.+
 RewriteCond %{REQUEST_URI} !.html$
+RewriteCond %{SCRIPT_FILENAME} !-f 
 RewriteRule ^(.*?)/?$ $1.html [R,L]
 
 </IfModule>
