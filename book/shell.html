@@ -1805,6 +1805,90 @@ NENE01971Z.txt    NENE02040Z.txt
         </ul>
       </div>
 
+      <div class="challenges" id="c:pipefilter">
+	<h3>Challenges</h3>
+
+	<p>Suppose that <code class="in">ls -F</code> initially displays:</p>
+<pre>
+<span class="out">analyzed/  fructose.dat    raw/   sucrose.dat</span>
+</pre>
+
+	<ol class="challenges">
+
+	  <li>
+	    What is the difference between:
+<pre>
+<span class="in">wc -l &lt; *.dat</span>
+</pre>
+            and:
+<pre>
+<span class="in">wc -l *.dat</span>
+</pre>
+            <ol class="choices">
+	      <li>Nothing: the two commands produce the same result.</li>
+	      <li>There is no difference in output, but the first is more efficient than the second.</li>
+	      <li>The first counts all lines together, while the second counts lines per file.</li>
+	      <li>The first is an error, because there is no file whose name is literally <code>*.dat</code>.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+            What single command must be used so that after it,
+	    <code class="in">ls&nbsp;*</code> will display:
+<pre>
+<span class="out">analyzed:
+fructose.dat    sucrose.dat
+
+raw:</span>
+</pre>
+	    <ol class="choices">
+	      <li><code class="in">cat *.dat &gt; analyzed</code></li>
+	      <li><code class="in">mv *.dat analyzed</code></li>
+	      <li><code class="in">ls | analyzed</code></li>
+	      <li>None of the above.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    A file called <code>animals.txt</code> contains the following observations:
+<pre>
+2012-11-05,deer
+2012-11-05,rabbit
+2012-11-05,raccoon
+2012-11-06,rabbit
+2012-11-06,deer
+2012-11-06,fox
+2012-11-07,rabbit
+2012-11-07,bear
+</pre>
+            The command:
+<pre>
+<span class="in">cut -d , -f 2 animals.txt</span>
+</pre>
+            produces the following output:
+<pre>
+deer
+rabbit
+raccoon
+rabbit
+deer
+fox
+rabbit
+bear
+</pre>
+            What other command(s) could be added to this in a pipeline to find out
+            how often each kind of animal had been seen?
+              <ol class="choices">
+		<li><span class="in">cut -d , -f 2 animals.txt | count -c</span></li>
+		<li><span class="in">cut -d , -f 2 animals.txt | sort | uniq</span></li>
+		<li><span class="in">cut -d , -f 2 animals.txt | sort | uniq -c</span></li>
+		<li><span class="in">cut -d , -f 2 animals.txt | uniq | sort | uniq</span></li>
+	      </ol>
+	  </li>
+
+	</ol>
+      </div>
+
     </section>
 
     <section id="s:loop">
