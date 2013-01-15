@@ -1,0 +1,19 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Telecom ParisTech" />
+  <meta name="date" content="April 2013" />
+  <meta name="startdate" content="2013-04-20" />
+  <meta name="enddate" content="2013-04-21" />
+  <meta name="latlng" content="48.82629,2.34642" />
+  <meta name="eventbrite_key" content="5232959924" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> T&eacute;l&eacute;com ParisTech, 46 Rue Barrault, 75013 Paris</p>
+<p><strong>When:</strong> April 20-21, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}
