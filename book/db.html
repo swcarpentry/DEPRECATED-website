@@ -59,8 +59,8 @@
       <div class="understand" id="u:select">
         <h3>Learning Objectives:</h3>
         <ul>
-	  <li>Explain the difference between a table, a database, and a database manager.</li>
-	  <li>Explain the difference between a field and a record.</li>
+          <li>Explain the difference between a table, a database, and a database manager.</li>
+          <li>Explain the difference between a field and a record.</li>
           <li>Select specific fields from specific tables, and display them in a specific order.</li>
         </ul>
       </div>
@@ -503,7 +503,7 @@ SELECT Scientist, ROUND(0.1 * Hours, 1) FROM Experiments;
           <li>Write queries that select records based on the values of their fields.</li>
           <li>Write queries that select records using combinations of several tests on their fields' values.</li>
           <li>Build up complex filtering criteria incrementally.</li>
-	  <li>Explain the logical order in which filtering by field value and displaying fields takes place.</li>
+          <li>Explain the logical order in which filtering by field value and displaying fields takes place.</li>
         </ul>
       </div>
 
@@ -706,7 +706,7 @@ SELECT * FROM Experiments WHERE (Hours > 3) AND (Scientist IN ("Mikhail Lomonoso
         <ul>
           <li>Write queries that order results according to fields' values.</li>
           <li>Write queries that order results according to calculated values.</li>
-	  <li>Explain why it is possible to sort records using the values of fields that are not displayed.</li>
+          <li>Explain why it is possible to sort records using the values of fields that are not displayed.</li>
         </ul>
       </div>
 
@@ -922,9 +922,9 @@ ORDER BY Project DESC;
           <li>Write queries that combine values from many records to create a single aggregate value.</li>
           <li>Write queries that put records into groups based on their values.</li>
           <li>Write queries that combine values group by group.</li>
-	  <li>Explain what is displayed for <em>unaggregated</em> fields when some fields are aggregated.</li>
-	  <li>Explain how to order aggregated results.</li>
-	  <li>Explain when grouping and aggregating occur during query processing.</li>
+          <li>Explain what is displayed for <em>unaggregated</em> fields when some fields are aggregated.</li>
+          <li>Explain how to order aggregated results.</li>
+          <li>Explain when grouping and aggregating occur during query processing.</li>
         </ul>
       </div>
 
@@ -1279,11 +1279,11 @@ ORDER BY SUM(Hours) ASC;
         <h3>Learning Objectives:</h3>
         <ul>
           <li>Explain what an atomic value is.</li>
-	  <li>Be able to tell whether a value is atomic or not.</li>
-	  <li>Explain why fields in database tables should store atomic values.</li>
+          <li>Be able to tell whether a value is atomic or not.</li>
+          <li>Explain why fields in database tables should store atomic values.</li>
           <li>Explain why databases should not store redundant information.</li>
-	  <li>Be able to tell whether information is redundant or not.</li>
-	  <li>Be able to reorganize database tables to eliminate redundancy.</li>
+          <li>Be able to tell whether information is redundant or not.</li>
+          <li>Be able to reorganize database tables to eliminate redundancy.</li>
         </ul>
       </div>
 
@@ -1593,11 +1593,11 @@ SELECT DISTINCT FamilyName || ", " || PersonalName FROM Experiments;
       <div class="understand" id="u:join">
         <h3>Learning Objectives:</h3>
         <ul>
-	  <li>Explain what primary keys and foreign keys are.</li>
+          <li>Explain what primary keys and foreign keys are.</li>
           <li>Write queries that combine information from two or more tables by matching keys.</li>
-	  <li>Write queries using aliases for table names.</li>
-	  <li>Explain why the <code>tablename.fieldname</code> notation is needed when tables are joined.</li>
-	  <li>Explain the logical sequence of operations that occurs when two or more tables are joined.</li>
+          <li>Write queries using aliases for table names.</li>
+          <li>Explain why the <code>tablename.fieldname</code> notation is needed when tables are joined.</li>
+          <li>Explain the logical sequence of operations that occurs when two or more tables are joined.</li>
         </ul>
       </div>
 
@@ -1982,7 +1982,7 @@ SELECT ROWID, * FROM Experiments;
 
       <p>
         One special case of joining tables comes up so often that it has its own name:
-	<a href="glossary.html#self-join">self join</a>.
+        <a href="glossary.html#self-join">self join</a>.
         As the name suggests,
         this means joining a table with itself.
         To see why this is useful,
@@ -2165,9 +2165,9 @@ ORDER BY        a.PersonID ASC;
         <h3>Learning Objectives:</h3>
         <ul>
           <li>Explain what databases use the special value <code>NULL</code> to represent.</li>
-	  <li>Explain why databases should <em>not</em> uses their own special values (like 9999 or "N/A") to represent missing or unknown data.</li>
-	  <li>Explain what atomic and aggregate calculations involving <code>NULL</code> produce, and why.</li>
-	  <li>Write queries that include or exclude records containing <code>NULL</code>.</li>
+          <li>Explain why databases should <em>not</em> uses their own special values (like 9999 or "N/A") to represent missing or unknown data.</li>
+          <li>Explain what atomic and aggregate calculations involving <code>NULL</code> produce, and why.</li>
+          <li>Write queries that include or exclude records containing <code>NULL</code>.</li>
         </ul>
       </div>
 
@@ -2406,7 +2406,7 @@ SELECT AVG(Hours) FROM Experiments;
         <ul>
           <li>Write queries whose results are used as input by other queries.</li>
           <li>Explain why the "obvious" way to calculate negative results is usually wrong.</li>
-	  <li>Write queries that calculate negative results correctly.</li>
+          <li>Write queries that calculate negative results correctly.</li>
         </ul>
       </div>
 
@@ -2591,12 +2591,12 @@ GROUP BY PersonID;
         <h3>Understand:</h3>
         <ul>
           <li>Write queries that create database tables with fields of common types.</li>
-	  <li>Write queries that specify the primary and foreign key relationships of tables.</li>
-	  <li>Write queries that specify whether field values must be unique and/or are allowed to be <code>NULL</code>.</li>
-	  <li>Write queries that erase database tables.</li>
-	  <li>Write queries that add records to database tables.</li>
-	  <li>Write queries that delete specific records from tables.</li>
-	  <li>Explain why it's important to be careful when deleting records from tables.</li>
+          <li>Write queries that specify the primary and foreign key relationships of tables.</li>
+          <li>Write queries that specify whether field values must be unique and/or are allowed to be <code>NULL</code>.</li>
+          <li>Write queries that erase database tables.</li>
+          <li>Write queries that add records to database tables.</li>
+          <li>Write queries that delete specific records from tables.</li>
+          <li>Explain why it's important to be careful when deleting records from tables.</li>
           <li>Explain what referential integrity is, and how a database can become inconsistent as data is changed.</li>
         </ul>
       </div>
@@ -2812,10 +2812,10 @@ SELECT * FROM Experiments WHERE PersonID = "dmen";
       <div class="understand" id="u:transactions">
         <h3>Learning Objectives:</h3>
         <ul>
-	  <li>Explain what a race condition is.</li>
+          <li>Explain what a race condition is.</li>
           <li>Explain why database operations sometimes have to be grouped together to ensure correct behavior.</li>
           <li>Write queries that group operations together in transactions.</li>
-	  <li>Explain what it means to commit a transaction.</li>
+          <li>Explain what it means to commit a transaction.</li>
         </ul>
       </div>
 
@@ -3067,9 +3067,9 @@ WHERE PersonID = "mlom" and Project = "Antigravity";
       <div class="understand" id="u:programming">
         <h3>Understand:</h3>
         <ul>
-	  <li>Write a Python program that connects to a database, issues a query, and processes the results.</li>
-	  <li>Explain what an SQL injection attack is.</li>
-	  <li>Write a program that safely interpolates values into queries.</li>
+          <li>Write a Python program that connects to a database, issues a query, and processes the results.</li>
+          <li>Explain what an SQL injection attack is.</li>
+          <li>Write a program that safely interpolates values into queries.</li>
         </ul>
       </div>
 

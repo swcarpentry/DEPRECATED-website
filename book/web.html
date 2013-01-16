@@ -63,7 +63,7 @@
         To start,
         let's have another look at the hearing tests from
         <a href="python.html">our chapter on Python programming</a>.
-	Most people would probably store these results in a plain text file
+        Most people would probably store these results in a plain text file
         with one row for each test:
       </p>
 
@@ -78,10 +78,10 @@ Date         Experimenter        Subject          Test       Score
 
       <p>
         This is pretty much what a conscientious researcher would write in a lab notebook,
-	and is easy for a human being to read.
+        and is easy for a human being to read.
         It's a lot harder for a computer to understand, though.
         Any program that wanted to load this data
-	would have to know that the first line of the file contains column titles,
+        would have to know that the first line of the file contains column titles,
         that the second can be ignored,
         that the first field of each row thereafter should be translated from text into a date,
         that the fields after that start in particular columns
@@ -91,7 +91,7 @@ Date         Experimenter        Subject          Test       Score
         and so on.
         Such a program would not be hard to write,
         but having to write, debug, and maintain a separate program for each data set
-	would be tedious.
+        would be tedious.
       </p>
 
       <p>
@@ -121,7 +121,7 @@ Date         Experimenter        Subject          Test       Score
         and Princeton (the university, not the glacier),
         we might have to wade through a lot of false matches.
         What we need is some way to explicitly tell a computer
-	all the things that human beings are able to infer.
+        all the things that human beings are able to infer.
       </p>
 
       <p>
@@ -143,7 +143,7 @@ Date         Experimenter        Subject          Test       Score
         HTML looked superficially the same as SGML, but it was much (much) simpler:
         almost anyone could write it, so almost everyone did.
         However, HTML only had a small vocabulary,
-	which users could not change or extend.
+        which users could not change or extend.
         They could say, "This is a paragraph," or, "This is a table,"
         but not, "This is a chemical formula," or, "This is a person's name."
       </p>
@@ -152,7 +152,7 @@ Date         Experimenter        Subject          Test       Score
         Instead of adding thousands of new terms for different application domains,
         a new standard for <em>defining</em> terms was created in 1998.
         This standard is called the
-	<a href="glossary.html#xml">Extensible Markup Language</a> (XML);
+        <a href="glossary.html#xml">Extensible Markup Language</a> (XML);
         it's much more complex than HTML,
         but still simpler than SGML,
         and hundreds of specialized vocabularies have now been defined in terms of it.
@@ -161,11 +161,11 @@ Date         Experimenter        Subject          Test       Score
       <p class="fixme">make analogy between XML and defining functions</p>
 
       <p>
-	More recently,
-	a new version of HTML called HTML5 has been created.
-	Web programmers are very excited about it,
+        More recently,
+        a new version of HTML called HTML5 has been created.
+        Web programmers are very excited about it,
         primarily because its new features allow them to create
-	sophisticated user interfaces that run on smart phones and tablets as well as conventional computers.
+        sophisticated user interfaces that run on smart phones and tablets as well as conventional computers.
         In what follows,
         though,
         we'll focus on some basics that haven't changed (much) in 20 years.
@@ -201,7 +201,7 @@ Date         Experimenter        Subject          Test       Score
         with names like "external entity references" and "processing instructions",
         but we'll ignore them.)
         The text in a document is just character data,
-	and as far as HTML is concerned, it has no intrinsic meaning:
+        and as far as HTML is concerned, it has no intrinsic meaning:
         "Feynman" is just seven characters,
         not a person.
       </p>
@@ -258,9 +258,9 @@ Date         Experimenter        Subject          Test       Score
       </table>
 
       <p>
-	Finally,
-	every well-formed document started with a <code>DOCTYPE</code> declaration,
-	which looks like:
+        Finally,
+        every well-formed document started with a <code>DOCTYPE</code> declaration,
+        which looks like:
       </p>
 
 <pre>
@@ -268,10 +268,10 @@ Date         Experimenter        Subject          Test       Score
 </pre>
 
       <p class="continue">
-	This tells programs what kind of elements are allowed to appear in the document:
-	'html' (by far the most common case),
-	'math' for MathML,
-	and so on.
+        This tells programs what kind of elements are allowed to appear in the document:
+        'html' (by far the most common case),
+        'math' for MathML,
+        and so on.
         Here is a simple HTML document that uses everything we've seen so far:
       </p>
 
@@ -300,18 +300,18 @@ Date         Experimenter        Subject          Test       Score
       <p>
         These different presentations are possible because
         HTML separates content from presentation,
-	or in computer science jargon,
-	separates <a href="glossary.html#model">models</a> from <a href="glossary.html#view">views</a>.
+        or in computer science jargon,
+        separates <a href="glossary.html#model">models</a> from <a href="glossary.html#view">views</a>.
         The model is the data itself;
         the view is how that data is displayed,
         such as a particular pattern of pixels on our screen
         or a particular sequence of sounds on our headphones.
-	A given model may be viewed in many different ways,
-	just as what files are on your hard drive
-	can be viewed as a list,
-	as snapshots,
-	or as a hierarchical tree
-	(<a href="#f:filesystem_views">Figure XXX</a>).
+        A given model may be viewed in many different ways,
+        just as what files are on your hard drive
+        can be viewed as a list,
+        as snapshots,
+        or as a hierarchical tree
+        (<a href="#f:filesystem_views">Figure XXX</a>).
       </p>
 
       <figure id="f:filesystem_views">
@@ -337,12 +337,12 @@ Date         Experimenter        Subject          Test       Score
         on the other hand,
         are very bad at reconstructing models from views.
         In fact,
-	many of the things we do without apparent effort,
+        many of the things we do without apparent effort,
         like understanding sentences,
         are still open research problems in computer science.
         That's why markup languages were invented:
         they allow us to explicitly specify the "what" that we infer so easily
-	for computers' benefit.
+        for computers' benefit.
       </p>
 
       <p>
@@ -350,7 +350,7 @@ Date         Experimenter        Subject          Test       Score
         in order to create and understand documents.
         If we are writing HTML by hand
         instead of using a <a href="glossary.html#wysiwyg">WYSIWYG</a> editor
-	like LibreOffice or Microsoft Word,
+        like LibreOffice or Microsoft Word,
         we might lay it out like this to make it easier to read:
       </p>
 
@@ -367,8 +367,8 @@ Date         Experimenter        Subject          Test       Score
       <p class="continue">
         Doing this doesn't change how most browsers render the document,
         since they usually ignore "extra" whitespace
-	(highlighted above).
-	<span class="fixme">refer back to 'highlight' later when talking about CSS and semantic separation</span>
+        (highlighted above).
+        <span class="fixme">refer back to 'highlight' later when talking about CSS and semantic separation</span>
         As we'll see when we start writing programs of our own, though,
         that whitespace doesn't magically disappear when a program reads the document in,
         so at some point we have to decide what to do with it.
@@ -378,15 +378,15 @@ Date         Experimenter        Subject          Test       Score
         Second,
         we must use <a href="glossary.html#escape-sequence">escape sequences</a>
         to represent the special characters <code>&lt;</code> and <code>&gt;</code>
-	for the same reason that we have to use <code>\&quot;</code>
-	inside a double-quoted string in a program.
-	<span class="fixme">where do we explain escape sequences?</span>
-	In HTML and XML,
-	an escape sequence is an ampersand '&amp;'
-	followed by the abbreviated name of the character
-	(such as 'amp' for "ampersand")
-	and a semi-colon.
-	The four most common escape sequences are:
+        for the same reason that we have to use <code>\&quot;</code>
+        inside a double-quoted string in a program.
+        <span class="fixme">where do we explain escape sequences?</span>
+        In HTML and XML,
+        an escape sequence is an ampersand '&amp;'
+        followed by the abbreviated name of the character
+        (such as 'amp' for "ampersand")
+        and a semi-colon.
+        The four most common escape sequences are:
       </p>
 
       <table>
@@ -428,7 +428,7 @@ Date         Experimenter        Subject          Test       Score
       </figure>
 
       <p>
-	A document like this, on the other hand, is not strictly legal:
+        A document like this, on the other hand, is not strictly legal:
       </p>
 
 <pre>
@@ -437,13 +437,13 @@ Date         Experimenter        Subject          Test       Score
 </pre>
 
       <p class="continue">
-	because it has two top-level elements
-	(the <code>h1</code> and the <code>p</code>).
-	Most browsers will render it correctly,
-	since they're designed to accommodate improperly-formatted HTML,
-	but most programs won't,
-	because they're not.
-	<span class="fixme">mention BeautifulSoup?</span>
+        because it has two top-level elements
+        (the <code>h1</code> and the <code>p</code>).
+        Most browsers will render it correctly,
+        since they're designed to accommodate improperly-formatted HTML,
+        but most programs won't,
+        because they're not.
+        <span class="fixme">mention BeautifulSoup?</span>
       </p>
 
       <div class="keypoints" id="k:formatting">
@@ -495,7 +495,7 @@ Date         Experimenter        Subject          Test       Score
         so <code>&lt;p align="left" align="right"&gt;&hellip;&lt;/p&gt;</code> is illegal.
         Attributes' values <em>must</em> be in quotes in XML;
         HTML5 allows single-word values to be unquoted,
-	but quoting is still recommended.
+        but quoting is still recommended.
       </p>
 
       <p>
@@ -524,15 +524,15 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
       <div class="box">
-	<h3>Attributes vs. Nested Elements</h3>
+        <h3>Attributes vs. Nested Elements</h3>
 
-	<p>
+        <p>
           When should we use attributes, and when should we nest elements?
           As a general rule,
           we should use attributes when:
-	</p>
+        </p>
 
-	<ul>
+        <ul>
 
           <li>
             each value can occur at most once for any element;
@@ -549,30 +549,30 @@ Date         Experimenter        Subject          Test       Score
             in order to understand it.
           </li>
 
-	</ul>
+        </ul>
 
-	<p class="continue">
+        <p class="continue">
           In all other cases, we should use nested elements.
           However, many widely-used XML formats break these rules
           in order to make it easier for people to write XML by hand.
           For example,
           in the Scalable Vector Graphics (SVG) format used to describe images as XML,
           we would define a rectangle as follows:
-	</p>
+        </p>
 
 <pre>
 &lt;rect width="300" height="100" style="fill:rgb(0,0,255); stroke-width:1; stroke:rgb(0,0,0)"/&gt;
 </pre>
 
-	<p class="continue">
+        <p class="continue">
           In order to understand the <code>style</code> attribute,
           a program has to somehow know to split it on semicolons,
           and then to split each piece on colons.
-	  This means that general-purpose programs for handling XML
-	  can't extract all the information that's implicit in SVG,
-	  which partly defeats the purpose of using XML in the first place.
-	  <span class="fixme">compare to database rules: no internal structure in columns</span>
-	</p>
+          This means that general-purpose programs for handling XML
+          can't extract all the information that's implicit in SVG,
+          which partly defeats the purpose of using XML in the first place.
+          <span class="fixme">compare to database rules: no internal structure in columns</span>
+        </p>
 
       </div>
 
@@ -600,10 +600,10 @@ Date         Experimenter        Subject          Test       Score
       </div>
 
       <p>
-	As anyone who has surfed the web has seen,
-	web pages can contain a lot more than just headings and paragraphs.
+        As anyone who has surfed the web has seen,
+        web pages can contain a lot more than just headings and paragraphs.
         To start with,
-	HTML provides two kinds of lists:
+        HTML provides two kinds of lists:
         <code>ul</code> to mark an unordered (bulleted) list,
         and <code>ol</code> for an ordered (numbered) one.
         Items inside either kind of list must be wrapped in <code>li</code> elements:
@@ -637,11 +637,11 @@ Date         Experimenter        Subject          Test       Score
         Note how elements are nested:
         since the ordered lists "belong" to the unordered list items above them,
         they are inside those items' <code>&lt;li&gt;&hellip;&lt;/li&gt;</code> tags.
-	And remember,
-	the indentation used to make this list easier for people to read
-	means nothing to the computer:
-	we could put the whole thing on one line,
-	or write it as:
+        And remember,
+        the indentation used to make this list easier for people to read
+        means nothing to the computer:
+        we could put the whole thing on one line,
+        or write it as:
       </p>
 
 <pre>
@@ -665,23 +665,23 @@ Date         Experimenter        Subject          Test       Score
 </pre>
 
       <p class="continue">
-	and the computer would interpret and display it the same way.
-	A human being,
-	on the other hand,
-	would find the inconsistent indentation of the second layout
-	much harder to follow.
+        and the computer would interpret and display it the same way.
+        A human being,
+        on the other hand,
+        would find the inconsistent indentation of the second layout
+        much harder to follow.
       </p>
 
       <p>
         HTML also provides tables, but they are awkward to use:
         tables are naturally two-dimensional,
         but text is one-dimensional.
-	This is exactly like the problem of representing a two-dimensional array in memory,
-	and we solve it in the same way:
-	by writing down the rows,
-	and the columns within each row,
-	in a fixed order.
-	<span class="fixme">link back to dev.html and numpy.html</span>
+        This is exactly like the problem of representing a two-dimensional array in memory,
+        and we solve it in the same way:
+        by writing down the rows,
+        and the columns within each row,
+        in a fixed order.
+        <span class="fixme">link back to dev.html and numpy.html</span>
         The <code>table</code> element marks the table itself;
         within that,
         each row is wrapped in <code>tr</code> (for "table row"),
@@ -720,9 +720,9 @@ Date         Experimenter        Subject          Test       Score
       </figure>
 
       <div class="box">
-	<h3>Tables and Multi-Column Layout</h3>
+        <h3>Tables and Multi-Column Layout</h3>
 
-	<p>
+        <p>
           Tables are sometimes used to do multi-column layout,
           as well as for tabular data,
           but this is a bad idea.
@@ -740,12 +740,12 @@ Date         Experimenter        Subject          Test       Score
           The <code>em</code> tag, on the other hand, has exactly one meaning,
           and that meaning is different from the meaning of <code>dfn</code> (a definition)
           or <code>cite</code> (a citation).
-	</p>
+        </p>
 
-	<p>
-	  Similarly,
-	  <span class="fixme">finish the thought...</span>
-	</p>
+        <p>
+          Similarly,
+          <span class="fixme">finish the thought...</span>
+        </p>
 
       </div>
 
@@ -763,8 +763,8 @@ Date         Experimenter        Subject          Test       Score
         Its <code>src</code> attribute specifies where to find the image file;
         this can be a path to a file on the same host as the web page,
         or a URL for something stored elsewhere.
-	For example,
-	when a browser displays this:
+        For example,
+        when a browser displays this:
       </p>
 
 <pre src="src/web/simple_image.html">
@@ -779,8 +779,8 @@ Date         Experimenter        Subject          Test       Score
 </pre>
 
       <p class="continue">
-	it looks for the file <code>madeleine.jpg</code>
-	in the same directory as the HTML file:
+        it looks for the file <code>madeleine.jpg</code>
+        in the same directory as the HTML file:
       </p>
 
       <figure id="f:simple_image">
@@ -789,21 +789,21 @@ Date         Experimenter        Subject          Test       Score
 
       <p>
         Notice,
-	by the way,
-	that the <code>img</code> element is written as
+        by the way,
+        that the <code>img</code> element is written as
         <code>&lt;img&hellip;/&gt;</code>,
-	i.e.,
-	with a trailing slash inside the <code>&lt;&gt;</code>
-	rather than with a separate closing tag.
+        i.e.,
+        with a trailing slash inside the <code>&lt;&gt;</code>
+        rather than with a separate closing tag.
         This makes sense because the element doesn't contain any text:
         the content is referred to by its <code>src</code> attribute.
-	Any element that doesn't contain anything
-	can be written using this short form.
+        Any element that doesn't contain anything
+        can be written using this short form.
       </p>
 
       <p>
-	Images don't have to be in the same directory as the pages that refer to them.
-	When the browser displays this:
+        Images don't have to be in the same directory as the pages that refer to them.
+        When the browser displays this:
       </p>
 
 <pre src="src/web/image_with_path.html">
@@ -817,10 +817,10 @@ Date         Experimenter        Subject          Test       Score
 </pre>
 
       <p class="continue">
-	it looks in the directory containing the page
-	for a sub-directory called <code>img</code>,
-	and loads the image file from there,
-	while if it's given:
+        it looks in the directory containing the page
+        for a sub-directory called <code>img</code>,
+        and loads the image file from there,
+        while if it's given:
       </p>
 
 <pre src="src/web/image_with_url.html">
@@ -833,9 +833,9 @@ Date         Experimenter        Subject          Test       Score
 </pre>
 
       <p class="continue">
-	it downloads the image from the URL
-	<code>http://software-carpentry.org/img/software-carpentry-logo.png</code>
-	and displays that.
+        it downloads the image from the URL
+        <code>http://software-carpentry.org/img/software-carpentry-logo.png</code>
+        and displays that.
       </p>
 
       <p>
@@ -843,8 +843,8 @@ Date         Experimenter        Subject          Test       Score
         we should use the <code>img</code> tag's <code>alt</code> attribute
         to provide a title or description of the image.
         This is what screen readers for people with visual handicaps will say aloud to "display" the image;
-	it's also what search engines use to classify images
-	so that people can find them.
+        it's also what search engines use to classify images
+        so that people can find them.
         Adding this to our previous example gives:
       </p>
 
@@ -860,7 +860,7 @@ Date         Experimenter        Subject          Test       Score
 </pre>
 
       <p>
-	The most important use of URLs in documents is
+        The most important use of URLs in documents is
         to create the links within and between pages that make HTML "hypertext".
         We create links using the <code>a</code> element.
         Whatever is inside the element is displayed and (usually) underlined for clicking;
@@ -873,8 +873,8 @@ Date         Experimenter        Subject          Test       Score
       <p>
         The <code>a</code> element's <code>href</code> attribute
         specifies what the link is pointing at;
-	as with images,
-	this can be either a local filename or a URL.
+        as with images,
+        this can be either a local filename or a URL.
         For example,
         we can create a listing of the examples we've written so far like this:
       </p>
@@ -904,7 +904,7 @@ Date         Experimenter        Subject          Test       Score
 
       <p>
         The hyperlink element is called <code>a</code> because
-	it can also used to create <a href="glossary.html#anchor">anchors</a> in documents
+        it can also used to create <a href="glossary.html#anchor">anchors</a> in documents
         by giving them a <code>name</code> attribute instead of an <code>href</code>.
         An anchor is simply a location in a document that can be linked to.
         For example,
@@ -960,16 +960,16 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
       <p>
-	Finally,
+        Finally,
         well-written HTML pages have a <code>head</code> element as well as a <code>body</code>.
-	The head isn't displayed;
-	instead,
-	it's used to store metadata about the page as a whole.
+        The head isn't displayed;
+        instead,
+        it's used to store metadata about the page as a whole.
         The most common element inside <code>head</code> is <code>title</code>,
         which,
         as its name suggests,
         gives the page's title.
-	(This is usually displayed in the browser's title bar.)
+        (This is usually displayed in the browser's title bar.)
         Another common item is <code>meta</code>,
         whose two attributes <code>name</code> and <code>content</code>
         allow authors to embed arbitrary information in their pages.
@@ -994,31 +994,31 @@ Date         Experimenter        Subject          Test       Score
 
       <p id="p:hide-paragraph">
         Well-written pages also use comments (just like code),
-	which start with <code>&lt;!--</code> and end with <code>--&gt;</code>.
+        which start with <code>&lt;!--</code> and end with <code>--&gt;</code>.
       </p>
 
       <div class="box">
 
-	<h3>Hiding Content</h3>
+        <h3>Hiding Content</h3>
 
-	<p>
-	  Commenting out part of a page does <em>not</em> hide the content
-	  from people who really want to see it:
-	  while a browser won't display what's inside a comment,
-	  it's still in the page,
-	  and anyone who uses "View Source" can read it.
-	  For example,
-	  if you are looking at this page in a web browser right now,
-	  try viewing the source
-	  and searching for the word "Surprise".
-	</p>
+        <p>
+          Commenting out part of a page does <em>not</em> hide the content
+          from people who really want to see it:
+          while a browser won't display what's inside a comment,
+          it's still in the page,
+          and anyone who uses "View Source" can read it.
+          For example,
+          if you are looking at this page in a web browser right now,
+          try viewing the source
+          and searching for the word "Surprise".
+        </p>
 
-	<!-- Surprise: this isn't display by the browser, but is still in the document. -->
+        <!-- Surprise: this isn't display by the browser, but is still in the document. -->
 
-	<p>
-	  If you really don't want people to be able to read something,
-	  the only safe thing to do is to keep it off the web.
-	</p>
+        <p>
+          If you really don't want people to be able to read something,
+          the only safe thing to do is to keep it off the web.
+        </p>
 
       </div>
 
@@ -1049,29 +1049,29 @@ Date         Experimenter        Subject          Test       Score
       </div>
 
       <p>
-	People usually write their home pages by hand,
-	but most pages that display lists of experimental results,
-	or second-hand lab equipment for sale,
-	are created by programs.
+        People usually write their home pages by hand,
+        but most pages that display lists of experimental results,
+        or second-hand lab equipment for sale,
+        are created by programs.
         For historical reasons,
         Python's standard library includes several libraries that process XML (including HTML);
         we'll use the simplest one,
-	called <code>ElementTree</code>,
-	but you will often run into programs that use others.
+        called <code>ElementTree</code>,
+        but you will often run into programs that use others.
       </p>
 
       <p>
-	Most of these libraries represent the nested structure of XML using something called
+        Most of these libraries represent the nested structure of XML using something called
         the <a href="glossary.html#document-object-model">Document Object Model</a> (DOM).
         This stores the document as a <a href="glossary.html#tree">tree</a>
-	with one node for each element or block of text.
-	The root element of the document,
-	such as the all-enclosing <code>html</code> in a web page,
-	is the root node of the tree.
-	Every other element or block of text is a child of it,
-	or a child of a child,
-	and so on.
-	For example,
+        with one node for each element or block of text.
+        The root element of the document,
+        such as the all-enclosing <code>html</code> in a web page,
+        is the root node of the tree.
+        Every other element or block of text is a child of it,
+        or a child of a child,
+        and so on.
+        For example,
         the tree representing our web page about dimorphism
         looks like <a href="#f:dimorphism_tree">Figure XXX</a>.
       </p>
@@ -1086,7 +1086,7 @@ Date         Experimenter        Subject          Test       Score
         or build the nodes one by one and put them together manually.
         The former is more common,
         since the usual way to store and exchange XML or HTML is as text,
-	so we will explore that first.
+        so we will explore that first.
         Let's begin by turning text into HTML and then back into text:
       </p>
 
@@ -1115,7 +1115,7 @@ print text
         (which is a lot easier to type and read).
         The multi-line string assigned to the variable <code>page</code>
         is the "document" we will parse;
-	most real programs will read data from a file instead.
+        most real programs will read data from a file instead.
       </p>
 
       <p>
@@ -1123,9 +1123,9 @@ print text
         it returns the root node of the DOM tree corresponding to that document.
         We then convert that tree back to text by calling <code>ET.tostring</code>.
         The <code>'utf-8'</code> argument specifies how we want characters represented;
-	you should always use this option unless you know enough to know
-	that you want something else.
-	<span class="fixme">need a better explanation than this</span>
+        you should always use this option unless you know enough to know
+        that you want something else.
+        <span class="fixme">need a better explanation than this</span>
       </p>
 
       <p>
@@ -1151,9 +1151,9 @@ print text
       <p class="fixme">point out how much simpler this is than parsing...</p>
 
       <p>
-	In the example above,
-	our output was exactly the same as our input,
-	but that won't always be the case.
+        In the example above,
+        our output was exactly the same as our input,
+        but that won't always be the case.
         Here's another simple program that converts text to a node tree and back:
       </p>
 
@@ -1656,14 +1656,14 @@ print ET.tostring(root)
 
       <div class="understand" id="u:templating">
         <h3>Understand:</h3>
-	<p class="fixme">learning objectives</p>
+        <p class="fixme">learning objectives</p>
       </div>
 
       <p class="fixme">content on Jinja2</p>
 
       <div class="keypoints" id="k:templating">
         <h3>Summary</h3>
-	<p class="fixme">learning objectives</p>
+        <p class="fixme">learning objectives</p>
       </div>
 
     </section>
