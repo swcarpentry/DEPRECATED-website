@@ -1,0 +1,86 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Online Office Hours" />
+{% endblock file_metadata %}
+
+{% block navhighlight %}{{navhighlight('bootcamps')}}{% endblock navhighlight %}
+
+{% block content %}
+
+<hr/>
+<h4>Upcoming Office Hours</h4>
+<ul>
+    <li>
+        <a href="http://openetherpad.org/swc-2013-01-17-16"
+           style="line-height:30px">Thursday, January 17, 2013 4-6pm EST</a>
+        <a class="pull-right btn btn-warning"
+        href="http://www.eventbrite.com/event/4535606120?ref=ebtn"
+        target="_blank">Register</a>
+    </li>
+</ul>
+<hr/>
+
+<p><b>Office hours</b> are regular events for learners, who have gone through a
+Bootcamp with us, to get one-on-one help from Software Carpentry instructors,
+online.  It's a chance to ask questions from your day-to-day scientific
+computing work ("stupid" questions encouraged!).  For example, you might be
+stuck on a bit of <a href="{{root_path}}/4_0/shell/index.html">shell</a> or <a
+href="{{root_path}}/4_0/python/index.html">python</a> scripting. Or perhaps you
+would <em>like</em> to write a script to automate something but want help
+figuring out how to begin. These are all great things to ask at office
+hours.</p>
+ 
+<p>Here's how it works:
+<ol>
+ <li><b>(Optional) Register for an upcoming office hours session.</b>  Registering lets
+    us know how many people to expect, and to send you a reminder email. </li>
+
+ <li><b>During the office hours times, visit the web address for the office hour.
+ </b>
+     Think of this like the "hall way" outside of the office.  Here you can chat with
+     the instructors and others who are waiting.
+        <div style="text-align:center"><img src="{{root_path}}/img/bootcamps/office-hours-etherpad-small.png"
+        class="img-rounded" style="text-align:center;"></div>
+     </li>
+
+ <li><b>Get started.</b> You and your instructor will sort out how best to carry out the tutoring:
+     over chat, video conferencing (e.g. Skype, Google Hangout), screen sharing,
+     a shared whiteboard, etc.  See below for setup instructions some of the
+     tools we've found to work, and that you may need to setup.</li>
+</ol>
+</p>
+<hr/>
+<a name="setup"></a><h2>Software Setup</h2>
+The following are tools we've found work well across operating systems, and
+which instructors will have experience using. 
+
+<h3>Google+ Hangout</h3>
+<p><b>Google+ Hangout</b> provides video, voice, and text chat, as well as
+screensharing and shared whiteboarding.<p>
+
+<p>To use it, you'll need a <a href="https://accounts.google.com/signup">Google+
+account</a>.  If you already have an account you can use it, or if privacy is
+concern you can always create an account just to use during the office
+hours.</p>
+
+<p>When you first attempt to start a "Hangout" (i.e. video/audio chat), you'll be
+prompted to <a href="https://tools.google.com/dlpage/hangoutplugin">install the
+Hangout plugin</a>.</p>
+
+<h3>Skype</h3>
+<p><b>Skype</b> provides video, voice and text chat.</p>
+
+<p><a href="http://www.skype.com/go/download/">Download Skype</a> and install
+it. Upon starting it, you'll be prompted to sign in or create a new account.</p>
+
+<h3>Screenleap</h3>
+<p><b>screenleap</b> provides screensharing through the web.<p>
+
+<p>To use it, visit <a href="http://screenleap.com">screenleap.com</a> and
+click "Share screen". This site requires that you have Java installed for your
+browser, and you should be prompted to install it if you don't. </p>
+
+{% endblock content %}
+
+{% block comments %}{% endblock comments %}
