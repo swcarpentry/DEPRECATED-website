@@ -2400,8 +2400,14 @@ do
     ls *.dat
 done
 </pre>
-            <table>
-	      <tr class="choices">
+            <table class="choices">
+	      <tr>
+		<td>1.</td>
+		<td>2.</td>
+		<td>3.</td>
+		<td>4.</td>
+	      </tr>
+	      <tr>
 		<td>
 <pre>
 fructose.dat
@@ -2449,8 +2455,14 @@ do
   done
 done
 </pre>
-            <table>
-	      <tr class="choices">
+            <table class="choices">
+	      <tr>
+		<td>1.</td>
+		<td>2.</td>
+		<td>3.</td>
+		<td>4.</td>
+	      </tr>
+	      <tr>
 		<td>
 <pre>
 4
@@ -2784,6 +2796,89 @@ done
           <li><code>$1</code>, <code>$2</code>, etc., refer to specified command-line arguments.</li>
           <li idea="tools">Letting users decide what files to process is more flexible and more consistent with built-in Unix commands.</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:scripts">
+	<h3>Challenges</h3>
+
+	<ol class="challenges">
+
+	  <li>
+	    Suppose that <code class="in">ls</code> displays:
+<pre>
+<span class="out">display.sh    fructose.dat    glucose.dat   sucrose.dat</span>
+</pre>
+	    What must <code>display.sh</code> contain in order for:
+<pre>
+$ <span class="in">bash display.sh *.dat</span>
+</pre>
+            to display each sugar data file exactly once (and nothing else)?
+	    <table class="choices">
+	      <tr>
+		<td>1.</td>
+		<td>2.</td>
+		<td>3.</td>
+		<td>4.</td>
+	      </tr>
+	      <tr>
+		<td>
+<pre>
+echo *.*
+</pre>
+		</td>
+		<td>
+<pre>
+for filename in $1 $2 $3
+do
+  cat $filename
+done
+</pre>
+		</td>
+		<td>
+<pre>
+echo $*.dat
+</pre>
+		</td>
+		<td>
+		  None of the above.
+		</td>
+	      </tr>
+	    </table>
+	  </li>
+
+	  <li>
+	    Nelle wants to save the last five commands she ran as a shell script to re-use later.
+	    She runs:
+<pre>
+$ <span class="in">history | tail -5 &gt; redo-last-5.sh</span>
+</pre>
+            To test it out, she then runs:
+<pre>
+$ <span class="in">bash redo-last-5.sh</span>
+</pre>
+            What happens?
+            <ol class="choices">
+	      <li>
+		The five commands she wanted to re-run are re-run.
+	      </li>
+	      <li>
+		Only the last <em>four</em> commands are re-run,
+		because the command <code>history</code> is also saved in <code>redo-last-5.sh</code>.
+	      </li>
+	      <li>
+		No commands are re-run,
+		because <code>redo-last-5.sh</code> also contains the serial numbers of commands
+		(which aren't legally commands themselves).
+	      </li>
+	      <li>
+		Each time she runs this,
+		the most recent five commands are replayed
+		(whether they're the five she originally wanted to save or not).
+	      </li>
+	    </ol>
+	  </li>
+
+	</ol>
       </div>
 
     </section>
@@ -3465,6 +3560,124 @@ $ <span class="in">bash pairwise.sh stats-*.txt > top100.txt</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:find">
+
+	<ol class="challenges">
+
+	  <li>
+	    Which description most accurately explains what the following pipeline does?
+<pre>
+find . -name '*.dat' -print | wc -l | sort -n
+</pre>
+            <ol class="choices">
+	      <li>
+		Display the number of lines in each data file in or below the current directory,
+		ordered numerically from longest to shortest.
+	      </li>
+	      <li>
+		Display a single line showing the total number of lines in all data files
+		in or below the current directory.
+	      </li>
+	      <li>
+		Display the number of data files in order below the current directory.
+	      </li>
+	      <li>
+		None of the above.
+	      </li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    The <code>-v</code> flag to <code>grep</code> inverts pattern matching,
+	    so that only lines which do <em>not</em> match the pattern are printed.
+	    Given that,
+	    which of the following commands will find all files in <code>/data</code>
+	    whose names end in <code>ose.dat</code>
+	    (e.g., <code>sucrose.dat</code> or <code>maltose.dat</code>),
+	    but do <em>not</em> contain the word <code>temp</code>?
+	    <table class="choices">
+	      <tr>
+		<td>1.</td>
+		<td>2.</td>
+		<td>3.</td>
+		<td>4.</td>
+	      </tr>
+	      <tr>
+		<td>
+<pre>
+find /data -name '*.dat' -print | grep ose | grep -v temp
+</pre>
+		</td>
+		<td>
+<pre>
+find /data -name ose.dat -print | grep -v temp
+</pre>
+		</td>
+		<td>
+<pre>
+grep -v temp $(find /data -name '*ose.dat' -print)
+</pre>
+		</td>
+		<td>
+		  None of the above.
+		</td>
+	      </tr>
+	    </table>
+	  </li>
+
+	  <li>
+	    Nelle has saved the IDs of some suspicious observations
+	    in a file called <code>maybe-faked.txt</code>:
+<pre>
+NENE01909C
+NEMA04220A
+NEMA04301A
+</pre>
+            Which of the following scripts will search all of the <code>.txt</code> files
+            whose names begin with <code>NE</code>
+            for references of these records?
+            <table class="choices">
+	      <tr>
+		<td>1.</td>
+		<td>2.</td>
+		<td>3.</td>
+		<td>4.</td>
+	      </tr>
+	      <tr>
+		<td>
+<pre>
+for pat in maybe-faked.txt
+do
+    find . -name 'NE*.txt' -print | grep $pat
+done
+</pre>
+		</td>
+		<td>
+<pre>
+for pat in $(cat maybe-faked.txt)
+do
+    grep $pat $(find . -name 'NE*.txt' -print)
+done
+</pre>
+		</td>
+		<td>
+<pre>
+for pat in $(cat maybe-faked.txt)
+do
+    find . -name 'NE*.txt' -print | grep $pat
+done
+</pre>
+		</td>
+		<td>
+		  None of the above.
+		</td>
+	      </tr>
+	    </table>
+	  </li>
+	</ol>
+
+      </div>
+
     </section>
 
     <section id="s:summary">
@@ -3487,8 +3700,6 @@ $ <span class="in">bash pairwise.sh stats-*.txt > top100.txt</span>
 {% endblock content %}
 
 <!--
-good intro for users with some experience
-
 where do the text editors live? can they only be accessed through the terminal? why are there so many of them when they seem pretty much the same?
 
 mv is confusing - from the GUI you think of moving "physical" files because you drag and drop; my original intuition was that mv would work like cp - perhaps another sentence in the explanation could clarify this.
