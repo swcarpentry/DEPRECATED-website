@@ -37,6 +37,11 @@ RewriteCond %{REQUEST_URI} !.html$
 RewriteRule ^(.*?)/?$ $1.html [R,L]
 
 ### Wordpress Page Redirects ###
+
+# Temp rewrite for Technische Universitat Munchen (jan 2013) published URL
+RewriteCond %{REQUEST_URI} ^/boot-camps/boot-camp-standard-software-set-up
+RewriteRule ^(.*) /setup/ [R,L]
+
 # wordpress bootcamps URLs
 RewriteCond %{REQUEST_URI} ^/boot-camps/
 RewriteRule ^(.*) /bootcamps/ [R,L]
@@ -61,6 +66,7 @@ RewriteRule ^(.*) /about/biblio.html [R,L]
 # Handle 4_0 episode links that don't end in .html 
 RewriteCond %{REQUEST_URI} ^/4_0/[^/]+/.+
 RewriteCond %{REQUEST_URI} !.html$
+RewriteCond %{SCRIPT_FILENAME} !-f 
 RewriteRule ^(.*?)/?$ $1.html [R,L]
 
 </IfModule>
