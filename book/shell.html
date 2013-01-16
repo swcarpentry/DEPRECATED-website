@@ -1912,13 +1912,13 @@ bear
         which is much more powerful,
         is to tell the shell to do something over and over again.
         Suppose we have several hundred genome data files in a directory
-        with names like <code>genome-unicorn.dat</code>,
-        <code>genome-basilisk.dat</code>,
+        with names like <code>basilisk.dat</code>,
+        <code>unicorn.dat</code>,
         and so on.
         Some new files have just arrived,
         so we'd like to rename all the existing ones to
-        <code>original-genome-unicorn.dat</code>,
-        <code>original-genome-basilisk.dat</code>,
+        <code>original-basilisk.dat</code>,
+        <code>original-unicorn.dat</code>,
         etc.
         We can't use:
       </p>
@@ -1944,70 +1944,80 @@ mv basilisk.dat unicorn.dat
       </p>
 
       <p>
-        Here's what we can do instead:
+        What we can do instead is use a <a href="glossary.html#for-loop">for loop</a>,
+	which does something <em>for</em> each thing in a list.
+	Here's a simple example:
       </p>
 
 <pre>
-for filename in *.dat; do mv $filename original-$filename; done
-</pre>
-
-      <p class="continue">
-        If we're typing interactively,
-        we can make this easier to read using carriage returns:
-      </p>
-
-<pre>
-for filename in *.dat
+for filename in basilisk.dat unicorn.dat
 do
-  mv $filename original-$filename
+  head -3 $filename
 done
 </pre>
 
       <p>
-        This is called a <a href="glossary.html#for-loop">for loop</a>,
-        because it does something <em>for</em> each thing in a list.
-        The shell starts by expanding the wildcard pattern <code>*.dat</code> to a list of files,
-        so that this loop is equivalent to:
+	When the shell sees the keyword <code>for</code>,
+	it knows it is supposed to repeat a command (or group of commands)
+	once for each thing in a list.
+	In this case,
+	the list consists of the two data filenames.
+	Each time through the loop,
+	the name of the file being processed
+	is assigned to the variable <code>filename</code>.
+	Inside the loop,
+	we get the variable's value by putting <code>$</code> in front of it,
+	so the first time through the loop,
+	<code>$filename</code> is <code>basilisk.dat</code>,
+	and the second time,
+	it is <code>unicorn.dat</code>.
+	Finally,
+	the command that's actually being run is our old friend <code>head</code>,
+	so this loop prints out the first three lines of each data file in turn.
       </p>
 
+      <div class="box">
+
+        <h3>What's In a Name?</h3>
+
+	<p>
+	  We have called the variable in this loop <code>filename</code>
+	  in order to make its purpose clearer to human readers.
+	  The shell itself doesn't care what the variable is called;
+	  if we wrote this loop as:
+	</p>
+
 <pre>
-for filename in genome-basilisk.dat genome-unicorn.dat
+for x in basilisk.dat unicorn.dat
 do
-  mv $filename original-$filename
+  head -3 $x
 done
 </pre>
 
-      <p class="continue">
-        It then runs the command inside the loop&mdash;the <code>mv</code>&mdash;once
-        for each name in that list.
-        Each time through the loop,
-        a different filename is assigned to the variable <code>filename</code>.
-        We get the variable's value by putting a <code>$</code> in front of it,
-        so <code>original-$filename</code> is
-        <code>original-basilisk.dat</code> when <code>filename</code> is <code>basilisk.dat</code>,
-        <code>original-unicorn.dat</code> when <code>filename</code> is <code>unicorn.dat</code>,
-        and so on.
-      </p>
-
-      <p>
-        Here's another, more complicated, loop:
-      </p>
+        <p class="continue">
+	  or:
+	</p>
 
 <pre>
-for filename in *.dat
+for temperature in basilisk.dat unicorn.dat
 do
-  head -100 $filename | tail -20
+  head -3 $temperature
 done
 </pre>
 
+        <p class="continue">
+	  it would work exactly the same way.
+	  <em>Don't do this.</em>
+	  Programs are only useful if people can understand them,
+	  so using meaningless names (like <code>x</code>)
+	  or misleading names (like <code>temperature</code>)
+	  increases the likelihood of the program being wrong.
+	</p>
+
+      </div>
+
       <p>
-        Again,
-        the loop is executed once for each file.
-        The <a href="glossary.html#loop-body">loop body</a> then selects
-        lines 80-100 from each of those files.
-        It doesn't tell us which file each group of lines is from, though;
-        if we wanted that,
-        we could change the loop to:
+	Here's a slightly more complicated loop:
       </p>
 
 <pre>
@@ -2018,11 +2028,34 @@ do
 done
 </pre>
 
+      <p>
+	The shell starts by expanding <code>*.dat</code>
+	to create the list of files it will process.
+        The <a href="glossary.html#loop-body">loop body</a> then executes two commands
+	for each of those files.
+        The first,
+	<code>echo</code>,
+	just prints its command-line arguments to standard output.
+	For example:
+      </p>
+
+<pre>
+echo hello there
+</pre>
+
       <p class="continue">
-        The <code>echo</code> command just prints its command-line arguments to standard output,
-        so in this case,
-        it just displays the filename.
-        We can't just write:
+	prints:
+      </p>
+
+<pre>
+hello there
+</pre>
+
+      <p>
+        In this case,
+	since the shell expands <code>$filename</code> to be the name of a file,
+	<code>echo $filename</code> just prints the name of the file.
+        Note that we can't write this as:
       </p>
 
 <pre>
@@ -2035,8 +2068,11 @@ done
 
       <p class="continue">
         because then the first time through the loop,
-        when <code>$filename</code> expanded to <code>genome-basilisk.dat</code>,
-        the shell would try to run that file as a program.
+        when <code>$filename</code> expanded to <code>basilisk.dat</code>,
+        the shell would try to run <code>basilisk.dat</code> as a program.
+	Finally,
+	the <code>head</code> and <code>tail</code> combination
+	selects lines 80-100 from whatever file is being processed.
       </p>
 
       <div class="box">
@@ -2044,7 +2080,8 @@ done
         <h3>Spaces in Names</h3>
 
         <p>
-          Loops like these are why you should <em>not</em> use spaces in filenames.
+          Filename expansion in loops is one reason why
+	  you should <em>not</em> use spaces in filenames.
           Suppose our data files are named:
         </p>
 
@@ -2061,6 +2098,7 @@ unicorn.dat
 <pre>
 for filename in *.dat
 do
+  echo $filename
   head -100 $filename | tail -20
 done
 </pre>
@@ -2098,6 +2136,85 @@ unicorn.dat
         </p>
 
       </div>
+
+      <p>
+	Going back to our original file renaming problem,
+        we can solve it using this loop:
+      </p>
+
+<pre>
+for filename in *.dat
+do
+  mv $filename original-$filename
+done
+</pre>
+
+      <p>
+        This loop runs the <code>mv</code> command once for each filename.
+	The first time,
+	when <code>$filename</code> expands to <code>basilisk.dat</code>,
+	the shell executes:
+      </p>
+
+<pre>
+mv basilisk.dat original-basilisk.dat
+</pre>
+
+      <p class="continue">
+	The second time,
+	the command is:
+      </p>
+
+<pre>
+mv unicorn.dat original-unicorn.dat
+</pre>
+
+        <div class="box">
+
+	  <h3>Measure Twice, Run Once</h3>
+
+	  <p>
+	    A loop is a way to do many things at once&mdash;or
+	    to make many mistakes at once
+	    if it does the wrong thing.
+	    One way to check what a loop <em>would</em> do is
+	    to echo the commands it would run
+	    instead of actually running them.
+	    For example,
+	    we could write our file renaming loop like this:
+	  </p>
+
+<pre>
+for filename in *.dat
+do
+  <span class="highlight">echo</span> mv $filename original-$filename
+done
+</pre>
+
+          <p>
+	    Instead of running <code>mv</code>,
+	    this loop runs <code>echo</code>,
+	    which prints out:
+	  </p>
+
+<pre>
+mv basilisk.dat original-basilisk.dat
+mv unicorn.dat original-unicorn.dat
+</pre>
+
+          <p class="continue">
+	    <em>without</em> actually running those commands.
+	    We can then use up-arrow to redisplay the loop,
+	    back-arrow to get to the word <code>echo</code>,
+	    delete it,
+	    and then press "enter" to run the loop
+	    with the actual <code>mv</code> commands.
+	    This isn't foolproof,
+	    but it's a handy way to see what's going to happen
+	    when you're still learning how loops work.
+	  </p>
+
+	</div>
 
       <section>
 
@@ -2265,6 +2382,135 @@ $ <span class="in">$ history | tail -5</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:loop">
+	<h3>Challenges</h3>
+
+	<p>Suppose that <code class="in">ls</code> initially displays:</p>
+<pre>
+<span class="out">fructose.dat    glucose.dat   sucrose.dat</span>
+</pre>
+
+	<ol class="challenges">
+
+	  <li>
+	    What is the output of:
+<pre>
+for datafile in *.dat
+do
+    ls *.dat
+done
+</pre>
+            <table>
+	      <tr class="choices">
+		<td>
+<pre>
+fructose.dat
+glucose.dat
+sucrose.dat
+</pre>
+		</td>
+		<td>
+<pre>
+fructose.dat
+fructose.dat
+fructose.dat
+</pre>
+		</td>
+		<td>
+<pre>
+fructose.dat glucose.dat sucrose.dat
+fructose.dat glucose.dat sucrose.dat
+fructose.dat glucose.dat sucrose.dat
+</pre>
+		</td>
+		<td>
+		  None of the above.
+		</td>
+	      </tr>
+	    </table>
+	  </li>
+
+	  <li>
+	    The <code>expr</code> does simple arithmetic using command-line arguments:
+<pre>
+$ <span class="in">expr 3 + 5</span>
+<span class="out">8</span>
+$ <span class="in">expr 30 / 5 - 2</span>
+<span class="out">4</span>
+</pre>
+            Given this,
+            what is the output of:
+<pre>
+for left in 2 3
+do
+  for right in $left
+  do
+    expr $left + $right
+  done
+done
+</pre>
+            <table>
+	      <tr class="choices">
+		<td>
+<pre>
+4
+5
+5
+6
+</pre>
+		</td>
+		<td>
+<pre>
+4
+6
+</pre>
+		</td>
+		<td>
+<pre>
+left
+left right
+</pre>
+		</td>
+		<td>
+		  An error.
+		</td>
+	      </tr>
+	    </table>
+	  </li>
+
+	  <li>
+	    In a directory with the same three sugar file names,
+	    what does this command do?
+
+<pre>
+for sugar in *.dat
+do
+  echo $sugar
+  cat $sugar &gt; xylose.dat
+done
+</pre>
+            <ol class="choices">
+	      <li>
+	        Prints <code>fructose.dat</code>, <code>glucose.dat</code>, and <code>sucrose.dat</code>,
+		and copies <code>sucrose.dat</code> to create <code>xylose.dat</code>.
+	      </li>
+	      <li>
+	        Prints <code>fructose.dat</code>, <code>glucose.dat</code>, and <code>sucrose.dat</code>,
+		and concatenates all three files to create <code>xylose.dat</code>.
+	      </li>
+	      <li>
+	        Prints <code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>, and <code>xylose.dat</code>,
+		and copies <code>sucrose.dat</code> to create <code>xylose.dat</code>.
+	      </li>
+	      <li>
+		None of the above.
+	      </li>
+	    </ol>
+          </li>
+	</ol>
+
+      </div>
+
     </section>
 
     <section id="s:scripts">
@@ -2338,6 +2584,67 @@ $ <span class="in">bash smallest *.txt</span>
 2718 thesis.txt</span>
 $
 </pre>
+
+      <div class="box">
+
+	<h3>Why Isn't It Doing Anything?</h3>
+
+	<p>
+	  What happens if a script is supposed to process a bunch of files,
+	  but we don't give it any filenames?
+	  For example,
+	  what if we type:
+	</p>
+
+<pre>
+$ <span class="in">bash smallest</span>
+</pre>
+
+        <p class="continue">
+	  but don't say <code>*.txt</code> (or anything else)?
+	  In this case,
+	  <code>$*</code> expands to nothing at all,
+	  so the pipeline inside the script is effectively:
+	</p>
+
+<pre>
+wc -l | sort -n
+</pre>
+
+        <p class="continue">
+	  Since it doesn't have any filenames,
+	  <code>wc</code> assumes it is supposed to process standard input,
+	  so it just sits there and waits for us to give it some data interactively.
+	  From the outside,
+	  though,
+	  all we see is it sitting there:
+	  the script doesn't appear to do anything.
+	</p>
+
+	<p>
+	  This is not a bug:
+	  it's actually very useful,
+	  because it lets us use our scripts as components in pipelines in their own right.
+	  For example,
+	  we can do this:
+	</p>
+
+<pre>
+$ <span class="in">cat sugar/*.pdb | bash smallest</span>
+</pre>
+
+        <p class="continue">
+	  to concatenate all the molecule data in the <code>sugar</code> directory
+	  into a single stream,
+	  and run it through <code>smallest</code> in one step.
+	  The results aren't particularly useful in this case,
+	  but stepping back,
+	  the fact that we can combine the tools we build to create larger tools,
+	  which can in turn be combined to create even larger tools,
+	  is possibly the single most powerful idea in programming.
+	</p>
+
+      </div>
 
       <p>
         If we want,
