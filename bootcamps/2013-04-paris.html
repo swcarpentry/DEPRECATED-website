@@ -13,7 +13,41 @@
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}
-{% include "_content.html" %}
+<p>
+  <strong>Content:</strong> This boot camp will cover the following topics:
+</p>
+<table>
+  <tr>
+    <td>day 1</td>
+    <td>a.m.</td>
+    <td>...</td>
+    <td>Introduction to Python</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>p.m.</td>
+    <td>...</td>
+    <td>NumPy for scientific computing</td>
+  </tr>
+  <tr>
+    <td>day 2</td>
+    <td>a.m.</td>
+    <td>...</td>
+    <td>Version control using Git</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>p.m.</td>
+    <td>...</td>
+    <td>Testing scientific software</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>.</td>
+    <td></td>
+    <td>Structuring, documenting, and packaging your project</td>
+  </tr>
+</table>
 {% include "_contact.html" %}
 {{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
