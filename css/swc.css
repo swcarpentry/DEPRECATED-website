@@ -120,13 +120,9 @@ div.files {
 div.footer {
     clear: both;
     background: url("/img/main_shadow.png") repeat-x scroll center top #FFFFFF;
-    padding: 10px;
+    padding: 4px 10px 7px 10px;
     border-top: 1px solid #A6A6A6;
-}
-
-/* Bug report link on footer */
-div.footer .bugreport {
-    margin-top: 4px;   /* unseemly hack to centre the text */
+    text-align: right;
 }
 
 .swc-blue-bg {
