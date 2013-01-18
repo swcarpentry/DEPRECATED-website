@@ -86,10 +86,10 @@
       <h2>What and Why</h2>
 
       <div class="understand" id="u:intro">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>Where the shell lies between the computer, the operating system, and the user's programs.</li>
-          <li>When and why command-line interfaces should be used instead of graphical interfaces.</li>
+          <li>Explain using a diagram where the shell lies between the computer, the operating system, and the user's programs.</li>
+          <li>Explain when and why command-line interfaces should be used instead of graphical interfaces.</li>
         </ul>
       </div>
 
@@ -238,16 +238,14 @@
       <h2>Files and Directories</h2>
 
       <div class="understand" id="u:filedir">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>The difference between a file and a directory.</li>
-          <li>The hierarchical organization of directories.</li>
-          <li>The difference between absolute and relative paths.</li>
-          <li>How to navigate the hierarchy.</li>
-          <li>That file suffixes are used to suggest file type.</li>
-          <li>The shell's read-run-print cycle.</li>
-          <li>That commands have options indicated by flags.</li>
-          <li>That tab completion saves time and reduces errors.</li>
+          <li>Explain the similarities and differences between a file and a directory.</li>
+          <li>Translate an absolute path into a relative path and vice versa.</li>
+          <li>Construct absolute and relative paths that identify specific files and directories.</li>
+          <li>Explain the steps in the shell's read-run-print cycle.</li>
+          <li>Identify the actual command, flags, and filenames in a command-line call.</li>
+          <li>Demonstrate the use of tab completion, and explain its advantages.</li>
         </ul>
       </div>
 
@@ -718,6 +716,57 @@ $ <span class="in">ls north-pacific-gyre/</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:filedir">
+        <h3>Challenges</h3>
+        <p>
+          Please refer to <a href="#f:filedir_challenge">Figure XXX</a>
+          when answering the challenges below.
+        </p>
+
+        <figure id="f:filedir_challenge_layout">
+          <img src="img/shell/filedir_challenge.png" alt="File System Layout for Challenge Questions" />
+        </figure>
+
+        <ol class="challenges">
+
+          <li>
+            If <code>pwd</code> displays <code>/users/thing</code>,
+            what will <code class="in">ls ../backup</code> display?
+            <ol class="choices">
+              <li><code class="err">../backup: No such file or directory</code></li>
+              <li><code class="out">2012-12-01 2013-01-08 2013-01-27</code></li>
+              <li><code class="out">2012-12-01/ 2013-01-08/ 2013-01-27/</code></li>
+              <li><code class="out">original pnas_submission pnas_final</code></li>
+            </ol>
+          </li>
+
+          <li>
+            If <code>pwd</code> displays <code>/users/fly</code>,
+            what command will display
+<pre>
+<span class="out">thesis/ papers/ articles/</span>
+</pre>
+            <ol class="choices">
+              <li><code class="in">ls pwd</code></li>
+              <li><code class="in">ls -r -F</code></li>
+              <li><code class="in">ls -r -F /users/fly</code></li>
+              <li>Either #2 or #3 above, but not #1.</li>
+            </ol>
+          </li>
+
+          <li>
+            What does the command <code class="in">cd</code> without a directory name do?
+            <ol class="choice">
+              <li>It has no effect.</li>
+              <li>It changes the working directory to <code>/</code>.</li>
+              <li>It changes the working directory to the user's home directory.</li>
+              <li>It is an error.</li>
+            </ol>
+          </li>
+
+        </ol>
+      </div>
+
     </section>
 
     <section id="s:create">
@@ -725,12 +774,12 @@ $ <span class="in">ls north-pacific-gyre/</span>
       <h2>Creating Things</h2>
 
       <div class="understand" id="u:create">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to create new files and directories.</li>
-          <li>How to delete files and directories.</li>
-          <li>How to copy and rename files and directories.</li>
-          <li>That deleting really does erase things.</li>
+          <li>Create a directory hierarchy that matches a given diagram.</li>
+	  <li>Create files in that hierarchy using an editor or by copying and renaming existing files.</li>
+	  <li>Display the contents of a directory using the command line.</li>
+          <li>Delete specified files and/or directories.</li>
         </ul>
       </div>
 
@@ -829,7 +878,7 @@ $ <span class="in">nano junk</span>
 
       <div class="box">
 
-        <h3>Why Nano?</h3>
+        <h3>Which Editor?</h3>
 
         <p>
           When we say, "<code>nano</code> is a text editor,"
@@ -840,9 +889,25 @@ $ <span class="in">nano junk</span>
           or any other human-friendly media.
           We'll use it in this chapter because
           almost anyone can use it anywhere without training,
-          but we'll use more powerful tools for programming,
-          editing HTML,
-          and so on.
+          but please use something more powerful for real work.
+          On Unix systems (such as Linux and Mac OS&nbsp;X),
+          many programmers use <a href="http://www.gnu.org/software/emacs/">Emacs</a>
+          and <a href="http://www.vim.org/">Vim</a>
+          (neither of which is particularly easy to learn),
+          or a graphical editor such as <a href="http://projects.gnome.org/gedit/">Gedit</a>.
+          On Windows,
+          you may wish to use <a href="http://notepad-plus-plus.org/">Notepad++</a>.
+        </p>
+
+        <p>
+          No matter what editor you use,
+          you will need to know where it searches for and saves files.
+          If you start the editor from a shell,
+          it will (probably) use your current working directory as its default location.
+          If you use your computer's start menu,
+          it may want to save files in your desktop or documents directory instead.
+          You can change this by navigating to another directory
+          the first time you "Save As..."
         </p>
 
       </div>
@@ -1160,6 +1225,53 @@ $
         </ul>
       </div>
 
+      <div class="challenges" id="c:create">
+        <h3>Challenges</h3>
+        <ol class="challenges">
+
+          <li>
+            Suppose that <code class="in">pwd</code> displays <code class="out">/home/thing/data</code>,
+            and that <code class="in">ls</code> displays <code class="out">proteins.dat</code>.
+            What does <code class="in">ls</code> display after the sequence of commands:
+<pre>
+$ <span class="in">mkdir recombine</span>
+$ <span class="in">mv proteins.dat recombine</span>
+$ <span class="in">cp recombine/proteins.dat ../proteins-saved.dat</span>
+</pre>
+            <ol class="choices">
+              <li>Nothing: <code class="in">mv proteins.dat recombine</code> is an error, because <code>recombine</code> already exists.</li>
+              <li><code class="out">recombine</code></li>
+              <li><code class="out">proteins-saved.dat recombine</code></li>
+              <li><code class="out">proteins.dat proteins-saved.dat recombine</code></li>
+            </ol>
+          </li>
+
+          <li>
+            Suppose that <code class="in">ls -F</code> displays:
+<pre>
+<span class="out">analyzed/  fructose.dat    raw/   sucrose.dat</span>
+</pre>
+            What command(s) have to be given <em>before</em> the commands shown below
+            will produce the output shown?
+<pre>
+$ <span class="in">ls</span>
+<span class="out">analyzed   raw</span>
+$ <span class="in">ls analyzed</span>
+<span class="out">fructose.dat    sucrose.dat</span>
+</pre>
+            <ol class="choices">
+              <li><code class="in">mv fructose.dat sucrose.dat analyzed</code></li>
+              <li><code class="in">mv fructose.dat analyzed</code> and <code class="in">mv sucrose.dat analyzed</code> (in either order)</li>
+              <li><code class="in">mv fructose.dat analyzed</code> and <code class="in">mv sucrose.dat analyzed</code> (in either order), and then <code class="in">rm fructose.dat</code> and <code class="in">rm sucrose.dat</code> (in either order)</li>
+              <li><code class="in">cp fructose.dat analyzed</code> and <code class="in">cp sucrose.dat analyzed</code> (in either order), and then <code class="in">rm fructose.dat</code> and <code class="in">rm sucrose.dat</code> (in either order)</li>
+              <li>#1, #2, and #4 above, but not #3.</li>
+              <li>#2 or #3 above, but not #1 or #4.</li>
+            </ol>
+          </li>
+
+        </ol>
+      </div>
+
     </section>
 
     <section id="s:pipefilter">
@@ -1167,15 +1279,15 @@ $
       <h2>Pipes and Filters</h2>
 
       <div class="understand" id="u:pipefilter">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to use wildcards to match filenames.</li>
-          <li>That wildcards are expanded by the shell before commands are run.</li>
-          <li>How to redirect a command's output to a file.</li>
-          <li>How to redirect a command's input from a file.</li>
-          <li>How to use the output of one command as the input to another with a pipe.</li>
-          <li>That combining single-purpose filters with pipes is the most productive way to use the shell.</li>
-          <li>That if a program conforms to Unix conventions, it can easily be combined with others.</li>
+          <li>Write wildcard expressions that select certain subsets of the files in one or more directories.</li>
+          <li>Explain when wildcards are expanded.</li>
+          <li>Redirect a command's output to a file.</li>
+          <li>Process a file instead of keyboard input using redirection.</li>
+          <li>Construct command pipelines with two or more stages.</li>
+	  <li>Explain what usually happens if a program or pipeline isn't given any input to process.</li>
+	  <li>Explain the advantages of Unix's "small pieces, loosely joined" philosophy.</li>
         </ul>
       </div>
 
@@ -1691,6 +1803,90 @@ NENE01971Z.txt    NENE02040Z.txt
         </ul>
       </div>
 
+      <div class="challenges" id="c:pipefilter">
+        <h3>Challenges</h3>
+
+        <p>Suppose that <code class="in">ls -F</code> initially displays:</p>
+<pre>
+<span class="out">analyzed/  fructose.dat    raw/   sucrose.dat</span>
+</pre>
+
+        <ol class="challenges">
+
+          <li>
+            What is the difference between:
+<pre>
+<span class="in">wc -l &lt; *.dat</span>
+</pre>
+            and:
+<pre>
+<span class="in">wc -l *.dat</span>
+</pre>
+            <ol class="choices">
+              <li>Nothing: the two commands produce the same result.</li>
+              <li>There is no difference in output, but the first is more efficient than the second.</li>
+              <li>The first counts all lines together, while the second counts lines per file.</li>
+              <li>The first is an error, because there is no file whose name is literally <code>*.dat</code>.</li>
+            </ol>
+          </li>
+
+          <li>
+            What single command must be used so that after it,
+            <code class="in">ls&nbsp;*</code> will display:
+<pre>
+<span class="out">analyzed:
+fructose.dat    sucrose.dat
+
+raw:</span>
+</pre>
+            <ol class="choices">
+              <li><code class="in">cat *.dat &gt; analyzed</code></li>
+              <li><code class="in">mv *.dat analyzed</code></li>
+              <li><code class="in">ls | analyzed</code></li>
+              <li>None of the above.</li>
+            </ol>
+          </li>
+
+          <li>
+            A file called <code>animals.txt</code> contains the following observations:
+<pre>
+2012-11-05,deer
+2012-11-05,rabbit
+2012-11-05,raccoon
+2012-11-06,rabbit
+2012-11-06,deer
+2012-11-06,fox
+2012-11-07,rabbit
+2012-11-07,bear
+</pre>
+            The command:
+<pre>
+<span class="in">cut -d , -f 2 animals.txt</span>
+</pre>
+            produces the following output:
+<pre>
+deer
+rabbit
+raccoon
+rabbit
+deer
+fox
+rabbit
+bear
+</pre>
+            What other command(s) could be added to this in a pipeline to find out
+            how often each kind of animal had been seen?
+              <ol class="choices">
+                <li><span class="in">cut -d , -f 2 animals.txt | count -c</span></li>
+                <li><span class="in">cut -d , -f 2 animals.txt | sort | uniq</span></li>
+                <li><span class="in">cut -d , -f 2 animals.txt | sort | uniq -c</span></li>
+                <li><span class="in">cut -d , -f 2 animals.txt | uniq | sort | uniq</span></li>
+              </ol>
+          </li>
+
+        </ol>
+      </div>
+
     </section>
 
     <section id="s:loop">
@@ -1698,13 +1894,14 @@ NENE01971Z.txt    NENE02040Z.txt
       <h2>Loops</h2>
 
       <div class="understand" id="u:loop">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to repeat operations using a loop.</li>
-          <li>That the loop variable takes on a different value each time through the loop.</li>
-          <li>The difference between a variable's name and its value.</li>
-          <li>Why spaces and some punctuation characters shouldn't be used in files' names.</li>
-          <li>How to display history and re-use commands.</li>
+          <li>Write a loop that applies one or more commands separately to each file in a set of files.</li>
+	  <li>Trace the values taken on by a loop variable during execution of the loop.</li>
+          <li>Explain the difference between a variable's name and its value.</li>
+          <li>Explain why spaces and some punctuation characters shouldn't be used in files' names.</li>
+          <li>Demonstrate how to see what commands have recently been executed.</li>
+	  <li>Re-run recently executed commands without retyping them.</li>
         </ul>
       </div>
 
@@ -1714,13 +1911,13 @@ NENE01971Z.txt    NENE02040Z.txt
         which is much more powerful,
         is to tell the shell to do something over and over again.
         Suppose we have several hundred genome data files in a directory
-        with names like <code>genome-unicorn.dat</code>,
-        <code>genome-basilisk.dat</code>,
+        with names like <code>basilisk.dat</code>,
+        <code>unicorn.dat</code>,
         and so on.
         Some new files have just arrived,
         so we'd like to rename all the existing ones to
-        <code>original-genome-unicorn.dat</code>,
-        <code>original-genome-basilisk.dat</code>,
+        <code>original-basilisk.dat</code>,
+        <code>original-unicorn.dat</code>,
         etc.
         We can't use:
       </p>
@@ -1746,70 +1943,80 @@ mv basilisk.dat unicorn.dat
       </p>
 
       <p>
-        Here's what we can do instead:
+        What we can do instead is use a <a href="glossary.html#for-loop">for loop</a>,
+        which does something <em>for</em> each thing in a list.
+        Here's a simple example:
       </p>
 
 <pre>
-for filename in *.dat; do mv $filename original-$filename; done
-</pre>
-
-      <p class="continue">
-        If we're typing interactively,
-        we can make this easier to read using carriage returns:
-      </p>
-
-<pre>
-for filename in *.dat
+for filename in basilisk.dat unicorn.dat
 do
-  mv $filename original-$filename
+  head -3 $filename
 done
 </pre>
 
       <p>
-        This is called a <a href="glossary.html#for-loop">for loop</a>,
-        because it does something <em>for</em> each thing in a list.
-        The shell starts by expanding the wildcard pattern <code>*.dat</code> to a list of files,
-        so that this loop is equivalent to:
-      </p>
-
-<pre>
-for filename in genome-basilisk.dat genome-unicorn.dat
-do
-  mv $filename original-$filename
-done
-</pre>
-
-      <p class="continue">
-        It then runs the command inside the loop&mdash;the <code>mv</code>&mdash;once
-        for each name in that list.
+        When the shell sees the keyword <code>for</code>,
+        it knows it is supposed to repeat a command (or group of commands)
+        once for each thing in a list.
+        In this case,
+        the list consists of the two data filenames.
         Each time through the loop,
-        a different filename is assigned to the variable <code>filename</code>.
-        We get the variable's value by putting a <code>$</code> in front of it,
-        so <code>original-$filename</code> is
-        <code>original-basilisk.dat</code> when <code>filename</code> is <code>basilisk.dat</code>,
-        <code>original-unicorn.dat</code> when <code>filename</code> is <code>unicorn.dat</code>,
-        and so on.
+        the name of the file being processed
+        is assigned to the variable <code>filename</code>.
+        Inside the loop,
+        we get the variable's value by putting <code>$</code> in front of it,
+        so the first time through the loop,
+        <code>$filename</code> is <code>basilisk.dat</code>,
+        and the second time,
+        it is <code>unicorn.dat</code>.
+        Finally,
+        the command that's actually being run is our old friend <code>head</code>,
+        so this loop prints out the first three lines of each data file in turn.
       </p>
 
-      <p>
-        Here's another, more complicated, loop:
-      </p>
+      <div class="box">
+
+        <h3>What's In a Name?</h3>
+
+        <p>
+          We have called the variable in this loop <code>filename</code>
+          in order to make its purpose clearer to human readers.
+          The shell itself doesn't care what the variable is called;
+          if we wrote this loop as:
+        </p>
 
 <pre>
-for filename in *.dat
+for x in basilisk.dat unicorn.dat
 do
-  head -100 $filename | tail -20
+  head -3 $x
 done
 </pre>
 
+        <p class="continue">
+          or:
+        </p>
+
+<pre>
+for temperature in basilisk.dat unicorn.dat
+do
+  head -3 $temperature
+done
+</pre>
+
+        <p class="continue">
+          it would work exactly the same way.
+          <em>Don't do this.</em>
+          Programs are only useful if people can understand them,
+          so using meaningless names (like <code>x</code>)
+          or misleading names (like <code>temperature</code>)
+          increases the likelihood of the program being wrong.
+        </p>
+
+      </div>
+
       <p>
-        Again,
-        the loop is executed once for each file.
-        The <a href="glossary.html#loop-body">loop body</a> then selects
-        lines 80-100 from each of those files.
-        It doesn't tell us which file each group of lines is from, though;
-        if we wanted that,
-        we could change the loop to:
+        Here's a slightly more complicated loop:
       </p>
 
 <pre>
@@ -1820,11 +2027,34 @@ do
 done
 </pre>
 
+      <p>
+        The shell starts by expanding <code>*.dat</code>
+        to create the list of files it will process.
+        The <a href="glossary.html#loop-body">loop body</a> then executes two commands
+        for each of those files.
+        The first,
+        <code>echo</code>,
+        just prints its command-line arguments to standard output.
+        For example:
+      </p>
+
+<pre>
+echo hello there
+</pre>
+
       <p class="continue">
-        The <code>echo</code> command just prints its command-line arguments to standard output,
-        so in this case,
-        it just displays the filename.
-        We can't just write:
+        prints:
+      </p>
+
+<pre>
+hello there
+</pre>
+
+      <p>
+        In this case,
+        since the shell expands <code>$filename</code> to be the name of a file,
+        <code>echo $filename</code> just prints the name of the file.
+        Note that we can't write this as:
       </p>
 
 <pre>
@@ -1837,8 +2067,11 @@ done
 
       <p class="continue">
         because then the first time through the loop,
-        when <code>$filename</code> expanded to <code>genome-basilisk.dat</code>,
-        the shell would try to run that file as a program.
+        when <code>$filename</code> expanded to <code>basilisk.dat</code>,
+        the shell would try to run <code>basilisk.dat</code> as a program.
+        Finally,
+        the <code>head</code> and <code>tail</code> combination
+        selects lines 80-100 from whatever file is being processed.
       </p>
 
       <div class="box">
@@ -1846,7 +2079,8 @@ done
         <h3>Spaces in Names</h3>
 
         <p>
-          Loops like these are why you should <em>not</em> use spaces in filenames.
+          Filename expansion in loops is one reason why
+          you should <em>not</em> use spaces in filenames.
           Suppose our data files are named:
         </p>
 
@@ -1863,6 +2097,7 @@ unicorn.dat
 <pre>
 for filename in *.dat
 do
+  echo $filename
   head -100 $filename | tail -20
 done
 </pre>
@@ -1900,6 +2135,85 @@ unicorn.dat
         </p>
 
       </div>
+
+      <p>
+        Going back to our original file renaming problem,
+        we can solve it using this loop:
+      </p>
+
+<pre>
+for filename in *.dat
+do
+  mv $filename original-$filename
+done
+</pre>
+
+      <p>
+        This loop runs the <code>mv</code> command once for each filename.
+        The first time,
+        when <code>$filename</code> expands to <code>basilisk.dat</code>,
+        the shell executes:
+      </p>
+
+<pre>
+mv basilisk.dat original-basilisk.dat
+</pre>
+
+      <p class="continue">
+        The second time,
+        the command is:
+      </p>
+
+<pre>
+mv unicorn.dat original-unicorn.dat
+</pre>
+
+        <div class="box">
+
+          <h3>Measure Twice, Run Once</h3>
+
+          <p>
+            A loop is a way to do many things at once&mdash;or
+            to make many mistakes at once
+            if it does the wrong thing.
+            One way to check what a loop <em>would</em> do is
+            to echo the commands it would run
+            instead of actually running them.
+            For example,
+            we could write our file renaming loop like this:
+          </p>
+
+<pre>
+for filename in *.dat
+do
+  <span class="highlight">echo</span> mv $filename original-$filename
+done
+</pre>
+
+          <p>
+            Instead of running <code>mv</code>,
+            this loop runs <code>echo</code>,
+            which prints out:
+          </p>
+
+<pre>
+mv basilisk.dat original-basilisk.dat
+mv unicorn.dat original-unicorn.dat
+</pre>
+
+          <p class="continue">
+            <em>without</em> actually running those commands.
+            We can then use up-arrow to redisplay the loop,
+            back-arrow to get to the word <code>echo</code>,
+            delete it,
+            and then press "enter" to run the loop
+            with the actual <code>mv</code> commands.
+            This isn't foolproof,
+            but it's a handy way to see what's going to happen
+            when you're still learning how loops work.
+          </p>
+
+        </div>
 
       <section>
 
@@ -2067,6 +2381,147 @@ $ <span class="in">$ history | tail -5</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:loop">
+        <h3>Challenges</h3>
+
+        <p>Suppose that <code class="in">ls</code> initially displays:</p>
+<pre>
+<span class="out">fructose.dat    glucose.dat   sucrose.dat</span>
+</pre>
+
+        <ol class="challenges">
+
+          <li>
+            What is the output of:
+<pre>
+for datafile in *.dat
+do
+    ls *.dat
+done
+</pre>
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+              <tr>
+                <td>
+<pre>
+fructose.dat
+glucose.dat
+sucrose.dat
+</pre>
+                </td>
+                <td>
+<pre>
+fructose.dat
+fructose.dat
+fructose.dat
+</pre>
+                </td>
+                <td>
+<pre>
+fructose.dat glucose.dat sucrose.dat
+fructose.dat glucose.dat sucrose.dat
+fructose.dat glucose.dat sucrose.dat
+</pre>
+                </td>
+                <td>
+                  None of the above.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            The <code>expr</code> does simple arithmetic using command-line arguments:
+<pre>
+$ <span class="in">expr 3 + 5</span>
+<span class="out">8</span>
+$ <span class="in">expr 30 / 5 - 2</span>
+<span class="out">4</span>
+</pre>
+            Given this,
+            what is the output of:
+<pre>
+for left in 2 3
+do
+  for right in $left
+  do
+    expr $left + $right
+  done
+done
+</pre>
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+              <tr>
+                <td>
+<pre>
+4
+5
+5
+6
+</pre>
+                </td>
+                <td>
+<pre>
+4
+6
+</pre>
+                </td>
+                <td>
+<pre>
+left
+left right
+</pre>
+                </td>
+                <td>
+                  An error.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            In a directory with the same three sugar file names,
+            what does this command do?
+
+<pre>
+for sugar in *.dat
+do
+  echo $sugar
+  cat $sugar &gt; xylose.dat
+done
+</pre>
+            <ol class="choices">
+              <li>
+                Prints <code>fructose.dat</code>, <code>glucose.dat</code>, and <code>sucrose.dat</code>,
+                and copies <code>sucrose.dat</code> to create <code>xylose.dat</code>.
+              </li>
+              <li>
+                Prints <code>fructose.dat</code>, <code>glucose.dat</code>, and <code>sucrose.dat</code>,
+                and concatenates all three files to create <code>xylose.dat</code>.
+              </li>
+              <li>
+                Prints <code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>, and <code>xylose.dat</code>,
+                and copies <code>sucrose.dat</code> to create <code>xylose.dat</code>.
+              </li>
+              <li>
+                None of the above.
+              </li>
+            </ol>
+          </li>
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:scripts">
@@ -2074,11 +2529,12 @@ $ <span class="in">$ history | tail -5</span>
       <h2>Shell Scripts</h2>
 
       <div class="understand" id="u:scripts">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to store shell commands in a file for re-use.</li>
-          <li>How to run a shell script.</li>
-          <li>How to pass filenames into a shell script.</li>
+          <li>Write a shell script that runs a command or series of commands for a fixed set of files.</li>
+          <li>Run a shell script from the command line.</li>
+          <li>Write a shell script that operates on a set of files defined by the user on the command line.</li>
+	  <li>Create pipelines that include user-written shell scripts.</li>
         </ul>
       </div>
 
@@ -2140,6 +2596,67 @@ $ <span class="in">bash smallest *.txt</span>
 2718 thesis.txt</span>
 $
 </pre>
+
+      <div class="box">
+
+        <h3>Why Isn't It Doing Anything?</h3>
+
+        <p>
+          What happens if a script is supposed to process a bunch of files,
+          but we don't give it any filenames?
+          For example,
+          what if we type:
+        </p>
+
+<pre>
+$ <span class="in">bash smallest</span>
+</pre>
+
+        <p class="continue">
+          but don't say <code>*.txt</code> (or anything else)?
+          In this case,
+          <code>$*</code> expands to nothing at all,
+          so the pipeline inside the script is effectively:
+        </p>
+
+<pre>
+wc -l | sort -n
+</pre>
+
+        <p class="continue">
+          Since it doesn't have any filenames,
+          <code>wc</code> assumes it is supposed to process standard input,
+          so it just sits there and waits for us to give it some data interactively.
+          From the outside,
+          though,
+          all we see is it sitting there:
+          the script doesn't appear to do anything.
+        </p>
+
+        <p>
+          This is not a bug:
+          it's actually very useful,
+          because it lets us use our scripts as components in pipelines in their own right.
+          For example,
+          we can do this:
+        </p>
+
+<pre>
+$ <span class="in">cat sugar/*.pdb | bash smallest</span>
+</pre>
+
+        <p class="continue">
+          to concatenate all the molecule data in the <code>sugar</code> directory
+          into a single stream,
+          and run it through <code>smallest</code> in one step.
+          The results aren't particularly useful in this case,
+          but stepping back,
+          the fact that we can combine the tools we build to create larger tools,
+          which can in turn be combined to create even larger tools,
+          is possibly the single most powerful idea in programming.
+        </p>
+
+      </div>
 
       <p>
         If we want,
@@ -2281,6 +2798,89 @@ done
         </ul>
       </div>
 
+      <div class="challenges" id="c:scripts">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            Suppose that <code class="in">ls</code> displays:
+<pre>
+<span class="out">display.sh    fructose.dat    glucose.dat   sucrose.dat</span>
+</pre>
+            What must <code>display.sh</code> contain in order for:
+<pre>
+$ <span class="in">bash display.sh *.dat</span>
+</pre>
+            to display each sugar data file exactly once (and nothing else)?
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+              <tr>
+                <td>
+<pre>
+echo *.*
+</pre>
+                </td>
+                <td>
+<pre>
+for filename in $1 $2 $3
+do
+  cat $filename
+done
+</pre>
+                </td>
+                <td>
+<pre>
+echo $*.dat
+</pre>
+                </td>
+                <td>
+                  None of the above.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            Nelle wants to save the last five commands she ran as a shell script to re-use later.
+            She runs:
+<pre>
+$ <span class="in">history | tail -5 &gt; redo-last-5.sh</span>
+</pre>
+            To test it out, she then runs:
+<pre>
+$ <span class="in">bash redo-last-5.sh</span>
+</pre>
+            What happens?
+            <ol class="choices">
+              <li>
+                The five commands she wanted to re-run are re-run.
+              </li>
+              <li>
+                Only the last <em>four</em> commands are re-run,
+                because the command <code>history</code> is also saved in <code>redo-last-5.sh</code>.
+              </li>
+              <li>
+                No commands are re-run,
+                because <code>redo-last-5.sh</code> also contains the serial numbers of commands
+                (which aren't legally commands themselves).
+              </li>
+              <li>
+                Each time she runs this,
+                the most recent five commands are replayed
+                (whether they're the five she originally wanted to save or not).
+              </li>
+            </ol>
+          </li>
+
+        </ol>
+      </div>
+
     </section>
 
     <section id="s:find">
@@ -2288,12 +2888,12 @@ done
       <h2>Finding Things</h2>
 
       <div class="understand" id="u:find">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to select lines matching patterns in text files.</li>
-          <li>How to find files with certain properties.</li>
-          <li>How to use one command's output as arguments to another command.</li>
-          <li>The difference between text files and binary files.</li>
+          <li>Use <code>grep</code> to select lines from text files that match simple patterns.</li>
+          <li>Use <code>find</code> to find files whose names match simple patterns.</li>
+          <li>Use the output of one command as the command-line arguments to another command.</li>
+          <li>Explain what is meant by "text" and "binary" files, and why many common tools don't handle the latter well.</li>
         </ul>
       </div>
 
@@ -2960,6 +3560,124 @@ $ <span class="in">bash pairwise.sh stats-*.txt > top100.txt</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:find">
+
+        <ol class="challenges">
+
+          <li>
+            Which description most accurately explains what the following pipeline does?
+<pre>
+find . -name '*.dat' -print | wc -l | sort -n
+</pre>
+            <ol class="choices">
+              <li>
+                Display the number of lines in each data file in or below the current directory,
+                ordered numerically from longest to shortest.
+              </li>
+              <li>
+                Display a single line showing the total number of lines in all data files
+                in or below the current directory.
+              </li>
+              <li>
+                Display the number of data files in order below the current directory.
+              </li>
+              <li>
+                None of the above.
+              </li>
+            </ol>
+          </li>
+
+          <li>
+            The <code>-v</code> flag to <code>grep</code> inverts pattern matching,
+            so that only lines which do <em>not</em> match the pattern are printed.
+            Given that,
+            which of the following commands will find all files in <code>/data</code>
+            whose names end in <code>ose.dat</code>
+            (e.g., <code>sucrose.dat</code> or <code>maltose.dat</code>),
+            but do <em>not</em> contain the word <code>temp</code>?
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+              <tr>
+                <td>
+<pre>
+find /data -name '*.dat' -print | grep ose | grep -v temp
+</pre>
+                </td>
+                <td>
+<pre>
+find /data -name ose.dat -print | grep -v temp
+</pre>
+                </td>
+                <td>
+<pre>
+grep -v temp $(find /data -name '*ose.dat' -print)
+</pre>
+                </td>
+                <td>
+                  None of the above.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            Nelle has saved the IDs of some suspicious observations
+            in a file called <code>maybe-faked.txt</code>:
+<pre>
+NENE01909C
+NEMA04220A
+NEMA04301A
+</pre>
+            Which of the following scripts will search all of the <code>.txt</code> files
+            whose names begin with <code>NE</code>
+            for references of these records?
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+              <tr>
+                <td>
+<pre>
+for pat in maybe-faked.txt
+do
+    find . -name 'NE*.txt' -print | grep $pat
+done
+</pre>
+                </td>
+                <td>
+<pre>
+for pat in $(cat maybe-faked.txt)
+do
+    grep $pat $(find . -name 'NE*.txt' -print)
+done
+</pre>
+                </td>
+                <td>
+<pre>
+for pat in $(cat maybe-faked.txt)
+do
+    find . -name 'NE*.txt' -print | grep $pat
+done
+</pre>
+                </td>
+                <td>
+                  None of the above.
+                </td>
+              </tr>
+            </table>
+          </li>
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:summary">
@@ -2982,8 +3700,6 @@ $ <span class="in">bash pairwise.sh stats-*.txt > top100.txt</span>
 {% endblock content %}
 
 <!--
-good intro for users with some experience
-
 where do the text editors live? can they only be accessed through the terminal? why are there so many of them when they seem pretty much the same?
 
 mv is confusing - from the GUI you think of moving "physical" files because you drag and drop; my original intuition was that mv would work like cp - perhaps another sentence in the explanation could clarify this.
