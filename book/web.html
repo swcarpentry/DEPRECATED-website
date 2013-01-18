@@ -10,8 +10,10 @@
       <li><a href="#s:formatting">Formatting Rules</a></li>
       <li><a href="#s:attributes">Attributes</a></li>
       <li><a href="#s:morehtml">More HTML</a></li>
-      <li><a href="#s:processing">Processing HTML and XML</a></li>
-      <li><a href="#s:search">Finding Nodes</a></li>
+      <li><a href="#s:reading">Reading Documents</a></li>
+      <li><a href="#s:search">Finding Things in Documents</a></li>
+      <li><a href="#s:creating">Creating Documents</a></li>
+      <li><a href="#s:templating">A Better Way to Create Documents</a></li>
       <li><a href="#s:http">How the Web Works</a></li>
       <li><a href="#s:client">Getting Data</a></li>
       <li><a href="#s:server">Providing Data</a></li>
@@ -38,7 +40,6 @@
       our experience has shown that all we can do in the time we have
       is show you how to create security holes,
       which we're reluctant to do.
-      <!-- CC: The preceding sentence is confusing; is it entirely necessary. If so, can it be rewritten?-->
       However,
       everything in this chapter is a prerequisite for doing that,
       and there are lots of other good tutorials available
@@ -62,7 +63,7 @@
         To start,
         let's have another look at the hearing tests from
         <a href="python.html">our chapter on Python programming</a>.
-        The easiest way to store their <!-- CC: suggestion: those --> results is to put them in a plain text file
+        Most people would probably store these results in a plain text file
         with one row for each test:
       </p>
 
@@ -76,11 +77,11 @@ Date         Experimenter        Subject          Test       Score
 </pre>
 
       <p>
-        This is easy for a human being to read,
-        not least because it looks exactly like what
-        a conscientious researcher would write in a lab notebook.
+        This is pretty much what a conscientious researcher would write in a lab notebook,
+        and is easy for a human being to read.
         It's a lot harder for a computer to understand, though.
-        A program would have to know that the first line of the file contains column titles,
+        Any program that wanted to load this data
+        would have to know that the first line of the file contains column titles,
         that the second can be ignored,
         that the first field of each row thereafter should be translated from text into a date,
         that the fields after that start in particular columns
@@ -88,9 +89,9 @@ Date         Experimenter        Subject          Test       Score
         and the number of spaces inside names can also vary&mdash;compare
         "A.&nbsp;Binet" with "C.&nbsp;S.&nbsp;Pierce"),
         and so on.
-        Such a program would not be particularly hard to write,
-        but having to write a new program for each set of test results
-        would quickly become tedious.
+        Such a program would not be hard to write,
+        but having to write, debug, and maintain a separate program for each data set
+        would be tedious.
       </p>
 
       <p>
@@ -119,9 +120,8 @@ Date         Experimenter        Subject          Test       Score
         (the physicist, not the geologist)
         and Princeton (the university, not the glacier),
         we might have to wade through a lot of false matches.
-        What we need is an unambiguous way to tell a computer
-        what the meanings of various words in each document are.
-        <!-- CC: awkward sentence structure -->
+        What we need is some way to explicitly tell a computer
+        all the things that human beings are able to infer.
       </p>
 
       <p>
@@ -130,10 +130,10 @@ Date         Experimenter        Subject          Test       Score
         the <a href="glossary.html#sgml">Standard Generalized Markup Language</a>, or SGML.
         It was designed as a way of adding extra data
         to medical and legal documents so that programs could search them more accurately.
-        It was a very complex specification (over 500 pages long),
+        SGML was very complex (the specification is over 500 pages long),
         and unless you were a specialist,
         you probably didn't even know it existed:
-        all you saw was the query program built on top of it.
+        all you saw were the programs that used it.
       </p>
 
       <p>
@@ -142,46 +142,40 @@ Date         Experimenter        Subject          Test       Score
         for his new "World Wide Web".
         HTML looked superficially the same as SGML, but it was much (much) simpler:
         almost anyone could write it, so almost everyone did.
-        However, HTML had a small vocabulary that users could not change or extend.
+        However, HTML only had a small vocabulary,
+        which users could not change or extend.
         They could say, "This is a paragraph," or, "This is a table,"
         but not, "This is a chemical formula," or, "This is a person's name."
       </p>
 
       <p>
         Instead of adding thousands of new terms for different application domains,
-        a new standard for <em>defining</em> terms was created.
-        These rules,
-        called the <a href="glossary.html#xml">Extensible Markup Language</a> (XML),
-        were standardized in 1998.
-        They are much more complex than HTML,
+        a new standard for <em>defining</em> terms was created in 1998.
+        This standard is called the
+        <a href="glossary.html#xml">Extensible Markup Language</a> (XML);
+        it's much more complex than HTML,
         but still simpler than SGML,
-        and hundreds of specialized vocabularies have now been defined in terms of XML.
+        and hundreds of specialized vocabularies have now been defined in terms of it.
       </p>
 
+      <p class="fixme">make analogy between XML and defining functions</p>
+
       <p>
-        Just to confuse things,
-        along with the XML standard
-        came a new version of HTML called XHTML
-        that re-defined things people were already using in strict XML terms.
-        <!-- CC: Not sure you want to use phrases like "to confuse things" because it sets people up to think that the information contained within it is hard or complicated. -->
-        It never became as popular as its creators hoped,
-        so yet another standard called HTML5 was created.
-        It's currently a very hot topic,
-        primarily because the combination of it and Javascript
-        allows developers to create fancy cross-platform user interfaces.
-        <!-- CC: Will your users understand what you mean by fancy, cross-platform user interfaces? -->
+        More recently,
+        a new version of HTML called HTML5 has been created.
+        Web programmers are very excited about it,
+        primarily because its new features allow them to create
+        sophisticated user interfaces that run on smart phones and tablets as well as conventional computers.
         In what follows,
         though,
-        we'll ignore most of that
-        and concentrate on basics that haven't changed (much) in 20 years.
-        <!-- CC: perhaps focus on what's going to be covered, "For our purposes here, though, we'll concentrate on some basics that haven't changed (much) in 20 years." -->
+        we'll focus on some basics that haven't changed (much) in 20 years.
       </p>
 
       <div class="keypoints" id="k:history">
         <h3>Summary</h3>
         <ul>
           <li>Structured data is much easier for machines to process than unstructured data.</li>
-          <li>Markup languages like SGML, HTML, and XML can be used to add semantic information to text.</li>
+          <li>Markup languages like HTML and XML can be used to add semantic information to text.</li>
         </ul>
       </div>
 
@@ -205,25 +199,19 @@ Date         Experimenter        Subject          Test       Score
         and <a href="glossary.html#text">text</a>.
         (The full specification allows for many other things
         with names like "external entity references" and "processing instructions",
-        but we will ignore them.)
-        The text in a document is its main content.
-        As far as HTML is concerned, text has no intrinsic meaning:
+        but we'll ignore them.)
+        The text in a document is just character data,
+        and as far as HTML is concerned, it has no intrinsic meaning:
         "Feynman" is just seven characters,
         not a person.
       </p>
 
       <p>
-        Elements are <a href="glossary.html#metadata">metadata</a>:
-        they describe the meaning of the document's content.
+        Elements are <a href="glossary.html#metadata">metadata</a>
+        that describe the meaning of the document's content.
         For example,
         one element might indicate a heading,
-        while another might signal that its text is a cross-reference or a person's name.
-        Elements usually,
-        but don't always,
-        contain text.
-        For example,
-        a caption element might contain the text,
-        "Figure 9: Division by Zero".
+        while another might signal that something is a cross-reference or a person's name.
       </p>
 
       <p>
@@ -269,12 +257,28 @@ Date         Experimenter        Subject          Test       Score
         </tr>
       </table>
 
-      <p class="continue">
-        And here is a simple HTML document that uses them:
+      <p>
+        Finally,
+        every well-formed document started with a <code>DOCTYPE</code> declaration,
+        which looks like:
       </p>
 
 <pre>
-&lt;html&gt;&lt;body&gt;&lt;h1&gt;Dimorphism&lt;/h1&gt;&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+&lt;!DOCTYPE html&gt;
+</pre>
+
+      <p class="continue">
+        This tells programs what kind of elements are allowed to appear in the document:
+        'html' (by far the most common case),
+        'math' for MathML,
+        and so on.
+        Here is a simple HTML document that uses everything we've seen so far:
+      </p>
+
+      <p class="continue">
+
+<pre>
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Dimorphism&lt;/h1&gt;&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
 </pre>
 
       <p>
@@ -290,21 +294,29 @@ Date         Experimenter        Subject          Test       Score
         A phone,
         for example,
         might use a different background color for the heading,
-        while a screen reader might read the text aloud for someone with visual disabilities.
+        while a screen reader for someone with visual disabilities would read the text aloud.
       </p>
 
       <p>
-        Different presentations are possible because
-        HTML helps separate content from presentation,
-        or in computer science terms,
-        <a href="glossary.html#model">models</a> from <a href="glossary.html#view">views</a>.
+        These different presentations are possible because
+        HTML separates content from presentation,
+        or in computer science jargon,
+        separates <a href="glossary.html#model">models</a> from <a href="glossary.html#view">views</a>.
         The model is the data itself;
         the view is how that data is displayed,
-        such as a particular pattern of light and dark pixels on our screen
+        such as a particular pattern of pixels on our screen
         or a particular sequence of sounds on our headphones.
-        Elements tell a computer what different pieces of text mean;
-        the computer can then decide what view to use to display the information.
+        A given model may be viewed in many different ways,
+        just as what files are on your hard drive
+        can be viewed as a list,
+        as snapshots,
+        or as a hierarchical tree
+        (<a href="#f:filesystem_views">Figure XXX</a>).
       </p>
+
+      <figure id="f:filesystem_views">
+        <img src="img/web/filesystem_views.png" alt="Different Views of a File System" />
+      </figure>
 
       <p>
         People can construct models from views almost effortlessly&mdash;if you are able to read,
@@ -324,55 +336,57 @@ Date         Experimenter        Subject          Test       Score
         Computers,
         on the other hand,
         are very bad at reconstructing models from views.
-        In fact, many of the things we do without apparent effort,
+        In fact,
+        many of the things we do without apparent effort,
         like understanding sentences,
         are still open research problems in computer science.
-        That's the real reason markup languages were invented:
-        they allow us to specify semantic information&mdash;the "what" that we infer so easily&mdash;in
-        ways that computers can work with.
+        That's why markup languages were invented:
+        they allow us to explicitly specify the "what" that we infer so easily
+        for computers' benefit.
       </p>
 
       <p>
-        There are a few other formatting rules we need to know
+        There are a couple of other formatting rules we need to know
         in order to create and understand documents.
         If we are writing HTML by hand
-        instead of using a <a href="glossary.html#wysiwyg">WYSIWYG</a> editor,
-        <!-- CC: will this be understandable to newbies?-->
+        instead of using a <a href="glossary.html#wysiwyg">WYSIWYG</a> editor
+        like LibreOffice or Microsoft Word,
         we might lay it out like this to make it easier to read:
       </p>
 
 <pre>
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Dimorphism&lt;/h1&gt;
-    &lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
-  &lt;/body&gt;
+<span class="highlight">  </span>&lt;body&gt;
+<span class="highlight">    </span>&lt;h1&gt;Dimorphism&lt;/h1&gt;
+<span class="highlight">    </span>&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
+<span class="highlight">  </span>&lt;/body&gt;
 &lt;/html&gt;
 </pre>
 
       <p class="continue">
         Doing this doesn't change how most browsers render the document,
-        since they usually ignore "extra" whitespace.
+        since they usually ignore "extra" whitespace
+        (highlighted above).
+        <span class="fixme">refer back to 'highlight' later when talking about CSS and semantic separation</span>
         As we'll see when we start writing programs of our own, though,
         that whitespace doesn't magically disappear when a program reads the document in,
         so at some point we have to decide what to do with it.
       </p>
 
-      <p id="a:single-tag">
-        A second formatting rule is that
-        if the element doesn't contain anything,
-        we can write it using the short form <code>&lt;cite/&gt;</code>
-        instead of <code>&lt;cite&gt;&lt;/cite&gt;</code>.
-        We'll see examples of empty elements <a href="#a:empty-element">later</a>.
-        <!-- CC: perhaps explain why this shorthand method is useful to coders? -->
-      </p>
-
       <p>
-        Finally,
+        Second,
         we must use <a href="glossary.html#escape-sequence">escape sequences</a>
-        to represent the special characters <code>&lt;</code> and <code>&gt;</code>.
-        These are just like the backslashed escape sequences we use
-        to represent quotation marks in strings in programs.
+        to represent the special characters <code>&lt;</code> and <code>&gt;</code>
+        for the same reason that we have to use <code>\&quot;</code>
+        inside a double-quoted string in a program.
+        <span class="fixme">where do we explain escape sequences?</span>
+        In HTML and XML,
+        an escape sequence is an ampersand '&amp;'
+        followed by the abbreviated name of the character
+        (such as 'amp' for "ampersand")
+        and a semi-colon.
+        The four most common escape sequences are:
       </p>
 
       <table>
@@ -407,12 +421,30 @@ Date         Experimenter        Subject          Test       Score
         For example,
         we could draw the logical structure of our little document
         as shown in <a href="#f:very_simple_tree">Figure XXX</a>.
-        We will use this fact when we start writing programs.
       </p>
 
       <figure id="f:very_simple_tree">
         <img src="img/web/very_simple_tree.png" alt="Tree View of a Very Simple Web Page" />
       </figure>
+
+      <p>
+        A document like this, on the other hand, is not strictly legal:
+      </p>
+
+<pre>
+&lt;h1&gt;Dimorphism&lt;/h1&gt;
+&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
+</pre>
+
+      <p class="continue">
+        because it has two top-level elements
+        (the <code>h1</code> and the <code>p</code>).
+        Most browsers will render it correctly,
+        since they're designed to accommodate improperly-formatted HTML,
+        but most programs won't,
+        because they're not.
+        <span class="fixme">mention BeautifulSoup?</span>
+      </p>
 
       <div class="keypoints" id="k:formatting">
         <h3>Summary</h3>
@@ -442,7 +474,7 @@ Date         Experimenter        Subject          Test       Score
 
       <p>
         Elements can be customized by giving them <a href="glossary.html#attribute">attributes</a>.
-        These are name/value pairs enclosed in the opening tag such as:
+        These are name/value pairs enclosed in the opening tag like this:
       </p>
 
 <pre>
@@ -461,10 +493,9 @@ Date         Experimenter        Subject          Test       Score
         Any particular attribute name may appear at most once in any element,
         just like keys may be present at most once in a <a href="setdict.html#s:dict">dictionary</a>,
         so <code>&lt;p align="left" align="right"&gt;&hellip;&lt;/p&gt;</code> is illegal.
-        Attributes' values <em>must</em> be in quotes in XML,
-        but since old-style browsers accept unquoted values like <code>&lt;p align=center&gt;&hellip;&lt;p&gt;</code>,
-        HTML5 allows single-word values to be unquoted.
-        <!-- CC: do you want to encourage folks to always quote attributes? if so, you might want to suggest that here -->
+        Attributes' values <em>must</em> be in quotes in XML;
+        HTML5 allows single-word values to be unquoted,
+        but quoting is still recommended.
       </p>
 
       <p>
@@ -492,99 +523,58 @@ Date         Experimenter        Subject          Test       Score
         mean the same thing.
       </p>
 
-      <p>
-        When should we use attributes, and when should we nest elements?
-        As a general rule,
-        we should use attributes when:
-      </p>
+      <div class="box">
+        <h3>Attributes vs. Nested Elements</h3>
 
-      <ul>
+        <p>
+          When should we use attributes, and when should we nest elements?
+          As a general rule,
+          we should use attributes when:
+        </p>
 
-        <li>
-          each value can occur at most once for any element;
-        </li>
+        <ul>
 
-        <li>
-          the order of the values doesn't matter; and
-        </li>
+          <li>
+            each value can occur at most once for any element;
+          </li>
 
-        <li>
-          those values have no internal structure,
-          i.e.,
-          we will never need to parse an attribute's value
-          in order to understand it.
-        </li>
+          <li>
+            the order of the values doesn't matter; and
+          </li>
 
-      </ul>
+          <li>
+            those values have no internal structure,
+            i.e.,
+            we will never need to parse an attribute's value
+            in order to understand it.
+          </li>
 
-      <p class="continue">
-        In all other cases, we should use nested elements.
-        However, many widely-used XML formats break these rules
-        in order to make it easier for people to write XML by hand.
-        For example,
-        in the Scalable Vector Graphics (SVG) format used to describe images as XML,
-        we would define a rectangle as follows:
-      </p>
+        </ul>
+
+        <p class="continue">
+          In all other cases, we should use nested elements.
+          However, many widely-used XML formats break these rules
+          in order to make it easier for people to write XML by hand.
+          For example,
+          in the Scalable Vector Graphics (SVG) format used to describe images as XML,
+          we would define a rectangle as follows:
+        </p>
 
 <pre>
 &lt;rect width="300" height="100" style="fill:rgb(0,0,255); stroke-width:1; stroke:rgb(0,0,0)"/&gt;
 </pre>
 
-      <p class="continue">
-        In order to understand the <code>style</code> attribute,
-        a program has to somehow know to split it on semicolons,
-        and then to split each piece on colons.
-        This quirky extra parsing wouldn't be required if the rectangle was written as:
-      </p>
+        <p class="continue">
+          In order to understand the <code>style</code> attribute,
+          a program has to somehow know to split it on semicolons,
+          and then to split each piece on colons.
+          This means that general-purpose programs for handling XML
+          can't extract all the information that's implicit in SVG,
+          which partly defeats the purpose of using XML in the first place.
+          <span class="fixme">compare to database rules: no internal structure in columns</span>
+        </p>
 
-<pre>
-&lt;rect width="300" height="100"&gt;
-  &lt;fill&gt;
-    &lt;red value="0"&gt;
-    &lt;green value="0"&gt;
-    &lt;blue value="255"&gt;
-  &lt;fill&gt;
-  &lt;stroke-width value="1"&gt;
-  &lt;stroke&gt;
-    &lt;red value="0"&gt;
-    &lt;green value="0"&gt;
-    &lt;blue value="0"&gt;
-  &lt;stroke&gt;
-&lt;rect&gt;
-</pre>
-
-      <p class="continue">
-        but that's obviously a lot more work for a human being to type in (or read).
-        Even then, one could argue that some "special" knowledge is required
-        to translate the string <code>"0"</code> into the integer 0,
-        and that this should be written something like this:
-      </p>
-
-<pre>
-&lt;rect&gt;
-  &lt;width type="int" value="300"/&gt;
-  &lt;height type="int" value="100"/&gt;
-  &lt;fill&gt;
-    &lt;red type="int" value="0"/&gt;
-    &lt;green type="int" value="0"/&gt;
-    &lt;blue type="int" value="255"/&gt;
-  &lt;/fill&gt;
-  &lt;stroke-width type="int" value="1"/&gt;
-  &lt;stroke&gt;
-    &lt;red type="int" value="0"/&gt;
-    &lt;green type="int" value="0"/&gt;
-    &lt;blue type="int" value="0"/&gt;
-  &lt;/stroke&gt;
-&lt;/rect&gt;
-</pre>
-
-      <p class="continue">
-        As always,
-        designers must try to strike a balance between pragmatism and purity.
-        As the airplane designer Donald Douglas once said,
-        "Not everything worth doing is worth doing right."
-        <!-- CC: this section is a bit confusing; what are you hoping students will understand by learning about these workarounds? -->
-      </p>
+      </div>
 
       <div class="keypoints" id="k:attributes">
         <h3>Summary</h3>
@@ -604,78 +594,15 @@ Date         Experimenter        Subject          Test       Score
       <div class="understand" id="u:morehtml">
         <h3>Understand:</h3>
         <ul>
-          <li>That metadata should go in the document's head.</li>
           <li>How to add lists, tables, images, and links to HTML.</li>
+          <li>That metadata should go in the document's head.</li>
         </ul>
       </div>
 
       <p>
-        Well-written HTML pages have a <code>head</code> element as well as a <code>body</code>,
-        and that head should contain <a href="glossary.html#metadata">metadata</a> about the page.
-        The most common element inside <code>head</code> is <code>title</code>,
-        which,
-        as its name suggests,
-        gives the page's title.
-        Another common item is <code>meta</code>,
-        whose two attributes <code>name</code> and <code>content</code>
-        allow authors to embed arbitrary information in their pages.
-        If we add these to the web page we wrote earlier,
-        we might have:
-      </p>
-
-<pre>
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Dimorphism Defined&lt;title&gt;
-    &lt;meta name="author" content="Alan Turing"/&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Dimorphism&lt;/h1&gt;
-    &lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</pre>
-
-      <p class="continue">
-        The text "Dimorphism Defined" does not show up anywhere in the web page,
-        but most browsers will display it the title bar,
-        and search engines use it
-        and the information in <code>meta</code> elements
-        to figure out what the page is about.
-      </p>
-
-      <p id="p:hide-paragraph">
-        Well-written pages also use comments (just like code).
-        These start with <!--, and end with, --> <code>&lt;!--</code>, and end with <code>--&gt;</code>,
-        and cannot be nested
-        (which means that commenting out a region that already includes a commented-out region
-        may have unexpected consequences).
-        Well-written pages do <em>not</em> put content in comments&mdash;not even
-        content that isn't supposed to be displayed,
-        since programs may or may not have access to such material.
-        A better way to hide something is to tell the browser not to display it:
-      </p>
-
-<pre src="src/web/hide_paragraph.html">
-&lt;html&gt;
-  &lt;body&gt;
-    &lt;p&gt;this is visible&lt;/p&gt;
-    &lt;p style="display:none"&gt;this is not&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</pre>
-
-      <img src="img/web/hide_paragraph.png" alt="Hiding a Paragraph"/>
-
-      <p class="continue">
-        An even better way is to use Cascading Style Sheets, or CSS,
-        which we will discuss in the <a href="ref.html#s:css">appendix</a>.
-        Before then,
-        though,
-        let's look at a few more things we can put in our documents.
-      </p>
-
-      <p>
+        As anyone who has surfed the web has seen,
+        web pages can contain a lot more than just headings and paragraphs.
+        To start with,
         HTML provides two kinds of lists:
         <code>ul</code> to mark an unordered (bulleted) list,
         and <code>ol</code> for an ordered (numbered) one.
@@ -683,6 +610,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre src="src/web/nested_lists.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;ul&gt;
@@ -709,14 +637,51 @@ Date         Experimenter        Subject          Test       Score
         Note how elements are nested:
         since the ordered lists "belong" to the unordered list items above them,
         they are inside those items' <code>&lt;li&gt;&hellip;&lt;/li&gt;</code> tags.
+        And remember,
+        the indentation used to make this list easier for people to read
+        means nothing to the computer:
+        we could put the whole thing on one line,
+        or write it as:
+      </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;ul&gt;
+    &lt;li&gt;A. Binet
+  &lt;ol&gt;
+    &lt;li&gt;H. Ebbinghaus&lt;/li&gt;
+    &lt;li&gt;W. Wundt&lt;/li&gt;
+  &lt;/ol&gt;
+    &lt;/li&gt;
+    &lt;li&gt;C. S. Pierce
+  &lt;ol&gt;
+    &lt;li&gt;W. Wundt&lt;/li&gt;
+  &lt;/ol&gt;
+    &lt;/li&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+      <p class="continue">
+        and the computer would interpret and display it the same way.
+        A human being,
+        on the other hand,
+        would find the inconsistent indentation of the second layout
+        much harder to follow.
       </p>
 
       <p>
         HTML also provides tables, but they are awkward to use:
         tables are naturally two-dimensional,
         but text is one-dimensional.
-        (Things get even worse when we have split columns and multi-row items.)
-        <!-- CC: Again, not sure that you want to introduce the idea of things getting worse or being complicated -->
+        This is exactly like the problem of representing a two-dimensional array in memory,
+        and we solve it in the same way:
+        by writing down the rows,
+        and the columns within each row,
+        in a fixed order.
+        <span class="fixme">link back to dev.html and numpy.html</span>
         The <code>table</code> element marks the table itself;
         within that,
         each row is wrapped in <code>tr</code> (for "table row"),
@@ -726,6 +691,7 @@ Date         Experimenter        Subject          Test       Score
       </p>
 
 <pre src="src/web/simple_table.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;table&gt;
@@ -753,32 +719,42 @@ Date         Experimenter        Subject          Test       Score
         <img src="img/web/simple_table.png" alt="A Simple Table" />
       </figure>
 
-      <p>
-        Tables are sometimes used to do multi-column layout,
-        as well as for tabular data,
-        but this is a bad idea.
-        To understand why,
-        consider two other HTML tags:
-        <code>i</code>, meaning "italics",
-        and <code>em</code>, meaning "emphasis".
-        The former directly controls how text is displayed,
-        but by doing so,
-        it breaks the separation between model and view that is the heart of markup's usefulness.
-        Without understanding the text that has been italicized,
-        a program cannot understand whether it is meant to indicate someone shouting,
-        the definition of a new term,
-        or the title of a book.
-        The <code>em</code> tag, on the other hand, has exactly one meaning,
-        and that meaning is different from the meaning of <code>dfn</code> (a definition)
-        or <code>cite</code> (a citation).
-      </p>
+      <div class="box">
+        <h3>Tables and Multi-Column Layout</h3>
+
+        <p>
+          Tables are sometimes used to do multi-column layout,
+          as well as for tabular data,
+          but this is a bad idea.
+          To understand why,
+          consider two other HTML tags:
+          <code>i</code>, meaning "italics",
+          and <code>em</code>, meaning "emphasis".
+          The former directly controls how text is displayed,
+          but by doing so,
+          it breaks the separation between model and view that is the heart of markup's usefulness.
+          Without understanding the text that has been italicized,
+          a program cannot understand whether it is meant to indicate someone shouting,
+          the definition of a new term,
+          or the title of a book.
+          The <code>em</code> tag, on the other hand, has exactly one meaning,
+          and that meaning is different from the meaning of <code>dfn</code> (a definition)
+          or <code>cite</code> (a citation).
+        </p>
+
+        <p>
+          Similarly,
+          <span class="fixme">finish the thought...</span>
+        </p>
+
+      </div>
 
       <p>
         HTML pages can also contain images.
         (In fact,
         the World Wide Web didn't really take off until
-        the Mosaic browser allowed people to mix graphics with text.)
-        The word "contain" is actually misleading, though:
+        the Mosaic browser allowed people to mix images with text.)
+        The word "contain" is misleading, though:
         HTML documents can only contain text,
         so we cannot store an image "in" a page.
         Instead,
@@ -787,9 +763,12 @@ Date         Experimenter        Subject          Test       Score
         Its <code>src</code> attribute specifies where to find the image file;
         this can be a path to a file on the same host as the web page,
         or a URL for something stored elsewhere.
+        For example,
+        when a browser displays this:
       </p>
 
 <pre src="src/web/simple_image.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;My daughter's first online chat:&lt;/p&gt;
@@ -799,20 +778,78 @@ Date         Experimenter        Subject          Test       Score
 &lt;/html&gt;
 </pre>
 
+      <p class="continue">
+        it looks for the file <code>madeleine.jpg</code>
+        in the same directory as the HTML file:
+      </p>
+
       <figure id="f:simple_image">
         <img src="img/web/simple_image.png" alt="Simple Images" />
       </figure>
 
       <p>
+        Notice,
+        by the way,
+        that the <code>img</code> element is written as
+        <code>&lt;img&hellip;/&gt;</code>,
+        i.e.,
+        with a trailing slash inside the <code>&lt;&gt;</code>
+        rather than with a separate closing tag.
+        This makes sense because the element doesn't contain any text:
+        the content is referred to by its <code>src</code> attribute.
+        Any element that doesn't contain anything
+        can be written using this short form.
+      </p>
+
+      <p>
+        Images don't have to be in the same directory as the pages that refer to them.
+        When the browser displays this:
+      </p>
+
+<pre src="src/web/image_with_path.html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;Yes, she knows she's cute:&lt;/p&gt;
+    &lt;img src="img/cute-smile.jpg"/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+      <p class="continue">
+        it looks in the directory containing the page
+        for a sub-directory called <code>img</code>,
+        and loads the image file from there,
+        while if it's given:
+      </p>
+
+<pre src="src/web/image_with_url.html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;img src="http://software-carpentry.org/img/software-carpentry-logo.png"/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+      <p class="continue">
+        it downloads the image from the URL
+        <code>http://software-carpentry.org/img/software-carpentry-logo.png</code>
+        and displays that.
+      </p>
+
+      <p>
         Whenever we refer to an image,
         we should use the <code>img</code> tag's <code>alt</code> attribute
         to provide a title or description of the image.
-        This is what screen readers for people with visual handicaps will say aloud to "display" the image,
-        and it helps search engines find things.
+        This is what screen readers for people with visual handicaps will say aloud to "display" the image;
+        it's also what search engines use to classify images
+        so that people can find them.
         Adding this to our previous example gives:
       </p>
 
 <pre>
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;My daughter's first online chat:&lt;/p&gt;
@@ -822,35 +859,28 @@ Date         Experimenter        Subject          Test       Score
 &lt;/html&gt;
 </pre>
 
-      <p class="continue" id="a:empty-element">
-        Notice, by the way, that the <code>img</code> element is written as
-        <code>&lt;img&hellip;/&gt;</code>,
-        i.e.,
-        as a <a href="#a:single-tag">single tag</a> rather than separate opening and closing tags.
-        This makes sense because the element doesn't contain any text:
-        the content is referred to by its <code>src</code> attribute.
-      </p>
-
       <p>
-        Finally, the links within and between pages are what make HTML "hypertext".
+        The most important use of URLs in documents is
+        to create the links within and between pages that make HTML "hypertext".
         We create links using the <code>a</code> element.
-        Whatever is inside the element is displayed and (usually) underlined for clicking.
-        This is usually a few words text,
+        Whatever is inside the element is displayed and (usually) underlined for clicking;
+        this is usually a few words text,
         but it can also be an entire paragraph,
         a table,
         or an image.
-        <!-- CC: here's an opportunity to discuss future ways of addressing presentation, e.g., removing underlining, changing link colors, css, etc.-->
       </p>
 
       <p>
         The <code>a</code> element's <code>href</code> attribute
-        specifies what the link is pointing at.
-        This can be either a local filename or a URL.
+        specifies what the link is pointing at;
+        as with images,
+        this can be either a local filename or a URL.
         For example,
         we can create a listing of the examples we've written so far like this:
       </p>
 
 <pre src="src/web/simple_listing.html">
+&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
@@ -873,8 +903,8 @@ Date         Experimenter        Subject          Test       Score
       </figure>
 
       <p>
-        The hyperlink element is called <code>a</code> because it is also used
-        to create <a href="glossary.html#anchor">anchors</a> in documents
+        The hyperlink element is called <code>a</code> because
+        it can also used to create <a href="glossary.html#anchor">anchors</a> in documents
         by giving them a <code>name</code> attribute instead of an <code>href</code>.
         An anchor is simply a location in a document that can be linked to.
         For example,
@@ -927,14 +957,70 @@ Date         Experimenter        Subject          Test       Score
 
       <p class="continue">
         and then refer to <code>quote.html#wheeler-electron-quote</code>.
-        Of course
-        this only works if what we want to link to
-        is already wrapped in some element or other;
-        if we really do want to jump into the middle of a paragraph,
-        we can wrap the target text in a <code>span</code> element,
-        which by default has no effect on display.
-        <!-- CC: perhaps provide more information about the span element here so the student can parse this adequately-->
       </p>
+
+      <p>
+        Finally,
+        well-written HTML pages have a <code>head</code> element as well as a <code>body</code>.
+        The head isn't displayed;
+        instead,
+        it's used to store metadata about the page as a whole.
+        The most common element inside <code>head</code> is <code>title</code>,
+        which,
+        as its name suggests,
+        gives the page's title.
+        (This is usually displayed in the browser's title bar.)
+        Another common item is <code>meta</code>,
+        whose two attributes <code>name</code> and <code>content</code>
+        allow authors to embed arbitrary information in their pages.
+        If we add these to the web page we wrote earlier,
+        we might have:
+      </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Dimorphism Defined&lt;title&gt;
+    &lt;meta name="author" content="Alan Turing"/&gt;
+    &lt;meta name="institution" content="Euphoric State University"/&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Dimorphism&lt;/h1&gt;
+    &lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+      <p id="p:hide-paragraph">
+        Well-written pages also use comments (just like code),
+        which start with <code>&lt;!--</code> and end with <code>--&gt;</code>.
+      </p>
+
+      <div class="box">
+
+        <h3>Hiding Content</h3>
+
+        <p>
+          Commenting out part of a page does <em>not</em> hide the content
+          from people who really want to see it:
+          while a browser won't display what's inside a comment,
+          it's still in the page,
+          and anyone who uses "View Source" can read it.
+          For example,
+          if you are looking at this page in a web browser right now,
+          try viewing the source
+          and searching for the word "Surprise".
+        </p>
+
+        <!-- Surprise: this isn't display by the browser, but is still in the document. -->
+
+        <p>
+          If you really don't want people to be able to read something,
+          the only safe thing to do is to keep it off the web.
+        </p>
+
+      </div>
 
       <div class="keypoints" id="k:morehtml">
         <h3>Summary</h3>
@@ -951,27 +1037,41 @@ Date         Experimenter        Subject          Test       Score
 
     </section>
 
-    <section id="s:processing">
+    <section id="s:reading">
 
-      <h2>Processing HTML and XML</h2>
+      <h2>Reading Documents</h2>
 
-      <div class="understand" id="u:processing">
+      <div class="understand" id="u:reading">
         <h3>Understand:</h3>
         <ul>
           <li>How the Document Object Model represents HTML and XML.</li>
-          <li>How to construct a document in memory and then convert it to text.</li>
         </ul>
       </div>
 
       <p>
-        The standard way to represent XML and HTML in a program is called
-        the <a href="glossary.html#document-object-model">Document Object Model</a> (DOM).
-        It creates a <a href="glossary.html#tree">tree</a>
-        containing one node for each element, attribute, or block of text.
+        People usually write their home pages by hand,
+        but most pages that display lists of experimental results,
+        or second-hand lab equipment for sale,
+        are created by programs.
         For historical reasons,
-        Python's standard library includes several libraries that implement the DOM;
-        we'll use the simpler one, called <code>ElementTree</code>.
-        With it,
+        Python's standard library includes several libraries that process XML (including HTML);
+        we'll use the simplest one,
+        called <code>ElementTree</code>,
+        but you will often run into programs that use others.
+      </p>
+
+      <p>
+        Most of these libraries represent the nested structure of XML using something called
+        the <a href="glossary.html#document-object-model">Document Object Model</a> (DOM).
+        This stores the document as a <a href="glossary.html#tree">tree</a>
+        with one node for each element or block of text.
+        The root element of the document,
+        such as the all-enclosing <code>html</code> in a web page,
+        is the root node of the tree.
+        Every other element or block of text is a child of it,
+        or a child of a child,
+        and so on.
+        For example,
         the tree representing our web page about dimorphism
         looks like <a href="#f:dimorphism_tree">Figure XXX</a>.
       </p>
@@ -985,13 +1085,9 @@ Date         Experimenter        Subject          Test       Score
         parse a string (or file) containing XML,
         or build the nodes one by one and put them together manually.
         The former is more common,
-        since the usual way to store and exchange XML or HTML is as text.
-        Programs often use the latter to create data for output,
-        and then convert the tree to text for storage or exchange.
-      </p>
-
-      <p>
-        Let's start by turning text into HTML, and then back into text:
+        since the usual way to store and exchange XML or HTML is as text,
+        so we will explore that first.
+        Let's begin by turning text into HTML and then back into text:
       </p>
 
 <pre src="src/web/parse_simple_page.py">
@@ -1018,13 +1114,18 @@ print text
         and giving it the alias <code>ET</code>
         (which is a lot easier to type and read).
         The multi-line string assigned to the variable <code>page</code>
-        is the "document" we will parse.
+        is the "document" we will parse;
+        most real programs will read data from a file instead.
+      </p>
+
+      <p>
         Parsing itself takes just a single call to <code>ET.fromstring</code>;
         it returns the root node of the DOM tree corresponding to that document.
         We then convert that tree back to text by calling <code>ET.tostring</code>.
         The <code>'utf-8'</code> argument specifies how we want characters represented;
-        we discuss this elsewhere.
-        <!-- CC: link to where else discussed?-->
+        you should always use this option unless you know enough to know
+        that you want something else.
+        <span class="fixme">need a better explanation than this</span>
       </p>
 
       <p>
@@ -1047,181 +1148,12 @@ print text
         which is exactly what we started with.
       </p>
 
-      <p>
-        Now let's build the dimorphism document by hand:
-      </p>
-
-<pre src="src/web/build_simple_page.py">
-import xml.etree.ElementTree as ET
-
-root = ET.Element('html')
-
-body = ET.Element('body')
-root.append(body)
-
-title = ET.SubElement(body, 'h1')
-title.text = 'Dimorphism'
-
-p1 = ET.SubElement(body, 'p')
-p1.text = 'Occurring or existing in two different '
-u = ET.SubElement(p1, 'u')
-u.text = 'forms'
-p1.tail = '.'
-
-long_text = '''The most notable form is sexual dimorphism,
-in which males and females have noticeably different appearances.'''
-ET.SubElement(body, 'p').text = long_text
-
-print ET.tostring(root)
-</pre>
+      <p class="fixme">point out how much simpler this is than parsing...</p>
 
       <p>
-        There's much less to this program than first appears.
-        It starts by creating an object of type <code>Element</code>,
-        which is the class the ElementTree library uses to represent nodes.
-        The argument to <code>Element</code>'s constructor,
-        <code>html</code>,
-        specifies the element's type.
-      </p>
-
-      <p>
-        The next two lines create another node of type <code>body</code>
-        and then append that to the root node.
-        At this point, our tree looks like
-        <a href="#f:partial_tree">Figure XXX</a>:
-      </p>
-
-      <figure id="f:partial_tree">
-        <img src="img/web/partial_tree.png" alt="Partially-Constructed Tree" />
-      </figure>
-
-      <p>
-        The rest of the program does little more than create and append nodes.
-        Because creating a node and appending it to another one is so common,
-        ElementTree provides a convenience function called <code>SubElement</code>
-        which combines the two steps.
-        The two lines:
-      </p>
-
-<pre>
-title = ET.SubElement(body, 'h1')
-title.text = 'Dimorphism'
-</pre>
-
-      <p class="continue">
-        create a new node of type <code>h1</code>,
-        append it to the <code>body</code> node,
-        and then set the text content of the title node to be the string <code>'Dimorphism'</code>.
-      </p>
-
-      <p>
-        The next step is the most complicated.
-        We need to create a paragraph node
-        whose <code>class</code> attribute has the value <code>definition</code>,
-        and which contains three things:
-      </p>
-
-      <ol>
-
-        <li>
-          the text <code>'Occurring or existing in two different&nbsp;'</code>
-          (with a space at the end);
-        </li>
-
-        <li>
-          a <code>u</code> element containing the text <code>'forms'</code>;
-          and
-        </li>
-
-        <li>
-          another piece of text containing the period '.' that ends the sentence.
-        </li>
-
-      </ol>
-
-      <p>
-        Creating the paragraph node and appending it to our body node is easy:
-        we just call <code>SubElement</code>.
-        Setting an attribute is also easy:
-        every node has a dictionary called <code>attrib</code>
-        whose keys are attribute names
-        and whose values are those attributes' values.
-        The single line:
-      </p>
-
-<pre>
-p1.attrib['class'] = 'definition'
-</pre>
-
-      <p class="continue">
-        therefore creates the attribute we want.
-      </p>
-
-      <p>
-        Now for the paragraph's content.
-        The first part is easy: we just set <code>p1.text</code>.
-        And underlining the word "forms" is easy too:
-        we create a node of type <code>u</code> and append it to the paragraph.
-        But where should the closing period be stored?
-      </p>
-
-      <p>
-        Along with <code>text</code>,
-        ElementTree nodes have another text field called <code>tail</code>,
-        which stores the text <em>after</em> the node
-        but before the start of anything else.
-        Since the period is in the paragraph,
-        the right place to store it is therefore <code>u.tail</code>
-        (since putting it in <code>p1.tail</code> would imply that
-        it came after the end of the first paragraph,
-        but before the start of the next paragraph).
-      </p>
-
-      <p>
-        Finally,
-        we create the second paragraph that elaborates dimorphism's definition
-        by combining node creation and text setting in a single line:
-      </p>
-
-<pre>
-ET.SubElement(body, 'p').text = long_text
-</pre>
-
-      <p class="continue">
-        This works because <code>SubElement</code> returns the node it just created,
-        so we can immediately set its <code>text</code> value.
-      </p>
-
-      <figure id="f:final_tree">
-        <img src="img/web/final_tree.png" alt="Final Tree" />
-      </figure>
-
-      <p>
-        In memory,
-        our document is now something like <a href="#f:final_tree">Figure XXX</a>.
-        If we convert it to text,
-        we get:
-      </p>
-
-<pre>
-<span class="out">&lt;html&gt;&lt;body&gt;&lt;h1&gt;Dimorphism&lt;/h1&gt;&lt;p class="definition"&gt;Occurring or existing in two&crarr;
-different &lt;u&gt;forms&lt;/u&gt;.&lt;/p&gt;&lt;p&gt;The most notable form is sexual dimorphism,
-in which males and females have noticeably different appearances.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</span>
-</pre>
-
-      <p class="continue">
-        (As before, we use &crarr; to break a line that's too long to fit on the screen.)
-        This has all the content we created,
-        but <em>only</em> that content.
-        We didn't create text nodes containing carriage returns and blanks,
-        so <code>tostring</code> didn't insert them.
-        Most machine-generated XML isn't nicely indented
-        because computers don't care,
-        but XML intended for human beings to read usually is.
-      </p>
-
-      <p>
-        There is another reason why what we see might not be what we created.
+        In the example above,
+        our output was exactly the same as our input,
+        but that won't always be the case.
         Here's another simple program that converts text to a node tree and back:
       </p>
 
@@ -1253,41 +1185,16 @@ print ET.tostring(doc, 'utf-8')
         they are not.
       </p>
 
-      <p>
-        Our example may make building trees seem like a lot of work,
-        but in practice,
-        programs almost always wrap the steps up in a few functions.
-        For example,
-        here's a function that converts a Python list into an HTML ordered list:
-      </p>
-
-<pre src="src/web/list_to_ol.py">
-import xml.etree.ElementTree as ET
-
-def convert(values):
-    '''Convert a list of values to an &lt;ol&gt; list.'''
-
-    result = ET.Element('ol')
-    for v in values:
-        ET.SubElement(result, 'li').text = str(v)
-    return result
-
-root = convert([1, "two", 3.4])
-print ET.tostring(root)
-<span class="out">&lt;ol&gt;&lt;li&gt;1&lt;/li&gt;&lt;li&gt;two&lt;/li&gt;&lt;li&gt;3.4&lt;/li&gt;&lt;/ol&gt;</span>
-</pre>
-
-      <div class="keypoints" id="k:processing">
+      <div class="keypoints" id="k:reading">
         <h3>Summary</h3>
         <ul>
-          <li>Use <code>xml.etree.ElementTree</code> to parse HTML and XML and manipulate it in memory.</li>
-          <li>Use the same library to create elements in memory rather than concatenating and printing strings.</li>
-          <li>An element's <code>text</code> property stores the text it contains.</li>
-          <li>An element's <code>tail</code> property stores the text that comes immediately after it.</li>
+          <li>Use <code>xml.etree.ElementTree</code> to parse HTML and XML.</li>
         </ul>
       </div>
 
     </section>
+
+    <!-- FIXME: edited this far -->
 
     <section id="s:search">
 
@@ -1520,6 +1427,243 @@ for atom in wrongly_placed:
           <li>Use XPath expressions to identify nodes in a document.</li>
           <li>Use a node's <code>findall</code> method to find children matching an XPath expression.</li>
         </ul>
+      </div>
+
+    </section>
+
+    <section id="s:creating">
+
+      <h2>Creating Documents</h2>
+
+      <div class="understand" id="u:creating">
+        <h3>Understand:</h3>
+        <ul>
+          <li>How to create DOM in memory and turn it into a document.</li>
+        </ul>
+      </div>
+
+      <p>
+        Now let's build the dimorphism document by hand:
+      </p>
+
+<pre src="src/web/build_simple_page.py">
+import xml.etree.ElementTree as ET
+
+root = ET.Element('html')
+
+body = ET.Element('body')
+root.append(body)
+
+title = ET.SubElement(body, 'h1')
+title.text = 'Dimorphism'
+
+p1 = ET.SubElement(body, 'p')
+p1.text = 'Occurring or existing in two different '
+u = ET.SubElement(p1, 'u')
+u.text = 'forms'
+p1.tail = '.'
+
+long_text = '''The most notable form is sexual dimorphism,
+in which males and females have noticeably different appearances.'''
+ET.SubElement(body, 'p').text = long_text
+
+print ET.tostring(root)
+</pre>
+
+      <p>
+        There's much less to this program than first appears.
+        It starts by creating an object of type <code>Element</code>,
+        which is the class the ElementTree library uses to represent nodes.
+        The argument to <code>Element</code>'s constructor,
+        <code>html</code>,
+        specifies the element's type.
+      </p>
+
+      <p>
+        The next two lines create another node of type <code>body</code>
+        and then append that to the root node.
+        At this point, our tree looks like
+        <a href="#f:partial_tree">Figure XXX</a>:
+      </p>
+
+      <figure id="f:partial_tree">
+        <img src="img/web/partial_tree.png" alt="Partially-Constructed Tree" />
+      </figure>
+
+      <p>
+        The rest of the program does little more than create and append nodes.
+        Because creating a node and appending it to another one is so common,
+        ElementTree provides a convenience function called <code>SubElement</code>
+        which combines the two steps.
+        The two lines:
+      </p>
+
+<pre>
+title = ET.SubElement(body, 'h1')
+title.text = 'Dimorphism'
+</pre>
+
+      <p class="continue">
+        create a new node of type <code>h1</code>,
+        append it to the <code>body</code> node,
+        and then set the text content of the title node to be the string <code>'Dimorphism'</code>.
+      </p>
+
+      <p>
+        The next step is the most complicated.
+        We need to create a paragraph node
+        whose <code>class</code> attribute has the value <code>definition</code>,
+        and which contains three things:
+      </p>
+
+      <ol>
+
+        <li>
+          the text <code>'Occurring or existing in two different&nbsp;'</code>
+          (with a space at the end);
+        </li>
+
+        <li>
+          a <code>u</code> element containing the text <code>'forms'</code>;
+          and
+        </li>
+
+        <li>
+          another piece of text containing the period '.' that ends the sentence.
+        </li>
+
+      </ol>
+
+      <p>
+        Creating the paragraph node and appending it to our body node is easy:
+        we just call <code>SubElement</code>.
+        Setting an attribute is also easy:
+        every node has a dictionary called <code>attrib</code>
+        whose keys are attribute names
+        and whose values are those attributes' values.
+        The single line:
+      </p>
+
+<pre>
+p1.attrib['class'] = 'definition'
+</pre>
+
+      <p class="continue">
+        therefore creates the attribute we want.
+      </p>
+
+      <p>
+        Now for the paragraph's content.
+        The first part is easy: we just set <code>p1.text</code>.
+        And underlining the word "forms" is easy too:
+        we create a node of type <code>u</code> and append it to the paragraph.
+        But where should the closing period be stored?
+      </p>
+
+      <p>
+        Along with <code>text</code>,
+        ElementTree nodes have another text field called <code>tail</code>,
+        which stores the text <em>after</em> the node
+        but before the start of anything else.
+        Since the period is in the paragraph,
+        the right place to store it is therefore <code>u.tail</code>
+        (since putting it in <code>p1.tail</code> would imply that
+        it came after the end of the first paragraph,
+        but before the start of the next paragraph).
+      </p>
+
+      <p>
+        Finally,
+        we create the second paragraph that elaborates dimorphism's definition
+        by combining node creation and text setting in a single line:
+      </p>
+
+<pre>
+ET.SubElement(body, 'p').text = long_text
+</pre>
+
+      <p class="continue">
+        This works because <code>SubElement</code> returns the node it just created,
+        so we can immediately set its <code>text</code> value.
+      </p>
+
+      <figure id="f:final_tree">
+        <img src="img/web/final_tree.png" alt="Final Tree" />
+      </figure>
+
+      <p>
+        In memory,
+        our document is now something like <a href="#f:final_tree">Figure XXX</a>.
+        If we convert it to text,
+        we get:
+      </p>
+
+<pre>
+<span class="out">&lt;html&gt;&lt;body&gt;&lt;h1&gt;Dimorphism&lt;/h1&gt;&lt;p class="definition"&gt;Occurring or existing in two&crarr;
+different &lt;u&gt;forms&lt;/u&gt;.&lt;/p&gt;&lt;p&gt;The most notable form is sexual dimorphism,
+in which males and females have noticeably different appearances.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</span>
+</pre>
+
+      <p class="continue">
+        (As before, we use &crarr; to break a line that's too long to fit on the screen.)
+        This has all the content we created,
+        but <em>only</em> that content.
+        We didn't create text nodes containing carriage returns and blanks,
+        so <code>tostring</code> didn't insert them.
+        Most machine-generated XML isn't nicely indented
+        because computers don't care,
+        but XML intended for human beings to read usually is.
+      </p>
+
+      <p>
+        Our example may make building trees seem like a lot of work,
+        but in practice,
+        programs almost always wrap the steps up in a few functions.
+        For example,
+        here's a function that converts a Python list into an HTML ordered list:
+      </p>
+
+<pre src="src/web/list_to_ol.py">
+import xml.etree.ElementTree as ET
+
+def convert(values):
+    '''Convert a list of values to an &lt;ol&gt; list.'''
+
+    result = ET.Element('ol')
+    for v in values:
+        ET.SubElement(result, 'li').text = str(v)
+    return result
+
+root = convert([1, "two", 3.4])
+print ET.tostring(root)
+<span class="out">&lt;ol&gt;&lt;li&gt;1&lt;/li&gt;&lt;li&gt;two&lt;/li&gt;&lt;li&gt;3.4&lt;/li&gt;&lt;/ol&gt;</span>
+</pre>
+
+      <div class="keypoints" id="k:creating">
+        <h3>Summary</h3>
+        <ul>
+          <li>Use the same library to create elements in memory rather than concatenating and printing strings.</li>
+          <li>An element's <code>text</code> property stores the text it contains.</li>
+          <li>An element's <code>tail</code> property stores the text that comes immediately after it.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section id="s:templating">
+
+      <h2>A Better Way to Documents</h2>
+
+      <div class="understand" id="u:templating">
+        <h3>Understand:</h3>
+        <p class="fixme">learning objectives</p>
+      </div>
+
+      <p class="fixme">content on Jinja2</p>
+
+      <div class="keypoints" id="k:templating">
+        <h3>Summary</h3>
+        <p class="fixme">learning objectives</p>
       </div>
 
     </section>
