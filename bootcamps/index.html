@@ -7,7 +7,7 @@
 
 {% block javascript %}
   {{ super() }}
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
   <script type="text/javascript">
   function MarkerPin(color) {
     var pin = new google.maps.MarkerImage(
@@ -184,7 +184,7 @@
   </table>
 </div>
 
-<p id="calendar">
+<div id="calendar">
   <iframe src="https://www.google.com/calendar/embed?title=Boot%20Camps&amp;showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;height=500&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=efjc2eea4qegtctcrg6kc0nrba9i0rbg%40import.calendar.google.com&amp;color=%232952A3&amp;ctz=America%2FNew_York"
           style=" border-width:0 "
           width="98%"
@@ -194,7 +194,7 @@
   <p style="text-align: right; margin-top: -12px;margin-bottom: -12px;">
     <a class="label swc-blue-bg" style="margin-right: 10px;" href="http://software-carpentry.org/bootcamps.ics">Calendar Feed</a>
   </p>
-</p>
+</div>
 </div>
 
 <h2 id="past">Past Workshops</h2>

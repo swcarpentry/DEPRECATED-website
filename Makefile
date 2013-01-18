@@ -104,9 +104,9 @@ install :
 check : $(STATIC_DST) $(OUT_DIR)/.htaccess
 	@make ascii-chars
 	$(COMPILE) -m blog/metadata.json -r $(BLOG_RSS_FILE) -c $(ICALENDAR_FILE) index.html
-	@make blog-journal
 	@make check-links
-	@make book-figref
+	#@make book-figref
+	@make blog-journal
 
 ## blog-next-id : find the next blog entry ID to use.
 blog-next-id :
