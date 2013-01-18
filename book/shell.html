@@ -718,6 +718,57 @@ $ <span class="in">ls north-pacific-gyre/</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:filedir">
+	<h3>Challenges</h3>
+	<p>
+	  Please refer to <a href="#f:filedir_challenge">Figure XXX</a>
+	  when answering the challenges below.
+	</p>
+
+        <figure id="f:filedir_challenge_layout">
+          <img src="img/shell/filedir_challenge.png" alt="File System Layout for Challenge Questions" />
+        </figure>
+
+	<ol class="challenges">
+
+	  <li>
+	    If <code>pwd</code> displays <code>/users/thing</code>,
+	    what will <code class="in">ls ../backup</code> display?
+	    <ol class="choices">
+	      <li><code class="err">../backup: No such file or directory</code></li>
+	      <li><code class="out">2012-12-01 2013-01-08 2013-01-27</code></li>
+	      <li><code class="out">2012-12-01/ 2013-01-08/ 2013-01-27/</code></li>
+	      <li><code class="out">original pnas_submission pnas_final</code></li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    If <code>pwd</code> displays <code>/users/fly</code>,
+	    what command will display
+<pre>
+<span class="out">thesis/ papers/ articles/</span>
+</pre>
+	    <ol class="choices">
+	      <li><code class="in">ls pwd</code></li>
+	      <li><code class="in">ls -r -F</code></li>
+	      <li><code class="in">ls -r -F /users/fly</code></li>
+	      <li>Either #2 or #3 above, but not #1.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    What does the command <code class="in">cd</code> without a directory name do?
+	    <ol class="choice">
+	      <li>It has no effect.</li>
+	      <li>It changes the working directory to <code>/</code>.</li>
+	      <li>It changes the working directory to the user's home directory.</li>
+	      <li>It is an error.</li>
+	    </ol>
+	  </li>
+
+	</ol>
+      </div>
+
     </section>
 
     <section id="s:create">
@@ -829,7 +880,7 @@ $ <span class="in">nano junk</span>
 
       <div class="box">
 
-        <h3>Why Nano?</h3>
+        <h3>Which Editor?</h3>
 
         <p>
           When we say, "<code>nano</code> is a text editor,"
@@ -840,10 +891,26 @@ $ <span class="in">nano junk</span>
           or any other human-friendly media.
           We'll use it in this chapter because
           almost anyone can use it anywhere without training,
-          but we'll use more powerful tools for programming,
-          editing HTML,
-          and so on.
+	  but please use something more powerful for real work.
+	  On Unix systems (such as Linux and Mac OS&nbsp;X),
+	  many programmers use <a href="http://www.gnu.org/software/emacs/">Emacs</a>
+	  and <a href="http://www.vim.org/">Vim</a>
+	  (neither of which is particularly easy to learn),
+	  or a graphical editor such as <a href="http://projects.gnome.org/gedit/">Gedit</a>.
+	  On Windows,
+	  you may wish to use <a href="http://notepad-plus-plus.org/">Notepad++</a>.
         </p>
+
+	<p>
+	  No matter what editor you use,
+	  you will need to know where it searches for and saves files.
+	  If you start the editor from a shell,
+	  it will (probably) use your current working directory as its default location.
+	  If you use your computer's start menu,
+	  it may want to save files in your desktop or documents directory instead.
+	  You can change this by navigating to another directory
+	  the first time you "Save As..."
+	</p>
 
       </div>
 
@@ -1158,6 +1225,53 @@ $
           <li><code>rm <em>path</em></code> removes (deletes) a file.</li>
           <li><code>rmdir <em>path</em></code> removes (deletes) an empty directory.</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:create">
+	<h3>Challenges</h3>
+	<ol class="challenges">
+
+	  <li>
+	    Suppose that <code class="in">pwd</code> displays <code class="out">/home/thing/data</code>,
+	    and that <code class="in">ls</code> displays <code class="out">proteins.dat</code>.
+	    What does <code class="in">ls</code> display after the sequence of commands:
+<pre>
+$ <span class="in">mkdir recombine</span>
+$ <span class="in">mv proteins.dat recombine</span>
+$ <span class="in">cp recombine/proteins.dat ../proteins-saved.dat</span>
+</pre>
+	    <ol class="choices">
+	      <li>Nothing: <code class="in">mv proteins.dat recombine</code> is an error, because <code>recombine</code> already exists.</li>
+	      <li><code class="out">recombine</code></li>
+	      <li><code class="out">proteins-saved.dat recombine</code></li>
+	      <li><code class="out">proteins.dat proteins-saved.dat recombine</code></li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    Suppose that <code class="in">ls -F</code> displays:
+<pre>
+<span class="out">analyzed/  fructose.dat    raw/   sucrose.dat</span>
+</pre>
+            What command(s) have to be given <em>before</em> the commands shown below
+            will produce the output shown?
+<pre>
+$ <span class="in">ls</span>
+<span class="out">analyzed   raw</span>
+$ <span class="in">ls analyzed</span>
+<span class="out">fructose.dat    sucrose.dat</span>
+</pre>
+	    <ol class="choices">
+	      <li><code class="in">mv fructose.dat sucrose.dat analyzed</code></li>
+	      <li><code class="in">mv fructose.dat analyzed</code> and <code class="in">mv sucrose.dat analyzed</code> (in either order)</li>
+	      <li><code class="in">mv fructose.dat analyzed</code> and <code class="in">mv sucrose.dat analyzed</code> (in either order), and then <code class="in">rm fructose.dat</code> and <code class="in">rm sucrose.dat</code> (in either order)</li>
+	      <li><code class="in">cp fructose.dat analyzed</code> and <code class="in">cp sucrose.dat analyzed</code> (in either order), and then <code class="in">rm fructose.dat</code> and <code class="in">rm sucrose.dat</code> (in either order)</li>
+	      <li>#1, #2, and #4 above, but not #3.</li>
+	      <li>#2 or #3 above, but not #1 or #4.</li>
+	    </ol>
+	  </li>
+
+	</ol>
       </div>
 
     </section>
@@ -1689,6 +1803,90 @@ NENE01971Z.txt    NENE02040Z.txt
           <li><code>tail</code> displays the last few lines of its input.</li>
           <li><code>wc</code> counts lines, words, and characters in its inputs.</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:pipefilter">
+	<h3>Challenges</h3>
+
+	<p>Suppose that <code class="in">ls -F</code> initially displays:</p>
+<pre>
+<span class="out">analyzed/  fructose.dat    raw/   sucrose.dat</span>
+</pre>
+
+	<ol class="challenges">
+
+	  <li>
+	    What is the difference between:
+<pre>
+<span class="in">wc -l &lt; *.dat</span>
+</pre>
+            and:
+<pre>
+<span class="in">wc -l *.dat</span>
+</pre>
+            <ol class="choices">
+	      <li>Nothing: the two commands produce the same result.</li>
+	      <li>There is no difference in output, but the first is more efficient than the second.</li>
+	      <li>The first counts all lines together, while the second counts lines per file.</li>
+	      <li>The first is an error, because there is no file whose name is literally <code>*.dat</code>.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+            What single command must be used so that after it,
+	    <code class="in">ls&nbsp;*</code> will display:
+<pre>
+<span class="out">analyzed:
+fructose.dat    sucrose.dat
+
+raw:</span>
+</pre>
+	    <ol class="choices">
+	      <li><code class="in">cat *.dat &gt; analyzed</code></li>
+	      <li><code class="in">mv *.dat analyzed</code></li>
+	      <li><code class="in">ls | analyzed</code></li>
+	      <li>None of the above.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    A file called <code>animals.txt</code> contains the following observations:
+<pre>
+2012-11-05,deer
+2012-11-05,rabbit
+2012-11-05,raccoon
+2012-11-06,rabbit
+2012-11-06,deer
+2012-11-06,fox
+2012-11-07,rabbit
+2012-11-07,bear
+</pre>
+            The command:
+<pre>
+<span class="in">cut -d , -f 2 animals.txt</span>
+</pre>
+            produces the following output:
+<pre>
+deer
+rabbit
+raccoon
+rabbit
+deer
+fox
+rabbit
+bear
+</pre>
+            What other command(s) could be added to this in a pipeline to find out
+            how often each kind of animal had been seen?
+              <ol class="choices">
+		<li><span class="in">cut -d , -f 2 animals.txt | count -c</span></li>
+		<li><span class="in">cut -d , -f 2 animals.txt | sort | uniq</span></li>
+		<li><span class="in">cut -d , -f 2 animals.txt | sort | uniq -c</span></li>
+		<li><span class="in">cut -d , -f 2 animals.txt | uniq | sort | uniq</span></li>
+	      </ol>
+	  </li>
+
+	</ol>
       </div>
 
     </section>
