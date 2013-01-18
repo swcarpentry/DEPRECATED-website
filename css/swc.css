@@ -88,7 +88,7 @@ div.banner a img {
 
 /* Explanatory call-out boxes. */
 div.box {
-    width: 44em;
+    width: 54em;
     background-color: mistyrose;
     display: block;
     margin-left: auto;
@@ -256,6 +256,11 @@ table.blogcalendar tr td {
 table.blogindex td.date {
     text-align: left ;
     width:10em;
+}
+
+/* Tables used for displaying choices in challenges. */
+table.choices tr td {
+    vertical-align : top;
 }
 
 /* Database tables do _not_ have double borders */
