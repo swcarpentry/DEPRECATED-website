@@ -85,11 +85,14 @@
       <h2>Basic Operations</h2>
 
       <div class="understand" id="u:basic">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to use the Python interpreter interactively.</li>
-          <li>How to do basic arithmetic.</li>
-          <li>How to assign values to variables.</li>
+          <li>Run the Python interpreter interactively.</li>
+          <li>Correctly enter basic arithmetic expressions.</li>
+          <li>Explain what variables are used for.</li>
+          <li>Assign numbers and strings to variables.</li>
+          <li>Explain what happens when one variable is assigned to another.</li>
+          <li>Trace the effect of several consecutive assignment statements.</li>
         </ul>
       </div>
 
@@ -401,9 +404,10 @@ NameError: name 'temp_celsius' is not defined</span>
       <h2>Creating Programs</h2>
 
       <div class="understand" id="u:program">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to create and run programs.</li>
+          <li>Store Python commands in a file.</li>
+          <li>Use the interpreter to run a file containing Python commands.</li>
         </ul>
       </div>
 
@@ -498,12 +502,13 @@ ZeroDivisionError: integer division or modulo by zero</span>
       <h2>Types</h2>
 
       <div class="understand" id="u:types">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>What data types are.</li>
-          <li>The differences between integers, floating-point numbers, and strings.</li>
-          <li>How to call a function.</li>
-          <li>Why computers shouldn't guess what people want.</li>
+          <li>Explain what a data type is, and give examples of three different data types.</li>
+          <li>Correctly identify the types of integer, floating-point, and string values.</li>
+          <li>Call a built-in function.</li>
+          <li>Explain what "type conversion" is, and give an example.</li>
+          <li>Explain (with an example) why programs shouldn't guess what people want to do.</li>
         </ul>
       </div>
 
@@ -586,7 +591,6 @@ print "body temperature in Kelvin:", temp_kelvin
         We can find out what type something is
         using a built-in <a href="glossary.html#function">function</a> called <code>type</code>:
       </p>
-
 
         <!-- JK: Typo here, should be 'int' not 'int, and same for float. -->
 <pre>
@@ -673,13 +677,13 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</span>
       <h2>Reading Files</h2>
 
       <div class="understand" id="u:io">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>Where computers store information.</li>
-          <li>How to open a file and read data from it.</li>
-          <li>How "lines" are stored in text files.</li>
-          <li>How to call a method.</li>
-          <li>How to write to a file.</li>
+          <li>Draw a diagram to explain where computers store data.</li>
+          <li>Write programs that open, read, and close files.</li>
+          <li>Explain how "lines" of text are actually stored in files.</li>
+          <li>Call a pre-defined method of a built-in type.</li>
+          <li>Write programs that write data to files.</li>
         </ul>
       </div>
 
@@ -1030,11 +1034,13 @@ writer.close()
       <h2>Standard Input and Output</h2>
 
       <div class="understand" id="u:stdio">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to import a module.</li>
-          <li>How to read from standard input.</li>
-          <li>How to write to standard output.</li>
+          <li>Explain what "importing a module" means and does.</li>
+          <li>Write programs that import standard library modules.</li>
+          <li>Explain what standard input and output are, and how they relate to the <a href="shell.html#s:pipefilter">pipe-and-filter</a> model.</li>
+          <li>Write programs that read from standard input.</li>
+          <li>Write programs that write to standard output.</li>
         </ul>
       </div>
 
@@ -1149,11 +1155,11 @@ reader.close()
       <h2>Repeating Things</h2>
 
       <div class="understand" id="u:for">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to repeat things using a loop.</li>
-          <li>That the loop variable takes on a different value each time through the loop.</li>
-          <li>How to tell what statements are in the body of a loop.</li>
+          <li>Write a loop that processes the lines of a file.</li>
+          <li>Trace the values taken on by a loop variable during execution of the loop.</li>
+          <li>Explain what the "body" of a loop is, and correctly identify the bodies of loops.</li>
         </ul>
       </div>
 
@@ -1327,11 +1333,12 @@ for value in data {
       <h2>Making Choices</h2>
 
       <div class="understand" id="u:logic">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to choose what statements to execute using conditionals.</li>
-          <li>How to combine conditional tests.</li>
-          <li>What an in-place operator is.</li>
+          <li>Trace the execution of conditional statements.</li>
+          <li>Write conditional statements to perform selected statements only under specific conditions.</li>
+          <li>Use logical operators to combine tests in conditional statements.</li>
+          <li>Explain what "in-place operators" are, and correctly write statements using them.</li>
         </ul>
       </div>
 
@@ -1600,10 +1607,11 @@ something *= 2
       <h2>Flags</h2>
 
       <div class="understand" id="u:flag">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>What Boolean values are.</li>
-          <li>How to keep track of events using flag variables.</li>
+          <li>Explain what Boolean values are.</li>
+          <li>Write statements that create and store Boolean values, and use them correctly in conditional statements.</li>
+          <li>Write examples showing how to keep track of events using flag variables.</li>
         </ul>
       </div>
 
@@ -1741,9 +1749,9 @@ print 'Number of data lines:', number
       <h2>Reading Data Files</h2>
 
       <div class="understand" id="u:parse">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to parse simple text files.</li>
+          <li>Read a simple columnar data file and operate on its values.</li>
         </ul>
       </div>
 
@@ -1906,10 +1914,11 @@ Out of range: volume 1 -3.0</span>
       <h2>Provenance Revisited</h2>
 
       <div class="understand" id="u:provenance">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How programs can add provenance to files.</li>
-          <li>How programs can carry provenance forward.</li>
+          <li>Demonstrate how to embed provenance information in a program.</li>
+          <li>Write programs that carry simple provenance information forward.</li>
+          <li>Explain how automatically tracking provenance helps computational research.</li>
         </ul>
       </div>
 
@@ -2044,11 +2053,12 @@ volume   2    4.0</span>
       <h2>Lists</h2>
 
       <div class="understand" id="u:lists">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to store many related values in a list.</li>
-          <li>How to use a loop to operate on the values in a list.</li>
-          <li>That programs should be tested on small, simple cases.</li>
+          <li>Explain why it is useful to store many values together.</li>
+          <li>Write programs that create and manipulate lists of numbers and strings.</li>
+          <li>Write programs that use loops to operate independently on each value in a list.</li>
+          <li>Explain why programs should be tested on short, simple inputs first.</li>
         </ul>
       </div>
 
@@ -2230,13 +2240,15 @@ float(sum(data) / len(data))
       <h2>More About Lists</h2>
 
       <div class="understand" id="u:morelist">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>That lists can be modified in place.</li>
-          <li>How to access arbitrary elements in a list.</li>
-          <li>What an out-of-bounds error is.</li>
-          <li>How to generate a list of legal indices for a list.</li>
-          <li>When to use short or long variable names.</li>
+          <li>Explain the difference between mutable and immutable values.</li>
+          <li>Index a list to retrieve values at specific locations.</li>
+          <li>Show how to alter the values in a list.</li>
+          <li>Trace changes to a list's values as a result of assignment.</li>
+          <li>Explain what an "out-of-bounds error" is, and give an example showing when one would occur.</li>
+          <li>Show how to generate all the valid indices for a list's elements.</li>
+          <li>Explain when it is appropriate to use short or long variable names, and why.</li>
         </ul>
       </div>
 
@@ -2746,11 +2758,12 @@ x = 2 * x
       <h2>Nesting Loops</h2>
 
       <div class="understand" id="u:nestloop">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>That loops can be nested to operate on combinations of items.</li>
-          <li>That the range of inner loops can depend on the state of outer loops.</li>
-          <li>That doing this allows programs to handle more cases without changes.</li>
+          <li>Trace the execution of a nested loop.</li>
+          <li>Give examples of the kinds of problems that nested loops should be used to solve.</li>
+          <li>Construct nested loops with independent ranges.</li>
+          <li>Construct nested loops in which the range of the inner loop depends on the state of the outer loop, and give an example showing when this is useful.</li>
         </ul>
       </div>
 
@@ -3087,10 +3100,11 @@ print "grouped data:", result
       <h2>Nesting Lists</h2>
 
       <div class="understand" id="u:nestlist">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>That lists can contain other lists.</li>
-          <li>That nested lists are a common way to represent regular (tabular) data.</li>
+          <li>Explain what is meant by "nested lists", and what their relationship is to nested loops.</li>
+          <li>Draw data structure diagrams corresponding to nested lists, and write nested lists that correspond to given diagrams.</li>
+          <li>Explain what happens when an expression like "<code>table[3][2]</code>" is evaluated.</li>
         </ul>
       </div>
 
@@ -3290,10 +3304,13 @@ print "average errors:", x_diff / len(actual), y_diff / len(actual)
       <h2>Aliasing</h2>
 
       <div class="understand" id="u:alias">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>That a program can contain many aliases for a single piece of data.</li>
-          <li>That changes made through any of those aliases are visible through all the others.</li>
+          <li>Explain what an "alias" for a value is.</li>
+          <li>Explain why aliases can make programs harder to understand.</li>
+          <li>Identify examples in which aliasing does and does not occur.</li>
+          <li>Construct programs which create aliases for data.</li>
+          <li>Trace changes to data in programs that contain aliases.</li>
         </ul>
       </div>
 
