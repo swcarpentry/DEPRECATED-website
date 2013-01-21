@@ -19,9 +19,9 @@ def read_xml(filename, mangle_entities=False):
     doc = html5parser.parse(filename, parser=parser)
 
     if parser.errors:
-        sys.stderr.write('errors in {}\n'.format(filename))
+        sys.stderr.write('errors in {0}\n'.format(filename))
         for e in parser.errors:
-            sys.stderr.write('    {}\n'.format(e))
+            sys.stderr.write('    {0}\n'.format(e))
 
     return doc
 
