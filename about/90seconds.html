@@ -1,0 +1,47 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="What We Do" />
+{% endblock file_metadata %}
+
+{% block navhighlight %}{{navhighlight('about')}}{% endblock navhighlight %}
+
+{% block content %}
+
+<div align="center">
+  <img src="{{root_path}}/img/bootcamps/2013-01-mckellar.png" alt="Getting Ready" />
+  <h3><em>What I cannot create, I do not understand.<br />&mdash; Richard Feynman</em></h3>
+</div>
+
+<p>Software Carpentry's aim is to teach researchers (usually graduate students) basic computing concepts and skills so that they can get more done in less time, and with less pain.  Depending on learners' needs, our two-day boot camps usually cover the following:</p>
+
+<div align="center">
+  <table width="90%">
+    <tr>
+      <td valign="top">Day&nbsp;1:&nbsp;</td>
+      <td valign="top">Introduction to Unix shell. We show participants a dozen basic commands, but the real aim is to introduce pipes, loops, history, and the idea of scripting.</td>
+    </tr>
+    <tr>
+      <td valign="top"></td>
+      <td valign="top">Introduction to Python, to building components that can be used in pipelines, and to when and why to break code into reusable functions.</td>
+    </tr>
+    <tr>
+      <td valign="top">Day&nbsp;2:&nbsp;</td>
+      <td valign="top">Version control for file sharing, collaboration, and reproducibility.</td>
+    </tr>
+    <tr>
+      <td valign="top"></td>
+      <td valign="top">Testing (both the mechanics and the use of tests to define problems more precisely).</td>
+    </tr>
+    <tr>
+      <td valign="top"></td>
+      <td valign="top">An introduction to either databases or NumPy, depending on the audience.</td>
+    </tr>
+  </table>
+</div>
+
+<p>We're funded by the Sloan Foundation and Mozilla, and our instructors are volunteers, so the only cost to host sites is their travel and accommodation. (We can handle registration online, or leave it in hosts' hands.) We aim for 40 people per workshop, and look for 2-3 local helpers to assist during practicals.</p>
+
+<p>Two independent assessments in the spring of 2012 confirmed that what we're doing accelerates participants' research, so if there's an upcoming meeting, conference, or get-together where a lot of your intended users will be together, please <a href="mailto:{{contact_email}}">get in touch</a>: we'd welcome a chance to chat about how we could help you.</p>
+
+{% endblock content %}
