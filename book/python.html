@@ -397,6 +397,65 @@ NameError: name 'temp_celsius' is not defined</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:basic">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+	    What is the output of:
+<pre>
+&gt;&gt;&gt; <span class="in">inner = 13.0</span>
+&gt;&gt;&gt; <span class="in">outer = 2 * inner</span>
+&gt;&gt;&gt; <span class="in">inner = 2 * inner</span>
+&gt;&gt;&gt; <span class="in">print outer</span>
+</pre>
+            <ol class="choices">
+              <li><code class="out">13.0</code></li>
+              <li><code class="out">26.0</code></li>
+              <li><code class="out">52.0</code></li>
+	      <li>None of the above.</li>
+            </ol>
+          </li>
+
+          <li>
+	    Fill in the blank so that these lines of code produce the output shown.
+<pre>
+&gt;&gt;&gt; <span class="in">female = 'GGT'</span>
+&gt;&gt;&gt; <span class="in">male = 'CAC'</span>
+&gt;&gt;&gt; <span class="in">________</span>
+&gt;&gt;&gt; <span class="in">print female</span>
+<span class="out">GGTGGTCAC</span>
+</pre>
+            <ol class="choices">
+              <li><code class="in">female = female + female + male</code></li>
+              <li><code class="in">female = (female + female) + male</code></li>
+              <li><code class="in">female = 2 * female + male</code></li>
+	      <li>Any of the above.</li>
+            </ol>
+          </li>
+
+          <li>
+	    What single change can be made to the first three lines below to get the output shown?
+<pre>
+&gt;&gt;&gt; <span class="in">scaling = 10</span> <span class="comment"># line 1</span>
+&gt;&gt;&gt; <span class="in">original = 7</span> <span class="comment"># line 2</span>
+&gt;&gt;&gt; <span class="in">adjusted = primary / scaling</span> <span class="comment"># line 3</span>
+&gt;&gt;&gt; <span class="in">print original + adjusted</span> <span class="comment"># line 4</span>
+<span class="out">7.7</span>
+</pre>
+            <ol class="choices">
+              <li>On line 1, change 10 to 0.1</li>
+	      <li>On line 2, change 7 to 7.7</li>
+	      <li>On line 3, change <code>adjusted</code> to <code>original</code></li>
+	      <li>None of the above.</li>
+            </ol>
+          </li>
+
+	</ol>
+
+      </div>
+ 
     </section>
 
     <section id="s:program">
@@ -493,6 +552,48 @@ ZeroDivisionError: integer division or modulo by zero</span>
         <ul>
           <li>Store programs in files whose names end in <code>.py</code> and run them with <code>python <em>name.py</em></code>.</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:basic">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+	  <li>
+	    Nelle has created a file called <code>example.py</code>
+	    that contains the following lines:
+<pre>
+tolerance = 5.0e3
+diameter = 2 * (tolerance/1000) ** 2 <span class="comment">note the double '*'</span>
+</pre>
+	    What happens when she runs this file from the shell using the command:
+<pre>
+$ <span class="in">python -i example.py</span>
+</pre>
+            <ol class="choices">
+              <li>The statements are run in reverse order ('i' for 'inverted').</li>
+              <li>The interpreter runs the program, then waits for interactive commands ('i' for 'interactive').</li>
+	      <li>The interpreter prints a list of the variables defined in the program ('i' for 'inspect').</li>
+	      <li>None of the above.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    Nelle has created two programs called <code>prepare.py</code> and <code>analyze.py</code>.
+	    What happens when she runs the command:
+	  </li>
+<pre>
+$ <span class="in">python prepare.py analyze.py</span>
+</pre>
+          <ol class="choices">
+	    <li>Python runs the two programs in the order shown.</li>
+	    <li>Python runs <code>prepare.py</code> but not <code>analyze.py</code>.</li>
+	    <li>Python runs <code>analyze.py</code> but not <code>first.py</code>.</li>
+	    <li>Python reports an error.</li>
+	  </ol>
+
+	</ol>
+
       </div>
 
     </section>
@@ -592,12 +693,11 @@ print "body temperature in Kelvin:", temp_kelvin
         using a built-in <a href="glossary.html#function">function</a> called <code>type</code>:
       </p>
 
-        <!-- JK: Typo here, should be 'int' not 'int, and same for float. -->
 <pre>
 &gt;&gt;&gt; <span class="in">type(12)</span>
-<span class="out">&lt;type 'int&gt;</span>
+<span class="out">&lt;type 'int'&gt;</span>
 &gt;&gt;&gt; <span class="in">type(12.0)</span>
-<span class="out">&lt;type 'float&gt;</span>
+<span class="out">&lt;type 'float'&gt;</span>
 </pre>
 
       <p>
@@ -668,6 +768,58 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</span>
           <li idea="meaning">Strings and numbers cannot be added because the behavior is ambiguous: convert one to the other type first.</li>
           <li>Variables do not have types, but values do.</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:types">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+	    If the variable <code>x</code> holds a number,
+	    is the value of <code>int(str(x))</code> always the same as the value of <code>x</code>?
+            <ol class="choices">
+	      <li>Yes.</li>
+              <li>No, because functions cannot be put inside functions.</li>
+              <li>No, because the expression should be <code>int('str(x)')</code> (with quotes).</li>
+              <li>No, because <code>x</code> might be a floating-point number.</li>
+            </ol>
+	  </li>
+
+          <li>
+	    What is value of <code>molecule</code> after the following code is run?
+<pre>
+&gt;&gt;&gt; <span class="in">oxygen = 'O'</span>
+&gt;&gt;&gt; <span class="in">carbon = 'C</span>
+&gt;&gt;&gt; <span class="in">molecule = carbon + oxygen * 2</span>
+</pre>
+            <ol class="choices">
+              <li><code>'COO'</code></li>
+              <li><code>'CO2'</code></li>
+              <li><code>'COCO'</code></li>
+              <li>None of the above: an error occurs on the last line.</li>
+            </ol>
+          </li>
+
+	  <li>
+	    Fill in the blanks so that these lines of code produce the output shown.
+<pre>
+&gt;&gt;&gt; <span class="in">pi = 3.14</span>
+&gt;&gt;&gt; <span class="in">x = ____(pi)</span>
+&gt;&gt;&gt; <span class="in">y = ____(x)</span>
+&gt;&gt;&gt; <span class="in">print y</span>
+<span class="out">3.14</span>
+</pre>
+            <ol class="choices">
+	      <li><code>float</code> and <code>str</code></li>
+	      <li><code>str</code> and <code>str</code></li>
+	      <li><code>str</code> and <code>float</code></li>
+	      <li><code>int</code> and <code>float</code></li>
+	    </ol>
+	  </li>
+
+	</ol>
+
       </div>
 
     </section>
