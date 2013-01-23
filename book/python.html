@@ -1676,6 +1676,126 @@ for value in data {
         </ul>
       </div>
 
+      <div class="challenges" id="c:">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+	    Suppose that the file <code>counts.txt</code> contains:
+<pre>
+1
+2
+3
+</pre>
+	    What does the following program print?
+<pre>
+source = open('counts.txt', 'r')
+result = 'result:'
+for data in source:
+    result = result + data.strip()
+source.close()
+print result
+</pre>
+            <ol class="choices">
+              <li>An error message, because you cannot add numbers to strings.</li>
+              <li><code class="out">result:123</code></li>
+              <li><code class="out">result:6</code></li>
+              <li>None of the above.</li>
+            </ol>
+	  </li>
+
+          <li>
+	    If <code>counts.txt</code> contains the same data,
+	    what does the following program print?
+<pre>
+source = open('counts.txt', 'r')
+first = source.readline()
+second = source.readline()
+for next in source:
+    first = second
+    second = next
+source.close()
+print first, second, next
+</pre>
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+	      <tr>
+		<td>
+<pre>
+1 2 3
+</pre>
+		</td>
+		<td>
+<pre>
+1
+2
+3
+</pre>
+		</td>
+		<td>
+<pre>
+1
+3
+3
+</pre>
+		</td>
+		<td>
+<pre>
+2
+3
+3
+</pre>
+		</td>
+	      </tr>
+	    </table>
+	  </li>
+
+	  <li>
+	    What does the following program print?
+<pre>
+odds = '135'
+evens = '246'
+total = 0
+for first in odds:
+    total = total + int(first)
+for second in evens:
+    total = total + int(first)
+print total
+</pre>
+            <ol class="choices">
+	      <li>12</li>
+	      <li>21</li>
+	      <li>24</li>
+	      <li>An error message.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    What does the following program print?
+<pre>
+text = 'abc'
+for char in text:
+    text = text + char
+print text
+</pre>
+            <ol class="choices">
+	      <li><code class="out">abca</code></li>
+	      <li><code class="out">abcabc</code></li>
+	      <li><code class="out">abcc</code></li>
+	      <li>An error message (the program eventually crashes when it runs out of memory).</li>
+	    </ol>
+	  </li>
+
+	</ol>
+
+      </div>
+
     </section>
 
     <section id="s:logic">
