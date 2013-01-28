@@ -9,6 +9,7 @@
   {{ super() }}
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
   <script type="text/javascript">
+  //<![CDATA[
   function MarkerPin(color) {
     var pin = new google.maps.MarkerImage(
         "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color,
@@ -123,6 +124,7 @@
     // add control to the map
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
   }
+  //]]>
   </script>
 {% endblock javascript %}
 
