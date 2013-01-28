@@ -70,3 +70,7 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^(.*?)/?$ $1.html [R,L]
 
 </IfModule>
+
+<Files "feed.xml">
+ForceType application/rss+xml
+</Files>
