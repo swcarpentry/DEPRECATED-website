@@ -1682,13 +1682,13 @@ for value in data {
         <ol class="challenges">
 
           <li>
-	    Suppose that the file <code>counts.txt</code> contains:
+            Suppose that the file <code>counts.txt</code> contains:
 <pre>
 1
 2
 3
 </pre>
-	    What does the following program print?
+            What does the following program print?
 <pre>
 source = open('counts.txt', 'r')
 result = 'result:'
@@ -1703,11 +1703,11 @@ print result
               <li><code class="out">result:6</code></li>
               <li>None of the above.</li>
             </ol>
-	  </li>
+          </li>
 
           <li>
-	    If <code>counts.txt</code> contains the same data,
-	    what does the following program print?
+            If <code>counts.txt</code> contains the same data,
+            what does the following program print?
 <pre>
 source = open('counts.txt', 'r')
 first = source.readline()
@@ -1725,39 +1725,39 @@ print first, second, next
                 <td>3.</td>
                 <td>4.</td>
               </tr>
-	      <tr>
-		<td>
+              <tr>
+                <td>
 <pre>
 1 2 3
 </pre>
-		</td>
-		<td>
+                </td>
+                <td>
 <pre>
 1
 2
 3
 </pre>
-		</td>
-		<td>
+                </td>
+                <td>
 <pre>
 1
 3
 3
 </pre>
-		</td>
-		<td>
+                </td>
+                <td>
 <pre>
 2
 3
 3
 </pre>
-		</td>
-	      </tr>
-	    </table>
-	  </li>
+                </td>
+              </tr>
+            </table>
+          </li>
 
-	  <li>
-	    What does the following program print?
+          <li>
+            What does the following program print?
 <pre>
 odds = '135'
 evens = '246'
@@ -1769,15 +1769,15 @@ for second in evens:
 print total
 </pre>
             <ol class="choices">
-	      <li>12</li>
-	      <li>21</li>
-	      <li>24</li>
-	      <li>An error message.</li>
-	    </ol>
-	  </li>
+              <li>12</li>
+              <li>21</li>
+              <li>24</li>
+              <li>An error message.</li>
+            </ol>
+          </li>
 
-	  <li>
-	    What does the following program print?
+          <li>
+            What does the following program print?
 <pre>
 text = 'abc'
 for char in text:
@@ -1785,14 +1785,14 @@ for char in text:
 print text
 </pre>
             <ol class="choices">
-	      <li><code class="out">abca</code></li>
-	      <li><code class="out">abcabc</code></li>
-	      <li><code class="out">abcc</code></li>
-	      <li>An error message (the program eventually crashes when it runs out of memory).</li>
-	    </ol>
-	  </li>
+              <li><code class="out">abca</code></li>
+              <li><code class="out">abcabc</code></li>
+              <li><code class="out">abcc</code></li>
+              <li>An error message (the program eventually crashes when it runs out of memory).</li>
+            </ol>
+          </li>
 
-	</ol>
+        </ol>
 
       </div>
 
@@ -2068,6 +2068,184 @@ something *= 2
           <li>Use '==' to test for equality and '!=' to test for inequality.</li>
           <li>Use <code><em>variable</em> += <em>expression</em></code> as a shorthand for <code><em>variable</em> = <em>variable</em> + <em>expression</em></code> (and similarly for other arithmetic operations).</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+          <li>
+            What is the value of <code>x</code> after executing the code shown below?
+<pre>
+x = 1
+x += x &gt; 0
+</pre>
+            <ol class="choices">
+              <li>
+                Undefined (an error occurs).
+              </li>
+              <li>
+                1
+              </li>
+              <li>
+                2
+              </li>
+              <li>
+                3
+              </li>
+            </ol>
+          </li>
+
+          <li>
+            What change must be made to the following code
+            so that it produces the output shown?
+<pre>
+major = 5 &gt; 0
+minor = 0.5 &lt;= 0
+if major and minor:
+    print 'both'
+elif major or minor:
+    print 'one'
+else:
+    print 'neither'
+<span class="out">one</span>
+</pre>
+            <ol class="choices">
+              <li>
+                The <code>if</code> test must be <code>if (major == True) and (minor == True)</code>,
+                and the <code>elif</code> test must be <code>if (major == True) or (minor == True)</code>.
+              </li>
+              <li>
+                The <code>if</code> test must be <code>if major or minor</code>,
+                and the <code>elif</code> test must be <code>if major</code>.
+              </li>
+              <li>
+                The <code>if</code> test must be <code>if major</code>,
+                and the <code>elif</code> test must be <code>if minor</code>.
+              </li>
+              <li>
+                No change is required.
+              </li>
+            </ol>
+          </li>
+
+          <li>
+            A program initially executes these two lines:
+<pre>
+color = 'green'
+shape = 'triangle'
+</pre>
+            Match each snippet of code to the final values of <code>color</code> and <code>shape</code>.
+            <table>
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+if color == 'green':
+    shape = 'square'
+elif shape == 'square':
+    color = 'red'
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+if color == 'green':
+    shape = 'square'
+if shape == 'square':
+    color = 'red'
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+if color == 'green' or shape == 'square':
+    shape = 'circle'
+if shape == 'square':
+    color = 'red'
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+if color == 'green':
+    if shape != 'triangle':
+        shape = 'circle'
+else:
+    shape = 'square'
+</pre>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td><code>color</code></td>
+                <td><code>red</code></td>
+                <td><code>green</code></td>
+                <td><code>green</code></td>
+                <td><code>green</code></td>
+              </tr>
+              <tr>
+                <td><code>shape</code></td>
+                <td><code>square</code></td>
+                <td><code>circle</code></td>
+                <td><code>square</code></td>
+                <td><code>triangle</code></td>
+              </tr>
+            </table>
+
+          </li>
+
+          <li>
+            What does the following code print?
+<pre>
+for char in 'CGT' * 0:
+    print char
+else:
+    print 'not found'
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+C
+G
+T
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+0
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+not found
+</pre>
+                </td>
+                <td valign="top">
+                  An "invalid syntax" error message.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+        </ol>
+
       </div>
 
     </section>
