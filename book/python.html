@@ -1676,7 +1676,7 @@ for value in data {
         </ul>
       </div>
 
-      <div class="challenges" id="c:">
+      <div class="challenges" id="c:for">
         <h3>Challenges</h3>
 
         <ol class="challenges">
@@ -2070,7 +2070,7 @@ something *= 2
         </ul>
       </div>
 
-      <div class="challenges" id="c:">
+      <div class="challenges" id="c:logic">
         <h3>Challenges</h3>
 
         <ol class="challenges">
@@ -2078,7 +2078,7 @@ something *= 2
             What is the value of <code>x</code> after executing the code shown below?
 <pre>
 x = 1
-x += x &gt; 0
+x += x + 1
 </pre>
             <ol class="choices">
               <li>
@@ -2244,6 +2244,64 @@ not found
             </table>
           </li>
 
+          <li>
+            Fill in the blanks so that the program below prints out
+            the sum of the values in the list
+            <em>after</em> the last negative number.
+<pre>
+data = [5, -2, 3, 1, -6, 2, 4]
+total = 0
+for value in data:
+    if ________ &lt; 0:
+        ________ = 0
+    else:
+        ________ += ________
+print total
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+total
+total
+value
+value
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+value
+total
+value
+total
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+total
+value
+total
+value
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+value
+total
+total
+value
+</pre>
+                </td>
+              </tr>
+            </table>
+          </li>
+
         </ol>
 
       </div>
@@ -2388,6 +2446,156 @@ print 'Number of data lines:', number
           <li>The two Boolean values <code>True</code> and <code>False</code> can be assigned to variables like any other values.</li>
           <li>Programs often use Boolean values as flags to indicate whether something has happened yet or not.</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:flag">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+          <li>
+            What does the following program print?
+<pre>
+pressure = 55.3
+regions = [0 &lt;= pressure &lt; 50, 50 &lt;= pressure &lt; 80]
+print regions
+</pre>
+            <ol class="choices">
+              <li><code>[0, 50]</code></li>
+              <li><code>[0, 1]</code></li>
+              <li><code>[False, True]</code></li>
+              <li>A syntax error message.</li>
+            </ol>
+          </li>
+
+          <li>
+            What does the following program print?
+<pre>
+data = [10, 50, 30, 20, 40]
+capped = False
+total = 0
+for value in data:
+    if capped:
+        total = value
+    elif value &gt; total:
+        capped = True
+    else:
+        total += value
+print total
+</pre>
+            <ol class="choices">
+              <li><code>1500</code></li>
+              <li><code>40</code></li>
+              <li><code>60</code></li>
+              <li><code>True</code></li>
+            </ol>
+          </li>
+
+          <li>
+            The <code>break</code> statement tells Python to exit a loop immediately.
+            For example:
+<pre>
+for value in [1, 2, 3, 4, 5]:
+    print value
+    if value == 3:
+        break
+</pre>
+            prints:
+<pre>
+<span class="out">1
+2
+3</span>
+</pre>
+            Which of the following programs prints the same thing
+            <em>without</em> using <code>break</code>?
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+for value in [1, 2, 3, 4, 5]:
+    if value &lt;= 3:
+        print value
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+seen = False
+for value in [1, 2, 3, 4, 5]:
+    print value
+    if value &gt; 2:
+        seen = True
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+printing = True
+for value in [1, 2, 3, 4, 5]:
+    if printing:
+        print value
+    printing = value &lt; 2
+</pre>
+                </td>
+                <td valign="top">
+                  All of the above.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            What does the program below print?
+<pre>
+deviated = True
+for value in [1, 2, 3, 4, 5]:
+    if deviated:
+        print value
+        if value &gt; 2 and deviated:
+            deviated = False
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+1
+2
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+1
+2
+3
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+1
+2
+3
+4
+5
+</pre>
+                </td>
+                <td valign="top">
+                  None of the above.
+                </td>
+              </tr>
+	    </table>
+          </li>
+
+        </ol>
+
       </div>
 
     </section>
