@@ -2708,8 +2708,8 @@ for line in data:
     elif have_seen_dashed_line:
         name, number, score = line.split()
         score = float(score)
-        if (score &lt; 0.0) or (score &gt; 5.0):
-            print 'Out of range:', name, number, score
+<span class="highlight">        if (score &lt; 0.0) or (score &gt; 5.0):
+            print 'Out of range:', name, number, score</span>
 </pre>
 
       <p>
@@ -2761,6 +2761,89 @@ Out of range: volume 1 -3.0</span>
           <li>Use <code>str.split()</code> to split a string into pieces on whitespace.</li>
           <li>Values can be assigned to any number of variables at once.</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:parse">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+          <li>
+	    What does this program do?
+<pre>
+for line in open('columns.txt', 'r'):
+    first, second = line.strip().split()
+    print int(first) + int(second)
+</pre>
+            <ol class="choices">
+	      <li>Nothing: the first line contains a syntax error.</li>
+	      <li>Adds pairs of numbers from a file containing two columns of data.</li>
+	      <li>Totals the values in the first column of data and (separately) the values in the second column.</li>
+	      <li>Nothing: the program fails because it doesn't close the file it opens.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    What does this program do?
+<pre>
+source = open('masses.txt', 'r')
+total = 0.0
+for line in source:
+    if line.startswith('#'):
+        print total
+        total = 0.0
+    else:
+        total += float(line)
+source.close()
+</pre>
+            <ol class="choices">
+	      <li>Add up groups of numbers (one per line) separated by lines starting with '#', printing the totals.</li>
+	      <li>As in #1, except the program does not print the first sub-total.</li>
+	      <li>As in #1, except the program does not print the last sub-total.</li>
+	      <li>As in #1, except the program does not include the first number in each group in its sub-total.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    What does this program do?
+<pre>
+reader = open('patients.txt', 'r')
+largest = 0
+for line in reader:
+    if '#' in line:
+        line, rest = line.split('#')
+    largest = max(largest, len(line.strip()))
+reader.close()
+print largest
+</pre>
+            <ol class="choices">
+	      <li>Print the length of the longest line in the file.</li>
+	      <li>As in #1, except it ignores everything after the first '#' in each line.</li>
+	      <li>As in #2, except it does not include trailing whitespace in the length of the line.</li>
+	      <li>As in #2, except it does not include leading or trailing whitespace in the length of the line.</li>
+	    </ol>
+	  </li>
+
+	  <li>
+	    What does this program do?
+<pre>
+reader = open('patients.txt', 'r')
+writer = open('filtered.txt', 'w')
+for line in reader:
+    line = line.strip()
+    if len(line) &gt; 0:
+        writer.write(line)
+reader.close()
+writer.close()
+</pre>
+            <ol class="choices">
+	      <li>Copy the first non-blank line from <code>patients.txt</code> to <code>filtered.txt</code>.</li>
+	      <li>Copy the longest non-blank line from <code>patients.txt</code> to <code>filtered.txt</code>.</li>
+	      <li>Copy all lines from <code>patients.txt</code> to <code>filtered.txt</code>.</li>
+	      <li>Copy all non-blank lines from <code>patients.txt</code> to <code>filtered.txt</code>.</li>
+	    </ol>
+	  </li>
+
+	</ol>
       </div>
 
     </section>
