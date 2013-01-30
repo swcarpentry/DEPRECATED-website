@@ -49,4 +49,4 @@ To create a new blog post, here is what you do:
 9. When you're satisfied, 'git add blog/YYYY/MM/some-descriptive-title.html' (*not* build/anything, ever).  Also 'git add' any extra files you've created (attachments).
 10. 'git commit -m "Adding a blog post about something or other"' will commit it to your local copy (on your laptop).
 11. 'git push origin master' will push it to your clone on GitHub (assuming you've configured 'origin' to mean "my clone on GitHub").
-12. Go to GitHub and issue a pull request from your clone to swcarpentry/website, then assign it to me or Jon for proof-reading.
+12. Go to GitHub and issue a pull request from your clone to swcarpentry/website, then assign it to @gvwilson or @pipitone for proof-reading.
