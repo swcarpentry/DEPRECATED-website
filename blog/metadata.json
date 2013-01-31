@@ -11,6 +11,7 @@
         "figueira.l" : "Luis Figueira",
         "guy.t" : "Tommy Guy",
         "hansen.m" : "Michael Hansen",
+        "hart.t" : "Ted Hart",
         "huff.k" : "Katy Huff",
         "jackson.m" : "Mike Jackson",
         "lawson.a" : "Ainsley Lawson",
@@ -22,8 +23,7 @@
         "varoquaux.n" : "Nelle Varoquaux",
         "waugh.b" : "Ben Waugh",
         "wilson.g" : "Greg Wilson",
-        "zarrabeitia.l" : "Luis Zarrabeitia",
-        "hart.t" : "Ted Hart"
+        "zarrabeitia.l" : "Luis Zarrabeitia"
     },
 
     "category" : {
