@@ -28,7 +28,7 @@ Blogging
 
 To create a new blog post, here is what you do: 
 
-1. Clone swcarpentry/website on GitHub.
+1. Fork swcarpentry/website on GitHub.
 2. Clone that to your desktop.
 3. In the root directory, run 'make blog-next-id' to find out what ID number your blog post should have.  (This will eventually be automated.)
 4. Create a file called blog/YYYY/MM/some-descriptive-title.html (where 'YYYY' is the four-digit year and 'MM' is the two-digit month, but you knew that).  Alternatively, copy blog/YYYY/MM/something-or-other.html to create the file you want.
@@ -48,5 +48,5 @@ To create a new blog post, here is what you do:
 8. Open build/blog/index.html or build/blog/YYYY/MM/some-descriptive-title.html to eyeball your creation.
 9. When you're satisfied, 'git add blog/YYYY/MM/some-descriptive-title.html' (*not* build/anything, ever).  Also 'git add' any extra files you've created (attachments).
 10. 'git commit -m "Adding a blog post about something or other"' will commit it to your local copy (on your laptop).
-11. 'git push origin master' will push it to your clone on GitHub (assuming you've configured 'origin' to mean "my clone on GitHub").
+11. 'git push origin master' will push it to your clone on GitHub (assuming you've configured 'origin' to mean "my fork on GitHub").
 12. Go to GitHub and issue a pull request from your clone to swcarpentry/website, then assign it to @gvwilson or @pipitone for proof-reading.
