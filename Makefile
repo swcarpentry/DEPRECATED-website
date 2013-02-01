@@ -103,10 +103,14 @@ install :
 ## check        : rebuild entire site locally for checking purposes.
 check : $(STATIC_DST) $(OUT_DIR)/.htaccess
 	@make ascii-chars
-	$(COMPILE) -m blog/metadata.json -r $(BLOG_RSS_FILE) -c $(ICALENDAR_FILE) index.html
+	@make check-bare
 	@make check-links
 	@make book-figref
 	@make blog-journal
+
+## check-bare   : rebuild entire site locally, but do not validate html 
+check-bare: $(STATIC_DST) $(OUT_DIR)/.htaccess
+	$(COMPILE) -m blog/metadata.json -r $(BLOG_RSS_FILE) -c $(ICALENDAR_FILE) index.html
 
 ## blog-next-id : find the next blog entry ID to use.
 blog-next-id :
