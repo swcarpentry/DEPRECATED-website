@@ -1,0 +1,17 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Vrije Universiteit, Amsterdam" />
+  <meta name="date" content="May 2013" />
+  <meta name="startdate" content="2013-05-02" />
+  <meta name="enddate" content="2013-05-03" />
+  <meta name="latlng" content="52.33399,4.86305" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Faculty of Sciences, Vrije Universiteit, De Boelelaan 1081, 1081 HV Amsterdam.</p>
+<p><strong>When:</strong> May 2-3, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{% endblock content %}
