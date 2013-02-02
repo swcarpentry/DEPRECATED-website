@@ -19,7 +19,7 @@
 <div class="row-fluid">
   <div class="span10 offset1">
     <table class="table">
-      <tr>
+      <tbody><tr>
         <td>Thursday morning:</td>
         <td>Intro to Python (basic control structures, lists, strings, functions, etc)</td>
       </tr>
@@ -35,15 +35,27 @@
         <td>Friday afternoon:</td>
         <td>Databases and wrap-up</td>
       </tr>
-    </table>
+    </tbody></table>
   </div>
 </div>
 
-<p><strong>Online follow-up exercises:</strong> go into the above topics in more detail, in addition to using the shell, matrix programming, using spreadsheets in a disciplined way, data management, and software development lifecycles.</p>
+<p><strong>Online follow-up exercises:</strong> go into the above topics
+ in more detail, in addition to using the shell, matrix programming, 
+using spreadsheets in a disciplined way, data management, and software 
+development lifecycles.</p>
 
-<p>Greg Wilson (Software Carpentry) and Mike Rezny (ARC Centre of Excellence for Climate System Science) will be delivering the content. We've also lined up a number of computing gurus from institutions including the Bureau of Meteorology, CSIRO, Monash University and the University of Melbourne, who will circulate the room and answer any questions that you might have.</p>
+<p>Greg Wilson (Software Carpentry) and Mike Rezny (ARC Centre of 
+Excellence for Climate System Science) will be delivering the content. 
+We've also lined up a number of computing gurus from institutions 
+including the Bureau of Meteorology, CSIRO, Monash University and the 
+University of Melbourne, who will circulate the room and answer any 
+questions that you might have.</p>
 
-<p><strong>Laptops:</strong> Participants are required to bring their own laptop, as the workshop involves a mixture of lectures and hands on exercises. The lecture theatre has desk facilities where you can plug in and charge. If you don't have a laptop, don't stress, we'll pair you up with someone who does.</p>
+<p><strong>Laptops:</strong> Participants are required to bring their 
+own laptop, as the workshop involves a mixture of lectures and hands on 
+exercises. The lecture theatre has desk facilities where you can plug in
+ and charge. If you don't have a laptop, don't stress, we'll pair you up
+ with someone who does.</p>
 
 <p>See below for software installation instructions.</p>
 
@@ -69,6 +81,7 @@ software.</p>
   <li><a href="#python">Python version 2.6 or later but not version 3</a></li>
   <li><a href="#setuptools">Python setuptools for installing packages</a></li>
   <li><a href="#nose">Python nose for running unit tests</a></li>
+  <li><a href="#git">Git for version control</a></li>
   <li><a href="#bitbucket">a bitbucket account for remote version control repositories</a></li>
   <li><a href="#sqlite3">sqlite3 relational database</a></li>
   <li><a href="#firefox">Firefox</a></li>
@@ -88,7 +101,7 @@ for installing the software prior to attending the Boot Camp.</p>
 <a href="http://en.wikipedia.org/wiki/Shell_%28computing%29">shell </a>or
 <a href="http://en.wikipedia.org/wiki/Terminal_emulator">terminal emulator</a>).
 If you don't know what this is or how to get one then please go to our page on
-<a href="setup-terminal.html">getting a terminal window</a>.</p>
+<a href="http://software-carpentry.org/bootcamps/setup-terminal.html">getting a terminal window</a>.</p>
 
 <h4 id="shell">Bash shell, the UNIX shell we like to use</h4>
 
@@ -201,6 +214,15 @@ error: option --version not recognized</pre>
 Ran 0 tests in 0.003s
 OK</pre>
 
+<h4 id="git">Git for using version control</h4>
+<p>At the prompt, enter:</p>
+<pre>$ git --version</pre>
+
+<p>You should be given a version number, e.g.:</p>
+<pre>
+git version 1.8.0
+</pre>
+
 <h4 id="bitbucket">BitBucket for using remote version control repositories</h4>
 
 <p>For version control practicals, we use BitBucket to enable
@@ -293,7 +315,8 @@ if you have any other suggestions that will make the installation process easier
 <li>Python 2.6 or 2.7</li>
 <li>Firefox</li>
 </ul>
-<p>All installation needs to be done as a root user or user with certain administrator privileges. If you have such access you can do:</p>
+<p>All installation needs to be done as a root user or user with certain
+ administrator privileges. If you have such access you can do:</p>
 <pre>$ sudo su -</pre>
 <p>Then enter your usual password.</p>
 <h4>Install Emacs or XEmacs</h4>
@@ -347,7 +370,8 @@ However, the versions of the installed packages may be different.</p>
 <li>sqlite3</li>
 
 </ul>
-<p>All installation needs to be done as a root user or user with certain administrator privileges. If you have such access you can do:</p>
+<p>All installation needs to be done as a root user or user with certain
+ administrator privileges. If you have such access you can do:</p>
 <pre>$ sudo su -</pre>
 <p>Then enter your usual password.</p>
 <h4>Install Emacs or XEmacs (only if you want to use emacs as your text editor)</h4>
@@ -475,6 +499,7 @@ height="50%" width="50%"/>
 <li>Click <strong>New column</strong> until it toggles to 3.82.90.1 (or, the latest version)</li>
 <li>Scroll to git</li>
 <li>Click <strong>New column</strong> until it toggles to 1.7.9 (or, the latest version)</li>
+<li>As well as  1.7.9-1 git, the packages  <strong>git-completion, git-gui  </strong> and  <strong>  gitk</strong> are needed. </li>
 <li>Click <strong>Editors</strong></li>
 <li>Pick your favourite editor...</li>
 <li>Scroll to nano</li>
@@ -484,10 +509,17 @@ height="50%" width="50%"/>
 <li>Scroll to xemacs</li>
 <li>Click <strong>New column</strong> until it toggles to 21.4.22-1 (or, the latest version)</li>
 <li>Click <strong>Python</strong></li>
-<li>Scroll to python</li>
-<li>Click <strong>New column</strong> until it toggles to 2.6.8-2 (or, the latest Python 2.x version)</li>
+<li>Click <strong>New column</strong> until it toggles to 2.6.8-2 .
+A successful installation seems to require 2.6.8-2. There were problems when you used the later 2.7 version.</li>
+<li>Whilst in Python, also install <strong> idle,  python-doc</strong> and <strong> python-tkinter </strong></li>
 <li>Click <strong>Shells</strong></li>
-<li>Scroll to bash</li>
+<li>Scroll to bash and check that it is installed.</li>
+<li>Install <strong>openssh</strong>.  Scroll to <strong>net</strong> and click on oppensh.</li>
+<li>You need a working X-Windows server to use some git tools. So scroll to <strong> X: </strong> and install
+                        <strong>X-start-menu-icons </strong> and <strong> xinit.</strong>
+</li>
+
+
 <li>Check <strong>New column </strong>until it toggles to 4.1.10-4 (or, the latest version)</li>
 <li>Click <strong>Next&gt;</strong></li>
 <li>Resolving Dependencies window appears</li>
