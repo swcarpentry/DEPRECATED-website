@@ -1,0 +1,347 @@
+{% extends "_base.html" %}
+
+{% block file_metadata %}
+  <meta name="title" content="Basic Programming With Python and Images" />
+{% endblock file_metadata %}
+
+{% block content %}
+
+<p>
+  Valerie Visual is studying how people visualize and recall color.
+  For one of her experiments,
+  she wants to cut a photograph of faces into rectangular pieces
+  and time how long it takes subjects to reassemble those pieces
+  after they have been recolored in different ways.
+</p>
+
+<p>
+  If Aurora only wanted to use one or two images,
+  the simplest way to create the puzzles she needs might be
+  to use a tool like Photoshop.
+  However,
+  she wants to give each subject several dozen puzzles to solve
+  (since each one typically only takes a few seconds to assemble).
+  Since she doesn't want to spend hours cutting and coloring images,
+  she wants to write a small program to do the job for her.
+  To do that,
+  she's going to have to learn how to program,
+  and that's what the next couple of chapters are about.
+</p>
+
+<p>
+  We will use a programming language called Python for our examples.
+  Python is free,
+  reasonably well documented,
+  and widely used in science and engineering.
+  Our main reason for choosing it,
+  though,
+  is that newcomers find it easier to read than most other languages.
+  It also allows people to do useful things
+  without having to master advanced concepts like object-oriented programming.
+</p>
+
+<p>
+  Our programs will use a library for manipulating images
+  that was specifically written for novices.
+  Many of the things we will do in five or ten lines
+  can actually be done in a single line by an experienced programmer,
+  but since our goal is to show you how to write programs of your own,
+  we will leave the training wheels on for now.
+</p>
+
+<section id="s:basic">
+
+  <h2>Basic Operations</h2>
+
+  <div class="understand" id="u:basic">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to use the Python interpreter interactively.</li>
+      <li>How to do basic arithmetic.</li>
+      <li>How to assign values to variables.</li>
+    </ul>
+  </div>
+
+  <p>
+    The best way to learn how to program is to start programming,
+    so let's run the Python interpreter
+    and type in the following:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">print 1 + 1</span>
+<span class="out">2</span>
+</pre>
+
+  <p class="continue">
+    The <code>&gt;&gt;&gt;</code> <a href="glossary.html#prompt">prompt</a>
+    is the interpreter's way of telling us that it's waiting for input,
+    like the <code>$</code> prompt in <a href="shell.html">the shell</a>.
+    When we enter 1+1,
+    Python does the calculation we've asked for
+    and prints the result.
+  </p>
+
+  <p>
+    Now type this:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">x = 1+1</span>
+</pre>
+
+  <p class="continue">
+    Python doesn't display anything this time
+    (except another prompt).
+    Instead,
+    as <a href="#f:first_variable">Figure 1</a> shows,
+    it creates a <a href="glossary.html#variable">variable</a> called <code>x</code>
+    and assigns it the value 2.
+    We can then get that variable's value simply by entering its name:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">print x</span>
+<span class="out">2</span>
+</pre>
+
+  <figure id="f:first_variable">
+    <img src="img/python/first_variable.png" alt="Our First Variable" />
+  </figure>
+
+  <div class="box">
+
+    <h3>Statements vs. Expressions</h3>
+
+    <p>
+      Python is a fairly relaxed language,
+      but there are still some things it won't let us do.
+      For example,
+      this doesn't work:
+    </p>
+
+<pre>
+print x = 1 + 2
+<span class="err">SyntaxError: invalid syntax</span>
+</pre>
+
+    <p class="continue">
+      The problem is that printing and assignment are both
+      <a href="glossary.html#statement">statements</a>,
+      and statements cannot be mixed together.
+      1+2, on the other hand,
+      is an <a href="glossary.html#expression">expression</a>&mdash;something
+      that produces a new value&mdash;and expressions can be combined in many ways.
+      Except for assignment,
+      every statement in Python begins with a keyword like <code>print</code>,
+      so it's usually easy to tell them apart.
+    </p>
+
+  </div>
+
+  <p>
+    We can now use that variable's value in calculations:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">print x * 2</span>
+4
+</pre>
+
+  <p class="continue">
+    including ones that create more variables:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">y = x * 2</span>
+&gt;&gt;&gt; <span class="in">print y</span>
+<span class="out">4</span>
+</pre>
+
+  <p class="continue">
+    We can change a variable's value
+    by assigning something new to it:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">x = 10</span>
+&gt;&gt;&gt; <span class="in">print x</span>
+10
+</pre>
+
+  <p class="continue">
+    As <a href="#f:assign_new_value">Figure XXX</a> shows,
+    assigning something to <code>x</code> changes what it points to,
+    but does not change anything else.
+    In particular,
+    <code>y</code> still has the value 4 after this assignment:
+    it is not automatically updated when <code>x</code>'s value changes,
+    as it would in a spreadsheet.
+  </p>
+
+  <figure id="f:assign_new_value">
+    <img src="img/python/assign_new_value.png" alt="Assigning a New Value" />
+  </figure>
+
+  <p>
+    Here's a more complex calculation:
+  </p>
+
+<pre src="src/python/fahrenheit_to_kelvin_unreadable.py">
+&gt;&gt;&gt; <span class="in">x = 98.6</span>
+&gt;&gt;&gt; <span class="in">y = (x - 32.0) * (5.0 / 9.0) + 273.15</span>
+&gt;&gt;&gt; <span class="in">print y</span>
+<span class="out">310.15</span>
+</pre>
+
+  <p class="continue">
+    Its meaning becomes clearer if we rewrite it as:
+  </p>
+
+<pre src="src/python/fahrenheit_to_kelvin.py">
+&gt;&gt;&gt; <span class="in">temp_fahr = 98.6</span>
+&gt;&gt;&gt; <span class="in">temp_kelvin = (temp_fahr - 32.0) * (5.0 / 9.0) + 273.15</span>
+&gt;&gt;&gt; <span class="in">print "body temperature in Kelvin:", temp_kelvin</span>
+<span class="out">body temperature in Kelvin: 310.15</span>
+</pre>
+
+  <p>
+    The first line creates a new variable called <code>temp_fahr</code>
+    (short for "temperature in Fahrenheit")
+    and gives it the value 98.6
+    (<a href="#f:first_memory_model">Figure XXX</a>).
+    The second line creates another variable to hold the temperature in Kelvin
+    (hence its name).
+    It calculates a value for this variable
+    that depends on the value of <code>temp_fahr</code>.
+    The last line prints the result.
+    The <a href="glossary.html#string">character string</a>
+    (or just "string" for short)
+    inside double quotes is printed as-is,
+    followed by the value of <code>temp_kelvin</code>.
+  </p>
+
+  <figure id="f:first_memory_model">
+    <img src="img/python/first_memory_model.png" alt="First Memory Model" />
+  </figure>
+
+  <p>
+    Like every program,
+    this one stores data and does calculations.
+    We use variables to do the first,
+    and write instructions that use those variables to do the second.
+    And like every <em>good</em> program,
+    this one is written with human beings in mind.
+    Computers get faster every year,
+    but our brains don't.
+    As a result,
+    the real bottleneck in scientific computing is usually not
+    how fast the program runs,
+    but how long it takes us to write it.
+    This is why we use variable names like <code>temp_fahr</code> and <code>temp_kelvin</code>
+    instead of <code>x</code> and <code>y</code>.
+  </p>
+
+  <div class="box">
+
+    <h3>Creating Variables</h3>
+
+    <p>
+      Python creates a variable whenever a value is assigned to a name,
+      but won't let us get the value of a variable that hasn't been assigned one.
+      For example,
+      if we try to do this:
+    </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">double_temp = temp_celsius * 2</span>
+</pre>
+
+    <p class="continue">
+      then Python prints an error message:
+    </p>
+
+<pre>
+<span class="err">Traceback (most recent call last):
+  File "&lt;undefined-variable.py&gt;", line 1, in &lt;module&gt;
+NameError: name 'temp_celsius' is not defined</span>
+</pre>
+
+    <p class="continue">
+      We'll explain what "module" means <a href="funclib.html">later</a>.
+      What's important now is that this strictness helps catch a lot of typing mistakes:
+      if we mistakenly type <code>temp_far</code> instead of <code>temp_fahr</code>:
+    </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">temp_kelvin = (<span class="highlight">temp_far</span> - 32.0) * (5.0 / 9.0) + 273.15</span>
+</pre>
+
+    <p class="continue">
+      then Python will tell us something's gone wrong.
+      It can't help us if we type 3.20 instead of 32.0, though;
+      if we want to catch that mistake,
+      we'll actually have to <a href="quality.html">test our program</a>.
+    </p>
+
+  </div>
+
+  <p>
+    Readability is also why we put the temperature in Fahrenheit in a variable,
+    then use that variable in line 2,
+    rather than just putting 98.6 directly in the calculation.
+    If we ever want to convert another temperature,
+    it's easier to see and change the value on line 1
+    than it would be to find it buried in the middle of a line of arithmetic.
+  </p>
+
+  <p>
+    Finally,
+    this first program also shows how arithmetic is done.
+    '+' means addition,
+    '*' means multiplication,
+    and parentheses group things together,
+    just as they do in pen-and-paper arithmetic.
+    We have to use parentheses here because
+    (also as in arithmetic)
+    multiplication takes precedence over addition:
+    the expression <code>2*3+5</code> means,
+    "Multiply two by three, then add five,"
+    rather than,
+    "Add three and five, then multiple by two."
+    If we want the latter,
+    we have to write <code>2*(3+5)</code>.
+  </p>
+
+  <div class="box">
+
+    <h3>Repeating Commands</h3>
+
+    <p>
+      Just as we could repeat previous commands in the shell
+      by using the <a href="shell.html#a:repeat">up arrow</a>,
+      so too can we repeat commands in the Python interpreter.
+      And while the standard interpreter doesn't have an equivalent
+      of the shell's <code>history</code> command,
+      more advanced shells like IPython do
+      (along with much more).
+    </p>
+
+  </div>
+
+  <div class="keypoints" id="k:basic">
+    <h3>Summary</h3>
+    <ul>
+      <li>Use '=' to assign a value to a variable.</li>
+      <li>Assigning to one variable does not change the values associated with other variables.</li>
+      <li>Use <code>print</code> to display values.</li>
+      <li>Variables are created when values are assigned to them.</li>
+      <li>Variables cannot be used until they have been created.</li>
+      <li>Addition ('+'), subtraction ('-'), and multiplication ('*') work as usual in Python.</li>
+      <li idea="perf">Use meaningful, descriptive names for variables.</li>
+    </ul>
+  </div>
+
+</section>
+
+{% endblock content %}
