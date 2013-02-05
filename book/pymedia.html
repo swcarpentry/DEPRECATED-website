@@ -15,7 +15,7 @@
 </p>
 
 <p>
-  If Aurora only wanted to use one or two images,
+  If Valerie only wanted to use one or two images,
   the simplest way to create the puzzles she needs might be
   to use a tool like Photoshop.
   However,
@@ -341,6 +341,490 @@ NameError: name 'temp_celsius' is not defined</span>
       <li idea="perf">Use meaningful, descriptive names for variables.</li>
     </ul>
   </div>
+
+</section>
+
+<section id="s:types">
+
+  <h2>Types</h2>
+
+  <div class="understand" id="u:types">
+    <h3>Understand:</h3>
+    <ul>
+      <li>What data types are.</li>
+      <li>The differences between integers, floating-point numbers, and strings.</li>
+      <li>How to call a function.</li>
+      <li>Why computers shouldn't guess what people want.</li>
+    </ul>
+  </div>
+
+  <p>
+    Let's take another look at our program:
+  </p>
+
+<pre src="src/python/fahrenheit_to_kelvin.py">
+&gt;&gt;&gt; <span class="in">temp_fahr = 98.6</span>
+&gt;&gt;&gt; <span class="in">temp_kelvin = (temp_fahr - 32.0) * (5.0 / 9.0) + 273.15</span>
+&gt;&gt;&gt; <span class="in">print "body temperature in Kelvin:", temp_kelvin</span>
+<span class="out">body temperature in Kelvin: 310.15</span>
+</pre>
+
+  <p>
+    Why have we written 5.0/9.0 instead of 5/9?
+    Let's see what happens if we take out the .0's:
+  </p>
+
+<pre src="src/python/fahrenheit_to_kelvin_int.py">
+&gt;&gt;&gt; <span class="in">temp_fahr = 98.6</span>
+&gt;&gt;&gt; <span class="highlight">temp_kelvin = (temp_fahr - 32) * (5 / 9) + 273.15</span>
+&gt;&gt;&gt; <span class="in">print "body temperature in Kelvin:", temp_kelvin</span>
+<span class="out">body temperature in Kelvin: 273.15</span>
+</pre>
+
+  <p>
+    That's not right.
+    To understand what's gone wrong,
+    let's look at 5/9:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">5/9</span>
+<span class="out">0</span>
+</pre>
+
+  <p>
+    The problem is that integers and floating point numbers
+    (or <a href="glossary.html#float">floats</a>)
+    are different things to a computer.
+    If a number doesn't have a decimal point,
+    then Python stores its value as an integer (with no fractional part).
+    When it divides one integer by another,
+    it throws away the remainder.
+    If a number contains a decimal point,
+    though,
+    Python stores it as a float.
+    When it does division (or any other kind of arithmetic),
+    the result is a float if either of the values involved is a float:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">10 / 3</span>
+<span class="out">3</span>
+&gt;&gt;&gt; <span class="in">10.0 / 3</span>
+<span class="out">3.3333333333333335</span>
+</pre>
+
+  <p class="continue">
+    This makes sense,
+    but only if you understand how the chips inside computers work.
+    Version 3 of Python changed the rules for division
+    so that it returns fractional numbers whenever it needs to.
+    However,
+    we're using Python 2.7 in this course,
+    so 10/3 is 3 until further notice.
+  </p>
+
+  <p>
+    Every value in a program has a specific <a href="glossary.html#type">type</a>
+    which determines how it behaves
+    and what can be done to it.
+    We can find out what type something is
+    using a built-in <a href="glossary.html#function">function</a> called <code>type</code>:
+  </p>
+
+
+<pre>
+&gt;&gt;&gt; <span class="in">type(12)</span>
+<span class="out">&lt;type 'int&gt;</span>
+&gt;&gt;&gt; <span class="in">type(12.0)</span>
+<span class="out">&lt;type 'float&gt;</span>
+</pre>
+
+  <p>
+    Integers and floating-point numbers are two common types;
+    another is the character string.
+    We can create one by putting characters inside either single or double quotes
+    (as long as they match at the beginning and end):
+  </p>
+
+<pre src="src/python/simple_string.py">
+&gt;&gt;&gt; <span class="in">name = "Alan Turing"</span>
+&gt;&gt;&gt; <span class="in">born = 'June 23, 1912'</span>
+&gt;&gt;&gt; <span class="in">print name, born</span>
+<span class="out">Alan Turing June 23, 1912</span>
+</pre>
+
+  <p>
+    We can also "add" strings:
+  </p>
+
+<pre src="src/python/simple_string.py">
+&gt;&gt;&gt; <span class="in">full = name + " (" + born + ")"</span>
+&gt;&gt;&gt; <span class="in">print full</span>
+<span class="out">Alan Turing (June 23, 1912)</span>
+</pre>
+
+  <p>
+    What we <em>can't</em> do is add numbers and strings:
+  </p>
+
+<pre src="src/python/add_numbers_strings.py">
+&gt;&gt;&gt; <span class="in">print 2 + "three"</span>
+<span class="err">Traceback (most recent call last):
+  File "add-numbers-strings.py", line 1, in &lt;module&gt;
+    print 2 + "three"
+TypeError: unsupported operand type(s) for +: 'int' and 'str'</span>
+</pre>
+
+  <p>
+    The string "2three" would be a reasonable result in this case,
+    but it's not so clear what <code>2+"3"</code> should do:
+    should it produce the integer 5 or the string <code>"23"</code>?
+    Rather than guessing at the programmer's intentions,
+    Python expects some guidance:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">print 2 + int("3")</span>
+<span class="out">5</span>
+&gt;&gt;&gt; <span class="in">print str(2) + "3"</span>
+<span class="out">23</span>
+</pre>
+
+  <p>
+    <code>int</code> and <code>str</code> are two more built-in functions
+    which convert values to particular types.
+    We'll look at functions in much more detail
+    in <a href="funclib.html">the next chapter</a>.
+  </p>
+
+  <div class="keypoints" id="k:types">
+    <h3>Summary</h3>
+    <ul>
+      <li>The most commonly used data types in Python are integers (<code>int</code>), floating-point numbers (<code>float</code>), and strings (<code>str</code>).</li>
+      <li>Strings can start and end with either single quote (') or double quote (&quot;).</li>
+      <li>Division ('/') produces an <code>int</code> result when given <code>int</code> values: one or both arguments must be <code>float</code> to get a <code>float</code> result.</li>
+      <li>"Adding" strings concatenates them, multiplying strings by numbers repeats them.</li>
+      <li idea="meaning">Strings and numbers cannot be added because the behavior is ambiguous: convert one to the other type first.</li>
+      <li>Variables do not have types, but values do.</li>
+    </ul>
+  </div>
+
+</section>
+
+<section id="s:openshow">
+
+  <h2>Displaying Images</h2>
+
+  <div class="understand" id="u:openshow">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to open and display images.</li>
+      <li>What a library is.</li>
+      <li>Why programs are built out of libraries.</li>
+      <li>What a method is and how to call one.</li>
+    </ul>
+  </div>
+
+  <p>
+    Now that we can do basic arithmetic,
+    let's look at some images:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">from skimage import novice</span>
+&gt;&gt;&gt; <span class="in">flower = novice.open('flower.jpg')</span>
+&gt;&gt;&gt; <span class="in">flower.show()</span>
+</pre>
+
+  <p>
+    This three-line program introduces one new idea per line.
+    The first statement asks Python to find a library called <code>skimage</code>
+    (the SciKit image processing library)
+    and load something called <code>novice</code> from it.
+    The second statement asks <code>novice</code> to open a file called <code>flower.jpg</code>;
+    the result of that operation is assigned to a variable called <code>flower</code>.
+    The final statement asks the thing <code>flower</code> now points at to display itself.
+    If all has gone well,
+    this should show a picture of the world's cutest child
+    (<a href="#f:flower">Figure XXX</a>).
+  </p>
+
+  <figure id="f:flower">
+    <img src="img/pymedia/flower.jpg" alt="The World's Cutest Child" />
+  </figure>
+
+  <p>
+    A <a href="glossary.html#library">library</a>
+    (or <a href="glossary.html#module">module</a>&mdash;for our purposes, the terms mean the same thing)
+    is one of the most important ideas in all of programming.
+    No language could possibly contain every single feature that everyone might ever want.
+    Even if it did,
+    people's needs evolve over time,
+    so an "all inclusive" approach would mean constantly releasing new versions of the language.
+    Instead,
+    every programming language provides a way for people to define new tools themselves,
+    and then load those tools into other programs.
+    In this case,
+    someone wrote an image processing library called <code>skimage</code>,
+    and someone else (a graduate student named Mike Hansen)
+    added a sub-library to it called <code>novice</code>
+    to provide an easy-to-use interface for people who are just learning to program.
+    When we write:
+  </p>
+
+<pre>
+from skimage import novice
+</pre>
+
+  <p class="continue">
+    we are asking Python to find the <code>skimage</code> library,
+    search inside it for <code>novice</code>,
+    and load that into memory for use.
+  </p>
+
+  <p>
+    To get at the things <code>novice</code> contains,
+    we then refer to them as <code>novice.<em>something</em></code>.
+    This <a href="glossary.html#dotted-notation">dotted notation</a> was invented
+    to deal with the fact that people often choose the same names for different things.
+    For example,
+    <code>skimage.novice</code>'s <code>open</code> looks for a file on disk and opens that,
+    but another library called <code>web</code> might provide something called <code>open</code>
+    that opened a connection to a web site.
+    Using <code>thing.subthing.subsubthing</code> to name things
+    is exactly like using the genus and species names to identify particular organisms.
+  </p>
+
+  <div class="box">
+
+    <h3>There's More Than One Way to Name It</h3>
+
+    <p>
+      You may have noticed above that we referred to <code>novice</code> as <code>skimage.novice</code>.
+      If we want to do this in our program,
+      we could rewrite it as:
+    </p>
+
+<pre>
+import skimage
+flower = skimage.novice.open('flower.jpg')
+flower.show()
+</pre>
+
+    <p class="continue">
+      which performs exactly the same operations as the original.
+      What we <em>can't</em> do is:
+    </p>
+
+<pre>
+import skimage
+flower = novice.open('flower.jpg')
+</pre>
+
+    <p class="continue">
+      or:
+    </p>
+
+<pre>
+from skimage import novice
+flower = skimage.novice.open('flower.jpg')
+</pre>
+
+    <p class="continue">
+      The first (<code>import skimage</code>) doesn't define anything in our program called <code>novice</code>;
+      it only defines <code>skimage</code>.
+      The second does the reverse:
+      it defines <code>novice</code> <em>without</em> defining <code>skimage</code>.
+    </p>
+
+    <p>
+      And yes,
+      we could do this:
+    </p>
+
+<pre>
+from skimage.novice import open
+flower = open('flower.jpg')
+</pre>
+
+    <p class="continue">
+      but it would be a very bad idea.
+      Python actually has a built-in function called <code>open</code>
+      that opens arbitrary files so that the bytes in them can be read.
+      If we run the code shown immediately above,
+      that built-in function will be replaced by
+      <code>skimage.novice</code>'s <code>open</code>,
+      which will probably break most programs
+      (since most files aren't actually images).
+    </p>
+
+  </div>
+
+  <p>
+    With that out of the way,
+    the second statement in:
+  </p>
+
+<pre>
+from skimage import novice
+<span class="highlight">flower = novice.open('flower.jpg')</span>
+flower.show()
+</pre>
+
+  <p class="continue">
+    should be pretty easy to understand.
+    It's a function call:
+    it just happens that the function being called is contained in the <code>novice</code> library.
+    Similarly,
+    the expression <code>flower.show()</code> is another call
+    that asks whatever the variable <code>flower</code> points at
+    to call the <code>show</code> function it contains.
+  </p>
+
+  <p>
+    Another way to think about this program is shown in <a href="#f:memory_model_image_display">Figure XXX</a>.
+    After the first statement,
+    Python has created a variable called <code>novice</code>
+    that refers to <code>skimage</code>'s <code>novice</code> module.
+    After the second statement,
+    that module has loaded bytes from an image file on disk into memory,
+    wrapped an object around them,
+    and creatd a variable called <code>flower</code> to refer to that object.
+  </p>
+
+  <figure id="f:memory_model_image_display">
+    <img src="img/pymedia/memory_model_image_display.jpg" alt="Memory Model of Image Display Program" />
+  </figure>
+
+  <div class="keypoints" id="k:openshow">
+    <h3>Summary</h3>
+    <ul>
+      <li class="fixme">Write summary</li>
+    </ul>
+  </div>
+
+</section>
+
+<section id="s:program">
+
+  <h2>Creating Programs</h2>
+
+  <div class="understand" id="u:program">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to create and run programs.</li>
+    </ul>
+  </div>
+
+  <p>
+    Typing in commands over and over again is tedious and error-prone.
+    Just as we saved shell commands in <a href="shell.html#s:scripts">shell scripts</a>,
+    we can save Python commands in files
+    and then have the Python interpreter run those.
+    Using your favorite text editor,
+    put the following three lines into a plain text file:
+  </p>
+
+<pre src="src/python/greeting.py">
+left = "hello"
+right = "there"
+print left, right
+</pre>
+
+  <p class="continue">
+    and then save it as <code>greeting.py</code>.
+    (By convention,
+    Python files end in '.py'
+    rather than '.txt'.)
+    To run it from the shell,
+    type:
+  </p>
+
+<pre>
+$ <span class="in">python greeting.py</span>
+<span class="out">hello there</span>
+</pre>
+
+  <p>
+    Of course,
+    we can do this with our image display program as well:
+  </p>
+
+<pre>
+import skimage
+flower = skimage.novice.open('flower.jpg')
+flower.show()
+</pre>
+
+  <p>
+    When we save this as <code>showflower.py</code>,
+    and run it as:
+  </p>
+
+<pre>
+$ <span class="in">python showflower.py</span>
+</pre>
+
+  <p class="continue">
+    it displays our picture.
+    <span class="fixme">explain how to kill it</span>
+  </p>
+
+  <p>
+    When the Python interpreter executes a file,
+    it runs the commands in that file
+    just as if they had been typed in interactively.
+    It doesn't wait until the whole file has been read
+    to start executing;
+    instead,
+    as the example below shows,
+    it runs each command as soon as it can:
+  </p>
+
+    <!-- JK: I think what was intended here was for the first 3 lines to 
+         replace the existing 3 lines in greeting.py, then 'python greeting.py' 
+         was to be run from the shell? If so, having the first 3 new lines in a 
+         separate blue box might be more clear. Also, the text below currently
+         references a.py. -->
+
+<pre src="src/python/executing_file.py">
+print "before"
+1/0
+print "after"
+<span class="out">before</span>
+<span class="err">Traceback (most recent call last):
+  File "a.py", line 2, in &lt;module&gt;
+    1/0
+ZeroDivisionError: integer division or modulo by zero</span>
+</pre>
+
+  <p class="continue">
+    Note that this can lead to some confusing output.
+    For example,
+    if we change the example above to:
+  </p>
+
+<pre>
+print "before", 1/0, "after"
+</pre>
+
+  <p class="continue">
+    then the output is:
+  </p>
+
+<pre><span class="out">before</span>
+<span class="err">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ZeroDivisionError: integer division or modulo by zero</span>
+</pre>
+
+<div class="keypoints" id="k:program">
+  <h3>Summary</h3>
+  <ul>
+    <li>Store programs in files whose names end in <code>.py</code> and run them with <code>python <em>name.py</em></code>.</li>
+  </ul>
+</div>
 
 </section>
 
