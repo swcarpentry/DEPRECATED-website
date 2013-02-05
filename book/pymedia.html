@@ -701,6 +701,7 @@ flower.show()
     <h3>Summary</h3>
     <ul>
       <li class="fixme">Write summary</li>
+      <li class="fixme">Explain scope of imports: program session</li>
     </ul>
   </div>
 
@@ -819,12 +820,550 @@ print "before", 1/0, "after"
 ZeroDivisionError: integer division or modulo by zero</span>
 </pre>
 
-<div class="keypoints" id="k:program">
-  <h3>Summary</h3>
-  <ul>
-    <li>Store programs in files whose names end in <code>.py</code> and run them with <code>python <em>name.py</em></code>.</li>
-  </ul>
-</div>
+  <div class="keypoints" id="k:program">
+    <h3>Summary</h3>
+    <ul>
+      <li>Store programs in files whose names end in <code>.py</code> and run them with <code>python <em>name.py</em></code>.</li>
+    </ul>
+  </div>
+
+</section>
+
+<section id="s:properties">
+
+  <h2>Image Properties</h2>
+
+  <div class="understand" id="u:properties">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to inspect and modify the properties of images.</li>
+      <li>How to save images to files.</li>
+    </ul>
+  </div>
+
+  <p>
+    Let's take another look at the world's cutest child:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">from skimage import novice</span>
+&gt;&gt;&gt; <span class="in">flower = novice.open('flower.jpg')</span>
+&gt;&gt;&gt; <span class="in">flower.show()</span>
+</pre>
+
+  <p class="continue">
+    What else can we do besides display this image?
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">print flower.format</span>
+<span class="out">JPEG</span>
+&gt;&gt;&gt; <span class="in">print flower.path</span>
+<span class="out">/home/gvwilson/examples/flower.jpg</span>
+&gt;&gt;&gt; <span class="in">print flower.height</span>
+<span class="out">180</span>
+&gt;&gt;&gt; <span class="in">print flower.width</span>
+<span class="out">240</span>
+</pre>
+
+  <p>
+    As this example shows,
+    a picture object has <a href="glossary.html#property">properties</a>:
+    its format (JPEG, PNG, and so on),
+    the path to the file it was loaded from,
+    and its height and width in pixels.
+    Some of these are unchangeable,
+    so that we can confuse our program
+    by fooling it into thinking that a JPEG image is actually stored as a PNG,
+    or that it was loaded from a different file than it actually was:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">flower.format = 'PNG'</span>
+<span class="err">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AttributeError: can't set attribute</span>
+&gt;&gt;&gt; <span class="in">flower.path = '/profiles/alan-turing.jpg'</span>
+<span class="err">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 2, in &lt;module&gt;
+AttributeError: can't set attribute</span>
+</pre>
+
+  <p>
+    Others,
+    however,
+    are changeable.
+    For example,
+    we can squish the image by altering its height
+    (<a href="#f:flower_squished">Figure XXX</a>).
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">flower.height = 90</span>
+&gt;&gt;&gt; <span class="in">flower.show()</span>
+</pre>
+
+  <figure id="f:flower_squished">
+    <img src="img/pymedia/flower_squished.jpg" alt="Squishing a Picture" />
+  </figure>
+
+  <p>
+    We can now save this picture to a new file if we want:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">flower.save('squished.jpg')</span>
+</pre>
+
+  <p>
+    When we do this,
+    the object's <code>path</code> property is automatically updated:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">print flower.path</span>
+<span class="out">/home/gvwilson/examples/squished.jpg</span>
+</pre>
+
+  <p>
+    And if we want to change its format,
+    we can do that by saving it to a file with the appropriate suffix:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">flower.save('squished.<span class="highlight">png</span>')</span>
+&gt;&gt;&gt; <span class="in">print flower.path</span>
+<span class="out">/home/gvwilson/examples/squished.png</span>
+</pre>
+
+  <p>
+    Now,
+    suppose we want to create a thumbnail of a picture to put on a web page.
+    We want the thumbnail to be exactly 30 pixels wide to fit into a table,
+    and we want its height scaled proportionally.
+    Here's what we could do:
+  </p>
+
+<pre>
+from skimage import novice
+picture = novice.open('mac.jpg')
+new_height = picture.height * 30 / picture.width
+picture.height = new_height
+picture.width = 30
+picture.save('thumb-mac.jpg')
+</pre>
+
+</section>
+
+<section id="s:color">
+
+  <h2>Colors</h2>
+
+  <div class="understand" id="u:color">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How computers represent colors.</li>
+      <li>How to create images from scratch.</li>
+      <li>How to change the color of every pixel in an image.</li>
+    </ul>
+  </div>
+
+  <p>
+    Before we go any further,
+    we need to talk about how computers represent colors.
+    The most common scheme,
+    called "RGB",
+    stores red, green, and blue values for each pixel in an image.
+    This is an additive color model:
+    the color we see is the sum of the individual color values,
+    each of which can range between 0 and 255.
+    (Why 255?
+    Because computer memory is organized into 8-bit bytes,
+    and 255 (11111111 in base 2) is the largest integer that can be represented in one byte.)
+  </p>
+
+  <p>
+    In RGB,
+    black is (0, 0, 0), i.e., nothing of any color.
+    White is the maximum value of all three colors, or (255, 255, 255).
+    We can think of this color model is as a cube
+    (<a href="#f:color_cube">Figure XXX</a>).:
+    the three axes represent the primary colors,
+    while secondary colors are combinations of maximum values,
+    and each actual color is a coordinate in this cube.
+  </p>
+
+  <figure id="f:color_cube">
+    <img src="img/pymedia/color_cube.png" alt="A Color Cube" />
+  </figure>
+
+  <p>
+    Let's have a look at how the three primary colors actually appear:
+  </p>
+
+<pre>
+from skimage import novice
+all_red = novice.new((200, 200), (255, 0, 0))
+all_red.show()
+all_green = novice.new((200, 200), (0, 255, 0))
+all_green.show()
+all_blue = novice.new((200, 200), (0, 0, 255))
+all_blue.show()
+</pre>
+
+  <figure id="f:primary_colors">
+    <img src="img/pymedia/primary_colors.png" alt="Primary Colors" />
+  </figure>
+
+  <p>
+    This program produces the three images shown in <a href="#f:primary_colors">Figure XXX</a> in turn.
+    The most important thing about it, though,
+    is actually where the parentheses are.
+    Just as in math,
+    programs often use parentheses to group values together.
+    Here,
+    we are using them to group (200, 200) together as the size of the image in pixels,
+    and (255, 0, 0) together as an RGB color value.
+    The designer of this library <em>could</em> have let us pass these values without the grouping,
+    as in:
+  </p>
+
+<pre>
+novice.new(200, 200, 255, 0, 0)
+</pre>
+
+  <p class="continue">
+    but as the number of values grows,
+    it quickly becomes difficult to keep track of which ones belong together.
+    A group of parenthesized values is called <a href="glossary.html#tuple">tuple</a>;
+    we can assign tuples to variables,
+    and then use those variables in our programs to make our code easier to read:
+  </p>
+
+<pre>
+from skimage import novice
+<span class="highlight">image_size = (200, 200)</span>
+all_red = novice.new(<span class="highlight">image_size</span>, (255, 0, 0))
+all_red.show()
+all_green = novice.new(<span class="highlight">image_size</span>, (0, 255, 0))
+all_green.show()
+all_blue = novice.new(<span class="highlight">image_size</span>, (0, 0, 255))
+all_blue.show()
+</pre>
+
+  <p>
+    One nice side effect of this is that it also makes our programs easier to change.
+    If we want our images to be 300 pixels across instead of 200,
+    we only have to change the value of <code>image_size</code>,
+    and everything else just works.
+    This is a basic rule of good program design:
+    any given piece of information should be stored in one place, once,
+    so that any change requires only one change in one place.
+  </p>
+
+  <p>
+    <code>skimage.novice</code> lets us change image colors using properties as well.
+    If we don't initially specify a color for an image,
+    the image's pixels are all set to black:
+  </p>
+
+<pre>
+from skimage import novice
+image_size = (200, 200)
+picture = novice.new(image_size)
+</pre>
+
+  <p>
+    We can now change the red, green, or blue values of all its pixels like this
+    (<a href="#f:color_properties">Figure XXX</a>):
+  </p>
+
+<pre>
+picture.red   = 128
+picture.green = 192
+picture.blue  = 255
+picture.show()
+</pre>
+
+  <figure id="f:color_properties">
+    <img src="img/pymedia/color_properties.png" alt="Color Properties" />
+  </figure>
+
+</section>
+
+<section id="s:pixels">
+
+  <h2>Manipulating Pixels</h2>
+
+  <p>
+    Changing the color of the entire image at once is useful for creating backgrounds,
+    but most pictures have more detail than that.
+    If we want to change the color of a single pixel,
+    we need a way to refer to it.
+    In Python and most other languages,
+    we do that by providing an <a href="glossary.html#index">index</a>,
+    which is just the coordinates of the pixel we want to access.
+    To create a red image with a single white pixel in the lower-left corner,
+    we would do this:
+  </p>
+
+<pre>
+from skimage import novice
+block = novice.new((10, 10), (255, 0, 0))
+block[0, 0] = (255, 255, 255)
+block.show()
+</pre>
+
+  <p>
+    The first thing to notice about this example is that the lower-left corner is at (0, 0),
+    not at (1, 1).
+    Programming languages derived from C (which includes C++, Java, Python, Perl, and Ruby)
+    count from 0:
+    the first five indices into anything are 0, 1, 2, 3, and 4.
+    Some other languages (notably Fortran, MATLAB, and R) count from 1.
+    The latter is more sensible&mdash;nobody says, "Zero, one, two, three, four," when counting their fingers&mdash;but
+    we're stuck with the former for programming.
+  </p>
+
+  <p>
+    The second thing to notice about this example is that a 10&times;10 image is hard to see,
+    and a single white pixel is almost invisible.
+    Let's try this:
+  </p>
+
+<pre>
+from skimage import novice
+block = novice.new((10, 10), (255, 0, 0))
+block[0, 0] = (255, 255, 255)
+<span class="highlight">block.inflation = 10</span>
+block.show()
+</pre>
+
+  <p>
+    An image's <code>inflation</code> property tells the library how large to make each pixel
+    when displaying or saving the image.
+    This doesn't change how many pixels there actually are,
+    or how they're indexed;
+    it's purely a convenience to help us see what we're doing.
+  </p>
+
+  <p>
+    What if we want to make the upper-right pixel white instead?
+    We happen to know that our image is 10&times;10,
+    so we could do this:
+  </p>
+
+<pre>
+block[9, 9] = (255, 255, 255)
+</pre>
+
+  <p class="continue">
+    The upper-right index is (9, 9) because we're counting from 0:
+    if the image is ten pixels across,
+    its X coordinates are 0..9.
+    This works in this specific case,
+    but it's a bad long-term solution:
+    if someone changes the size of the image,
+    the upper-right pixel probably won't be at (9, 9) any longer,
+    and we don't want to have to check our program line-by-line to find things like this.
+  </p>
+
+  <p>
+    Here's one better solution:
+  </p>
+
+<pre>
+block_width = 10
+block_height = 10
+block = novice.new((block_width, block_height), (255, 0, 0))
+block[block_width - 1, block_height - 1] = (255, 255, 255)
+</pre>
+
+  <p>
+    If someone changes the block's height or width now,
+    the index expression in the last line will automatically adjust.
+    This version of the program also makes the image's size a lot easier to find:
+    instead of being buried inside a function call,
+    <code>block</code>'s height and width are identified by name.
+  </p>
+
+  <p>
+    We can improve this program even further like this:
+  </p>
+
+<pre>
+block_width = 10
+block_height = 10
+<span class="highlight">red = (255, 0, 0)
+white = (255, 255, 255)</span>
+block = novice.new((block_width, block_height), <span class="highlight">red</span>)
+block[block_width - 1, block_height - 1] = <span class="highlight">white</span>
+</pre>
+
+  <p class="continue">
+    and then go one step further like this:
+  </p>
+
+<pre>
+block_width = 10
+block_height = 10
+red = (255, 0, 0)
+white = (255, 255, 255)
+block = novice.new((block_width, block_height), red)
+block[<span class="highlight">-1, -1</span>] = white
+</pre>
+
+  <p>
+    Unlike most languages,
+    Python is happy with negative indices:
+    it uses them to count backward from the ends of things,
+    rather than forward from the start
+    (<a href="#f:negative_indices">Figure XXX</a>).
+    Once you get used to it,
+    it makes programs much easier to read&mdash;as the examples above show,
+    the <code>-1</code> can be easy to miss when it's tacked onto the end of a long expression.
+  </p>
+
+  <figure id="f:negative_indices">
+    <img src="img/pymedia/negative_indices.png" alt="Negative Indices" />
+  </figure>
+
+  <p>
+    Now,
+    what if we want to put a white border around our image?
+    We could do this:
+  </p>
+
+<pre>
+block[0, 0] = white
+block[0, 1] = white
+block[0, 2] = white
+...
+block[0, 9] = white
+</pre>
+
+  <p class="continue">
+    and then repeat it for the other three sides
+    but that would be a lot of work to type in,
+    we'd probably make mistakes along the way,
+    and if the image size changes,
+    we'll have to add or remove dozens or hundreds of lines.
+    Here's a better way:
+  </p>
+
+<pre>
+block[0, :]  = white
+block[-1, :] = white
+block[:, 0]  = white
+block[:, -1] = white
+</pre>
+
+  <p>
+    As you can probably guess,
+    ':' on its own means "all indices"&mdash;it's a <a href="shell.html#pipefilter">wildcard</a>,
+    just like '*' in filenames in the shell.
+    Behind the scenes,
+    the computer is still executing something like our original code&mdash;after all,
+    each of the pixels on the border does need to be modified somehow&mdash;but:
+  </p>
+
+  <ol>
+    <li>
+      this code is much faster to write,
+    </li>
+    <li>
+      much more likely to be correct,
+      and
+    </li>
+    <li>
+      once the computer knows it's supposed to update all the pixels in a row or column,
+      it can probably do it faster than we could by hand.
+    <li>
+  </ol>
+
+  <p>
+    ':' on its own is actually a special case of something much more general
+    called a <a href="glossary.html#slice">slice</a>.
+    If we run this program:
+  </p>
+
+<pre>
+from skimage import novice
+block_width = 200
+block_height = 200
+green = (0, 255, 0)
+white = (255, 255, 255)
+block = novice.new((block_width, block_height), green)
+block[<span class="highlight">0:40, 0:40</span>] = white
+</pre>
+
+  <p class="continue">
+    When we display this image,
+    it is a single white tile in the lower-left of a green background
+    (<a href="#f:single_tile">Figure XXX</a>):
+  </p>
+
+  <figure id="f:single_tile">
+    <img src="img/pymedia/single_tile.png" alt="A Single Tile" />
+  </figure>
+
+  <p>
+    You can probably guess that the expression <code>0:40</code> refers to
+    a range of pixels:
+    in this case, from index 0 to index 39 inclusive,
+    i.e.,
+    from the lower limit up to, but not including, the upper limit.
+    It may seem strange not to include the upper limit,
+    but it has several advantages:
+  </p>
+
+  <ol>
+    <li>
+      The number of values in <code>lower:upper</code> is <code>upper-lower</code>.
+    </li>
+    <li>
+      When the ranges <code>lower:middle</code> and <code>middle:upper</code> are joined together,
+      the pixel at coordinate <code>middle</code> is only included once.
+    </li>
+    <li>
+      If the axis in question has <code>length</code> pixels,
+      the expression <code>0:length</code> refers to each pixel exactly once.
+    </li>
+  </ol>
+
+</section>
+
+<section id="s:argv">
+
+  <h2>Command-Line Arguments</h2>
+
+  <div class="understand" id="u:argv">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to work with command-line arguments.</li>
+    </ul>
+  </div>
+
+  <p>
+    Our thumbnailing program would be much more useful
+    if we could create a thumbnail of any image we wanted
+    without having to edit the program each time.
+    What we really want is something we can use from the command line like this:
+  </p>
+
+<pre>
+$ <span class="in">ls *.jpg</span>
+<span class="out">mac.jpg</span>
+$ <span class="in">python thumbnail mac.jpg</span>
+$ <span class="in">ls *.jpg</span>
+<span class="out">mac.jpg    thumb-mac.jpg</span>
+</pre>
+
+  <p>
+    To make this work,
+    we need a way to get filenames from the command line into our program.
+    <span class="fixme">can't do this until we know about list indexing</span>
+  </p>
 
 </section>
 
