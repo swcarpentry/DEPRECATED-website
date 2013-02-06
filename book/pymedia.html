@@ -1341,14 +1341,15 @@ block[<span class="highlight">0:40, 0:40</span>] = white
     <h3>Understand:</h3>
     <ul>
       <li>How to work with command-line arguments.</li>
+      <li>That slicing works in many places.</li>
     </ul>
   </div>
 
   <p>
-    Our thumbnailing program would be much more useful
-    if we could create a thumbnail of any image we wanted
-    without having to edit the program each time.
-    What we really want is something we can use from the command line like this:
+    Let's go back to our thumbnail creation program for a moment.
+    It would be much more useful if we could create a thumbnail of any image we wanted
+    without having to edit the program each time to change the name of the file.
+    What we want is something like this:
   </p>
 
 <pre>
@@ -1362,8 +1363,509 @@ $ <span class="in">ls *.jpg</span>
   <p>
     To make this work,
     we need a way to get filenames from the command line into our program.
-    <span class="fixme">can't do this until we know about list indexing</span>
+    To do that,
+    we need to use another library called <code>sys</code>
+    (short for "system").
+    It defines constants to tell us what version of Python we're using,
+    what operating system we're running on,
+    and so on:
   </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">import sys</span>
+&gt;&gt;&gt; <span class="in">print sys.version</span>
+<span class="out">2.7 (r27:82525, Jul  4 2010, 09:01:59) [MSC v.1500 32 bit (Intel)]</span>
+&gt;&gt;&gt; <span class="in">print sys.platform</span>
+<span class="out">win32</span>
+</pre>
+
+  <p>
+    The most commonly-used element of <code>sys</code>, though, is <code>sys.argv</code>,
+    which holds the <a href="glossary.html#command-line-arguments">command-line arguments</a>
+    used to run the program.
+    These are accessed using indices,
+    just like individual pixels;
+    the biggest differences are that
+    <code>sys.argv</code> is one-dimensional instead of two-dimensional,
+    and that its values are strings rather than pixels.
+    The name of the script itself is in <code>sys.argv[0]</code>;
+    all the other arguments are put in <code>sys.argv[1]</code>, <code>sys.argv[2]</code>, and so on.
+    For example, here's a program that does nothing except
+    print its first three command-line arguments:
+  </p>
+
+<pre>
+import sys
+print 'location 0:', sys.argv[0]
+print 'location 1:', sys.argv[1]
+print 'location 2:', sys.argv[2]
+</pre>
+
+  <p>
+    If we run save this code in a file called <code>three.py</code>,
+    and run it like this:
+  </p>
+
+<pre>
+$ <span class="in">python three.py alpha beta</span>
+</pre>
+
+  <p class="continue">
+    it prints:
+  </p>
+
+<pre>
+<span class="out">location 0: three.py
+location 1: alpha
+location 2: beta</span>
+</pre>
+
+  <p>
+    However,
+    if we run it with no arguments,
+    or only one,
+    we get this:
+  </p>
+
+<pre>
+$ <span class="in">python three.py</span>
+<span class="out">location 0: /Users/gwilson/three.py
+location 1:</span>
+<span class="err">Traceback (most recent call last):
+  File "/Users/gwilson/three.py", line 3, in &lt;module&gt;
+    print 'location 1:', sys.argv[1]
+IndexError: list index out of range</span>
+</pre>
+
+  <p>
+    The problem is that <code>sys.argv[1]</code> doesn't exist,
+    and Python won't let us read a value that isn't there.
+    It's exactly like the undefined variables we encountered at the start of this chapter.
+  </p>
+
+  <p>
+    Let's ignore that problem for now
+    and go back to our thumbnail creator.
+    Here's how we can make it work for an arbitrary file:
+  </p>
+
+<pre>
+import sys
+from skimage import novice
+
+FIXED_WIDTH = 30
+
+filename = sys.argv[1]
+picture = novice.open(filename)
+new_height = picture.height * fixed_width / picture.width
+picture.height = new_height
+picture.width = fixed_width
+picture.save('thumb-' + filename)
+</pre>
+
+  <p>
+    Let's walk through it piece by piece:
+  </p>
+
+  <ul>
+    <li>
+      We start by importing the libraries we need.
+      <code>import</code> statements can actually be anywhere in the program,
+      but it's considered good style to put them at the top,
+      as it makes it easy for people to see what the program depends on.
+    </li>
+    <li>
+      We give the fixed width we want thumbnails to have a name,
+      so that we don't have to scatter the number 30 throughout the program.
+      Values that are meant to be constants are usually written in UPPER CASE;
+      again,
+      it's not a requirement,
+      but it's what most people do,
+      so by sticking to this convention you will make it easier for other people to understand your code.
+    </li>
+    <li>
+      The name of the image to be thumbnailed is supposed to be the program's single command-line argument,
+      which means it will be in <code>sys.argv[1]</code>.
+      (Remember, the program's name is in <code>sys.argv[0]</code>.)
+      We could just use <code>sys.argv[1]</code> everywhere,
+      but assigning the value to the variable <code>filename</code> makes our program easier to follow.
+    </li>
+    <li>
+      We calculate the picture's new size
+      and resize the picture as before.
+    </li>
+    <li>
+      Finally,
+      we create the new filename by concatenating <code>'thumb-'</code> and the original filename,
+      and save the thumbnail to that file.
+    </li>
+  </ul>
+
+</section>
+
+<section id="s:for">
+
+  <h2>Repeating Things</h2>
+
+  <div class="understand" id="u:for">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to repeat things using a loop.</li>
+      <li>That the loop variable takes on a different value each time through the loop.</li>
+      <li>How to tell what statements are in the body of a loop.</li>
+    </ul>
+  </div>
+
+  <p>
+    Computers are useful because they can do lots of calculations on lots of data,
+    which means we need a concise way to represent multiple steps.
+    (After all,
+    writing out a million additions would take longer than doing them.)
+    Let's start by writing a program called <code>show.py</code>
+    that displays its command-line arguments one by one:
+  </p>
+
+<pre>
+import sys
+for arg in sys.argv:
+    print arg
+</pre>
+
+  <p>
+    Here's what happens when we run it:
+  </p>
+
+<pre>
+$ <span class="in">python show.py first second third</span>
+<span class="out">show.py
+first
+second
+third</span>
+</pre>
+
+  <p>
+    The keywords <code>for</code> and <code>in</code> are used to create a <a href="glossary.html#for-loop">for loop</a>.
+    Just like a <a href="shell.html#loop">loop in the shell</a>,
+    a <code>for</code> loop in Python repeats one or more instructions
+    for each value in some set.
+    The indented line is called the <a href="glossary.html#loop-body">body</a> of the loop:
+    it's the command that Python executes repeatedly.
+    The variable <code>arg</code> is sometimes called
+    the <a href="glossary.html#loop-variable">loop variable</a>.
+    There's nothing special about its name:
+    we could equally well have called it <code>something</code>.
+    What's important is that the <code>for</code> loop repeatedly
+    assigns a value to it,
+    then executes the loop body one more time.
+  </p>
+
+  <p>
+    Python always uses indentation to show what's in the body of a loop
+    (or anything else&mdash;we'll see other things that have bodies soon).
+    This means that:
+  </p>
+
+<pre>
+for arg in sys.argv:
+    print arg
+    print "all done"
+</pre>
+
+   <p class="continue">
+     and:
+   </p>
+
+<pre>
+for arg in sys.argv:
+    print arg
+print "all done"
+</pre>
+
+  <p class="continue">
+    are different programs.
+    The first one would print:
+  </p>
+
+<pre>
+<span class="out">show.py
+all done
+first
+all done
+second
+all done
+third
+all done</span>
+</pre>
+
+  <p class="continue">
+    because the statement <code>print "all done"</code> is inside the loop body.
+    The second is probably what we actually want,
+    as it prints:
+  </p>
+
+<pre>
+<span class="out">show.py
+first
+second
+third
+all done</span>
+</pre>
+
+  <p class="continue">
+    because the final <code>print</code> is outside the loop.
+  </p>
+
+  <div class="box">
+
+    <h3>Why Indentation?</h3>
+
+    <p>
+      Most other languages use visible markers to show the beginnings and ends of loop bodies,
+      such as the <code>do</code> and <code>done</code> of the shell.
+      Python uses indentation because studies done in the 1970s and 1980s showed
+      that's what people actually pay attention to.
+      If we write something as:
+    </p>
+
+<pre>
+for value in data
+do
+    print value
+print "done"
+done
+</pre>
+
+    <p class="continue">
+      then most people reading the code in a hurry will "see"
+      the second <code>print</code> statement as being outside the loop.
+    </p>
+
+  </div>
+
+  <p>
+    Let's go back and teach our thumbnail program how to process multiple files at once:
+  </p>
+
+<pre>
+import sys
+from skimage import novice
+
+FIXED_WIDTH = 30
+
+for filename in sys.argv:
+    picture = novice.open(filename)
+    new_height = picture.height * fixed_width / picture.width
+    picture.height = new_height
+    picture.width = fixed_width
+    picture.save('thumb-' + filename)
+</pre>
+
+  <p>
+    Almost everything has stayed the same:
+    the only change is that instead of assigning <code>sys.argv[1]</code> to <code>filename</code>,
+    we're using a loop to assign it each value in <code>sys.argv</code> in turn.
+    Let's try running it:
+  </p>
+
+<pre>
+$ <span class="in">python thumbnail.py flower.jpg mac.jpg</span>
+<span class="err">Traceback (most recent call last):
+...several lines of error message...
+IOError: cannot identify image file</span>
+</pre>
+
+  <p>
+    Whoops:
+    the first time through the loop,
+    <code>filename</code> is assigned <code>sys.argv[0]</code>,
+    which is the name of the Python program itself.
+    The <code>novice.open</code> call then tries to open a Python program
+    (i.e., a text file)
+    as if it were an image.
+    Unsurprisingly,
+    that doesn't work.
+  </p>
+
+  <p>
+    How can we fix this?
+    By using a slice that starts at index 1
+    and runs to the end of the list of filenames:
+  </p>
+
+<pre>
+import sys
+from skimage import novice
+
+FIXED_WIDTH = 30
+
+for filename in sys.argv<span class="in">[1:len(sys.argv)]</span>:
+    picture = novice.open(filename)
+    new_height = picture.height * fixed_width / picture.width
+    picture.height = new_height
+    picture.width = fixed_width
+    picture.save('thumb-' + filename)
+</pre>
+
+  <p class="continue">
+    Remember,
+    a slice starts at its low index,
+    and goes up to, but not including, its upper index.
+    The expression <code>stuff[1:len(stuff)]</code> is therefore
+    everything in <code>stuff</code> except the element at location zero
+    (<a href="#f:all_but_the_first">Figure XXX</a>):
+  </p>
+
+  <figure id="f:all_but_the_first">
+    <img src="img/pymedia/all_but_the_first.png" alt="All But The First Element" />
+  </figure>
+
+  <p>
+    We can make this even simpler.
+    If we don't specify the lower end of a slice,
+    it defaults to 0,
+    so <code>stuff[:3]</code> is elements 0, 1, and 2 of <code>stuff</code>.
+    Similarly,
+    if we don't specify the slice's upper end,
+    it defaults to the end,
+    so <code>stuff[3:]</code> is elements 3, 4, 5, and so on to the end.
+    In particular,
+    <code>stuff[1:]</code> is everything in <code>stuff</code> except the element at index 0,
+    so we can rewrite our thumbnailer one more time as:
+  </p>
+
+<pre>
+import sys
+from skimage import novice
+
+FIXED_WIDTH = 30
+
+for filename in sys.argv<span class="in">[1:]</span>:
+    picture = novice.open(filename)
+    new_height = picture.height * fixed_width / picture.width
+    picture.height = new_height
+    picture.width = fixed_width
+    picture.save('thumb-' + filename)
+</pre>
+
+  <div class="box">
+    <h3>One Thing, Many Uses</h3>
+
+    <p>
+      Slices are a good example of a powerful idea in program design:
+      if something works in one place,
+      it ought to work everywhere.
+      For example,
+      if we want to select the first four characters from a string,
+      you shouldn't be surprised that we do it like this:
+    </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">full_name = 'Alan Turing'</span>
+&gt;&gt;&gt; <span class="in">first_name = full_name[:4]</span>
+&gt;&gt;&gt; <span class="in">print first_name</span>
+<span class="out">Alan</span>
+</pre>
+
+    <p class="continue">
+      or that if we want to print each character from the string
+      on a line of its own,
+      we use:
+    </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">for char in 'Alan':
+...     print char</span>
+<span class="out">A
+l
+a
+n</span>
+</pre>
+
+  </div>
+
+  <p>
+    Here's something else we can do with a loop:
+  </p>
+
+<pre>
+from skimage import novice
+
+picture = novice.open('mac.jpg')
+picture.show()
+for pixel in picture:
+    pixel.red = pixel.red / 2
+picture.show()
+</pre>
+
+  <p>
+    <a href="#f:less_red">Figure XXX</a> shows the original and modified images side by side.
+    The second version looks bluish-green
+    because the amount of red in each pixel has been cut in half.
+    That's what the <code>for</code> loop has done:
+    each time through the loop,
+    <code>pixel</code> has been assigned the next pixel in the image,
+    and the statement:
+  </p>
+
+<pre>
+    pixel.red = pixel.red / 2
+</pre>
+
+  <p class="continue">
+    has half the original value of the pixel's <code>red</code> property
+    and assigned it back to the pixel.
+  </p>
+
+  <figure id="f:less_red">
+    <img src="img/pymedia/less_red.png" alt="Reducing the Red" />
+  </figure>
+
+  <p>
+    What happens if we try to double the red instead?
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">picture = novice.open('mac.jpg')
+&gt;&gt;&gt; for pixel in picture:
+...    pixel.red = pixel.red * 2
+...</span>
+<span class="err">
+Traceback (most recent call last):
+...several lines of error message...
+ValueError: Expected an integer between 0 and 255, but got 294 instead!</span>
+</pre>
+
+  <p class="continue">
+    Just as Python won't let us use an index that's out of range,
+    <code>skimage.novice</code> won't let us assign a color value
+    that's out of the range from 0 to 255.
+    If we want to make sure the value is in that range,
+    we can do this instead:
+  </p>
+
+<pre>
+picture = novice.open('mac.jpg')
+for pixel in picture:
+    pixel.red = min(255, pixel.red * 2)
+</pre>
+
+  <p>
+    This works,
+    and gives the result shown in <a href="#f:more_red">Figure XXX</a>.
+  </p>
+
+  <figure id="f:more_red">
+    <img src="img/pymedia/more_red.png" alt="Increasing the Red" />
+  </figure>
+
+  <div class="keypoints" id="k:for">
+    <h3>Summary</h3>
+    <ul>
+      <li>Use <code>for <em>variable</em> in <em>something</em>:</code> to loop over the parts of something.</li>
+      <li>The body of a loop must be indented consistently.</li>
+      <li>The parts of a string are its characters; the parts of an image are its pixels.</li>
+    </ul>
+  </div>
 
 </section>
 
