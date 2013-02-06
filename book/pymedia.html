@@ -1869,4 +1869,804 @@ for pixel in picture:
 
 </section>
 
+<section id="s:lists">
+
+  <h2>Lists</h2>
+
+  <div class="understand" id="u:lists">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to store many related values in a list.</li>
+      <li>How to use a loop to operate on the values in a list.</li>
+      <li>That programs should be tested on small, simple cases.</li>
+    </ul>
+  </div>
+
+  <p>
+    It's time to double back and have a closer look at <code>sys.argv</code>.
+    It's obviously not an image;
+    instead,
+    it's a <a href="glossary.html#list">list</a>.
+    To start our exploration of lists,
+    let's run an interpreter and try this:
+  </p>
+
+<pre src="src/python/sum_values.py">
+&gt;&gt;&gt; <span class="in">data = [1, 3, 5]</span>
+&gt;&gt;&gt; <span class="in">for value in data:</span>
+... <span class="in">    print value</span>
+...
+<span class="out">1
+3
+5</span>
+</pre>
+
+  <p>
+    <code>[1, 3, 5]</code> is a list:
+    a single object that stores multiple values
+    (<a href="#f:simple_list">Figure XXX</a>).
+    Just as a <code>for</code> loop over an open file
+    reads lines from that file one by one
+    and assigns them to the loop variable,
+    a <code>for</code> loop over a list assigns each value in the list
+    to the loop variable in turn.
+  </p>
+
+  <figure id="f:simple_list">
+    <img src="img/python/simple_list.png" alt="A Simple List" />
+  </figure>
+
+  <p>
+    Let's do something a bit more useful:
+  </p>
+
+<pre src="src/python/first_mean.py">
+data = [1, 4, 2, 3, 3, 4, 3, 4, 1]
+total = 0
+for n in data:
+    total += n
+mean = total / len(data)
+print "mean is", mean
+<span class="out">mean is 2</span>
+</pre>
+
+  <p class="continue">
+    This loop adds each value in the list to <code>total</code>.
+    Once the loop is over,
+    we divide <code>total</code> by the length of the list,
+    which we find using the built-in function <code>len</code>.
+  </p>
+
+  <p>
+    Unfortunately,
+    the result in the example above is wrong:
+    The total of the numbers in the list is 25,
+    but we're printing 2 instead of 25/9
+    (which is 2.7777&hellip;).
+    The problem once again is that we're dividing one integer by another,
+    which throws away the remainder.
+    We can fix this by initializing <code>total</code> to 0.0
+    (so that all the additions involve a floating-point number and an integer,
+    which produces a floating-point number),
+    or by using the <code>float</code> function to do the conversion explicitly:
+  </p>
+
+<pre src="src/python/second_mean.py">
+data = [1, 4, 2, 3, 3, 4, 3, 4, 1]
+total = 0
+for n in data:
+    total += n
+mean = <span class="highlight">float(total)</span> / len(data)
+print "mean is", mean
+<span class="out">mean is 2.77777777778</span>
+</pre>
+
+  <p>
+    The <em>real</em> problem isn't a matter of integers versus floats, though.
+    The real problem with this program is that
+    we didn't know whether the answer was right or wrong,
+    so we couldn't tell if the program was correct or not.
+    After all,
+    the average of these nine numbers might well have been 2.
+  </p>
+
+  <p>
+    The fact that a program runs without crashing doesn't mean it's correct.
+    One way to make programs easier to check
+    is to run them on smaller or more regular data.
+    For example,
+    If we ran the program on <code>[1, 4]</code>,
+    we'd probably notice that we were getting 2 instead of 2.5.
+    Writing programs so that they're checkable is another idea
+    that we'll explore in detail <a href="quality.html">later</a>.
+  </p>
+
+  <div class="box">
+
+    <h3>Even Simpler</h3>
+
+    <p>
+      Python actually has a built-in function called <code>sum</code>,
+      so we can get rid of the loop entirely:
+    </p>
+
+<pre src="src/python/loopless.py">
+total = sum(data)
+print "mean is", float(total) / len(data)
+</pre>
+
+    <p class="continue">
+      and shorten this even further by calling <code>float</code>
+      directly on the result of <code>sum</code>:
+    </p>
+
+<pre src="src/python/one_liner.py">
+print "mean is", float(sum(data)) / len(data)
+</pre>
+
+    <p>
+      <code>float(sum(data))</code> is like <em>sin(log(x))</em>:
+      the inner function is evaluated first,
+      and its result is used as the input to the outer function.
+      It's important to get the parentheses in the right place,
+      since the expressions:
+    </p>
+
+<pre src="src/python/one_liner.py">
+float(sum(data)) / len(data)
+</pre>
+
+    <p class="continue">
+      and
+    </p>
+
+<pre src="src/python/incorrect_one_liner.py">
+float(sum(data) / len(data))
+</pre>
+
+    <p class="continue">
+      calculate different things.
+      In the first,
+      <code>float</code> is applied to <code>sum(data)</code>,
+      i.e.,
+      Python adds up all the numbers,
+      then converts the result to a floating-point value
+      before dividing by <code>len(data)</code>
+      to get the mean.
+    </p>
+
+    <p>
+      In the second,
+      Python adds up the numbers,
+      divides by <code>len(data)</code> to get an integer result,
+      and then converts that integer to a floating point number.
+      This is just our original bug in a more compact form.
+      Once again,
+      the only way to guard against it is to test the program.
+    </p>
+
+  </div>
+
+  <div class="keypoints" id="k:lists">
+    <h3>Summary</h3>
+    <ul>
+      <li>Use <code>[<em>value</em>, <em>value</em>, ...]</code> to create a list of values.</li>
+      <li><code>for</code> loops process the elements of a list, in order.</li>
+      <li><code>len(<em>list</em>)</code> returns the length of a list.</li>
+      <li><code>[]</code> is an empty list with no values.</li>
+    </ul>
+  </div>
+
+</section>
+
+<section id="s:morelist">
+
+  <h2>More About Lists</h2>
+
+  <div class="understand" id="u:morelist">
+    <h3>Understand:</h3>
+    <ul>
+      <li>That lists can be modified in place.</li>
+      <li>How to access arbitrary elements in a list.</li>
+      <li>What an out-of-bounds error is.</li>
+      <li>How to generate a list of legal indices for a list.</li>
+      <li>When to use short or long variable names.</li>
+    </ul>
+  </div>
+
+  <p>
+    Lists (and their equivalents in other languages)
+    are used more than any other data structure,
+    so let's have a closer look at them.
+    First,
+    lists are <a href="glossary.html#mutable">mutable</a>,
+    i.e.,
+    they can be changed after they are created:
+  </p>
+
+<pre src="src/python/appending.py">
+data = [1, 4, 2, 3]
+result = []
+current = 0
+for n in data:
+    current = current + n
+    result.append(current)
+print "running total:", result
+<span class="out">[1, 5, 7, 10]</span>
+</pre>
+
+  <p class="continue">
+    <code>result</code> starts off as an <a href="glossary.html#empty-list">empty list</a>,
+    and <code>current</code> starts off as zero
+    (<a href="#f:running_total">Figure XXX</a>).
+    Each time the loop executes&mdash;i.e.,
+    for each number in <code>values</code>&mdash;Python
+    adds the next value in the list to <code>current</code>
+    to calculate the running total.
+    It then append this value to <code>result</code>,
+    so that when the program finishes,
+    we have a complete list of partial sums.
+  </p>
+
+  <figure id="f:running_total">
+    <img src="img/python/running_total.png" alt="Running Total" />
+  </figure>
+
+  <p>
+    What if we want to double the values in <code>data</code> in place?
+    We could try this:
+  </p>
+
+<pre src="src/python/incorrect_doubling_in_place.py">
+data = [1, 4, 2, 3]
+for n in data:
+    n = 2 * n
+print "doubled data is:", data
+<span class="out">doubled data is [1, 4, 2, 3]</span>
+</pre>
+
+  <p class="continue">
+    but as we can see,
+    it doesn't work.
+    When Python calculates <code>2*n</code>,
+    it creates a new value in memory
+    (<a href="#f:doubling_list">Figure XXX</a>).
+    It then makes the variable <code>n</code> point at the value for a few microseconds
+    before going around the loop again
+    and pointing <code>n</code> at the next value from the list instead.
+    Since nothing is pointing to the temporary value we just created any longer,
+    Python throws it away.
+  </p>
+
+  <figure id="f:doubling_list">
+    <img src="img/python/doubling_list.png" alt="Failed Attempt to Double Values in a List" />
+  </figure>
+
+  <p>
+    The solution to our problem is,
+    not surprisingly,
+    to index the list.
+    Here are some examples:
+  </p>
+
+<pre src="src/python/modify_list.py">
+scientists = ["Newton", "Darwing", "Turing"]
+print "length:", len(scientists)
+<span class="out">length: 3</span>
+print "first element:", scientists[0]
+<span class="out">first element: Newton</span>
+print "second element:", scientists[1]
+<span class="out">second element: Darwing</span>
+print "third element:", scientists[2]
+<span class="out">third element: Turing</span>
+</pre>
+
+  <p>
+    How does indexing help us?
+    Well,
+    after noticing that we have misspelled Darwin's name as "Darwing",
+    we can fix it by assigning a new value to that location in the list:
+  </p>
+
+<pre src="src/python/modify_list_continued.py">
+scientists[1] = "Darwin"
+print scientists
+<span class="out">["Newton", "Darwin", "Turing"]</span>
+</pre>
+
+  <p class="continue">
+    <a href="#f:update_list">Figure XXX</a> shows
+    the list before and after the change.
+    Again,
+    once we've made the update,
+    nothing is pointing to the string "Darwing" with a "g" on the end,
+    so the memory it's using is recycled.
+  </p>
+
+  <figure id="f:update_list">
+    <img src="img/python/update_list.png" alt="Successfully Doubling Values in a List" />
+  </figure>
+
+  <p>
+    Now, back to our original problem of doubling values in place.
+    We now know that we can do this:
+  </p>
+
+<pre src="src/python/explicit_doubling.py">
+data = [1, 4, 2]
+data[0] = 2 * data[0]
+data[1] = 2 * data[1]
+data[2] = 2 * data[2]
+print "doubled data is:", data
+<span class="out">doubled data is [2, 8, 4]</span>
+</pre>
+
+  <p class="continue">
+    but it clearly doesn't scale:
+    we're not going to write a million statements
+    to update a list of a million values.
+    We need to use a loop,
+    but instead of looping over the values in the list,
+    we want to loop over the allowed indices of the list.
+    To do this,
+    we will rely on a function called <code>range</code>
+    which creates a list of the first N integers:
+  </p>
+
+<pre src="src/python/range_5.py">
+print range(5)
+<span class="out">[0, 1, 2, 3, 4]</span>
+</pre>
+
+  <p>
+    Once again,
+    the values go from 0 to one less than the number given to <code>range</code>,
+    which just happens to be exactly the indices of a list of that length.
+    Let's try it out:
+  </p>
+
+<pre src="src/python/range_loop.py">
+data = [1, 4, 2]
+indices = range(3)
+for i in indices:
+    print i, data[i]
+<span class="out">0 1
+1 4
+2 2</span>
+</pre>
+
+  <p class="continue">
+    then fold the call to <code>range</code> into the loop:
+  </p>
+
+<pre src="src/python/range_loop_2.py">
+data = [1, 4, 2]
+for i in <span class="highlight">range(3)</span>:
+    print i, data[i]
+<span class="out">0 1
+1 4
+2 2</span>
+</pre>
+
+  <p>
+    This program is correct, but fragile:
+    if we add more values to the list,
+    Python will still only execute the loop three times,
+    so we'll still only print the first three values in the list:
+  </p>
+
+<pre src="src/python/incorrect_range_loop.py">
+data = [1, 4, 2<span class="highlight">, 5, 1, 3</span>]
+for i in range(3):
+    print i, data[i]
+<span class="out">0 1
+1 4
+2 2</span>
+</pre>
+
+  <p>
+    What we want is for the loop to automatically adjust itself
+    based on the length of the list:
+  </p>
+
+<pre src="src/python/data_length_loop.py">
+data = [1, 4, 2, 5, 1, 3]
+<span class="highlight">data_length = len(data)</span>
+for i in range(<span class="highlight">data_length</span>):
+    print i, data[i]
+<span class="out">0 1
+1 4
+2 2
+3 5
+4 1
+5 3</span>
+</pre>
+
+  <p>
+    We can get rid of the variable <code>data_length</code>
+    by putting the call to <code>len(data)</code>
+    inside the call to <code>range</code>:
+  </p>
+
+<pre src="src/python/idiomatic_range_loop.py">
+data = [1, 4, 2, 5, 1, 3]
+for i in range(<span class="highlight">len(data)</span>):
+    print i, data[i]
+<span class="out">0 1
+1 4
+2 2
+3 5
+4 1
+5 3</span>
+</pre>
+
+  <p class="continue">
+    Again,
+    <code>range(len(data))</code> is like <em>sin(log(x))</em>:
+    the inner function is evaluated first,
+    and its result becomes the input to the outer function.
+    Put together like this,
+    they are a common <a href="glossary.html#idiom">idiom</a> in Python,
+    i.e.,
+    a way of saying something that everyone recognizes and uses.
+    When an experienced programmer sees:
+  </p>
+
+<pre>
+for i in range(len(something)):
+</pre>
+
+  <p class="continue">
+    what she "hears" is:
+  </p>
+
+<pre>
+for each legal index of something:
+</pre>
+
+  <p>
+    The reason this idiom is better than what we started with is that
+    there is no duplicated information.
+    Instead of having a list of length 3,
+    and looping from 0 up to 3,
+    we have a list of any length whatever,
+    and loop from 0 up to that length.
+    In general,
+    anything that is repeated two or more times in a program
+    will eventually be wrong in at least one.
+    Putting it another way,
+    any piece of information should appear exactly once in a program,
+    so that if it needs to change,
+    it only needs to be changed in one place.
+  </p>
+  
+  <div class="box">
+
+    <h3>Short and Long Variable Names</h3>
+
+    <p>
+      We have said several times that programs should use meaningful variable names.
+      Are we not violating our own rule by using <code>i</code> as a variable in this program?
+      The short answer is "yes", but it's a defensible violation.
+      Suppose we re-write our loop as:
+    </p>
+
+<pre>
+data = [1, 4, 2, 5, 1, 3]
+for location in range(len(data)):
+    print location, data[location]
+</pre>
+
+    <p class="continue">
+      The longer name are more meaningful,
+      but it also takes longer to read.
+      Since the original <code>i</code> is only used for a few lines,
+      users will easily be able to keep its meaning in short-term memory
+      as long as they need to.
+      On balance,
+      therefore,
+      the short name are better in this case.
+    </p>
+
+    <p>
+      This is actually a general principle in program design.
+      A variable that holds a simple value,
+      and is only used in a few adjacent lines of code,
+      can (and usually should) have a short name.
+      A variable that holds a complex value,
+      or one which is used over more than a few lines of code,
+      should have a longer name
+      in order to optimize the tradeoff between reading speed
+      and the limitations of human short-term memory.
+    </p>
+
+  </div>
+
+    <!-- JK: Also, to hearken back to the previous paragraph, the use of i as a 
+         counter in a for loop is arguably another common idiom that 
+         experienced programmers will recognize right away as a counter. At 
+         least if they're not also mathematicians who read it as an imaginary 
+         number... -->
+
+  <p>
+    Let's finally go back and double the values in place:
+  </p>
+
+<pre src="src/python/doubling_in_place.py">
+data = [1, 4, 2, 5, 3, 4, 5]
+for i in range(len(data)):
+    data[i] = 2 * data[i]
+print data
+<span class="out">[2, 8, 4, 10, 6, 8, 10]</span>
+</pre>
+
+<div class="box">
+
+  <h3>Left and Right</h3>
+
+  <p>
+    Seeing the expression <em>x = 2x</em>,
+    most mathematicians would say,
+    "Right&mdash;so <em>x</em> is zero."
+    Seeing the same expression,
+    most programmers would say,
+    "Right&mdash;you're doubling the value of <em>x</em>."
+    <a href="#f:double_in_place">Figure XXX</a> shows
+    how that actually works:
+  </p>
+
+  <ol>
+
+    <li>
+      Python reads the current value of <code>x</code> from memory.
+    </li>
+
+    <li>
+      It multiplies that value by 2,
+      storing the result in a temporary location&hellip;
+    </li>
+
+    <li>
+      &hellip;and then modifies <code>x</code> to point at the new value.
+    </li>
+
+  </ol>
+
+  <figure id="f:double_in_place">
+    <img src="img/python/double_in_place.png" alt="Doubling in Place" />
+  </figure>
+
+  <p>
+    Now look at what happens when Python execute the statements:
+  </p>
+
+<pre>
+x = 5
+y = x
+x = 2 * x
+</pre>
+
+<ol>
+
+  <li>
+    The variable <code>x</code> is created,
+    and set to point at the value 5
+    (<a href="#f:new_values_for_variables">Figure XXX</a>).
+  </li>
+
+  <li>
+    The variable <code>y</code> is created,
+    and set to point at the same value.
+  </li>
+
+  <li>
+    The value 10 (i.e., 2&times;5) is created and stored in a temporary location.
+  </li>
+
+  <li>
+    <code>x</code> is altered to point at that value.
+  </li>
+
+</ol>
+
+<figure id="f:new_values_for_variables">
+  <img src="img/python/new_values_for_variables.png" alt="New Values for Variables" />
+</figure>
+
+  <p>
+    After these operations are complete,
+    <code>y</code> is left pointing at the original value, 5.
+    It does <em>not</em> point at the same thing <code>x</code> does any longer,
+    and its value is <em>not</em> automatically recalculated
+    to keep it twice the value of <code>x</code>.
+  </p>
+
+</div>
+
+<div class="keypoints" id="k:morelist">
+  <h3>Summary</h3>
+  <ul>
+    <li>Lists are mutable: they can be changed in place.</li>
+    <li>Use <code><em>list</em>.append(<em>value</em>)</code> to append something to the end of a list.</li>
+    <li>Use <code><em>list</em>[<em>index</em>]</code> to access a list element by location.</li>
+    <li>The index of the first element of a list is 0; the index of the last element is <code>len(<em>list</em>)-1</code>.</li>
+    <li>Negative indices count backward from the end of the list, so <code><em>list</em>[-1]</code> is the last element.</li>
+    <li>Trying to access an element with an out-of-bounds index is an error.</li>
+    <li><code>range(<em>number</em>)</code> produces the list of numbers <code>[0, 1, ..., <em>number</em>-1]</code>.</li>
+    <li><code>range(len(<em>list</em>))</code> produces the list of legal indices for <code><em>list</em></code>.</li>
+  </ul>
+</div>
+
+</section>
+
+<section id="s:coords">
+
+  <h2>Coordinates</h2>
+
+  <div class="understand" id="u:coords">
+    <h3>Understand:</h3>
+    <ul>
+      <li class="fixme">Write something</li>
+    </ul>
+  </div>
+
+  <p>
+    Let's try an experiment in two parts.
+    First,
+    run this program and look at the image files it creates:
+  </p>
+
+<pre>
+from skimage import novice
+
+BASE    = 128
+STEP    = 4
+SPACING = 4
+NUMBER  = 6
+GRAY    = (BASE, BASE, BASE)
+SIZE    = 200
+
+for color in range(BASE + STEP, BASE + NUMBER * STEP, STEP):
+    image = novice.new((SIZE, SIZE), GRAY)
+    image[::SPACING, ::SPACING] = (color, color, color)
+    filename = 'step-' + str(color) + '.png'
+    image.save(filename)
+</pre>
+
+  <p>
+    These files have named like <code>step-132.png</code>,
+    <code>step-136.png</code>,
+    and so on.
+    Each one has white pixels spaced evenly across a gray background,
+    with the white slowly getting whiter.
+    Images like these are sometimes used in vision tests,
+    since different spacings and colorings are noticeable to different people.
+  </p>
+
+  <p>
+    Having told you that,
+    we've spoiled the second part of our experiment,
+    which is to see how much knowing what a program does
+    helps you figure out how it works.
+    As you might suspect,
+    the answer is, "A lot."
+    Let's go through this one.
+  </p>
+
+  <p>
+    The constants at the top don't tell us much,
+    although <code>GRAY</code> is obviously an RGB color value
+    and <code>SIZE</code> is (probably) an image size.
+    Next is our loop:
+    given the name of its index variable,
+    <code>color</code>,
+    we can guess that we're looping over colors,
+    and sure enough,
+    two lines down,
+    we see <code>(color, color, color)</code>,
+    which is creating a shade of gray defined by the current value of <code>color</code>.
+  </p>
+
+  <p>
+    Backing up a line,
+    we're creating a <code>SIZE</code>&times;<code>SIZE</code> image using <code>novice.new</code>
+    and setting all its pixels to the fixed color <code>GRAY</code>.
+    We're then&mdash;hm.
+    What does <code>::SPACING</code> do?
+    If it was <code>:SPACING</code> (with a single colon),
+    it would mean,
+    "From the start up to <code>SPACING</code>,"
+    but there's a double colon there.
+  </p>
+
+  <p>
+    The answer is that Python ranges can actually have three parts:
+    the start,
+    the end,
+    and the <a href="glossary.html#stride">stride</a>,
+    which is the separation between each entry.
+    We can find out more about this inside the interpreter
+    using the built-in <code>help</code> function:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">help(range)</span>
+<span class="out">range(...)
+    range([start,] stop[, step]) -> list of integers
+    
+    Return a list containing an arithmetic progression of integers.
+    range(i, j) returns [i, i+1, i+2, ..., j-1]; start (!) defaults to 0.
+    When step is given, it specifies the increment (or decrement).
+    For example, range(4) returns [0, 1, 2, 3].  The end point is omitted!
+    These are exactly the valid indices for a list of 4 elements.</span>
+</pre>
+
+  <p class="continue">
+    However,
+    that doesn't tell us that strides also work in indices:
+    that's something we just have to know.
+  </p>
+
+  <p>
+    So,
+    going back to our program,
+    the key lines are:
+  </p>
+
+<pre>
+for color in range(BASE + STEP, BASE + NUMBER * STEP, STEP):
+    ...create image...
+    image[::SPACING, ::SPACING] = (color, color, color)
+</pre>
+
+  <p class="continue">
+    The loop is going from <code>BASE + STEP</code> up to <code>BASE + NUMBER * STEP</code>
+    in increments of <code>STEP</code>.
+    <code>BASE</code> is 128&mdash;our initial shade of gray.
+    <code>STEP</code> is 4:
+    that's the increment each time we go around the loop.
+    And <code>NUMBER</code> is how many we're doing,
+    so this loop is creating a bunch of images with the same gray background,
+    but whiter and whiter points spaced at equal intervals across them.
+  </p>
+
+  <div class="keypoints" id="k:coords">
+    <h3>Summary</h3>
+    <ul>
+      <li class="fixme">Write something</li>
+    </ul>
+  </div>
+
+</section>
+
+<section id="s:logic">
+
+  <h2>Making Choices</h2>
+
+  <div class="understand" id="u:logic">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to choose what statements to execute using conditionals.</li>
+      <li>How to combine conditional tests.</li>
+      <li>What an in-place operator is.</li>
+    </ul>
+  </div>
+
+  <p class="fixme">write</p>
+
+</section>
+
+<section id="s:puzzle">
+
+  <h2>Cutting Up Images</h2>
+
+  <p>
+    We now have everything we need to solve Valerie's original problem,
+    which is to cut an image into pieces
+    and colorize those pieces in different ways.
+    <span class="fixme">write description</span>
+  </p>
+
+</section>
+
 {% endblock content %}
