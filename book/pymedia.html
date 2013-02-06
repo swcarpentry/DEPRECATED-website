@@ -2791,6 +2791,25 @@ for color in range(BASE + STEP, BASE + NUMBER * STEP, STEP):
 
 </section>
 
+<section id="s:nestloop">
+
+  <h2>Nesting Loops</h2>
+
+  <div class="understand" id="u:nestloop">
+    <h3>Understand:</h3>
+    <ul>
+      <li>That loops can be nested to operate on combinations of items.</li>
+      <li>That the range of inner loops can depend on the state of outer loops.</li>
+      <li>That doing this allows programs to handle more cases without changes.</li>
+    </ul>
+  </div>
+
+  <p class="fixme">
+    Explain nested loops in terms of triangles on images.
+  </p>
+
+</section>
+
 <section id="s:puzzle">
 
   <h2>Cutting Up Images</h2>
@@ -2799,7 +2818,78 @@ for color in range(BASE + STEP, BASE + NUMBER * STEP, STEP):
     We now have everything we need to solve Valerie's original problem,
     which is to cut an image into pieces
     and colorize those pieces in different ways.
-    <span class="fixme">write description</span>
+    First,
+    let's figure out what our input file is,
+    and how many pieces we want along the X and Y axes:
+  </p>
+
+<pre>
+import sys
+from skimage import novice
+
+if len(sys.argv) != 4:
+    print 'Expected source filename and number of tiles on X and Y'
+    sys.exit(1)
+
+original_filename = sys.argv[1]
+tile_x = int(sys.argv[2])
+tile_y = int(sys.argv[3])
+</pre>
+
+  <p>
+    After importing our libraries,
+    this program checks that it has the right number of arguments.
+    (Once again,
+    the number is 4 because <code>sys.argv[0]</code> is the name of the program.)
+    If something is wrong,
+    the program prints an error message and exits.
+    <span class="fixme">explain why 1</span>
+    It then stores the name of the source file in <code>original_filename</code>,
+    and converts the other two arguments to integers.
+  </p>
+
+<pre>
+original = novice.open(original_filename)
+size_x = original.width / tile_x
+size_y = original.height / tile_y
+if (size_x == 0) or (size_y == 0):
+    print 'Cannot create that many tiles.'
+    sys.exit(1)
+</pre>
+
+  <p>
+    Here,
+    the program opens the source file
+    and figures out how large each tile is going to be along the X and Y axes.
+    Once again,
+    it checks to make sure the answer is reasonable:
+    if,
+    for example,
+    we ask for 2000 tiles along an axis that's 200 pixels large,
+    the integer-over-integer division will set the size to zero,
+    and we should exit right away.
+  </p>
+
+<pre>
+for x in range(0, size_x * tile_x, size_x):
+    for y in range(0, size_y * tile_y, size_y):
+        tile = novice.new((size_x, size_y))
+        tile[:, :] = original[x:x+size_x, y:y+size_y]
+        tile_filename = str(x) + '-' + str(y) + '-' + original_filename
+        tile.save(tile_filename)
+</pre>
+
+  <p>
+    This nested loop creates our slices.
+    The loop variables <code>x</code> and <code>y</code> are coordinates of
+    the lower-left corners of the slices;
+    for each combination of their values,
+    we create a new blank image
+    (which we assign to <code>tile</code>),
+    then copy over a section of the original image.
+    We then construct a filename like
+    <code>100-140-bicycle.jpg</code>
+    and save that tile.
   </p>
 
 </section>
