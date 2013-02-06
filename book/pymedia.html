@@ -1869,6 +1869,158 @@ for pixel in picture:
 
 </section>
 
+<section id="s:logic">
+
+  <h2>Making Choices</h2>
+
+  <div class="understand" id="u:logic">
+    <h3>Understand:</h3>
+    <ul>
+      <li>How to choose what statements to execute using conditionals.</li>
+      <li>How to combine conditional tests.</li>
+      <li>What an in-place operator is.</li>
+    </ul>
+  </div>
+
+  <p>
+    Using the <code>min</code> function is one way to clip values.
+    Another is to use a <a href="glossary.html#conditional">conditional</a> statement.
+    Let's start with a simple example:
+  </p>
+
+<pre>
+if 5 &gt; 0:
+    print '5 is greater than 0'
+
+if 5 &lt; 0:
+    print '5 is less than 0'
+</pre>
+
+  <p>
+    When we run this program,
+    it prints:
+  </p>
+
+<pre>
+<span class="out">5 is greater than 0</span>
+</pre>
+
+  <p class="continue">
+    The logic is fairly easy to follow.
+    The keyword <code>if</code> is followed by an expression.
+    If that expression is true,
+    Python executes the indented block of code,
+    but if the expression is false,
+    it doesn't.
+    In this case,
+    since 5 actually is greater than 0,
+    the first <code>print</code> statement is run,
+    but not the second.
+  </p>
+
+  <p>
+    Now let's try this:
+  </p>
+
+<pre>
+for char in 'GATTACA':
+    if char == 'A':
+        print 'found an A'
+<span class="out">found an A
+found an A
+found an A</span>
+</pre>
+
+  <p>
+    Python uses a double equals sign '==' to test for equality
+    (because the single equals sign '=' is used for assignment).
+    Each time through the loop above,
+    it compares the current value of <code>char</code> to the character 'A'.
+    When the two are equal,
+    it prints a message;
+    since the letter appears three times in 'GATTACA',
+    the message is printed three times.
+  </p>
+
+  <p>
+    All right,
+    how about this?
+
+<pre>
+VOWELS = 'AEIOU'
+num_vowels = 0
+num_other = 0
+for char in 'GATTACA':
+    if char in VOWELS:
+        num_vowels = num_vowels + 1
+    else:
+        num_other = num_other + 1
+print num_vowels, 'vowels'
+print num_other, 'other characters'
+<span class="out">3 vowels
+4 other characters</span>
+</pre>
+
+  <p>
+    This little program introduces two new language features.
+    The first is the <code>in</code> operator,
+    which,
+    as its name suggests,
+    tests whether one value is in another.
+    In this case,
+    we're using it to see if the current character is in our list of vowels.
+  </p>
+
+  <p>
+    The other feature is the keyword <code>else</code>,
+    which is used to introduce an alternative to an <code>if</code>.
+    Here,
+    if a character is a vowel,
+    Python increments <code>num_vowels</code>.
+    If that test fails&mdash;i.e., if the character <em>isn't</em> in <code>VOWELS</code>&mdash;Python
+    executes the both of the <code>else</code>
+    and increments <code>num_other</code> instead.
+  </p>
+
+  <p>
+    We can make this program a bit more readable by writing the body of the loop like this:
+  </p>
+
+<pre>
+for char in 'GATTACA':
+    if char in VOWELS:
+        <span class="highlight">num_vowels += 1</span>
+    else:
+        <span class="highlight">num_other += 1</span>
+</pre>
+
+  <p>
+    The notation <code>x += 1</code> means, "Add one to the variable <code>x</code>."
+    This is called an <a href="glossary.html#in-place-operator">in-place operator</a>;
+    we can similarly use <code>x += 5</code> to add 5 to <code>x</code>,
+    <code>x *= 3</code> to triple it,
+    and so on.
+    It may seem like a small saving,
+    but it actually prevents a lot of bugs
+    by eliminating duplicated code.
+  </p>
+
+  <p>
+    With conditionals in hand,
+    let's go back and rewrite our reddening program:
+  </p>
+
+<pre>
+picture = novice.open('mac.jpg')
+for pixel in picture:
+    if pixel.red &lt; 128:
+        pixel.red *= 2
+    else:
+        pixel.red = 255
+</pre>
+
+</section>
+
 <section id="s:lists">
 
   <h2>Lists</h2>
@@ -2636,23 +2788,6 @@ for color in range(BASE + STEP, BASE + NUMBER * STEP, STEP):
       <li class="fixme">Write something</li>
     </ul>
   </div>
-
-</section>
-
-<section id="s:logic">
-
-  <h2>Making Choices</h2>
-
-  <div class="understand" id="u:logic">
-    <h3>Understand:</h3>
-    <ul>
-      <li>How to choose what statements to execute using conditionals.</li>
-      <li>How to combine conditional tests.</li>
-      <li>What an in-place operator is.</li>
-    </ul>
-  </div>
-
-  <p class="fixme">write</p>
 
 </section>
 
