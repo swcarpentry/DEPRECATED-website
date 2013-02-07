@@ -63,6 +63,7 @@ BOOK_SUBJECTS_STEMS = \
   shell \
   svn \
   python \
+  pymedia \
   funclib \
   db \
   numpy \
