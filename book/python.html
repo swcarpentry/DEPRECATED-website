@@ -85,11 +85,14 @@
       <h2>Basic Operations</h2>
 
       <div class="understand" id="u:basic">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to use the Python interpreter interactively.</li>
-          <li>How to do basic arithmetic.</li>
-          <li>How to assign values to variables.</li>
+          <li>Run the Python interpreter interactively.</li>
+          <li>Correctly enter basic arithmetic expressions.</li>
+          <li>Explain what variables are used for.</li>
+          <li>Assign numbers and strings to variables.</li>
+          <li>Explain what happens when one variable is assigned to another.</li>
+          <li>Trace the effect of several consecutive assignment statements.</li>
         </ul>
       </div>
 
@@ -394,6 +397,65 @@ NameError: name 'temp_celsius' is not defined</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:basic">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            What is the output of:
+<pre>
+&gt;&gt;&gt; <span class="in">inner = 13.0</span>
+&gt;&gt;&gt; <span class="in">outer = 2 * inner</span>
+&gt;&gt;&gt; <span class="in">inner = 2 * inner</span>
+&gt;&gt;&gt; <span class="in">print outer</span>
+</pre>
+            <ol class="choices">
+              <li><code class="out">13.0</code></li>
+              <li><code class="out">26.0</code></li>
+              <li><code class="out">52.0</code></li>
+              <li>None of the above.</li>
+            </ol>
+          </li>
+
+          <li>
+            Fill in the blank so that these lines of code produce the output shown.
+<pre>
+&gt;&gt;&gt; <span class="in">female = 'GGT'</span>
+&gt;&gt;&gt; <span class="in">male = 'CAC'</span>
+&gt;&gt;&gt; <span class="in">________</span>
+&gt;&gt;&gt; <span class="in">print female</span>
+<span class="out">GGTGGTCAC</span>
+</pre>
+            <ol class="choices">
+              <li><code class="in">female = female + female + male</code></li>
+              <li><code class="in">female = (female + female) + male</code></li>
+              <li><code class="in">female = 2 * female + male</code></li>
+              <li>Any of the above.</li>
+            </ol>
+          </li>
+
+          <li>
+            What single change can be made to the first three lines below to get the output shown?
+<pre>
+&gt;&gt;&gt; <span class="in">scaling = 10</span> <span class="comment"># line 1</span>
+&gt;&gt;&gt; <span class="in">original = 7</span> <span class="comment"># line 2</span>
+&gt;&gt;&gt; <span class="in">adjusted = primary / scaling</span> <span class="comment"># line 3</span>
+&gt;&gt;&gt; <span class="in">print original + adjusted</span> <span class="comment"># line 4</span>
+<span class="out">7.7</span>
+</pre>
+            <ol class="choices">
+              <li>On line 1, change 10 to 0.1</li>
+              <li>On line 2, change 7 to 7.7</li>
+              <li>On line 3, change <code>adjusted</code> to <code>original</code></li>
+              <li>None of the above.</li>
+            </ol>
+          </li>
+
+        </ol>
+
+      </div>
+ 
     </section>
 
     <section id="s:program">
@@ -401,9 +463,10 @@ NameError: name 'temp_celsius' is not defined</span>
       <h2>Creating Programs</h2>
 
       <div class="understand" id="u:program">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to create and run programs.</li>
+          <li>Store Python commands in a file.</li>
+          <li>Use the interpreter to run a file containing Python commands.</li>
         </ul>
       </div>
 
@@ -491,6 +554,48 @@ ZeroDivisionError: integer division or modulo by zero</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:program">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            Nelle has created a file called <code>example.py</code>
+            that contains the following lines:
+<pre>
+tolerance = 5.0e3
+diameter = 2 * (tolerance/1000) ** 2 <span class="comment">note the double '*'</span>
+</pre>
+            What happens when she runs this file from the shell using the command:
+<pre>
+$ <span class="in">python -i example.py</span>
+</pre>
+            <ol class="choices">
+              <li>The statements are run in reverse order ('i' for 'inverted').</li>
+              <li>The interpreter runs the program, then waits for interactive commands ('i' for 'interactive').</li>
+              <li>The interpreter prints a list of the variables defined in the program ('i' for 'inspect').</li>
+              <li>None of the above.</li>
+            </ol>
+          </li>
+
+          <li>
+            Nelle has created two programs called <code>prepare.py</code> and <code>analyze.py</code>.
+            What happens when she runs the command:
+          </li>
+<pre>
+$ <span class="in">python prepare.py analyze.py</span>
+</pre>
+          <ol class="choices">
+            <li>Python runs the two programs in the order shown.</li>
+            <li>Python runs <code>prepare.py</code> but not <code>analyze.py</code>.</li>
+            <li>Python runs <code>analyze.py</code> but not <code>first.py</code>.</li>
+            <li>Python reports an error.</li>
+          </ol>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:types">
@@ -498,12 +603,13 @@ ZeroDivisionError: integer division or modulo by zero</span>
       <h2>Types</h2>
 
       <div class="understand" id="u:types">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>What data types are.</li>
-          <li>The differences between integers, floating-point numbers, and strings.</li>
-          <li>How to call a function.</li>
-          <li>Why computers shouldn't guess what people want.</li>
+          <li>Explain what a data type is, and give examples of three different data types.</li>
+          <li>Correctly identify the types of integer, floating-point, and string values.</li>
+          <li>Call a built-in function.</li>
+          <li>Explain what "type conversion" is, and give an example.</li>
+          <li>Explain (with an example) why programs shouldn't guess what people want to do.</li>
         </ul>
       </div>
 
@@ -587,13 +693,11 @@ print "body temperature in Kelvin:", temp_kelvin
         using a built-in <a href="glossary.html#function">function</a> called <code>type</code>:
       </p>
 
-
-        <!-- JK: Typo here, should be 'int' not 'int, and same for float. -->
 <pre>
 &gt;&gt;&gt; <span class="in">type(12)</span>
-<span class="out">&lt;type 'int&gt;</span>
+<span class="out">&lt;type 'int'&gt;</span>
 &gt;&gt;&gt; <span class="in">type(12.0)</span>
-<span class="out">&lt;type 'float&gt;</span>
+<span class="out">&lt;type 'float'&gt;</span>
 </pre>
 
       <p>
@@ -666,6 +770,58 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:types">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            If the variable <code>x</code> holds a number,
+            is the value of <code>int(str(x))</code> always the same as the value of <code>x</code>?
+            <ol class="choices">
+              <li>Yes.</li>
+              <li>No, because functions cannot be put inside functions.</li>
+              <li>No, because the expression should be <code>int('str(x)')</code> (with quotes).</li>
+              <li>No, because <code>x</code> might be a floating-point number.</li>
+            </ol>
+          </li>
+
+          <li>
+            What is value of <code>molecule</code> after the following code is run?
+<pre>
+&gt;&gt;&gt; <span class="in">oxygen = 'O'</span>
+&gt;&gt;&gt; <span class="in">carbon = 'C</span>
+&gt;&gt;&gt; <span class="in">molecule = carbon + oxygen * 2</span>
+</pre>
+            <ol class="choices">
+              <li><code>'COO'</code></li>
+              <li><code>'CO2'</code></li>
+              <li><code>'COCO'</code></li>
+              <li>None of the above: an error occurs on the last line.</li>
+            </ol>
+          </li>
+
+          <li>
+            Fill in the blanks so that these lines of code produce the output shown.
+<pre>
+&gt;&gt;&gt; <span class="in">pi = 3.14</span>
+&gt;&gt;&gt; <span class="in">x = ____(pi)</span>
+&gt;&gt;&gt; <span class="in">y = ____(x)</span>
+&gt;&gt;&gt; <span class="in">print y</span>
+<span class="out">3.14</span>
+</pre>
+            <ol class="choices">
+              <li><code>float</code> and <code>str</code></li>
+              <li><code>str</code> and <code>str</code></li>
+              <li><code>str</code> and <code>float</code></li>
+              <li><code>int</code> and <code>float</code></li>
+            </ol>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:io">
@@ -673,13 +829,13 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</span>
       <h2>Reading Files</h2>
 
       <div class="understand" id="u:io">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>Where computers store information.</li>
-          <li>How to open a file and read data from it.</li>
-          <li>How "lines" are stored in text files.</li>
-          <li>How to call a method.</li>
-          <li>How to write to a file.</li>
+          <li>Draw a diagram to explain where computers store data.</li>
+          <li>Write programs that open, read, and close files.</li>
+          <li>Explain how "lines" of text are actually stored in files.</li>
+          <li>Call a pre-defined method of a built-in type.</li>
+          <li>Write programs that write data to files.</li>
         </ul>
       </div>
 
@@ -1023,6 +1179,113 @@ writer.close()
         </ul>
       </div>
 
+      <div class="challenges" id="c:io">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            If <code>species.txt</code> is a text file,
+            what do the following lines print?
+<pre>
+info = open('species.txt', 'r')
+print info.readline().strip()
+</pre>
+            <ol class="choices">
+              <li>The first character of the file.</li>
+              <li>Any blanks at the start or end of the first line of the file.</li>
+              <li>The first line of the file with leading and trailing blanks removed.</li>
+              <li>Nothing: the statement is an error.</li>
+            </ol>
+
+          </li>
+
+          <li>
+            What does the following program leave in the file <code>output.txt</code>?
+<pre>
+results = open('output.txt', 'w')
+results.write('first')
+results.close()
+results = open('output.txt', 'a')
+results.write('second')
+results.close()
+</pre>
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+              <tr>
+                <td>
+<pre>
+firstsecond
+</pre>
+                </td>
+                <td>
+<pre>
+first
+second
+</pre>
+                </td>
+                <td>
+<pre>
+second
+</pre>
+                </td>
+                <td>
+                  Nothing.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            If the file <code>square.txt</code> contains:
+<pre>
+abcde
+fghij
+klmno
+</pre>
+            what does the following program print?
+<pre>
+handle = open('square.txt', 'r')
+result = len(handle)
+handle.close()
+print result
+</pre>
+            <ol class="choices">
+              <li>3</li>
+              <li>15</li>
+              <li>18</li>
+              <li>The program produces an error message.</li>
+            </ol>
+          </li>
+
+          <li>
+            If <code>square.txt</code> contains the three lines shown above,
+            and the file <code>final.txt</code> does not exist,
+            what is the effect of the following program?
+<pre>
+reader = open('square.txt', 'r')
+writer = open('final.txt', 'w')
+writer = reader
+reader.close()
+writer.close()
+</pre>
+            <ol class="choices">
+              <li>It creates an empty file called <code>final.txt</code>.</li>
+              <li>It copies the first line of <code>square.txt</code> to <code>final.txt</code>.</li>
+              <li>It copies all three lines from <code>square.txt</code> to <code>final.txt</code>.</li>
+              <li>It copies all three lines from <code>square.txt</code> to <code>final.txt</code>, but leaves <code>square.txt</code> empty.</li>
+            </ol>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:stdio">
@@ -1030,11 +1293,13 @@ writer.close()
       <h2>Standard Input and Output</h2>
 
       <div class="understand" id="u:stdio">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to import a module.</li>
-          <li>How to read from standard input.</li>
-          <li>How to write to standard output.</li>
+          <li>Explain what "importing a module" means and does.</li>
+          <li>Write programs that import standard library modules.</li>
+          <li>Explain what standard input and output are, and how they relate to the <a href="shell.html#s:pipefilter">pipe-and-filter</a> model.</li>
+          <li>Write programs that read from standard input.</li>
+          <li>Write programs that write to standard output.</li>
         </ul>
       </div>
 
@@ -1142,6 +1407,97 @@ reader.close()
         </ul>
       </div>
 
+      <div class="challenges" id="c:stdio">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            What is the difference between:
+<pre>
+import sys
+reader = sys.stdin
+print len(reader.readline())
+</pre>
+            and:
+<pre>
+import sys
+print len(sys.stdin.readline())
+</pre>
+            <ol class="choices">
+              <li>Nothing: they do exactly the same thing.</li>
+              <li>The second is not legal Python.</li>
+              <li>The first waits until there is actually input before running; the second does not.</li>
+              <li>None of the above (i.e., they are different in some other way).</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program do?
+<pre>
+import sys                                <span class="comment"># line 1</span>
+sys.stdin = open('temporary.txt', 'w')    <span class="comment"># line 2</span>
+sys.stdin.write(123)                      <span class="comment"># line 3</span>
+sys.stdin.close()                         <span class="comment"># line 4</span>
+</pre>
+            <ol class="choices">
+              <li>It produces an error message on line 2 because <code>sys.stdin</code> cannot be opened for writing.</li>
+              <li>It produces an error message on line 3 because the number 123 cannot be written written using <code>file.write</code>.</li>
+              <li>It sends the number 123 to the previous stage in the command-line pipeline.</li>
+              <li>It saves the number 123 to the file <code>temporary.txt</code>.</li>
+            </ol>
+          </li>
+
+          <li>
+            Nelle wants to copy the first line of <code>patients.txt</code>
+            to the file <code>subjects.txt</code>
+            using the shell command:
+<pre>
+$ <span class="in">python copier.py &gt; subjects.txt</span>
+</pre>
+            Fill in the blanks in the program below so that it does this.
+<pre>
+import sys
+source = ________
+line = ________
+source.close()
+________.________(line)
+</pre>
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+              <tr>
+                <td><code>open(sys.stdin)</code></td>
+                <td><code>sys.stdin</code></td>
+                <td><code>sys.stdin</code></td>
+              </tr>
+              <tr>
+                <td><code>source.readline()</code></td>
+                <td><code>source.readline()</code></td>
+                <td><code>sys.stdin.readline()</code></td>
+              </tr>
+              <tr>
+                <td><code>stdout</code></td>
+                <td><code>sys.stdout</code></td>
+                <td><code>sys</code></td>
+              </tr>
+              <tr>
+                <td><code>write</code></td>
+                <td><code>write</code></td>
+                <td><code>stdout</code></td>
+              </tr>
+            </table>
+          </li>
+
+        </ol>
+
+      </div>
+
+
     </section>
 
     <section id="s:for">
@@ -1149,11 +1505,11 @@ reader.close()
       <h2>Repeating Things</h2>
 
       <div class="understand" id="u:for">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to repeat things using a loop.</li>
-          <li>That the loop variable takes on a different value each time through the loop.</li>
-          <li>How to tell what statements are in the body of a loop.</li>
+          <li>Write a loop that processes the lines of a file.</li>
+          <li>Trace the values taken on by a loop variable during execution of the loop.</li>
+          <li>Explain what the "body" of a loop is, and correctly identify the bodies of loops.</li>
         </ul>
       </div>
 
@@ -1320,6 +1676,126 @@ for value in data {
         </ul>
       </div>
 
+      <div class="challenges" id="c:for">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            Suppose that the file <code>counts.txt</code> contains:
+<pre>
+1
+2
+3
+</pre>
+            What does the following program print?
+<pre>
+source = open('counts.txt', 'r')
+result = 'result:'
+for data in source:
+    result = result + data.strip()
+source.close()
+print result
+</pre>
+            <ol class="choices">
+              <li>An error message, because you cannot add numbers to strings.</li>
+              <li><code class="out">result:123</code></li>
+              <li><code class="out">result:6</code></li>
+              <li>None of the above.</li>
+            </ol>
+          </li>
+
+          <li>
+            If <code>counts.txt</code> contains the same data,
+            what does the following program print?
+<pre>
+source = open('counts.txt', 'r')
+first = source.readline()
+second = source.readline()
+for next in source:
+    first = second
+    second = next
+source.close()
+print first, second, next
+</pre>
+            <table class="choices">
+              <tr>
+                <td>1.</td>
+                <td>2.</td>
+                <td>3.</td>
+                <td>4.</td>
+              </tr>
+              <tr>
+                <td>
+<pre>
+1 2 3
+</pre>
+                </td>
+                <td>
+<pre>
+1
+2
+3
+</pre>
+                </td>
+                <td>
+<pre>
+1
+3
+3
+</pre>
+                </td>
+                <td>
+<pre>
+2
+3
+3
+</pre>
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            What does the following program print?
+<pre>
+odds = '135'
+evens = '246'
+total = 0
+for first in odds:
+    total = total + int(first)
+for second in evens:
+    total = total + int(first)
+print total
+</pre>
+            <ol class="choices">
+              <li>12</li>
+              <li>21</li>
+              <li>24</li>
+              <li>An error message.</li>
+            </ol>
+          </li>
+
+          <li>
+            What does the following program print?
+<pre>
+text = 'abc'
+for char in text:
+    text = text + char
+print text
+</pre>
+            <ol class="choices">
+              <li><code class="out">abca</code></li>
+              <li><code class="out">abcabc</code></li>
+              <li><code class="out">abcc</code></li>
+              <li>An error message (the program eventually crashes when it runs out of memory).</li>
+            </ol>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:logic">
@@ -1327,11 +1803,12 @@ for value in data {
       <h2>Making Choices</h2>
 
       <div class="understand" id="u:logic">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to choose what statements to execute using conditionals.</li>
-          <li>How to combine conditional tests.</li>
-          <li>What an in-place operator is.</li>
+          <li>Trace the execution of conditional statements.</li>
+          <li>Write conditional statements to perform selected statements only under specific conditions.</li>
+          <li>Use logical operators to combine tests in conditional statements.</li>
+          <li>Explain what "in-place operators" are, and correctly write statements using them.</li>
         </ul>
       </div>
 
@@ -1593,6 +2070,242 @@ something *= 2
         </ul>
       </div>
 
+      <div class="challenges" id="c:logic">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+          <li>
+            What is the value of <code>x</code> after executing the code shown below?
+<pre>
+x = 1
+x += x + 1
+</pre>
+            <ol class="choices">
+              <li>
+                Undefined (an error occurs).
+              </li>
+              <li>
+                1
+              </li>
+              <li>
+                2
+              </li>
+              <li>
+                3
+              </li>
+            </ol>
+          </li>
+
+          <li>
+            What change must be made to the following code
+            so that it produces the output shown?
+<pre>
+major = 5 &gt; 0
+minor = 0.5 &lt;= 0
+if major and minor:
+    print 'both'
+elif major or minor:
+    print 'one'
+else:
+    print 'neither'
+<span class="out">one</span>
+</pre>
+            <ol class="choices">
+              <li>
+                The <code>if</code> test must be <code>if (major == True) and (minor == True)</code>,
+                and the <code>elif</code> test must be <code>if (major == True) or (minor == True)</code>.
+              </li>
+              <li>
+                The <code>if</code> test must be <code>if major or minor</code>,
+                and the <code>elif</code> test must be <code>if major</code>.
+              </li>
+              <li>
+                The <code>if</code> test must be <code>if major</code>,
+                and the <code>elif</code> test must be <code>if minor</code>.
+              </li>
+              <li>
+                No change is required.
+              </li>
+            </ol>
+          </li>
+
+          <li>
+            A program initially executes these two lines:
+<pre>
+color = 'green'
+shape = 'triangle'
+</pre>
+            Match each snippet of code to the final values of <code>color</code> and <code>shape</code>.
+            <table>
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+if color == 'green':
+    shape = 'square'
+elif shape == 'square':
+    color = 'red'
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+if color == 'green':
+    shape = 'square'
+if shape == 'square':
+    color = 'red'
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+if color == 'green' or shape == 'square':
+    shape = 'circle'
+if shape == 'square':
+    color = 'red'
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+if color == 'green':
+    if shape != 'triangle':
+        shape = 'circle'
+else:
+    shape = 'square'
+</pre>
+                </td>
+              </tr>
+            </table>
+
+            <table>
+              <tr>
+                <td></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td><code>color</code></td>
+                <td><code>red</code></td>
+                <td><code>green</code></td>
+                <td><code>green</code></td>
+                <td><code>green</code></td>
+              </tr>
+              <tr>
+                <td><code>shape</code></td>
+                <td><code>square</code></td>
+                <td><code>circle</code></td>
+                <td><code>square</code></td>
+                <td><code>triangle</code></td>
+              </tr>
+            </table>
+
+          </li>
+
+          <li>
+            What does the following code print?
+<pre>
+for char in 'CGT' * 0:
+    print char
+else:
+    print 'not found'
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+C
+G
+T
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+0
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+not found
+</pre>
+                </td>
+                <td valign="top">
+                  An "invalid syntax" error message.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            Fill in the blanks so that the program below prints out
+            the sum of the values in the list
+            <em>after</em> the last negative number.
+<pre>
+data = [5, -2, 3, 1, -6, 2, 4]
+total = 0
+for value in data:
+    if ________ &lt; 0:
+        ________ = 0
+    else:
+        ________ += ________
+print total
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+total
+total
+value
+value
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+value
+total
+value
+total
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+total
+value
+total
+value
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+value
+total
+total
+value
+</pre>
+                </td>
+              </tr>
+            </table>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:flag">
@@ -1600,10 +2313,11 @@ something *= 2
       <h2>Flags</h2>
 
       <div class="understand" id="u:flag">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>What Boolean values are.</li>
-          <li>How to keep track of events using flag variables.</li>
+          <li>Explain what Boolean values are.</li>
+          <li>Write statements that create and store Boolean values, and use them correctly in conditional statements.</li>
+          <li>Write examples showing how to keep track of events using flag variables.</li>
         </ul>
       </div>
 
@@ -1734,6 +2448,156 @@ print 'Number of data lines:', number
         </ul>
       </div>
 
+      <div class="challenges" id="c:flag">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+          <li>
+            What does the following program print?
+<pre>
+pressure = 55.3
+regions = [0 &lt;= pressure &lt; 50, 50 &lt;= pressure &lt; 80]
+print regions
+</pre>
+            <ol class="choices">
+              <li><code>[0, 50]</code></li>
+              <li><code>[0, 1]</code></li>
+              <li><code>[False, True]</code></li>
+              <li>A syntax error message.</li>
+            </ol>
+          </li>
+
+          <li>
+            What does the following program print?
+<pre>
+data = [10, 50, 30, 20, 40]
+capped = False
+total = 0
+for value in data:
+    if capped:
+        total = value
+    elif value &gt; total:
+        capped = True
+    else:
+        total += value
+print total
+</pre>
+            <ol class="choices">
+              <li><code>1500</code></li>
+              <li><code>40</code></li>
+              <li><code>60</code></li>
+              <li><code>True</code></li>
+            </ol>
+          </li>
+
+          <li>
+            The <code>break</code> statement tells Python to exit a loop immediately.
+            For example:
+<pre>
+for value in [1, 2, 3, 4, 5]:
+    print value
+    if value == 3:
+        break
+</pre>
+            prints:
+<pre>
+<span class="out">1
+2
+3</span>
+</pre>
+            Which of the following programs prints the same thing
+            <em>without</em> using <code>break</code>?
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+for value in [1, 2, 3, 4, 5]:
+    if value &lt;= 3:
+        print value
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+seen = False
+for value in [1, 2, 3, 4, 5]:
+    print value
+    if value &gt; 2:
+        seen = True
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+printing = True
+for value in [1, 2, 3, 4, 5]:
+    if printing:
+        print value
+    printing = value &lt; 2
+</pre>
+                </td>
+                <td valign="top">
+                  All of the above.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            What does the program below print?
+<pre>
+deviated = True
+for value in [1, 2, 3, 4, 5]:
+    if deviated:
+        print value
+        if value &gt; 2 and deviated:
+            deviated = False
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+1
+2
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+1
+2
+3
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+1
+2
+3
+4
+5
+</pre>
+                </td>
+                <td valign="top">
+                  None of the above.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:parse">
@@ -1741,9 +2605,9 @@ print 'Number of data lines:', number
       <h2>Reading Data Files</h2>
 
       <div class="understand" id="u:parse">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to parse simple text files.</li>
+          <li>Read a simple columnar data file and operate on its values.</li>
         </ul>
       </div>
 
@@ -1844,8 +2708,8 @@ for line in data:
     elif have_seen_dashed_line:
         name, number, score = line.split()
         score = float(score)
-        if (score &lt; 0.0) or (score &gt; 5.0):
-            print 'Out of range:', name, number, score
+<span class="highlight">        if (score &lt; 0.0) or (score &gt; 5.0):
+            print 'Out of range:', name, number, score</span>
 </pre>
 
       <p>
@@ -1899,6 +2763,89 @@ Out of range: volume 1 -3.0</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:parse">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+          <li>
+            What does this program do?
+<pre>
+for line in open('columns.txt', 'r'):
+    first, second = line.strip().split()
+    print int(first) + int(second)
+</pre>
+            <ol class="choices">
+              <li>Nothing: the first line contains a syntax error.</li>
+              <li>Adds pairs of numbers from a file containing two columns of data.</li>
+              <li>Totals the values in the first column of data and (separately) the values in the second column.</li>
+              <li>Nothing: the program fails because it doesn't close the file it opens.</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program do?
+<pre>
+source = open('masses.txt', 'r')
+total = 0.0
+for line in source:
+    if line.startswith('#'):
+        print total
+        total = 0.0
+    else:
+        total += float(line)
+source.close()
+</pre>
+            <ol class="choices">
+              <li>Add up groups of numbers (one per line) separated by lines starting with '#', printing the totals.</li>
+              <li>As in #1, except the program does not print the first sub-total.</li>
+              <li>As in #1, except the program does not print the last sub-total.</li>
+              <li>As in #1, except the program does not include the first number in each group in its sub-total.</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program do?
+<pre>
+reader = open('patients.txt', 'r')
+largest = 0
+for line in reader:
+    if '#' in line:
+        line, rest = line.split('#')
+    largest = max(largest, len(line.strip()))
+reader.close()
+print largest
+</pre>
+            <ol class="choices">
+              <li>Print the length of the longest line in the file.</li>
+              <li>As in #1, except it ignores everything after the first '#' in each line.</li>
+              <li>As in #2, except it does not include trailing whitespace in the length of the line.</li>
+              <li>As in #2, except it does not include leading or trailing whitespace in the length of the line.</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program do?
+<pre>
+reader = open('patients.txt', 'r')
+writer = open('filtered.txt', 'w')
+for line in reader:
+    line = line.strip()
+    if len(line) &gt; 0:
+        writer.write(line)
+reader.close()
+writer.close()
+</pre>
+            <ol class="choices">
+              <li>Copy the first non-blank line from <code>patients.txt</code> to <code>filtered.txt</code>.</li>
+              <li>Copy the longest non-blank line from <code>patients.txt</code> to <code>filtered.txt</code>.</li>
+              <li>Copy all lines from <code>patients.txt</code> to <code>filtered.txt</code>.</li>
+              <li>Copy all non-blank lines from <code>patients.txt</code> to <code>filtered.txt</code>.</li>
+            </ol>
+          </li>
+
+        </ol>
+      </div>
+
     </section>
 
     <section id="s:provenance">
@@ -1906,10 +2853,11 @@ Out of range: volume 1 -3.0</span>
       <h2>Provenance Revisited</h2>
 
       <div class="understand" id="u:provenance">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How programs can add provenance to files.</li>
-          <li>How programs can carry provenance forward.</li>
+          <li>Demonstrate how to embed provenance information in a program.</li>
+          <li>Write programs that carry simple provenance information forward.</li>
+          <li>Explain how automatically tracking provenance helps computational research.</li>
         </ul>
       </div>
 
@@ -2037,6 +2985,125 @@ volume   2    4.0</span>
         </ul>
       </div>
 
+      <div class="challenges" id="c:provenance">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+          <li>
+            Fill in the blanks so that this program prints a line like:
+<pre>
+# Version: 123
+</pre>
+            in its output instead of just copying the raw provenance forward.
+<pre>
+my_version = '$Revision: 123$'
+cleaned = my_version.________('$')
+front, back = cleaned.split(________)
+print '# Version:', ________.strip()
+</pre>
+            <table class="choices">
+              <tr>
+                <td></td>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td>1.</td>
+                <td><code>split</code></td>
+                <td><code>strip</code></td>
+                <td><code>find</code></td>
+                <td><code>strip</code></td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td><code>' '</code></td>
+                <td><code>':'</code></td>
+                <td><code>'$'</code></td>
+                <td><code>'$'</code></td>
+              </tr>
+              <tr>
+                <td>3.</td>
+                <td><code>front</code></td>
+                <td><code>back</code></td>
+                <td><code>back</code></td>
+                <td><code>back</code></td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            Suppose our data files are also under version control,
+            and also include revision numbers:
+<pre>
+Version: $Revision: 227$
+Subject: 1782
+Date:    2012-05-21
+Test     Run  Score
+----     ---  -----
+range    1    3
+range    2    5
+discrim  1    1
+discrim  2    1
+discrim  4    1.5
+volume   1    3.5
+volume   2    4.0
+</pre>
+            Which block of code must we add to:
+<pre>
+source = open('data.txt', 'r')
+largest = None
+for line in source:
+    if ':' in line:
+        ________
+    else:
+        name, number, score = line.strip().split()
+        if largest is None:
+            largest = score
+        else:
+            largest = max(largest, score)
+source.close()
+print 'Version:', version_number
+print 'Largest:', largest
+</pre>
+            to copy the data file's version into the output?
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+name, keyword, version_number = line.strip('$').split(':')
+version_number = version_number.strip()
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+name, keyword, version_number = line.strip('$').split(':').strip()
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+name, keyword, version_number = line.strip('$').split(':')
+version_number = version_number.strip()
+</pre>
+                </td>
+                <td valign="top">
+                  None of the above.
+                </td>
+              </tr>
+            </table>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:lists">
@@ -2044,11 +3111,12 @@ volume   2    4.0</span>
       <h2>Lists</h2>
 
       <div class="understand" id="u:lists">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>How to store many related values in a list.</li>
-          <li>How to use a loop to operate on the values in a list.</li>
-          <li>That programs should be tested on small, simple cases.</li>
+          <li>Explain why it is useful to store many values together.</li>
+          <li>Write programs that create and manipulate lists of numbers and strings.</li>
+          <li>Write programs that use loops to operate independently on each value in a list.</li>
+          <li>Explain why programs should be tested on short, simple inputs first.</li>
         </ul>
       </div>
 
@@ -2223,6 +3291,92 @@ float(sum(data) / len(data))
         </ul>
       </div>
 
+      <div class="challenges" id="c:lists">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            What does the following program print?
+<pre>
+total = 0
+for v in []:
+    total += v
+print total
+</pre>
+            <ol class="choices">
+              <li>Nothing</li>
+              <li>0</li>
+              <li>The program doesn't run because of a syntax error.</li>
+              <li>None of the above.</li>
+            </ol>
+          </li>
+
+          <li>
+            The expression <code>list('abc')</code> produces the list <code>['a', 'b', 'c']</code>.
+            What does the expression <code>str(['a', 'b', 'c'])</code> produce?
+            <ol class="choices">
+              <li><code>'abc'</code></li>
+              <li><code>['abc']</code></li>
+              <li><code>['a', 'b', 'c']</code></li>
+              <li>An error message.</li>
+            </ol>
+          </li>
+
+          <li>
+            What is the value of the expression <code>len(['abc', 'def'])</code>?
+            <ol class="choices">
+              <li>6</li>
+              <li><code>[3, 3]</code></li>
+              <li>2</li>
+              <li>3</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program print?
+<pre>
+for i in 4:
+    print i
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+0
+1
+2
+3
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+1
+2
+3
+4
+</pre>
+                </td>
+                <td valign="top">
+                  Nothing
+                </td>
+                <td valign="top">
+                  A syntax error message
+                </td>
+              </tr>
+            </table>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:morelist">
@@ -2230,13 +3384,15 @@ float(sum(data) / len(data))
       <h2>More About Lists</h2>
 
       <div class="understand" id="u:morelist">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>That lists can be modified in place.</li>
-          <li>How to access arbitrary elements in a list.</li>
-          <li>What an out-of-bounds error is.</li>
-          <li>How to generate a list of legal indices for a list.</li>
-          <li>When to use short or long variable names.</li>
+          <li>Explain the difference between mutable and immutable values.</li>
+          <li>Index a list to retrieve values at specific locations.</li>
+          <li>Show how to alter the values in a list.</li>
+          <li>Trace changes to a list's values as a result of assignment.</li>
+          <li>Explain what an "out-of-bounds error" is, and give an example showing when one would occur.</li>
+          <li>Show how to generate all the valid indices for a list's elements.</li>
+          <li>Explain when it is appropriate to use short or long variable names, and why.</li>
         </ul>
       </div>
 
@@ -2739,6 +3895,109 @@ x = 2 * x
         </ul>
       </div>
 
+      <div class="challenges" id="c:morelist">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            What does this program print?
+<pre>
+sizes = [0, 1, 1, 2, 2]
+total = 0
+for s in sizes:
+    total += sizes[s]
+print total
+</pre>
+            <ol class="choices">
+              <li>0</li>
+              <li>2</li>
+              <li>4</li>
+              <li>6</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program print?
+<pre>
+pop = [20, 40, 30]
+loc = [1, 2, 1]
+print pop[loc[0]], pop[loc[2]]
+</pre>
+            <ol class="choices">
+              <li>Nothing: there is a syntax error.</li>
+              <li>Nothing: the program is syntactically correct, but fails when run.</li>
+              <li><code>1 1</code></li>
+              <li><code>20 30</code></li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program print?
+<pre>
+genders = list('FMFFMFM')
+print [genders[0] + genders[-1]]
+</pre>
+            <ol class="choices">
+              <li><code>'FM'</code></li>
+              <li><code>['FM']</code></li>
+              <li><code>['F', 'M']</code></li>
+              <li><code>['M', 'F']</code></li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program print?
+<pre>
+result = ''
+for i in range(5):
+    result += str(i/2)
+print result
+</pre>
+            <ol class="choices">
+              <li>An error message.</li>
+              <li>01122</li>
+              <li>00112</li>
+              <li>range(5)</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program print?
+<pre>
+values = list('abcd')
+for i in range(len(values)):
+    values[i] = values[-i]
+print values
+</pre>
+            <ol class="choices">
+              <li>['a', 'b', 'c', 'd']</li>
+              <li>['d', 'c', 'b', 'a']</li>
+              <li>['a', 'c', 'c', 'a']</li>
+              <li>['a', 'd', 'c', 'd']</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program print?
+<pre>
+values = list('abcd')
+for char in values:
+    values.append(char)
+print values
+</pre>
+            <ol class="choices">
+              <li>['a', 'b', 'c', 'd']</li>
+              <li>['a', 'b', 'c', 'd', 'a']</li>
+              <li>['a', 'b', 'c', 'd', 'a', 'b', 'c', 'd']</li>
+              <li>It never finishes running.</li>
+            </ol>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:nestloop">
@@ -2746,11 +4005,12 @@ x = 2 * x
       <h2>Nesting Loops</h2>
 
       <div class="understand" id="u:nestloop">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>That loops can be nested to operate on combinations of items.</li>
-          <li>That the range of inner loops can depend on the state of outer loops.</li>
-          <li>That doing this allows programs to handle more cases without changes.</li>
+          <li>Trace the execution of a nested loop.</li>
+          <li>Give examples of the kinds of problems that nested loops should be used to solve.</li>
+          <li>Construct nested loops with independent ranges.</li>
+          <li>Construct nested loops in which the range of the inner loop depends on the state of the outer loop, and give an example showing when this is useful.</li>
         </ul>
       </div>
 
@@ -3080,6 +4340,99 @@ print "grouped data:", result
         </ul>
       </div>
 
+      <div class="challenges" id="c:nestloop">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            What does this program print?
+<pre>
+total = 0
+for i in range(2):
+    for j in range(-i):
+        total += j
+print total
+</pre>
+            <ol class="choices">
+              <li>-2</li>
+              <li>-1</li>
+              <li>0</li>
+              <li>1</li>
+            </ol>
+          </li>
+
+          <li>
+            How many different numbers can be put in the blank below so that the value of the expression is 12?
+<pre>
+sum(range(1, ____, 3))
+</pre>
+            <ol class="choices">
+              <li>Only 1</li>
+              <li>2 different values</li>
+              <li>3 different values</li>
+              <li>The expression's value can never be 12</li>
+            </ol>
+          </li>
+
+          <li>
+            How many different numbers can be put in the blank below so that the value of the expression is 12?
+<pre>
+sum(range(1, 3, ____))
+</pre>
+            <ol class="choices">
+              <li>Only 1</li>
+              <li>2 different values</li>
+              <li>3 different values</li>
+              <li>The expression's value can never be 12</li>
+            </ol>
+          </li>
+
+          <li>
+            Fill in the blanks in:
+            <blockquote>
+              <code>final_mass</code> starts at 0,
+              which is less than any of the values in ________,
+              so <code>________(final_mass, inner)</code> is always 0,
+              so <code>max(outer, min(...))</code> is always just ________,
+              so the final value is just the last value of <code>outer_masses</code>.
+            </blockquote>
+            so that it is an accurate description of the behavior of this program:
+<pre>
+outer_masses = [10, 20, 30]
+inner_masses = [1, 2, 3]
+final = 0
+for outer in outer_masses:
+    for inner in inner_masses:
+        final = max(outer, min(final, inner))
+print final
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td><code>inner_masses</code></td>
+                <td><code>min</code></td>
+                <td><code>outer</code></td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td><code>outer_masses</code></td>
+                <td><code>min</code></td>
+                <td><code>0</code></td>
+              </tr>
+              <tr>
+                <td>C</td>
+                <td><code>inner_masses</code></td>
+                <td><code>max</code></td>
+                <td><code>inner_masses[-1]</code></td>
+              </tr>
+            </table>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:nestlist">
@@ -3087,10 +4440,11 @@ print "grouped data:", result
       <h2>Nesting Lists</h2>
 
       <div class="understand" id="u:nestlist">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>That lists can contain other lists.</li>
-          <li>That nested lists are a common way to represent regular (tabular) data.</li>
+          <li>Explain what is meant by "nested lists", and what their relationship is to nested loops.</li>
+          <li>Draw data structure diagrams corresponding to nested lists, and write nested lists that correspond to given diagrams.</li>
+          <li>Explain what happens when an expression like "<code>table[3][2]</code>" is evaluated.</li>
         </ul>
       </div>
 
@@ -3283,6 +4637,85 @@ print "average errors:", x_diff / len(actual), y_diff / len(actual)
         </ul>
       </div>
 
+      <div class="challenges" id="c:nestlist">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            A colleague has defined a 3&times;3 matrix like this:
+<pre>
+tensor = [ [0, 1, 2],
+           [3, 4, 5],
+           [6, 7, 8] ]
+</pre>
+            They then try to transpose it like this:
+<pre>
+transpose = []
+for i in [-1, -2, -3]:
+    transpose.append(tensor[i])
+</pre>
+            What is the actual result?
+            <ol class="choices">
+              <li><code>transpose</code> contains the transpose of <code>tensor</code> as desired.</li>
+              <li><code>transpose</code> contains the rows of <code>tensor</code> in reverse order.</li>
+              <li><code>transpose</code> contains the columns of <code>tensor</code> in reverse order.</li>
+              <li>An error occurs.</li>
+            </ol>
+          </li>
+
+          <li>
+            What is the output of this program?
+<pre>
+final = []
+for i in range(3):
+    final.append(range(i))
+print final
+</pre>
+            <ol class="choices">
+              <li><code>[0, 1, 2]</code></li>
+              <li><code>[[0], [1, [2]]</code></li>
+              <li><code>[[], [0], [0, 1]]</code></li>
+              <li><code>[[0, 1, 2]]</code></li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program do?
+<pre>
+alpha = [ [1, 2], [3, 4] ]
+beta = [ [10, 20], [30, 40] ]
+result = [ [0, 0], [0, 0] ]
+for i in range(2):
+    for j in range(2):
+        for k in range(2):
+            result[i][j] += alpha[i][k] * beta[k][j]
+</pre>
+            <ol class="choices">
+              <li>Calculate the sums of the rows and columns of <code>alpha</code> and <code>beta</code>.</li>
+              <li>Calculate the products of the elements the rows and columns of <code>alpha</code> and <code>beta</code>.</li>
+              <li>Calculate the matrix product <code>alpha</code>&times;<code>beta</code></li>
+              <li>Calculate the matrix product <code>beta</code>&times;<code>alpha</code></li>
+            </ol>
+          </li>
+
+          <li>
+            What is:
+<pre>
+len([ [0], [0, 1], [0, 1, 2] ])
+</pre>
+            <ol class="choices">
+              <li>0</li>
+              <li>3</li>
+              <li>6</li>
+              <li>undefined (the lists have different lengths)</li>
+            </ol>
+          </li>
+
+        </ol>
+
+      </div>
+
     </section>
 
     <section id="s:alias">
@@ -3290,10 +4723,13 @@ print "average errors:", x_diff / len(actual), y_diff / len(actual)
       <h2>Aliasing</h2>
 
       <div class="understand" id="u:alias">
-        <h3>Understand:</h3>
+        <h3>Learning Objectives:</h3>
         <ul>
-          <li>That a program can contain many aliases for a single piece of data.</li>
-          <li>That changes made through any of those aliases are visible through all the others.</li>
+          <li>Explain what an "alias" for a value is.</li>
+          <li>Explain why aliases can make programs harder to understand.</li>
+          <li>Identify examples in which aliasing does and does not occur.</li>
+          <li>Construct programs which create aliases for data.</li>
+          <li>Trace changes to data in programs that contain aliases.</li>
         </ul>
       </div>
 
@@ -3416,6 +4852,113 @@ print "average errors:", x_diff / len(actual), y_diff / len(actual)
           <li>Several variables can alias the same data.</li>
           <li>If that data is mutable (e.g., a list), a change made through one variable is visible through all other aliases.</li>
         </ul>
+      </div>
+
+      <div class="challenges" id="c:alias">
+        <h3>Challenges</h3>
+
+        <ol class="challenges">
+
+          <li>
+            Which diagram most accurately shows the state of memory after this code has executed?
+<pre>
+base = [1]
+base.append(base)
+</pre>
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td><img src="img/python/challenge.png"></td>
+                <td><img src="img/python/challenge.png"></td>
+                <td><img src="img/python/challenge.png"></td>
+                <td><img src="img/python/challenge.png"></td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            Which program creates the memory layout shown below?
+            <table class="choices">
+              <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td valign="top">
+<pre>
+alpha = [beta]
+beta = [alpha]
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+alpha = []
+beta = []
+alpha[0] = beta
+beta[0] = alpha
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+alpha = [beta] + alpha
+</pre>
+                </td>
+                <td valign="top">
+<pre>
+alpha = []
+beta = []
+alpha.append(beta)
+beta.append(alpha)
+</pre>
+                </td>
+              </tr>
+            </table>
+          </li>
+
+          <li>
+            What does this program print?
+<pre>
+vector = [100, 200]
+matrix = []
+matrix.append(vector)
+vector[0] = 300
+vector[1] = 400
+matrix.append(vector)
+print matrix
+</pre>
+            <ol class="choices">
+              <li><code>[[100, 200], [300, 400]]</code></li>
+              <li><code>[[300, 400], [300, 400]]</code></li>
+              <li><code>[[100, 200], [100, 200]]</code></li>
+              <li>None of the above</li>
+            </ol>
+          </li>
+
+          <li>
+            What does this program print?
+<pre>
+readings = [0] * 5
+readings[1] = 12
+readings[3] = 34
+print readings
+</pre>
+            <ol class="choices">
+              <li><code>[0, 12, 2, 34, 4]</code></li>
+              <li><code>[0, 12, 0, 34, 0]</code></li>
+              <li><code>[0, 34, 0, 34, 0]</code></li>
+              <li>None of the above</li>
+            </ol>
+          </li>
+
+        </ol>
+
       </div>
 
     </section>
