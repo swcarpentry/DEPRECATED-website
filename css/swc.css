@@ -230,10 +230,9 @@ span.review {
     font-style: italic;
 }
 
-/* Spacing around bibliography entries with book covers. */
-table.biblio tr td {
-    padding: 8px 0px;
-    vertical-align: top;
+/* Bibliography book covers. */
+img.book-cover {
+    width: 80px;
 }
 
 /* Blog calendar table in blog/index.html. */
