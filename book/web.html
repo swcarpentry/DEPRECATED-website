@@ -17,6 +17,7 @@
       <li><a href="#s:http">How the Web Works</a></li>
       <li><a href="#s:client">Getting Data</a></li>
       <li><a href="#s:server">Providing Data</a></li>
+      <li><a href="#s:index">Creating an Index</a></li>
       <li><a href="#s:summary">Summing Up</a></li>
     </ol>
 
@@ -1013,7 +1014,7 @@ Date         Experimenter        Subject          Test       Score
           and searching for the word "Surprise".
         </p>
 
-        <!-- Surprise: this isn't display by the browser, but is still in the document. -->
+        <!-- Surprise: this isn't displayed by the browser, but is still in the document. -->
 
         <p>
           If you really don't want people to be able to read something,
@@ -1649,9 +1650,9 @@ in which males and females have noticeably different appearances.&lt;/p&gt;&lt;/
       </p>
 
       <p>
-        Our example may make building trees seem like a lot of work,
-        but in practice,
-        programs usually wrap the steps up in functions.
+        in practice,
+        of course,
+        programs usually wrap all these steps up in functions.
         For example,
         this function converts a Python list into an HTML ordered list:
       </p>
@@ -1699,7 +1700,9 @@ print ET.tostring(root)
 </pre>
 
         <p class="continue">
-          It's a matter of personal taste which form is more readable.
+          It's a matter of taste which is less unreadable,
+          but since we're about to see a different approach that most people find better anyway,
+          the question is moot.
         </p>
 
       <div class="keypoints" id="k:creating">
@@ -1804,7 +1807,19 @@ print ET.tostring(root)
       </p>
 
       <p>
-        Our program looks like this:
+        First,
+        let's put all the values we want to customize the page with into variables:
+      </p>
+
+<pre src="src/web/template_expansion.py">
+name = 'Beatrice Tinsley'
+facts = ['Born 1941', 'Died 1981', 'Studied stellar aging']
+</pre>
+
+      <p>
+        Next,
+        we have to import the Jinja2 library
+        and do a bit of magic to load the template for our page:
       </p>
 
 <pre src="src/web/template_expansion.py">
@@ -1813,12 +1828,6 @@ import jinja2
 loader = jinja2.FileSystemLoader(['.'])
 environment = jinja2.Environment(loader=loader)
 template = environment.get_template('biography.html')
-
-result = template.render(name='Beatrice Tinsley',
-                         facts=['Born 1941',
-                                'Died 1981',
-                                'Studied stellar aging'])
-print result
 </pre>
 
       <p class="continue">
@@ -1845,11 +1854,20 @@ print result
       </p>
 
       <p>
-        We're now ready to do the actual expansion.
+        We're now ready to do the actual expansion:
+      </p>
+
+<pre src="src/web/template_expansion.py">
+result = template.render(name=name, facts=facts)
+print result
+</pre>
+
+      <p class="continue">
         When we call <code>template.render</code>,
-        we pass it any number of values with names,
-        such as <code>name='Beatrice Tinsley'</code>.
-        Those variables are then available inside the template,
+        we pass it any number of name-value pairs.
+        (Remember, the odd-looking expression <code>name=name</code> in the function call means,
+        "Assign the value of the variable <code>name</code> to the parameter called <code>name</code>.")
+        Those names are then available inside the template as variables,
         so that <code>{{name}}</code> is replaced with the value of <code>name</code>
         and we can iterate over the list in <code>facts</code>.
         The method call <code>template.render</code> "runs" the template
@@ -1920,7 +1938,9 @@ result = template.render(name='Helen Sawyer Hogg',
 </pre>
 
       <p>
-        We could then modify our template file to contain:
+        Jinja2 templates support all the basic features of Python.
+        For example,
+        we can modify our template file to say:
       </p>
 
 <pre src="src/web/biography2.html">
@@ -2008,19 +2028,20 @@ result = template.render(name='Helen Sawyer Hogg',
       </div>
 
       <p>
-        Now that we understand the web's most common data format,
+        Now that we know how to read and write the web's most common data format,
         it's time to look at how data is moved around on the web.
         Broadly speaking,
         web applications are built in one of two ways.
-        A <a href="glossary.html#client-server-architecture">client/server architecture</a>
-        is one in which many <a href="glossary.html#client">clients</a>
+        In a <a href="glossary.html#client-server-architecture">client/server architecture</a>
+        many <a href="glossary.html#client">clients</a>
         communicate with a central <a href="glossary.html#server">server</a>
         (<a href="#f:client_server">Figure XXX</a>).
         This model is asymmetric:
         clients ask for things,
         and servers provide them.
-        Web browsers and web servers like Apache are the best-known example of this model,
-        but many <a href="shell.html#a:dbms">database management systems</a> are also servers.
+        Web browsers and web servers like Firefox and Apache are the best-known example of this model,
+        but many <a href="db.html#a:dbms">database management systems</a>
+        also use a client/server architecture.
       </p>
 
       <figure id="f:client_server">
@@ -2032,14 +2053,14 @@ result = template.render(name='Helen Sawyer Hogg',
         a <a href="glossary.html#peer-to-peer-architecture">peer-to-peer architecture</a>
         is one in which all processes exchange information equally
         (<a href="#f:peer_to_peer">Figure XXX</a>).
-        This is symmetric,
-        in that every participant both provides and receives data;
-        the best-known example is probably filesharing systems like BitTorrent,
+        This is symmetric:
+        every participant both provides and receives data.
+        The best-known example is probably filesharing systems like BitTorrent,
         but again,
         there are many others.
         Peer-to-peer systems are generally harder to design than client-server systems,
-        but they are also more resilient.
-        If a centralized web server fails,
+        but they are also more resilient:
+        if a centralized web server fails,
         the whole system goes down,
         while if one node in a filesharing network goes down,
         the rest can (usually) carry on.
@@ -2075,7 +2096,12 @@ result = template.render(name='Helen Sawyer Hogg',
         it provides a reliable stream of data from one place to another,
         so that sending data between computers looks as much as possible
         like reading and writing files.
+        (<a href="#f:streams">Figure XXX</a>).
       </p>
+
+      <figure id="f:streams">
+        <img src="img/web/streams.png" alt="Building Streams Out of Packets" />
+      </figure>
 
       <p>
         Programs using IP communicate through <a href="glossary.html#socket">sockets</a>.
@@ -2089,10 +2115,11 @@ result = template.render(name='Helen Sawyer Hogg',
       </figure>
 
       <p>
-        A socket's <a href="glossary.html#host-address">host address</a>
-        or <a href="glossary.html#ip-address">IP address</a>
-        identifies a particular machine on the network.
-        This address consists of four 8-bit numbers,
+        A socket is identified by two numbers.
+        The first is its <a href="glossary.html#host-address">host address</a>
+        or <a href="glossary.html#ip-address">IP address</a>,
+        which identifies a particular machine on the network.
+        This consists of four 8-bit numbers,
         such as <code>208.113.154.118</code>.
         The <a href="glossary.html#dns">Domain Name System</a> (DNS)
         matches these numbers to symbolic names
@@ -2115,8 +2142,8 @@ Address:  173.236.199.157</span>
         A socket's <a href="glossary.html#port">port number</a>
         is just a number in the range 0-65535
         that uniquely identifies the socket on the host machine.
-        (If the IP address is like a company's phone number,
-        then the port number is like an extension number.)
+        (If the IP address is like a university's phone number,
+        then the port number is the extension.)
         Ports 0-1023 are reserved for the operating system's use;
         anyone else can use the remaining ports.
       </p>
@@ -2127,59 +2154,21 @@ Address:  173.236.199.157</span>
 
       <p>
         The <a href="glossary.html#http">Hypertext Transfer Protocol</a> (HTTP)
-        specifies how programs exchange documents over the World Wide Web.
+        is a layer on top of TCP/IP
+        that specifies one way for programs to exchange information.
         Originally,
-        the communicating parties were usually web browsers and web servers,
-        but these days HTTP is used in many other creative ways.
+        the communicating parties were web browsers and web servers,
+        but these days HTTP is used by many other kinds of applications as well.
         In principle,
         HTTP communication is simple:
         the client sends a request specifying what it wants over a socket connection,
         and the server sends some data in response.
         (or an error message).
-        The data may be HTML copied from a file on disk
-        or generated dynamically by a program,
+        The data may be HTML copied from a file on disk,
+        a similar page generated dynamically by a program,
         an image,
         or just about anything else
         (<a href="#f:http_content">Figure XXX</a>).
-      </p>
-
-      <figure id="f:http_content">
-        <img src="img/web/http_content.png" alt="HTTP Content" />
-      </figure>
-
-      <p>
-        The most important thing about HTTP is
-        that it is <a href="glossary.html#stateless-protocol">stateless</a>.
-        The server doesn't automatically store any state,
-        i.e.,
-        it doesn't remember anything between requests:
-        each connection and request is handled on its own.
-        If an application wants to keep track of things between requests
-        (such as the user's identity),
-        it's the application's job to do it.
-      </p>
-
-      <figure id="f:http_cycle">
-        <img src="img/web/http_cycle.png" alt="HTTP Request Cycle"/>
-      </figure>
-
-      <figure id="f:http_request">
-        <img src="img/web/http_request.png" alt="HTTP Request"/>
-      </figure>
-
-      <p>
-        An HTTP request has three parts
-        (<a href="#f:http_request">Figure XXX</a>).
-        The HTTP method is almost always either
-        <code>"GET"</code> (to fetch information)
-        or
-        <code>"POST"</code> (to submit form data or upload files).
-        The URL identifies the thing the request wants;
-        it may be a path to a file on disk,
-        such as <code>/index.html</code>,
-        but it's entirely up to the server how to interpret the URL.
-        The HTTP version is usually <code>"HTTP/1.0"</code> or <code>"HTTP/1.1"</code>;
-        the differences between the two don't matter to us.
       </p>
 
       <div class="box">
@@ -2208,6 +2197,33 @@ Address:  173.236.199.157</span>
         </p>
 
       </div>
+
+      <figure id="f:http_content">
+        <img src="img/web/http_content.png" alt="HTTP Content" />
+      </figure>
+
+      <figure id="f:http_cycle">
+        <img src="img/web/http_cycle.png" alt="HTTP Request Cycle"/>
+      </figure>
+
+      <figure id="f:http_request">
+        <img src="img/web/http_request.png" alt="HTTP Request"/>
+      </figure>
+
+      <p>
+        An HTTP request has three parts
+        (<a href="#f:http_request">Figure XXX</a>).
+        The HTTP method is almost always either
+        <code>"GET"</code> (to fetch information)
+        or
+        <code>"POST"</code> (to submit form data or upload files).
+        The URL identifies the thing the request wants;
+        it may be a path to a file on disk,
+        such as <code>/research/experiments.html</code>,
+        but it's entirely up to the server to decide what to send back.
+        The HTTP version is usually <code>"HTTP/1.0"</code> or <code>"HTTP/1.1"</code>;
+        the differences between the two don't matter to us.
+      </p>
 
       <p>
         An <a href="glossary.html#http-header">HTTP header</a> is a key/value pair,
@@ -2333,7 +2349,17 @@ If-Modified-Since: 16-May-2005
           </tr>
         </table>
         <figcaption>HTTP Codes</figcaption>
+        <!-- FIXME: add "I am a teapot" -->
       </figure>
+
+      <p>
+        The one other thing that we need to know about HTTP is that
+        it is <a href="glossary.html#stateless-protocol">stateless</a>:
+        each request is handled on its own,
+        and the server doesn't remember anything between one request and the next.
+        If an application wants to keep track of something like a user's identity,
+        it must do so itself.
+      </p>
 
       <div class="keypoints" id="k:http">
         <h3>Summary</h3>
@@ -2341,9 +2367,9 @@ If-Modified-Since: 16-May-2005
           <li>Most communication on the web uses TCP/IP sockets.</li>
           <li>Socket endpoints are identified by a host address and a port number.</li>
           <li>The Domain Name System translates human-readable names into host addresses.</li>
-          <li>HTTP is a stateless request-response protocol.</li>
           <li>An HTTP request contains a method, headers, and a body.</li>
           <li>An HTTP response also contains a response code.</li>
+          <li>HTTP is a stateless request-response protocol.</li>
         </ul>
       </div>
 
@@ -2366,10 +2392,10 @@ If-Modified-Since: 16-May-2005
         so most people use libraries to do most of the work.
         Python comes with such a library called <code>urllib2</code>
         (because it's a replacement for an earlier library called <code>urllib</code>),
-        but it can be fairly complicated for beginners to use.
+        but it exposes a lot of plumbing that most people never want to care about.
         Instead,
-        we recommend the <code>Requests</code> library.
-        Here's an example that shows how to read a page using it:
+        we recommend using the <code>Requests</code> library.
+        Here's an example that uses it to download a page from our web site:
       </p>
 
 <pre src="src/web/requests_client.py">
@@ -2393,25 +2419,41 @@ content length: 126
       <p>
         Sometimes a URL isn't enough on its own:
         for example,
-        when searching on Google, we have to specify what the search terms are.
-        We could do this as part of the path in the URL,
-        but it's more flexible to add parameters to the URL instead.
-        To do this,
-        we put a '?' on the end of the URL,
-        then add key-value pairs separated by the '&amp;' character.
+        when searching on Google,
+        we have to specify what the search terms are.
+        We could add these to the path in the URL,
+        but then every web site could have a different convention about
+        which parts actually belong to the path
+        and which are extras.
+        Instead,
+        what we should do is add parameters to the URL
+        by putting a '?' on the end of the URL,
+        then adding key-value pairs separated by the '&amp;' character.
         For example,
         the URL <code>http://www.google.ca?q=Python</code>
         ask Google to search for pages related to Python,
         while
         <code>http://www.google.ca/search?q=Python&amp;client=Firefox</code>
-        asks it to search for pages that mention Python
-        while telling Google that the program doing the search is the Firefox browser.
+        also tells Google that we're using Firefox.
         We can pass whatever parameters we want,
         whenever we want,
         but it's up to the application running on the web site to decide
         which ones to pay attention to,
         and how to interpret them.
       </p>
+
+      <div class="box">
+        <h3>You Are Who You Say You Are</h3>
+
+        <p>
+          Yes,
+          this means that we could write a program of our own
+          that tells websites it's Firefox,
+          Internet Explorer,
+          or pretty much anything else.
+          We'll return to this and other security issues later.
+        </p>
+      </div>
 
       <p>
         Of course,
@@ -2499,6 +2541,14 @@ print 'actual URL:', response.url
 <span class="out">actual URL: http://www.google.com/search?q=Python&amp;client=Firefox</span>
 </pre>
 
+      <p class="continue">
+        You should <em>always</em> let the library build the URL for you,
+        rather than doing it yourself:
+        there are lots of subtleties we haven't covered,
+        and even if there weren't,
+        there's no point duplicating code that's already been written and tested.
+      </p>
+
       <p>
         Suppose we want to write a script that actually <em>does</em> search Google.
         Constructing a URL is easy.
@@ -2509,33 +2559,33 @@ print 'actual URL:', response.url
         <a href="glossary.html#screen-scraping">screen scraping</a>
         to get data,
         i.e.,
-        extract information from the page by throwing regular expressions at it.
-        (They usually had to use regular expressions
-        because a lot of the HTML wasn't well-formed,
-        and couldn't be interpreted by real XML or HTML parsers.)
+        they would search for substrings in the HTML.
+        (They had to do this because a lot of hand-written HTML was improperly formatted.
+        For example,
+        it was quite common to use <code>&lt;br&gt;</code> on its own to break a line.)
       </p>
 
       <p>
-        Screen scraping was always hard to get right if the page layout is complex.
-        It was also fragile:
-        whenever the layout of the pages changed,
-        the application could break
-        because data was no longer where it had been.
+        Screen scraping is always hard to get right if the page layout is complex.
+        It is also fragile:
+        whenever the layout of the pages changes,
+        the application will most likely break
+        because data is no longer where it was.
       </p>
 
       <p>
-        Modern applications separate data from presentation
+        Most modern web applications try to sidestep this problem
         by providing some sort of <a href="glossary.html#web-services">web services</a> interface.
         When a client sends a request,
         it indicates whether it wants machine-oriented data or human-readable HTML
         (<a href="#f:web_services">Figure XXX</a>).
         If it asks for the former,
-        the server sends back something in XML or some other format
-        that is easy for the client to parse.
-        This data format is also much less likely to change over time,
-        since the information provided by a site
-        usually doesn't evolve as rapidly as
-        the way that information is displayed.
+        the server sends back XML (or some other format)
+        that is easy for a program to parse.
+        If the client asks for "real" HTML,
+        on the other hand,
+        the application turns that data into HTML tables with italics and colored highlights and the like
+        to make it easy for human beings to read.
       </p>
 
       <figure id="f:web_services">
@@ -2543,13 +2593,13 @@ print 'actual URL:', response.url
       </figure>
 
       <p>
-        Using "live" data from the web is wonderful,
+        Using "live" data from a web service is a powerful way to get a lot of science done in a hurry,
         but only when it works.
-        (As a case in point,
+        As a case in point,
         we wanted to use bird-watching data from <a href="http://ebird.org">ebird.org</a> in this example,
         but their server was locked down for security reasons
         when it came time for us to write our examples.
-        This is another way in which software is like other experimental apparatus:
+        (This is another way in which software is like other experimental apparatus:
         odds are that when you need it most,
         it will be broken or someone will have borrowed it.)
       </p>
@@ -2570,7 +2620,8 @@ http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/<em>VARIABLE<
 
       <ul>
         <li>
-          <em>VARIABLE</em> is either "pr" (for precipitation) or "tas" (for surface temperature);
+          <em>VARIABLE</em> is either "pr" (for precipitation)
+          or "tas" (for <em>t</em>emperature <em>a</em>t <em>s</em>urface);
         </li>
         <li>
           <em>ISO</em> is the International Standards Organization's 3-letter country code
@@ -2580,17 +2631,21 @@ http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/<em>VARIABLE<
         </li>
         <li>
           <em>FORMAT</em> is "XML" for XML,
-          and other strings for other things
-          that we'll talk about later.
+          and other strings for other formats
+          that we'll discuss later.
         </li>
       </ul>
 
-      <p class="continue">
-        The data returned when we get this URL looks like this:
+      <p>
+        Let's try getting some data:
       </p>
 
 <pre>
-&lt;list&gt;
+&gt;&gt;&gt; <span class="in">import requests</span>
+&gt;&gt;&gt; <span class="in">url = 'http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/tas/year/FRA.XML'</span>
+&gt;&gt;&gt; <span class="in">response = requests.get(url)</span>
+&gt;&gt;&gt; <span class="in">print response.text</span>
+<span class="out">&lt;list&gt;
   &lt;domain.web.V1WebCru&gt;
     &lt;year&gt;1901&lt;/year&gt;
     &lt;data&gt;21.357021&lt;/data&gt;
@@ -2600,13 +2655,13 @@ http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/<em>VARIABLE<
     &lt;data&gt;21.382462&lt;/data&gt;
   &lt;/domain.web.V1WebCru&gt;
   ...
-&lt;/list&gt;
+&lt;/list&gt;</span>
 </pre>
 
-      <p class="continue">
-        i.e.,
-        an outer <code>list</code> element (the document root)
-        that contains any number of <code>domain.web.V1WebCru</code> elements,
+      <p>
+        All right:
+        the outer <code>list</code> element (the document root)
+        contains any number of <code>domain.web.V1WebCru</code> elements,
         each of which contains <code>year</code> and <code>data</code> elements.
         That long, clumsy name <code>domain.web.V1WebCru</code> probably means something to someone,
         but we don't need to care:
@@ -2615,7 +2670,9 @@ http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/<em>VARIABLE<
       </p>
 
       <p>
-        Let's start by writing the main program:
+        Let's write a program to compare the data for two countries
+        (which is the problem Carla wanted to solve at the start of this chapter).
+        We need to know which countries to compare:
       </p>
 
 <pre src="src/web/temperatures.py">
@@ -2633,9 +2690,8 @@ if __name__ == '__main__':
 </pre>
 
       <p>
-        This uses a function called <code>ratios</code>,
-        which fetches data
-        and then displays the annual ratios:
+        This program uses a function called <code>ratios</code>
+        to fetch data and display the annual ratios:
       </p>
 
 <pre src="src/web/temperatures.py">
@@ -2703,7 +2759,7 @@ def find_one(node, pattern):
 
       <p>
         Let's try running this program with no arguments
-        (which compares Australia to Canada):
+        to compare Australia to Canada, eh:
       </p>
 
 <pre>
@@ -2718,7 +2774,7 @@ $ <span class="in">python temperatures.py</span>
 </pre>
 
       <p class="continue">
-        and then compare Malaysia with Norway:
+        and then with arguments to compare Malaysia to Norway:
       </p>
 
 <pre>
@@ -2740,8 +2796,6 @@ $ <span class="in">python temperatures.py MYS NOR</span>
         (handling command-line arguments and printing output)
         and data manipulation
         (converting temperatures and calculating ratios).
-        The good news is that
-        the webbish stuff only grows slowly as we do more complicated statistics.
       </p>
 
       <div class="keypoints" id="k:client">
@@ -2774,11 +2828,11 @@ $ <span class="in">python temperatures.py MYS NOR</span>
         The next logical step is to provide data to others
         by writing some kind of server application.
         The basic idea is simple:
-        wait for someone to connect and send an HTTP request,
-        parse it,
+        wait for someone to connect to your server and send you an HTTP request,
+        parse that request,
         figure out what it's asking for,
-        fetch that data,
-        format it as HTML (or XML, or something),
+        fetch that data (or run a program to generate some data dynamically),
+        format the data as HTML or XML,
         and send it back
         (<a href="#f:web_application">Figure XXX</a>).
       </p>
@@ -2788,7 +2842,8 @@ $ <span class="in">python temperatures.py MYS NOR</span>
       </figure>
 
       <p>
-        But we're not going to show you how to do this,
+        We're not going to show you how to do this,
+        though,
         because experience has shown that all we can actually do in a short lecture
         is show you how to create security holes.
         Here's just one example.
@@ -2862,15 +2917,15 @@ DROP TABLE Species;
         because the user is injecting arbitrary (and usually damaging) SQL
         into our database query,
         and it's just one of hundreds of different ways that villains can try to compromise a web application.
-        Built properly,
-        web sites can withstand such attacks,
-        but "properly" takes time.
       </p>
 
       <p>
+        Built properly,
+        web sites can withstand such attacks,
+        but learning how to do things properly takes a long time.
         Instead,
         we will look at how to write programs that create plain old HTML pages
-        that can then be shared with the world by a standard web server like Apache.
+        that can then be served up to the world by a standard web server.
         Using our previous example (ratios of average annual temperatures) as a starting point,
         we'll create pages whose names look like
         <code>http://my.site/tempratio/AUS-CAN.html</code>,
@@ -2918,76 +2973,164 @@ DROP TABLE Species;
       <p>
         The first step is to calculate ratios,
         which we did in the <a href="#s:client">previous section</a>.
-        Our updated main program is:
+        Our main program is:
       </p>
 
 <pre src="src/web/make_data_page.py">
 def main(args):
-    first_country = 'AUS'
-    second_country = 'CAN'
-    index_page = 'index.html'
-    if len(args) &gt; 0:
-        first_country = args[0]
-    if len(args) &gt; 1:
-        second_country = args[1]
-    if len(args) &gt; 2:
-        index_page = args[2]
-    make_page(sys.stdout, first_country, second_country)
-    update_index(index_page, first_country, second_country)
+    '''Create web page showing temperature ratios for two countries.'''
+
+    assert len(args) == 4, \
+           'Usage: make_data_page template_filename output_filename country_1 country_2'
+    template_filename = args[0]
+    output_filename = args[1]
+    country_1 = args[2]
+    country_2 = args[3]
+
+    page = make_page(template_filename, country_1, country_2)
+
+    writer = open(output_filename, 'w')
+    writer.write(page)
+    writer.close()
 </pre>
 
       <p>
-        The second step is to translate the temperature values into a web page,
-        which we'll do using the ElementTree library:
+        The second step is to translate the temperature values into a web page.
+        We'll use the <code>get_temps</code> function we wrote above
+        to grab temperature data,
+        get the years from that,
+        and add the date as well.
+        Once we have all those
       </p>
 
 <pre src="src/web/make_data_page.py">
-def make_page(output, first_country, second_country):
+def make_page(template_filename, output_filename, country_1, country_2):
     '''Create page showing temperature ratios.'''
 
-    first_data = get_temps(first_country)
-    second_data = get_temps(second_country)
-
+    data_1 = get_temps(country_1)
+    data_2 = get_temps(country_2)
+    years = data_1.keys()
+    years.sort()
     the_date = date.isoformat(date.today())
 
-    html = ET.Element('html')
-    head = ET.SubElement(html, 'head')
-    revised = ET.SubElement(head, 'meta', {'name'    : 'revised',
-                                           'content' : the_date})
+    loader = jinja2.FileSystemLoader(['.'])
+    environment = jinja2.Environment(loader=loader)
+    template = environment.get_template(template_filename)
+    result = template.render(country_1=country_1, data_1=data_1,
+                             country_2=country_2, data_2=data_2,
+                             years=years, the_date=the_date)
 
-    body = ET.SubElement(html, 'body')
-    h1 = ET.SubElement(body, 'h1')
-    h1.text = 'Ratio of Average Annual Temperatures for %s and %s' % \
-              (first_country, second_country)
+    return result
+</pre>
 
-    make_table(body, first_data, second_data)
+      <p>
+        Finally,
+        we need a Jinja2 template for the pages we want to create:
+      </p>
 
-    output.write(ET.tostring(html))
+<pre src="src/web/temp_ratio.html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Temperature Ratios of {{country_1}} and {{country_2}} as of {{the_date}}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Temperature Ratios of {{country_1}} and {{country_2}}&lt;/h1&gt;
+    &lt;h2&gt;Calculated {{the_date}}&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Year&lt;/td&gt;
+        &lt;td&gt;{{country_1}}&lt;/td&gt;
+        &lt;td&gt;{{country_2}}&lt;/td&gt;
+        &lt;td&gt;Ratio&lt;/td&gt;
+      &lt;/tr&gt;
+      {% for year in years %}
+      &lt;tr&gt;
+        &lt;td&gt;{{year}}&lt;/td&gt;
+        &lt;td&gt;{{data_1[year]}}&lt;/td&gt;
+        &lt;td&gt;{{data_2[year]}}&lt;/td&gt;
+        &lt;td&gt;{{data_1[year] / data_2[year]}}&lt;/td&gt;
+      &lt;/tr&gt;
+      {% endfor %}
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+      <p>
+        Let's run it for Australia and Canada:
+      </p>
+
+<pre>
+$ <span class="in">python make_data_page.py temp_ratio.html /tmp/aus-can.html AUS CAN</span>
 </pre>
 
       <p class="continue">
-        For readability's sake,
-        we have put the code that actually generates the table
-        in a separate function:
+        Sure enough,
+        the file <code>/tmp/aus-can.html</code>contains:
       </p>
 
-<pre src="src/web/make_data_page.py">
-def make_table(parent, first_data, second_data):
-    '''Create table in page showing temperature ratios.'''
-    table = ET.SubElement(parent, 'table')
-    table.attrib['class'] = 'data'
-    keys = first_data.keys()
-    keys.sort()
-    for year in keys:
-        tr = ET.SubElement(table, 'tr')
-        td_year = ET.SubElement(tr, 'td', {'class' : 'year'})
-        td_year.text = str(year)
-        td_data = ET.SubElement(tr, 'td', {'class' : 'data'})
-        td_data.text = str( first_data[year] / second_data[year] )
+<pre src="src/web/aus-can-ratio.html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Temperature Ratios of AUS and CAN as of 2013-02-10&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Temperature Ratios of AUS and CAN&lt;/h1&gt;
+    &lt;h2&gt;Calculated 2013-02-10&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Year&lt;/td&gt;
+        &lt;td&gt;AUS&lt;/td&gt;
+        &lt;td&gt;CAN&lt;/td&gt;
+        &lt;td&gt;Ratio&lt;/td&gt;
+      &lt;/tr&gt;
+      
+      &lt;tr&gt;
+        &lt;td&gt;1901&lt;/td&gt;
+        &lt;td&gt;294.507021&lt;/td&gt;
+        &lt;td&gt;265.477581&lt;/td&gt;
+        &lt;td&gt;1.10934799048&lt;/td&gt;
+      &lt;/tr&gt;
+      
+      &lt;tr&gt;
+        &lt;td&gt;1902&lt;/td&gt;
+        &lt;td&gt;294.532462&lt;/td&gt;
+        &lt;td&gt;265.2872886&lt;/td&gt;
+        &lt;td&gt;1.11023963325&lt;/td&gt;
+      &lt;/tr&gt;
+
+      ...
+      
+      &lt;tr&gt;
+        &lt;td&gt;2009&lt;/td&gt;
+        &lt;td&gt;295.07194&lt;/td&gt;
+        &lt;td&gt;266.1529883&lt;/td&gt;
+        &lt;td&gt;1.10865537105&lt;/td&gt;
+      &lt;/tr&gt;
+      
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </pre>
 
+    </section>
+
+    <section id="s:index">
+
+      <h2>Creating an Index</h2>
+
+      <div class="understand" id="u:index">
+        <h3>Understand:</h3>
+        <ul>
+          <li>That good data sets have an index.</li>
+        </ul>
+      </div>
+
       <p>
-        But we're only half-done at this point.
+        Before leaving Carla's climate problem,
+        let's go one step further and make our solution more useful.
         If we're going to calculate these tables for many different countries,
         how will other scientists know which ones we've done?
         In other words,
@@ -3032,21 +3175,22 @@ def make_table(parent, first_data, second_data):
 <pre>
 &lt;html&gt;
   &lt;head&gt;
+    &lt;title&gt;Index of Average Annual Temperature Ratios&lt;/title&gt;
     &lt;meta name="revised" content="2012-09-15" /&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;h1&gt;Index of Average Annual Temperature Ratios&lt;/h1&gt;
     &lt;table class="data"&gt;
       &lt;tr&gt;
-        &lt;td class="revised"&gt;2012-09-12&lt;/td&gt;
         &lt;td class="country"&gt;AUS&lt;/td&gt;
         &lt;td class="country"&gt;CAN&lt;/td&gt;
+        &lt;td class="revised"&gt;2012-09-12&lt;/td&gt;
       &lt;/tr&gt;
       ...
       &lt;tr&gt;
-        &lt;td class="revised"&gt;2012-09-15&lt;/td&gt;
         &lt;td class="country"&gt;MYS&lt;/td&gt;
         &lt;td class="country"&gt;NOR&lt;/td&gt;
+        &lt;td class="revised"&gt;2012-09-15&lt;/td&gt;
       &lt;/tr&gt;
     &lt;/table&gt;
   &lt;/body&gt;
@@ -3059,314 +3203,235 @@ def make_table(parent, first_data, second_data):
         each time we generate a new version,
         we have to include all the data that was in the old version as well.
         We therefore need to remember what we've done.
-        The usual way to do this in a real application
-        is to use a database of some kind,
-        but we're going to try something simpler.
-        Let's start by creating an empty <code>index.html</code> page
-        in our <code>/tempratio</code> directory:
+        The usual way to do this in a real application is to use a database,
+        but for our purposes,
+        a plain old text file will suffice.
+      </p>
+
+      <p>
+        Now,
+        we <em>could</em> make up a format to store the information we need,
+        such as:
       </p>
 
 <pre>
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta name="revised" content="" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Index of Average Annual Temperature Ratios&lt;/h1&gt;
-    &lt;table class="data"&gt;
-    &lt;/table&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</pre>
-
-      <p>
-        Each time we generate a new data set,
-        we will read this file in,
-        updated the revision date in the <code>meta</code> element in the header,
-        add one row to the table for our new data file,
-        and write it back out.
-        In other words,
-        we'll use the index file itself as
-        our long-term record of what we've done.
-      </p>
-
-      <p>
-        Here's the function that does that:
-      </p>
-
-<pre src="src/web/make_data_page.py">
-def update_index(path_to_index, first_country, second_country):
-    '''Update the index of our data files.'''
-
-    the_date = date.isoformat(date.today())
-    doc = ET.parse(path_to_index)
-
-    replace_meta(doc, the_date)
-    add_record(doc, the_date, first_country, second_country)
-
-    writer = open(path_to_index, 'w')
-    writer.write(ET.tostring(doc))
-</pre>
-
-      <p>
-        And here are the two helper functions that <code>update_index</code> depends on.
-        The first replaces the date in the index page's metadata:
-      </p>
-
-<pre src="src/web/make_data_page.py">
-def replace_meta(doc, the_date):
-    '''Replace the revision date in the page header.'''
-    node = doc.findall('.//meta[@name="revised"]')[0]
-    node.attrib['content'] = the_date
+Updated 2013-05-09
+AUS CAN 2013-03-07
+AUS NOR 2013-03-09
+CAN NOR 2013-04-22
+CAN MDG 2013-05-09
 </pre>
 
       <p class="continue">
-        while the second adds another row to the index table:
+        but there's a better solution.
+        A growing number of applications use a data format called
+        <a href="glossary.html#json">JSON</a>,
+        which stands for "JavaScript Object Notation".
+        Despite the name,
+        it is a language-independent way to store nested data structures
+        made up of lists, dictionaries, strings, numbers, Booleans,
+        and the special value <code>null</code> (equivalent to Python's <code>None</code>).
+        Here's a program that creates a dictionary representing the four data sets listed above
+        and saves it in <code>index.json</code>:
       </p>
 
-<pre src="src/web/make_data_page.py">
-def add_record(doc, the_date, first_country, second_country):
-    '''Add a record for another country pair to the index table.'''
-    table = doc.findall('.//table[@class="data"]')
-    row = ET.SubElement(table, 'tr')
-    for (coltype, data) in (('revised', the_date),
-                            ('country', first_country),
-                            ('country', second_country)):
-        col = ET.SubElement(row, 'td', {'class' : coltype})
-        col.text = data
+<pre src="src/web/create-index.py">
+import json
+
+index_data = {
+    'updated' : '2013-05-09',
+    'entries' : [
+        ['AUS', 'CAN', '2013-03-07'],
+        ['AUS', 'NOR', '2013-03-09'],
+        ['CAN', 'NOR', '2013-04-22'],
+        ['CAN', 'MDG', '2013-05-09']
+    ]
+}
+
+writer = open('index.json', 'w')
+json.dump(index_data, writer)
+writer.close()
 </pre>
 
       <p>
-        We now have an index that tells anyone who wants to know
-        what data is available.
-        It still doesn't include the URLs to the data files themselves;
-        they can easily be constructed from the country names,
-        but that's bad design,
-        since it requires the client to know something about this data in particular.
-        A much better approach is to add the links to the table itself
-        so that we have:
+        When we run this,
+        it creates a file called <code>index.json</code> that contains:
       </p>
 
-<pre>
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta name="revised" content="2012-09-15" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Index of Average Annual Temperature Ratios&lt;/h1&gt;
-    &lt;table class="data"&gt;
-      &lt;tr&gt;
-        &lt;td class="revised"&gt;2012-09-12&lt;/td&gt;
-        &lt;td class="country"&gt;AUS&lt;/td&gt;
-        &lt;td class="country"&gt;CAN&lt;/td&gt;
-        &lt;td class="url"&gt;&lt;a href="http://my.site/tempratio/AUS-CAN.html"&gt;AUS-CAN.html&lt;/a&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      ...
-      &lt;tr&gt;
-        &lt;td class="revised"&gt;2012-09-15&lt;/td&gt;
-        &lt;td class="country"&gt;MYS&lt;/td&gt;
-        &lt;td class="country"&gt;NOR&lt;/td&gt;
-        &lt;td class="url"&gt;&lt;a href="http://my.site/tempratio/MYS-NOR.html"&gt;MYS-NOR.html&lt;/a&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</pre>
-
-      <p>
-        By using the standard <code>a</code> tag and its <code>href</code> attribute,
-        we have made it possible for search engines to understand this data:
-        they don't need to know anything about concatenating country names
-        in order to know what's a link,
-        or what other files are available.
-      </p>
-
-      <p>
-        All right:
-        now that we can create pages,
-        how can other people use them?
-        Let's suppose for the moment that
-        every time we provide a new data file,
-        our collaborators will want to get it,
-        but that they only want each file once.
-        We have given them the URL of the index page
-        (which is <code>http://my.site/tempratio/index.html</code>),
-        so the first thing they'll do is grab that:
-      </p>
-
-<pre>
-response = requests.get('http://my.site/tempratio/index.html')
-doc = ET.fromstring(response.text)
+<pre src="src/web/index.json">
+{"updated": "2013-05-09", "entries": [["AUS", "CAN", "2013-03-07"], ["AUS", "NOR", "2013-03-09"], ["CAN", "NOR", "2013-04-22"], ["CAN", "MDG", "2013-05-09"]]}
 </pre>
 
       <p class="continue">
-        and then extract all of the entries:
+        If we want to check that it has worked,
+        we can read the file's contents back in to re-create the original data structure:
       </p>
 
 <pre>
-rows = doc.findall('.//table[@class="data"]/tr')
-entries = set()
-for r in rows:
-    the_date = r.findall('./td[@class="revised"]')[0].text
-    the_countries = r.findall('./td[@class="country"]')
-    country_a = the_countries[0].text
-    country_b = the_countries[1].text
-    url = r.findall('./td[@class="url"]/a').attrib['href']
-    new_entry = (the_date, country_a, country_b, url)
-    entries.add(new_entry)
+&gt;&gt;&gt; <span class="in">import json</span>
+&gt;&gt;&gt; <span class="in">reader = open('index.json', 'r')</span>
+&gt;&gt;&gt; <span class="in">check = json.load(reader)</span>
+&gt;&gt;&gt; <span class="in">print check</span>
+<span class="out">{u'updated': u'2013-05-09', u'entries': [[u'AUS', u'CAN', u'2013-03-07'], [u'AUS', u'NOR', u'2013-03-09'], [u'CAN', u'NOR', u'2013-04-22'], [u'CAN', u'MDG', u'2013-05-09']]}</span>
 </pre>
 
-      <p>
-        This creates a set of tuples,
-        each of which has a date,
-        two countries,
-        and a URL.
-        What it <em>doesn't</em> do is subtract the ones we have seen before.
-        In order to do that,
-        we need to keep some sort of record of what's already been examined.
-        We can do that in two ways:
+      <p class="continue">
+        The only catch here is that the strings loaded back in are Unicode,
+        but we can safely ignore that for now.
+        Instead,
+        let's rewrite the main function of our program
+        so that it creates the index as well as the individual page:
       </p>
 
-      <ol>
+<pre src="src/web/make_indexed_page.py">
+import sys
+import os
+from datetime import date
+import jinja2
+import json
+from temperatures import get_temps
 
-        <li>
-          <em>On the server</em>:
-          give everyone with access to the data a user ID,
-          and have the server keep track of what they have downloaded
-        </li>
+INDIVIDUAL_PAGE = 'temp_ratio.html'
+INDEX_PAGE = 'index.html'
+INDEX_FILE = 'index.json'
 
-        <li>
-          <em>On the client</em>:
-          have each user keep track of their downloads themselves.
-        </li>
-
-      </ol>
-
-      <p>
-        The first is better if people are frequently grabbing data from different machines,
-        i.e.,
-        if one person uses several different computers,
-        but we still want to think of them as one person.
-        The second is a lot less in every other case,
-        since it doesn't require us to set up accounts,
-        manage logins,
-        and so on,
-        so we'll do that.
-        In particular,
-        we'll save a copy of the last <code>index.html</code> file we downloaded,
-        then "subtract" its entries from what's in the latest downloaded index file
-        to find out what we actually need to grab.
-      </p>
-
-      <p>
-        By now,
-        the first step should seem familiar:
-      </p>
-
-<pre src="src/web/get_data_page.py">
 def main(args):
-    '''Main driver for program.'''
+    '''
+    Create web page showing temperature ratios for two countries,
+    and update the index.html page with the new entry.
+    '''
 
-    assert len(args) == 2
-    url, filename = args
+    assert len(args) == 4, \
+           'Usage: make_indexed_page template_dir output_dir country_1 country_2'
+    template_dir = args[0]
+    output_dir = args[1]
+    country_1 = args[2]
+    country_2 = args[3]
+    the_date = date.isoformat(date.today())
 
-    current_index = get_web(url)
-    old_index = get_file(filename)
+    loader = jinja2.FileSystemLoader([template_dir])
+    environment = jinja2.Environment(loader=loader)
 
-    new_index = current_index - old_index
-    show_index(new_index)
+    page = make_page(environment, country_1, country_2, the_date)
+    save_page(output_dir, '%s-%s.html' % (country_1, country_2), page)
 
-    save_index(filename, current_index)
+    index_data = load_index(output_dir, INDEX_FILE)
+    index_data['entries'].append([country_1, country_2, the_date])
+    save_page(output_dir, INDEX_FILE, json.dumps(index_data))
 
-if __name__ == '__main__':
-    main(sys.argv[1:])
-</pre>
-
-      <p>
-        Getting an index from the web
-        and getting one out of a file
-        are almost the same:
-      </p>
-
-<pre src="src/web/get_data_page.py">
-INDEX_URL = 'http://my.site/tempratio/index.html'
-
-def get_web(url):
-    '''Get index from a URL on the web.'''
-    response = requests.get(INDEX_URL)
-    doc = ET.fromstring(response.text)
-    return parse_index(doc)
-
-def get_file(filename):
-    '''Get index from a file on disk.'''
-    reader = open(filename, 'r')
-    data = reader.read()
-    reader.close()
-    doc = ET.fromstring(data)
-    return parse_index(doc)
+    page = make_index(environment, index_data)
+    save_page(output_dir, INDEX_PAGE, page)
 </pre>
 
       <p class="continue">
-        The common code is in <code>parse_index</code>,
-        which grabs rows out of the data table
-        and extracts the date and country fields
-        (we'll leave URL handling as an exercise):
+        Since we will be expanding templates in a couple of different functions,
+        we move the creation of the Jinja2 environment to the main program.
+        We then pass that variable into <code>make_page</code>
+        and a new function called <code>update_index</code>,
+        and use another new function <code>save_page</code>
+        to save generated pages where they need to go.
+        (Note that we update the index data <em>before</em> rewriting the index HTML page.
+        The first version of this program that we wrote updated the HTML page
+        before updating the data it was based on&mdash;oops.)
       </p>
-
-<pre src="src/web/get_data_page.py">
-def parse_index(doc):
-    '''Get a set of (date, country_a, country_b) tuples from an index file.'''
-    index = set()
-    rows = doc.findall('.//table[@class="data"]/tr')
-    for r in rows:
-        the_date = r.findall('./td[@class="revised"]')[0].text
-        the_countries = r.findall('./td[@class="country"]')
-        country_a = the_countries[0].text
-        country_b = the_countries[1].text
-        new_entry = (the_date, country_a, country_b)
-        index.add(new_entry)
-    return index
-</pre>
 
       <p>
-        We don't have to write a function
-        to determine which entries we haven't seen before:
-        that's just subtracting one set from another.
-        To display a list of unseen entries,
-        we sort the index
-        (so that entries will be in order by date)
-        and loop over it:
+        <code>save_page</code> is the simplest of these pages to write,
+        so let's do that:
       </p>
 
-<pre src="src/web/get_data_page.py">
-def show_index(index):
-    '''Display index in order.'''
-    temp = sorted(index)
-    for (date, country_a, country_b) in temp:
-        print date, country_a, country_b
-</pre>
-
-      <p class="continue">
-        and to save the new index information,
-        we just convert it back to text
-        and write that to the local file:
-      </p>
-
-<pre src="src/web/get_data_page.py">
-def save_index(filename, index):
-    '''Save index as XML for next time.'''
-    writer = open(filename, 'w')
-    writer.write(ET.tostring(index))
+<pre src="src/web/make_indexed_page.py">
+def save_page(output_dir, page_name, content):
+    '''Save text in a file output_dir/page_name.'''
+    path = os.path.join(output_dir, page_name)
+    writer = open(path, 'w')
+    writer.write(content)
     writer.close()
 </pre>
 
       <p>
-        As with our original temperature ratio example,
-        only a small part of this code has anything to do with the web:
-        only two lines (in <code>get_web</code>) touch the network at all.
-        Everything else is about reading and interpreting the data
-        that we've pulled from the web,
-        which is as it should be.
+        Our revised <code>make_page</code> function is shorter than our original,
+        since the environment is now being created in <code>main</code>.
+        <code>make_page</code> is also now being passed the date
+        (since that is used to update the index as well),
+        and uses a fixed template specified by the global variable
+        <code>INDIVIDUAL_PAGE</code>.
+        The result is:
+      </p>
+
+<pre src="src/web/make_indexed_page.py">
+def make_page(environment, country_1, country_2, the_date):
+    '''Create page showing temperature ratios.'''
+
+    data_1 = get_temps(country_1)
+    data_2 = get_temps(country_2)
+    years = data_1.keys()
+    years.sort()
+
+    template = environment.get_template(INDIVIDUAL_PAGE)
+    result = template.render(country_1=country_1, data_1=data_1,
+                             country_2=country_2, data_2=data_2,
+                             years=years, the_date=the_date)
+
+    return result
+</pre>
+
+      <p>
+        The function that loads existing index data is also pretty simple:
+      </p>
+
+<pre src="src/web/make_indexed_page.py">
+def load_index(output_dir, filename):
+    '''Load index data from output_dir/filename.'''
+
+    path = os.path.join(output_dir, filename)
+    reader = open(path, 'r')
+    result = json.load(reader)
+    reader.close()
+    return result
+</pre>
+
+      <p>
+        All that's left is the function that regenerates the HTML version of the index:
+      </p>
+
+<pre src="src/web/make_indexed_page.py">
+def make_index(environment, index_data):
+    '''Refresh the HTML index page.'''
+
+    template = environment.get_template(INDEX_PAGE)
+    return template.render(updated=index_data['updated'],
+                           entries=index_data['entries'])
+</pre>
+
+      <p class="continue">
+        and the HTML template it relies on:
+      </p>
+
+<pre src="src/web/index_template.html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Index of Average Annual Temperature Ratios&lt;/title&gt;
+    &lt;meta name="revised" content="{{updated}}" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Index of Average Annual Temperature Ratios&lt;/h1&gt;
+    &lt;table class="data"&gt;
+      {% for entry in entries %}
+      &lt;tr&gt;
+        &lt;td class="country"&gt;{{entry[0]}}&lt;/td&gt;
+        &lt;td class="country"&gt;{{entry[1]}}&lt;/td&gt;
+        &lt;td class="revised"&gt;&lt;a href="{{entry[0]}}-{{entry[1]}}.html"&gt;{{entry[2]}}&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      {% endfor %}
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+      <p>
+        Notice that the date in each row is actually a hyperlink to the file containing that dataset.
       </p>
 
       <div class="keypoints" id="k:server">
@@ -3375,8 +3440,6 @@ def save_index(filename, index):
           <li>It is hard to make dynamic web applications secure.</li>
           <li>An alternative is to dynamically generate static web pages.</li>
           <li>Every collection of data should provide a machine-readable index.</li>
-          <li>URLs should be embedded in the index to keep clients simple.</li>
-          <li>Information about what data has been seen can be stored on the server or on the client.</li>
         </ul>
       </div>
 
@@ -3400,8 +3463,7 @@ def save_index(filename, index):
         (and for people with disabilities,
         whose assistive aids are all too easy to confuse).
         And while XML is widely used for representing data,
-        many people believe that
-        younger alternatives like <a href="glossary.html#json">JSON</a>
+        many people believe that younger alternatives like JSON
         do a better job of balancing the needs of human and computer readers.
       </p>
 

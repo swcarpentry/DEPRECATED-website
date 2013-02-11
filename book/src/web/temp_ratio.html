@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Temperature Ratios of {{country_1}} and {{country_2}} as of {{the_date}}</title>
+  </head>
+  <body>
+    <h1>Temperature Ratios of {{country_1}} and {{country_2}}</h1>
+    <h2>Calculated {{the_date}}</h2>
+    <table>
+      <tr>
+        <td>Year</td>
+        <td>{{country_1}}</td>
+        <td>{{country_2}}</td>
+        <td>Ratio</td>
+      </tr>
+      {% for year in years %}
+      <tr>
+        <td>{{year}}</td>
+        <td>{{data_1[year]}}</td>
+        <td>{{data_2[year]}}</td>
+        <td>{{data_1[year] / data_2[year]}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
