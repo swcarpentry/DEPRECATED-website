@@ -10,14 +10,13 @@
 
 {% block content %}
 <section id="recent-posts">
-  <h2>Recent Posts
-    <a href="http://software-carpentry.org/feed.xml">
-      <img class="pull-right" src="../img/rss-icon-blue.png"/></a></h2>
+  <div class="pull-right"><a href="http://software-carpentry.org/feed.xml">
+      <img class="pull-right" src="../img/rss-icon-blue.png"/></a></div>
 
   {% for post in page.children[-page.blog_history_length:]|reverse %}
     <h3><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></h3>
     <div class="row-fluid">
-      <span class="span11 offset1">
+      <span class="span11">
         {{post.excerpt(page.filename)|safe}}
         <br/>
         &mdash; {{post.post_date}}{% if post.author_id %} by {{post.author_id}}{% endif %}.
@@ -26,6 +25,7 @@
   {% endfor %}
 </section>
 
+<hr/>
 <section id="all-posts">
   <h2>All Posts By Date</h2>
 

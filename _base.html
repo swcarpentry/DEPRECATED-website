@@ -59,6 +59,9 @@
 
   <head>
     <link rel="shortcut icon" type="image/x-icon" href="{{root_path}}/img/favicon.ico" />
+    <link rel="stylesheet" id="twentytwelve-fonts-css"
+      href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext" 
+      type="text/css" media="all">
     {% block css %}
     <link href="{{root_path}}/css/bootstrap/bootstrap.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -192,16 +195,15 @@
 
   {% block navhighlight %}{% endblock navhighlight %}
 
-  {% block title %}
-  <div class="title">
-    <h1>{{page.title}}</h1>
-  </div>
-  {% endblock title %}
-
       {% block files %}{% endblock files %}
+
 
       <div class="row-fluid">
         <div class="span10 offset1">
+        {% block title %}
+        <h1 class="title">{{page.title}}</h1>
+        {% endblock title %}
+
         {% block content %}{% endblock content %}
         {% block details %}{% endblock details %}
         {% block comments %}{{disqus(page.title, page.filename)}}{% endblock comments %}
