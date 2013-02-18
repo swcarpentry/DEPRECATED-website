@@ -1,0 +1,38 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="EGI Forum, Manchester" />
+  <meta name="date" content="April 2013" />
+  <meta name="startdate" content="2013-04-11" />
+  <meta name="latlng" content="53.467102, -2.233958" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> EGI Forum, Manchester.</p>
+<p><strong>When:</strong> April 11th, 2013 between 10:00 and 17:30</p>
+<p>
+  <strong>What:</strong>
+  Our goal is to help scientists and engineers become more productive
+  by teaching them basic computing skills. At the EGI Forum we will be
+  hosting a day of boot camp "highlights". This consists of 3 standalone
+  sessions which provide a short introduction to 3 valuable computing
+  skills and that will also give attendees a flavour of what a full 
+  boot camp is like.
+</p>
+{% include "_who.html" %}
+<p>
+  <strong>Requirements:</strong>
+Participants can bring their own laptop with specific software packages installed. Alternatively they can download and run a VMWare Virtual machine. If this is not possible, then accounts will be made available on the day.
+</p>
+<p>
+  <strong>Content:</strong> The syllabus for this boot camp will include:
+</p>
+<ul>
+<li>Using version control to manage and share information</li>
+<li>How (and how much) to test programs</li>
+<li>Approaches to data management</li>
+</ul>
+{% include "_contact.html" %}
+<p>
+  <strong>Registration</strong>:
+  The boot camp highlights sessions are open to anyone attending the <a href="http://cf2013.egi.eu/">EGI Forum</a>.
+</p>
+{% endblock content %}
