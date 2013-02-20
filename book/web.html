@@ -2417,6 +2417,16 @@ content length: 126
 &lt;/html&gt;</span>
 </pre>
 
+      <p class="continue">
+        As you can probably infer,
+        the <code>get</code> function does an HTTP GET on a URL
+        and returns an object that stores the response.
+        Its <code>status_code</code> member is the response's status code,
+        <code>content_length</code> tells us how many bytes are in the response data,
+        and <code>text</code> is the actual data
+        (in this case, an HTML page).
+      </p>
+
       <p>
         Sometimes a URL isn't enough on its own:
         for example,
@@ -2545,7 +2555,7 @@ print 'actual URL:', response.url
       <p class="continue">
         You should <em>always</em> let the library build the URL for you,
         rather than doing it yourself:
-        there are lots of subtleties we haven't covered,
+        there are subtleties we haven't covered,
         and even if there weren't,
         there's no point duplicating code that's already been written and tested.
       </p>
