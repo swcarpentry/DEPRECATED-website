@@ -1,0 +1,28 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="American University of Beirut" />
+  <meta name="date" content="March 2013" />
+  <meta name="startdate" content="2013-03-20" />
+  <meta name="enddate" content="2013-03-22" />
+  <meta name="latlng" content="33.8833,35.513056" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> American University of Beirut.</p>
+<p><strong>When:</strong> March 20-22, 2013. We will start at 9:00 and end at 4:30 each day. Note that this is a three-day boot camp.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+
+<p>
+  <strong>Content:</strong> The syllabus for this boot camp will include:
+</p>
+<ul>
+  <li>using the shell to do more in less time</li>
+  <li>using version control to manage and share information</li>
+  <li>basic Python programming</li>
+  <li>how (and how much) to test programs</li>
+  <li>documentation and debugging</li>
+  <li>Python in High Performance Computing
+</ul>
+{% include "_contact.html" %}
+{% endblock content %}
