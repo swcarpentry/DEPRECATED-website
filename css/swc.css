@@ -1,3 +1,17 @@
+/* Headings */
+h1, h2, h3, h4, h5, h6  {
+    color: rgb(03,03,03);
+}
+
+h1, h2 { 
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    color: inherit;
+} 
+
 /* Comments in code. */
 .comment {
     color: purple;
@@ -59,9 +73,9 @@ blockquote.testimonial cite {
 /* Main body of pages. */
 body {
     background: #BEC3C6;
-    color: black;
-    font-size: 16px;
     margin: 20px 0;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    color: rgb(03, 03, 03);
 }
 
 /* Styling for editorial stylesheet */
@@ -169,25 +183,10 @@ div.toc {
 }
 
 
-/* Container for main title of page. */
-div.title {
-    text-align: center;
-    padding: 10px 40px;
-}
-
 /* Title styling */
-/* the media query makes this only apply for wider-screens */
-@media (min-width: 768px) {
-    div.title h1 {
-        margin: 10px 110px;  /* Gives room for pager links */
-    }
-}
-
-/* After/before the pager links */
-div.title ul.pager::before,
-div.title ul.pager::after {
-    clear: none;         /* Allows title to "nestle" between buttons */
-    display: block;
+h1.title {
+    margin:40px 0px;
+    border-bottom:1px solid #515151;
 }
 
 /* YouTube video embed. */
@@ -289,5 +288,3 @@ table.bootcamps td.date {
     width: 50%;
     text-align: right;
 }
-
-
