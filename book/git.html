@@ -114,3 +114,43 @@ git pull origin
 cat first.txt
 popd
 </pre>
+
+<h2>Branching</h2>
+
+<pre>
+echo "### Set up repository."
+mkdir alpha
+cd alpha
+git init
+echo "First line" > first.txt
+git add first.txt
+git commit -a -m "Setting up."
+
+echo "### Creating a branch"
+git branch analysis
+git branch
+
+echo "### Making changes on main branch."
+echo "Second line added in master" >> first.txt
+git add first.txt
+git commit -m "Making a change in master"
+git log
+ls
+
+echo "### Making changes on analysis branch."
+git checkout analysis
+ls
+git branch
+echo "Second file in analysis" > second.txt
+git add second.txt
+git commit -m "Adding a file in analysis"
+git log
+ls
+
+echo "### Bring that change into the master."
+git checkout master
+ls
+git merge -m "Bringing in stuff from 'analysis' branch" analysis
+ls
+git status
+</pre>
