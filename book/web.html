@@ -2586,11 +2586,14 @@ print 'actual URL:', response.url
 
       <p>
         Most modern web applications try to sidestep this problem
-        by providing some sort of <a href="glossary.html#web-services">web services</a> interface.
+        by providing some sort of <a href="glossary.html#web-services">web services</a> interface,
+        which is a lot simpler than it sounds.
         When a client sends a request,
-        it indicates whether it wants machine-oriented data or human-readable HTML
+        it indicates whether it wants machine-oriented data rather than human-readable HTML,
+        either by using a slightly different URL
+        or by using a suffix like <code>.xml</code> instead of <code>.html</code>.
         (<a href="#f:web_services">Figure XXX</a>).
-        If it asks for the former,
+        If it asks for data,
         the server sends back XML (or some other format)
         that is easy for a program to parse.
         If the client asks for "real" HTML,
@@ -3126,6 +3129,13 @@ $ <span class="in">python make_data_page.py temp_ratio.html /tmp/aus-can.html AU
 &lt;/html&gt;
 </pre>
 
+      <div class="keypoints" id="k:client">
+        <h3>Summary</h3>
+        <ul>
+          <li>Creating static files is a safe alternative to providing content dynamically.</li>
+        </ul>
+      </div>
+
     </section>
 
     <section id="s:index">
@@ -3135,7 +3145,7 @@ $ <span class="in">python make_data_page.py temp_ratio.html /tmp/aus-can.html AU
       <div class="understand" id="u:index">
         <h3>Understand:</h3>
         <ul>
-          <li>That good data sets have an index.</li>
+          <li>Why good data sets have an index.</li>
         </ul>
       </div>
 
@@ -3174,12 +3184,14 @@ $ <span class="in">python make_data_page.py temp_ratio.html /tmp/aus-can.html AU
       <p>
         What should be in <code>index.html</code>?
         The answer is simple:
-        a table of some kind showing what files are available
-        and when they were created.
+        a table of some kind showing what files are available,
+        when they were created,
+        and where they are.
         The first piece of information is the most important;
         the second allows users to determine
         what has been added since they last looked at our site
-        without having to download actual data files.
+        without having to download actual data files,
+        while the third tells them how to get what they want.
         Our <code>index.html</code> will therefore be something like this:
       </p>
 
@@ -3196,21 +3208,44 @@ $ <span class="in">python make_data_page.py temp_ratio.html /tmp/aus-can.html AU
         &lt;td class="country"&gt;AUS&lt;/td&gt;
         &lt;td class="country"&gt;CAN&lt;/td&gt;
         &lt;td class="revised"&gt;2012-09-12&lt;/td&gt;
+        &lt;td class="revised"&gt;&lt;a href="http://my.site/tempratio/AUS-CAN.html"&gt;download&lt;/a&gt;&lt;/td&gt;
       &lt;/tr&gt;
       ...
       &lt;tr&gt;
         &lt;td class="country"&gt;MYS&lt;/td&gt;
         &lt;td class="country"&gt;NOR&lt;/td&gt;
         &lt;td class="revised"&gt;2012-09-15&lt;/td&gt;
+        &lt;td class="download"&gt;&lt;a href="http://my.site/tempratio/MYS-NOR.html"&gt;download&lt;/a&gt;&lt;/td&gt;
       &lt;/tr&gt;
     &lt;/table&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 
+      <div class="box" id="b:index:explicit">
+        <h3>Why Explicit URLs?</h3>
+
+        <p>
+          Strictly speaking,
+          we don't need to store the URLs in the index file:
+          we could instead tell people that if they got the index from
+          <code>http://my.site/tempratio/index.html</code>,
+          then the data for AUS and CAN is in <code>http://my.site/tempratio/AUS-CAN.html</code>,
+          and let them construct the URL themselves.
+          However,
+          that puts more of a burden on the user both in the short term
+          (since more coding is required)
+          and in the long term
+          (since the rule for constructing the URL for a particular data set could well change).
+          It also effectively hides our data from search engines,
+          since there's no way for them to know what our URL construction rule is.
+        </p>
+      </div>
+
       <p>
-        Unlike our actual data files,
-        this file is added to incrementally:
+        Now,
+        unlike our actual data files,
+        this index file is added to incrementally:
         each time we generate a new version,
         we have to include all the data that was in the old version as well.
         We therefore need to remember what we've done.
@@ -3220,8 +3255,7 @@ $ <span class="in">python make_data_page.py temp_ratio.html /tmp/aus-can.html AU
       </p>
 
       <p>
-        Now,
-        we <em>could</em> make up a format to store the information we need,
+        We <em>could</em> make up a format to store the information we need,
         such as:
       </p>
 
@@ -3287,10 +3321,9 @@ writer.close()
 </pre>
 
       <p class="continue">
-        The only catch here is that the strings loaded back in are Unicode,
+        The 'u' in front of each string signals that these strings are actually stored as Unicode,
         but we can safely ignore that for now.
-        Instead,
-        let's rewrite the main function of our program
+        Let's rewrite the main function of our program
         so that it creates the index as well as the individual page:
       </p>
 
@@ -3312,12 +3345,9 @@ def main(args):
     and update the index.html page with the new entry.
     '''
 
-    assert len(args) == 4, \
-           'Usage: make_indexed_page template_dir output_dir country_1 country_2'
-    template_dir = args[0]
-    output_dir = args[1]
-    country_1 = args[2]
-    country_2 = args[3]
+    assert len(args) == 5, \
+           'Usage: make_indexed_page url_base template_dir output_dir country_1 country_2'
+    url_base, template_dir, output_dir, country_1, country_2 = args
     the_date = date.isoformat(date.today())
 
     loader = jinja2.FileSystemLoader([template_dir])
@@ -3330,7 +3360,7 @@ def main(args):
     index_data['entries'].append([country_1, country_2, the_date])
     save_page(output_dir, INDEX_FILE, json.dumps(index_data))
 
-    page = make_index(environment, index_data)
+    page = make_index(environment, url_base, index_data)
     save_page(output_dir, INDEX_PAGE, page)
 </pre>
 
@@ -3407,11 +3437,12 @@ def load_index(output_dir, filename):
       </p>
 
 <pre src="src/web/make_indexed_page.py">
-def make_index(environment, index_data):
+def make_index(environment, url_base, index_data):
     '''Refresh the HTML index page.'''
 
     template = environment.get_template(INDEX_PAGE)
-    return template.render(updated=index_data['updated'],
+    return template.render(url_base=url_base,
+                           updated=index_data['updated'],
                            entries=index_data['entries'])
 </pre>
 
@@ -3433,7 +3464,8 @@ def make_index(environment, index_data):
       &lt;tr&gt;
         &lt;td class="country"&gt;{{entry[0]}}&lt;/td&gt;
         &lt;td class="country"&gt;{{entry[1]}}&lt;/td&gt;
-        &lt;td class="revised"&gt;&lt;a href="{{entry[0]}}-{{entry[1]}}.html"&gt;{{entry[2]}}&lt;/a&gt;&lt;/td&gt;
+        &lt;td class="revised"&gt;{{entry[2]}}&lt;/td&gt;
+        &lt;td class="revised"&gt;&lt;a href="{{url_base}}/{{entry[0]}}-{{entry[1]}}.html"&gt;download&lt;/a&gt;&lt;/td&gt;
       &lt;/tr&gt;
       {% endfor %}
     &lt;/table&gt;
@@ -3441,16 +3473,11 @@ def make_index(environment, index_data):
 &lt;/html&gt;
 </pre>
 
-      <p>
-        Notice that the date in each row is actually a hyperlink to the file containing that dataset.
-      </p>
-
-      <div class="keypoints" id="k:server">
+      <div class="keypoints" id="k:index">
         <h3>Summary</h3>
         <ul>
-          <li>It is hard to make dynamic web applications secure.</li>
-          <li>An alternative is to dynamically generate static web pages.</li>
           <li>Every collection of data should provide a machine-readable index.</li>
+          <li>Links between files should be explicit.</li>
         </ul>
       </div>
 
@@ -3475,7 +3502,18 @@ def make_index(environment, index_data):
       </p>
 
       <p>
-        The first step is to decide how to keep track of what we have downloaded and when.
+        In order for this to work,
+        each of the sites that's providing data needs to be able to tell us
+        what data sets it has calculated,
+        and when they were created.
+        This information is in the site's <code>index.html</code> file in human-readable form,
+        but it's also in the <code>index.json</code> file each site is maintaining.
+        This file can be loaded directly without any XML parsing or XPath searching,
+        so we'll use that.
+      </p>
+
+      <p>
+        The next step is to decide how to keep track of what we have downloaded and when.
         The simplest thing is to create another JSON file
         containing the timestamp and the list of URLs.
         We'll call this <code>sources.json</code>:
@@ -3491,14 +3529,15 @@ def make_index(environment, index_data):
 }
 </pre>
 
-      <p>
+      <p class="continue">
+        (Again, a larger application would use a database of some kind,
+        but that's more than we need right now.)
         Each time we run our program,
         it will read this file,
         then download each <code>index.json</code> file.
         If any of those files contain links to data sets that are newer than the timestamp,
         it will print the data set's URL.
-        (A real data analysis program would actually download the data
-        and do something with it.)
+        (A real data analysis program would download the data and do something with it.)
         We will then save a fresh copy of <code>sources.json</code>
         with an updated timestamp.
         Our main program looks like this:
@@ -3596,25 +3635,36 @@ def get_new_datasets(last_checked, index_url):
     response = requests.get(index_url)
     index_data = json.loads(index.text)
     result = []
-    for (country_a, country_b, updated, dataset_url) in index_data:
+    for (country_a, country_b, updated) in index_data:
         dataset_timestamp = datetime.parse(updated)
         if dataset_timestamp >= last_checked:
+            dataset_url = make_dataset_url(index_url, country_a, country_b)
             result.append(dataset_url)
     return result
 </pre>
 
       <p>
-        <em>This</em> is why we included the full URL for each dataset
-        in the <code>index.json</code> file.
-        We could use the code that constructs URLs from country codes
-        in our syndication program,
-        but having the program that generates the data
-        store explicit URLs removes the need.
-        More importantly,
-        it allows people to write client programs in whatever language they want:
-        they could use Perl, Ruby, or something that hasn't even been invented yet,
-        and not have to translate our URL generator into that language.
+        The logic here is straightforward:
+        grab the <code>index.json</code> file,
+        check each dataset to see if it's newer than the last time we checked,
+        and if it is&mdash;hm.
+        This code uses a not-yet-written function called <code>make_dataset_url</code>
+        to construct the URL for the specific dataset
+        from the URL of the index file
+        and the two country codes,
+        but as we discussed <a href="#b:index:explicit">earlier</a>,
+        asking client programs to construct links themselves is a bad idea.
+        Instead,
+        we should modify the <code>index.json</code> files so that they include the URLs.
+        Doing this is left as a final exercise for the reader.
       </p>
+
+      <div class="keypoints" id="k:syndicate">
+        <h3>Summary</h3>
+        <ul>
+          <li>Well-constructed files make data syndication simple.</li>
+        </ul>
+      </div>
 
     </section>
 

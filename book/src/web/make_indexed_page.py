@@ -15,12 +15,9 @@ def main(args):
     and update the index.html page with the new entry.
     '''
 
-    assert len(args) == 4, \
-           'Usage: make_indexed_page template_dir output_dir country_1 country_2'
-    template_dir = args[0]
-    output_dir = args[1]
-    country_1 = args[2]
-    country_2 = args[3]
+    assert len(args) == 5, \
+           'Usage: make_indexed_page url_base template_dir output_dir country_1 country_2'
+    url_base, template_dir, output_dir, country_1, country_2 = args
     the_date = date.isoformat(date.today())
 
     loader = jinja2.FileSystemLoader([template_dir])
@@ -33,7 +30,7 @@ def main(args):
     index_data['entries'].append([country_1, country_2, the_date])
     save_page(output_dir, INDEX_FILE, json.dumps(index_data))
 
-    page = make_index(environment, index_data)
+    page = make_index(environment, url_base, index_data)
     save_page(output_dir, INDEX_PAGE, page)
 
 def make_page(environment, country_1, country_2, the_date):
@@ -60,11 +57,12 @@ def load_index(output_dir, filename):
     reader.close()
     return result
 
-def make_index(environment, index_data):
+def make_index(environment, url_base, index_data):
     '''Refresh the HTML index page.'''
 
     template = environment.get_template(INDEX_PAGE)
-    return template.render(updated=index_data['updated'],
+    return template.render(url_base=url_base,
+                           updated=index_data['updated'],
                            entries=index_data['entries'])
 
 def save_page(output_dir, page_name, content):
