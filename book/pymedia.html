@@ -7,24 +7,23 @@
 {% block content %}
 
 <p>
-  Valerie Visual is studying how people visualize and recall color.
+  Valerie Visual is studying human visual processing.
+  More specifically,
+  she is studying the way the brain interprets missing or noisy information.
   For one of her experiments,
-  she wants to cut a photograph of faces into rectangular pieces
-  and time how long it takes subjects to reassemble those pieces
-  after they have been recolored in different ways.
+  she wants to introduce successively larger amounts of random noise into a series of pictures
+  to see when differnet people start to notice that something is wrong.
 </p>
 
 <p>
   If Valerie only wanted to use one or two images,
-  the simplest way to create the puzzles she needs might be
+  the simplest way to create the images she needs might be
   to use a tool like Photoshop.
   However,
-  she wants to give each subject several dozen puzzles to solve
-  (since each one typically only takes a few seconds to assemble).
-  Since she doesn't want to spend hours cutting and coloring images,
-  she wants to write a small program to do the job for her.
-  To do that,
-  she's going to have to learn how to program,
+  she wants to show each test subject several dozen images.
+  What she <em>doesn't</em> want to do is spend more time creating images
+  than running the actual experiments.
+  She's going to have to learn how to program,
   and that's what the next couple of chapters are about.
 </p>
 
@@ -823,7 +822,8 @@ ZeroDivisionError: integer division or modulo by zero</span>
   <div class="keypoints" id="k:program">
     <h3>Summary</h3>
     <ul>
-      <li>Store programs in files whose names end in <code>.py</code> and run them with <code>python <em>name.py</em></code>.</li>
+      <li>Store programs in files whose names end in <code>.py</code>.</li>
+      <li>Run programs using <code>python <em>name.py</em></code>.</li>
     </ul>
   </div>
 
@@ -917,7 +917,8 @@ AttributeError: can't set attribute</span>
 
   <p>
     When we do this,
-    the object's <code>path</code> property is automatically updated:
+    the object's <code>path</code> property is automatically updated
+    to reflect its new location:
   </p>
 
 <pre>
@@ -977,9 +978,9 @@ picture.save('thumb-mac.jpg')
     This is an additive color model:
     the color we see is the sum of the individual color values,
     each of which can range between 0 and 255.
-    (Why 255?
+    Why 255?
     Because computer memory is organized into 8-bit bytes,
-    and 255 (11111111 in base 2) is the largest integer that can be represented in one byte.)
+    and 255 (11111111 in base 2) is the largest integer that can be represented in one byte.
   </p>
 
   <p>
@@ -1035,7 +1036,7 @@ novice.new(200, 200, 255, 0, 0)
   <p class="continue">
     but as the number of values grows,
     it quickly becomes difficult to keep track of which ones belong together.
-    A group of parenthesized values is called <a href="glossary.html#tuple">tuple</a>;
+    A group of parenthesized values is called a <a href="glossary.html#tuple">tuple</a>;
     we can assign tuples to variables,
     and then use those variables in our programs to make our code easier to read:
   </p>
@@ -1284,7 +1285,7 @@ block[:, -1] = white
   <p>
     ':' on its own is actually a special case of something much more general
     called a <a href="glossary.html#slice">slice</a>.
-    If we run this program:
+    Let's modify the program like this:
   </p>
 
 <pre>
@@ -1298,7 +1299,7 @@ block[<span class="highlight">0:40, 0:40</span>] = white
 </pre>
 
   <p class="continue">
-    When we display this image,
+    When we display the image that this program creates,
     it is a single white tile in the lower-left of a green background
     (<a href="#f:single_tile">Figure XXX</a>):
   </p>
@@ -1309,18 +1310,15 @@ block[<span class="highlight">0:40, 0:40</span>] = white
 
   <p>
     You can probably guess that the expression <code>0:40</code> refers to
-    a range of pixels:
-    in this case, from index 0 to index 39 inclusive,
+    a range of pixels.
+    What you might not guess is that the range goes from index 0 to index 39 inclusive,
     i.e.,
     from the lower limit up to, but not including, the upper limit.
-    It may seem strange not to include the upper limit,
-    but it has several advantages:
+    It may seem odd not to include the upper limit;
+    the usual justifications are:
   </p>
 
   <ol>
-    <li>
-      The number of values in <code>lower:upper</code> is <code>upper-lower</code>.
-    </li>
     <li>
       When the ranges <code>lower:middle</code> and <code>middle:upper</code> are joined together,
       the pixel at coordinate <code>middle</code> is only included once.
@@ -1544,7 +1542,8 @@ third</span>
 </pre>
 
   <p>
-    The keywords <code>for</code> and <code>in</code> are used to create a <a href="glossary.html#for-loop">for loop</a>.
+    The keywords <code>for</code> and <code>in</code> are used to create
+    a <a href="glossary.html#for-loop">for loop</a>.
     Just like a <a href="shell.html#loop">loop in the shell</a>,
     a <code>for</code> loop in Python repeats one or more instructions
     for each value in some set.
@@ -1620,8 +1619,9 @@ all done</span>
     <h3>Why Indentation?</h3>
 
     <p>
-      Most other languages use visible markers to show the beginnings and ends of loop bodies,
-      such as the <code>do</code> and <code>done</code> of the shell.
+      Most other languages use keywords like <code>do</code> and <code>done</code>
+      or <code>begin</code> and <code>end</code> to show what's in the body of a loop,
+      or even curly braces '{}'.
       Python uses indentation because studies done in the 1970s and 1980s showed
       that's what people actually pay attention to.
       If we write something as:
@@ -1629,10 +1629,10 @@ all done</span>
 
 <pre>
 for value in data
-do
+begin
     print value
 print "done"
-done
+end
 </pre>
 
     <p class="continue">

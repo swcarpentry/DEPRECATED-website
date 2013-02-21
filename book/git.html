@@ -1,0 +1,156 @@
+<h2>Single Repository, No Branches</h2>
+
+<pre>
+echo "### Do some setup."
+git config --global color.ui "auto"
+git config --global user.name "Greg Wilson"
+git config --global user.email "gvwilson@third-bit.com"
+
+echo "### Initialize a repo."
+mkdir alpha
+cd alpha
+git init
+git status
+
+echo "### Do the first commit."
+echo "First line of first file" > first.txt
+git status
+git add first.txt
+git status
+git commit -m "Creating first file"
+git status
+git log
+
+echo "### Show that Git keeps track of files."
+echo "Second line of first file" >> first.txt
+git status
+git diff
+git add first.txt
+git status
+git diff
+git diff --staged
+git commit -m "Adding second line to first file"
+git status
+git log
+
+echo "### Show depth of history."
+echo "Third line of first file" >> first.txt
+git add -A
+git commit -m "Adding third line to first file."
+cat first.txt
+git diff HEAD~1 first.txt
+git diff HEAD~2 first.txt
+
+echo "### Show how to undo recent changes."
+echo "Fourth line of first file" >> first.txt
+cat first.txt
+git reset --hard HEAD
+cat first.txt
+git log
+
+echo "### Show how to undo deeper changes."
+cat first.txt
+git reset --hard HEAD~1
+cat first.txt
+git log
+</pre>
+
+<h2>Cloned Repositories, No Branches</h2>
+
+<pre>
+echo "### Set up master copy."
+mkdir alpha
+pushd alpha
+git init --bare
+popd
+
+echo "### Create clones."
+git clone alpha beta
+git clone alpha gamma
+
+echo "### Push some content."
+pushd beta
+git config push.default simple
+git status
+git remote -v
+echo "First line" > first.txt
+git add first.txt
+git commit -m "Adding first file"
+git status
+git push origin
+popd
+
+echo "### Pull content."
+pushd gamma
+git config push.default simple
+git remote -v
+git pull origin
+ls
+cat first.txt
+popd
+
+echo "### Show conflicts."
+pushd beta
+echo "Second line from beta" >> first.txt
+git add -A
+git commit -m "Beta's copy of first"
+git push origin
+popd
+pushd gamma
+echo "Second line from gamma" >> first.txt
+git add -A
+git commit -m "Gamma's copy of first"
+git pull origin
+echo "First line" > first.txt
+echo "Second line from beta" >> first.txt
+echo "Second line from gamma" >> first.txt
+cat first.txt
+git commit -a -m "Resolving merge conflict"
+git log
+git push origin
+popd
+pushd beta
+git pull origin
+cat first.txt
+popd
+</pre>
+
+<h2>Branching</h2>
+
+<pre>
+echo "### Set up repository."
+mkdir alpha
+cd alpha
+git init
+echo "First line" > first.txt
+git add first.txt
+git commit -a -m "Setting up."
+
+echo "### Creating a branch"
+git branch analysis
+git branch
+
+echo "### Making changes on main branch."
+echo "Second line added in master" >> first.txt
+git add first.txt
+git commit -m "Making a change in master"
+git log
+ls
+
+echo "### Making changes on analysis branch."
+git checkout analysis
+ls
+git branch
+echo "Second file in analysis" > second.txt
+git add second.txt
+git commit -m "Adding a file in analysis"
+git log
+ls
+
+echo "### Bring that change into the master."
+git checkout master
+ls
+git merge -m "Bringing in stuff from 'analysis' branch" analysis
+ls
+git status
+</pre>
