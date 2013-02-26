@@ -171,7 +171,11 @@
   {% if bootcamp.startdate >= today %}
     <tr>
       <td class="link">
-        <a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a>
+        <a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}
+    {% if bootcamp.restricted %}
+          (restricted)
+    {% endif %}
+        </a>
       </td>
       <td class="spacer">&nbsp;...&nbsp;</td>
       <td class="date">
@@ -216,7 +220,11 @@
   {% if bootcamp.startdate < today %}
     <tr>
       <td class="link">
-        <a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a>
+        <a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}
+    {% if bootcamp.restricted %}
+          (restricted)
+    {% endif %}
+        </a>
       </td>
       <td class="spacer">&nbsp;...&nbsp;</td>
       <td class="date">
