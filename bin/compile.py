@@ -440,7 +440,7 @@ class BootCampPage(GenericPage):
 
     KEYS = GenericPage.KEYS + \
            ['venue', 'latlng', 'date', 'startdate', 'enddate',
-            'eventbrite_key']
+            'open', 'eventbrite_key']
 
     UPLINK = 'index.html'
 
@@ -456,10 +456,13 @@ class BootCampPage(GenericPage):
         * Create normalized date for display.
         * Create slug.
         * Create sort key (start date and venue).
+        * Is registration open yet?
         """
         self._merge_dates()
         self.slug = os.path.splitext(os.path.basename(self.filename))[0]
         self._sort_key = (self.startdate, self.venue)
+        if self.open is None:
+            self.open = ''
 
     def _merge_dates(self):
         """

@@ -154,19 +154,15 @@
   attendees to have an enjoyable and fulfilling experience.</p>
 </section>
 
-<h2 id="future">Future Workshops</h2>
+<h2 id="future">Future Boot Camps</h2>
 <div class="bootcamps">
 <table class="table table-striped bootcamps">
 {% for bootcamp in page.children %}
   {% if bootcamp.startdate >= today %}
     <tr>
-      <td class="link">
-        <a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a>
-      </td>
-      <td class="spacer">&nbsp;...&nbsp;</td>
-      <td class="date">
-        {{bootcamp.date}}
-      </td>
+      <td class="link"><a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a></td>
+      <td class="open">{{bootcamp.open}}</td>
+      <td class="date">{{bootcamp.date}}</td>
     </tr>
   {% endif %}
 {% endfor %}
@@ -197,19 +193,14 @@
 </div>
 </div>
 
-<h2 id="past">Past Workshops</h2>
+<h2 id="past">Past Boot Camps</h2>
 <div class="bootcamps">
 <table class="table table-striped bootcamps">
 {% for bootcamp in page.children|reverse %}
   {% if bootcamp.startdate < today %}
     <tr>
-      <td class="link">
-        <a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a>
-      </td>
-      <td class="spacer">&nbsp;...&nbsp;</td>
-      <td class="date">
-        {{bootcamp.date}}
-      </td>
+      <td class="link"><a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a></td>
+      <td class="date">{{bootcamp.date}}</td>
     </tr>
   {% endif %}
 {% endfor %}
