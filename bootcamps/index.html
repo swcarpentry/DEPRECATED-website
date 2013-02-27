@@ -41,7 +41,8 @@
     };
 
     var oldPin = MarkerPin("FE7569");
-    var newPin = MarkerPin("6975FE");
+    var newPin = MarkerPin("69FE86");
+    var newRestrictedPin = MarkerPin("6975FE");
 
     var pinShadow = new google.maps.MarkerImage(
         "http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
@@ -63,7 +64,11 @@
         map: map,
         title: "{{bootcamp.venue}}, {{bootcamp.date}}",
     {% if bootcamp.startdate >= today %}
+      {% if bootcamp.registration == 'restricted' %}
+        icon: newRestrictedPin,
+      {% else %}
         icon: newPin,
+      {% endif %}
         visible: true,
     {% else %}
         icon: oldPin,
@@ -161,7 +166,9 @@
   {% if bootcamp.startdate >= today %}
     <tr>
       <td class="link"><a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a></td>
-      <td class="open">{{bootcamp.open}}</td>
+      <td class="registration">
+	{% if bootcamp.registration %}{{bootcamp.registration}}{% endif %}
+      </td>
       <td class="date">{{bootcamp.date}}</td>
     </tr>
   {% endif %}
@@ -170,14 +177,16 @@
 
 <div id="map_canvas" style="width: 98%; height: 500px; margin-left:auto; margin-right: auto;"></div>
 <div style="margin-bottom: 20px;">
-  <table>
-    <tr>
-      <td><img src="{{root_path}}/img/icons/google-map-future-bootcamp.png" alt="Future Boot Camp Icon" /></td>
-      <td style="padding-right: 20px;">Future Boot Camps</td>
-      <td><img src="{{root_path}}/img/icons/google-map-past-bootcamp.png" alt="Past Boot Camp Icon" /></td>
-      <td>Past Boot Camps</td>
-    </tr>
-  </table>
+  <p>
+    <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|69FE86" />
+    upcoming open boot camps
+    |
+    <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|6975FE" />
+    upcoming restricted boot camps
+    |
+    <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FE7569" />
+    past boot camps
+  </p>
 </div>
 
 <div id="calendar">
