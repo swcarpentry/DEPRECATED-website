@@ -1,0 +1,21 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="University College London" />
+  <meta name="date" content="April 2013" />
+  <meta name="startdate" content="2013-04-04" />
+  <meta name="enddate" content="2013-04-08" />
+  <meta name="latlng" content="51.524789, -0.133578" />
+  <meta name="eventbrite_key" content="5396735782" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> University College London.</p>
+<p><strong>When:</strong> April 4 and 8, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+<p>
+Registration will begin soon.
+</p>
+{% endblock content %}
