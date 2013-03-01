@@ -8,58 +8,70 @@
 
 {% block content %}
 
-<p>Software Carpentry is an open project. Like all such projects, it needs your help to grow, and you can contribute in many ways, large and small.</p>
+<p>Software Carpentry is an open project. Like all such projects, it needs your
+help to grow, and you can contribute in many ways, large and small.</p>
 
 <dl>
 
-  <dt id="bugs">Report Bugs</dt>
-  <dd>
-    If you see a mistake in our lectures or example programs, please add a comment to the appropriate page, or <a href="mailto:{{contact_email}}">mail us</a>, and we'll fix it as quickly as we can.
-  </dd>
-
-  <dt id="improve">Suggest Improvements</dt>
-  <dd>
-    Is one of our lessons too long?  Do they move too quickly or too slowly, or give too much or too little detail?  Did we miss anything important, or include things you're sure you'll never need?  If so, please <a href="mailto:{{contact_email}}">let us know</a>.  When doing so, please tell us a bit about your background and needs so that we know how best to interpret your feedback.
-  </dd>
-
   <dt id="teach">Teach</dt>
   <dd>
-    All of our slides, notes, and example programs are in our Git repository
-    at <a href="https://github.com/swcarpentry/website">https://github.com/swcarpentry/website</a>,
-    and you are free to use them however you want
-    (so long as you <a href="{{root_path}}/license.html">give us attribution</a>).
-    Everything is designed so that individuals can work through what they need on their own,
-    but universities, research labs, companies, and self-study groups have also used it
-    in week-long crash courses and as part of longer classroom courses.
-    If you would like to deliver the course in one of these formats,
-    or in one we haven't seen yet,
-    please let us know&mdash;we'd be glad to help.
-    Please also blog your experiences so that we can share what you learn with others.
+    <p>All of our slides, notes, and example programs are in our Git repository
+    at <a
+    href="https://github.com/swcarpentry/website">https://github.com/swcarpentry/website</a>,
+    and you are free to use them however you want (so long as you <a
+    href="{{root_path}}/license.html">give us attribution</a>).  Everything is
+    designed so that individuals can work through what they need on their own,
+    but universities, research labs, companies, and self-study groups have also
+    used it in week-long crash courses and as part of longer classroom
+    courses.</p>
+
+    <p>If you would like to deliver the course (as a Software Carpentry
+    instructor or on your own) in one of these formats, or in one we haven't
+    seen yet, please <a href="#discuss">let us know</a>&mdash;we'd be glad to
+    provide you with training or advice.</p>
   </dd>
 
   <dt id="create">Create</dt>
   <dd>
-    This is what Software Carpentry needs most, and the good news is, it's easier than you think.
-    Suppose you have a small program that illustrates an important idea:
-    something like our <a href="{{root_path}}/4_0/matrix/recommend.html">recommendation engine</a>,
-    <a href="{{root_path}}/4_0/setdict/nanotech.html">nanotech warehouse</a>,
-    <a href="{{root_path}}/4_0/setdict/phylogen.html">phylogenetic tree</a>,
-    or <a href="{{root_path}}/4_0/media/stars.html">star counting</a> examples.
-    The only other thing we need is a few minutes' worth of slides and an audio recording of you going through them.
-    The slides and recording don't have to be perfect:
-    we can reformat the former, and edit out any mistakes or retakes in the latter.
-    We will put the slides and the edited audio together and post them to our site,
-    along with a link back to you as the author.
-    If this sounds interesting, please <a href="mailto:{{contact_email}}">get in touch</a>.
-  </dd>
+    <p>If you are interested in developing the Software Carpentry content, you
+    can use  <a href="http://git-scm.com/">Git</a> to get the source for our <a
+    href="https://github.com/swcarpentry/website">website</a>, and our <a
+    href="https://github.com/swcarpentry/boot-camps">bootcamp teaching
+    materials</a>. We welcome any pull requests.</p>
 
-  <dt id="develop">Develop</dt>
+    <p>Drop us a line by sending us <a href="mailto:{{contact_email}}">email</a>
+    and/or joining the discussion list (see below) so that we can
+    coordinate.</p> 
+  </dd>
+  <dt id="discuss">Discuss</dt>
   <dd>
-    If you are interested in devoping the Software Carpentry content directly,
-    use <a href="http://git-scm.com/">Git</a> to get the source from
-    <a href="https://github.com/swcarpentry/website">https://github.com/swcarpentry/website</a>,
-    and then send us a pull request.
-  </dd>
+    <p>To stay up to date with us, you can follow <a
+    href="{{root_path}}/blog">our blog</a> and sign up for our low-traffic (~1-4
+    emails a month) announcement mailing list:</p>
+    <form class="form-inline" method="post" style="text-align:center"
+      action="http://scripts.dreamhost.com/add_list.cgi">
+      <fieldset>
+        <input type="hidden" name="list" value="software-carpentry" />
+        <input type="hidden" name="domain" value="software-carpentry.org" />
+        <input type="hidden" name="emailit" value="1" />
+        <input type="text" name="name" placeholder="Full name" />
+        <input type="text" name="email" placeholder="Email"/>
+        <button type="submit" class="btn" name="submit" value="Join">
+          Join</button>
+        <button type="submit" class="btn" name="unsub" value="Unsubscribe">
+          Unsubscribe</button>
+      </fieldset>
+    </form>
 
+    <p>Additionally, you can join our higher-traffic <a
+    href="http://lists.software-carpentry.org/listinfo.cgi/discuss-software-carpentry.org">discussion
+    list</a>. This is the main avenue through which instructors and and other
+    volunteers discuss course material changes, technology, and make planning
+    decisions.</p>
+
+    <p>If you see a mistake in on our website, please add a comment to the
+    appropriate page, or <a href="mailto:{{contact_email}}">mail us</a>, and
+    we'll fix it as quickly as we can.</p>
+  </dd>
 </dl>
 {% endblock content %}
