@@ -154,9 +154,9 @@
   <p>Want to know more?  See our <a href="{{root_path}}/about/faq.html">FAQ</a>.  Want to
   organize one?  See our <a href="how-to.html">how-to</a> guide.</p>
 
-  <p>And please note: all boot camp participants are expected to abide
+  <p><em>All boot camp participants are expected to abide
   by our <a href="conduct.html">code of conduct</a> to ensure that all
-  attendees to have an enjoyable and fulfilling experience.</p>
+  attendees to have an enjoyable and fulfilling experience.</em></p>
 </section>
 
 <h2 id="future">Future Boot Camps</h2>
@@ -167,13 +167,14 @@
     <tr>
       <td class="link"><a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a></td>
       <td class="registration">
-	{% if bootcamp.registration %}{{bootcamp.registration}}{% endif %}
+        {% if bootcamp.registration %}{{bootcamp.registration}}{% endif %}
       </td>
       <td class="date">{{bootcamp.date}}</td>
     </tr>
   {% endif %}
 {% endfor %}
 </table>
+<p>See also our list of <a href="staffing.html">who's teaching where</a>.</p>
 
 <div id="map_canvas" style="width: 98%; height: 500px; margin-left:auto; margin-right: auto;"></div>
 <div style="margin-bottom: 20px;">
