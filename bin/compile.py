@@ -108,9 +108,11 @@ USAGE = """compile.py [options] initial_file_path: rebuild Software Carpentry we
 -x                                      shorten blog excerpts
 """
 
-CONTACT_EMAIL = 'info@software-carpentry.org'
-TWITTER_NAME = '@swcarpentry'
-TWITTER_URL = 'https://twitter.com/swcarpentry'
+CONTACT_EMAIL   = 'info@software-carpentry.org'
+FACEBOOK_URL    = 'https://www.facebook.com/SoftwareCarpentry'
+GOOGLE_PLUS_URL = 'https://plus.google.com/u/0/114244759874490019250/posts'
+TWITTER_NAME    = '@swcarpentry'
+TWITTER_URL     = 'https://twitter.com/swcarpentry'
 
 METADATA_TEMPLATE = r'<meta\s+name="%s"\s+content="([^"]*)"\s*/>'
 
@@ -167,14 +169,16 @@ class Application(object):
             root_path = '.'
         else:
             root_path = '/'.join([os.pardir] * depth)
-        return {'contact_email' : CONTACT_EMAIL,
-                'filename'      : filename,
-                'root_path'     : root_path,
-                'site'          : self.site,
-                'timestamp'     : timestamp(),
-                'today'         : self.today,
-                'twitter_name'  : TWITTER_NAME,
-                'twitter_url'   : TWITTER_URL}
+        return {'contact_email'   : CONTACT_EMAIL,
+                'facebook_url'    : FACEBOOK_URL,
+                'filename'        : filename,
+                'google_plus_url' : GOOGLE_PLUS_URL,
+                'root_path'       : root_path,
+                'site'            : self.site,
+                'timestamp'       : timestamp(),
+                'today'           : self.today,
+                'twitter_name'    : TWITTER_NAME,
+                'twitter_url'     : TWITTER_URL}
 
     def _parse(self, args):
         """
