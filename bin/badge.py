@@ -8,6 +8,13 @@ import datetime
 import urllib2
 import getopt
 
+# PNG module not installed on server, but not needed for badge
+# creation (only for extracting info from badges during testing).
+try:
+    import png
+except ImportError:
+    png = None
+
 #-------------------------------------------------------------------------------
 
 BADGE_DESCRIPTIONS = {
@@ -200,11 +207,9 @@ def erase(website_dir, badge_dir, kind, username):
 
 def extract(filenames):
     '''Extract metadata URL from files.'''
-    try:
-        import png
-    except ImportError:
-        sys.stderr.write('Unable to import PNG library\n')
-        return
+
+    # May not have imported PNG module successfully (not installed on server).
+    assert png is not None, 'Failed to import PNG library'
 
     for f in filenames:
         try:
