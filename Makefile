@@ -82,6 +82,7 @@ BOOK_CHAPTERS_STEMS = \
   $(BOOK_SUBJECTS_STEMS) \
   concl \
   ack \
+  extras \
   bib \
   ref
 

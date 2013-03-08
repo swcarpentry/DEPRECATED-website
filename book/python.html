@@ -33,6 +33,7 @@
       to give the hearing impaired a sense of sound.
       To test how effective they are,
       Aurora Audio wants to measure three things:
+        <!-- EP: Aurora Audio, really? Sounds like a company, not a person. -->
       the range of tones people can hear,
       how well they can discriminate between similar tones.
       and the softest volume they can notice.
@@ -415,6 +416,7 @@ NameError: name 'temp_celsius' is not defined</span>
               <li><code class="out">26.0</code></li>
               <li><code class="out">52.0</code></li>
               <li>None of the above.</li>
+        <!-- EP: you need to be careful with none/all of the above: for most MCQs that's the throwaway question. If you're serious on using that option, your /first/ question should be "None of the above" to establish you treat the option seriously. -->
             </ol>
           </li>
 
@@ -449,6 +451,7 @@ NameError: name 'temp_celsius' is not defined</span>
               <li>On line 2, change 7 to 7.7</li>
               <li>On line 3, change <code>adjusted</code> to <code>original</code></li>
               <li>None of the above.</li>
+        <!-- EP: all of these are MCQs, which aren't always what you want. MCQs test recognition, which is significantly easier than recall. If you want to test a deeper level of learning, fill of the blank is a better way to go. I'd suggest: 1-2 MCQs, then 1-2 fill in the blank. -->
             </ol>
           </li>
 
@@ -577,6 +580,7 @@ $ <span class="in">python -i example.py</span>
               <li>None of the above.</li>
             </ol>
           </li>
+<!-- EP: something to be careful of when writing MCQs: make sure all the options are all of approximately the same length. Smart students tend to realize that the longest answer is often correct. -->
 
           <li>
             Nelle has created two programs called <code>prepare.py</code> and <code>analyze.py</code>.
@@ -783,6 +787,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</span>
               <li>No, because functions cannot be put inside functions.</li>
               <li>No, because the expression should be <code>int('str(x)')</code> (with quotes).</li>
               <li>No, because <code>x</code> might be a floating-point number.</li>
+<!-- EP: "always" is a word that frequently trips students up. -->
             </ol>
           </li>
 
@@ -817,6 +822,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</span>
               <li><code>int</code> and <code>float</code></li>
             </ol>
           </li>
+<!-- EP: this feels like a makework problem rather than directly probing what you want to get out of it. -->
 
         </ol>
 
@@ -1217,6 +1223,7 @@ results.close()
                 <td>3.</td>
                 <td>4.</td>
               </tr>
+<!-- EP: awkward formatting of the table. Would suggest a vertical arrangement like the other questions. I'd also add a line of whitespace between the results.close() and results.open('output.txt', 'a'): this at first is a lot for a novice to read and improving readibility will help. Always assume novices will have a hard time reading everything. (Likewise, syntax highlighting would be a great thing in this document.) -->
               <tr>
                 <td>
 <pre>
@@ -1273,6 +1280,7 @@ writer = open('final.txt', 'w')
 writer = reader
 reader.close()
 writer.close()
+<!-- EP: add vertical whitespace! -->
 </pre>
             <ol class="choices">
               <li>It creates an empty file called <code>final.txt</code>.</li>
@@ -1431,6 +1439,7 @@ print len(sys.stdin.readline())
               <li>None of the above (i.e., they are different in some other way).</li>
             </ol>
           </li>
+<!-- EP: the trend I'm really seeing in these questions is "what does X do?" and this /really/ isn't getting at conceptual knowledge. It's really a lot of pattern matching so far, or just compiling and seeing the difference. I'd strongly encourage you to think beyond the "what does X do" questions. -->
 
           <li>
             What does this program do?
@@ -1689,6 +1698,7 @@ for value in data {
 3
 </pre>
             What does the following program print?
+<!-- EP: said it before, but I'm actually getting rather bored of the "What does X do" MCQs. Vary it up. You're really only probing one type of understanding here. -->
 <pre>
 source = open('counts.txt', 'r')
 result = 'result:'
@@ -1718,6 +1728,7 @@ for next in source:
 source.close()
 print first, second, next
 </pre>
+<!-- EP: table formatting is confusing. Also: vertical whitespace, man!-->
             <table class="choices">
               <tr>
                 <td>1.</td>
