@@ -7,10 +7,13 @@ import getopt
 import datetime
 import urllib2
 import getopt
+
+# PNG module not installed on server, but not needed for badge
+# creation (only for extracting info from badges during testing).
 try:
     import png
 except ImportError:
-    sys.stderr.write('Unable to import PNG library\n')
+    png = None
 
 #-------------------------------------------------------------------------------
 
@@ -74,7 +77,7 @@ def main(args):
         if opt == '-a':
             assert action is None, \
                    'Action specified multiple times (-a)'
-            assert arg in ('create', 'dummy', 'erase', 'extract', 'help'), \
+            assert arg in ('create', 'dummy', 'erase', 'extract', 'paths', 'help'), \
                    'Unknown action "%s"' % arg
             action = arg
 
@@ -132,6 +135,9 @@ def main(args):
         assert len(filenames) > 0, \
                'No filenames given for metadata extraction'
         extract(filenames)
+
+    elif action == 'paths':
+        paths(image_src_dir, website_dir, badge_dir, kind, username, email)
 
     elif action == 'help':
         usage()
@@ -201,6 +207,10 @@ def erase(website_dir, badge_dir, kind, username):
 
 def extract(filenames):
     '''Extract metadata URL from files.'''
+
+    # May not have imported PNG module successfully (not installed on server).
+    assert png is not None, 'Failed to import PNG library'
+
     for f in filenames:
         try:
             p = png.Reader(filename=f)
@@ -214,6 +224,19 @@ def extract(filenames):
                 print >> sys.stderr, 'No open badges metadtata found in', f
         except Exception, e:
             print >> sys.stderr, "error in %s:" % f, e
+
+#-------------------------------------------------------------------------------
+
+def paths(image_src_dir, website_dir, badge_dir, kind, username, email):
+    '''Show paths used in creating a badge (for testing).'''
+
+    # Paths
+    image_src_path, image_dst_path, json_dst_path, url = \
+        _make_paths(website_dir, badge_dir, kind, username, image_src_dir=image_src_dir)
+    print 'Image source path:', image_src_path
+    print 'Image destination path:', image_dst_path
+    print 'JSON destination path:', json_dst_path
+    print 'URL:', url
 
 #-------------------------------------------------------------------------------
 
@@ -238,7 +261,7 @@ def _make_paths(website_dir, badge_dir, kind, username,
     assert os.path.isdir(website_dir), \
            'Web site directory "%s" does not exist' % website_dir
 
-    # Full Badge directory.
+    # Full badge directory.
     assert badge_dir is not None, \
            'Badge sub-directory not provided' % badge_dir
     badge_root_dir = os.path.join(website_dir, badge_dir)
