@@ -5,6 +5,8 @@
   <meta name="startdate" content="2013-05-13" />
   <meta name="enddate" content="2013-05-14" />
   <meta name="latlng" content="38.54926,-121.76709" />
+  <meta name="eventbrite_key" content="5553687228" />
+  <meta name="registration" content="open" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> University of California Davis, King Lounge (Room 245), Memorial Union.</p>
@@ -14,4 +16,5 @@
 {% include "_requirements.html" %}
 {% include "_content.html" %}
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
