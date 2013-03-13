@@ -102,6 +102,10 @@ commands :
 install :
 	@make OUT_DIR=$(HOME)/software-carpentry.org SITE=http://software-carpentry.org check
 
+## install-bare : rebuild entire site for real, without checks.
+install-bare :
+	@make OUT_DIR=$(HOME)/software-carpentry.org SITE=http://software-carpentry.org check-bare
+
 ## check        : rebuild entire site locally for checking purposes.
 check : $(STATIC_DST) $(OUT_DIR)/.htaccess
 	@make ascii-chars
