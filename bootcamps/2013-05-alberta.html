@@ -4,15 +4,17 @@
   <meta name="date" content="May 2013" />
   <meta name="startdate" content="2013-05-30" />
   <meta name="enddate" content="2013-05-31" />
-  <meta name="latlng" content="53.5234543,-113.5259951" />
+  <meta name="latlng" content="53.52345,-113.52600" />
+  <meta name="registration" content="open" />
+  <meta name="eventbrite_key" content="5824534339" />
 {% endblock file_metadata %}
 {% block content %}
-<p><strong>Where:</strong> University of Alberta</p>
+<p><strong>Where:</strong> Biological Sciences Building, Central Wing 410 (CW410), University of Alberta</p>
 <p><strong>When:</strong> May 30-31, 2013. We will start at 9:00 and end at 4:30 each day.</p>
-<p><em>Registration for this boot camp has not yet opened.</em></p>
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}
 {% include "_content.html" %}
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
