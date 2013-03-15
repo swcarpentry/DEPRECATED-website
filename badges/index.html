@@ -1,27 +1,148 @@
 {% extends "_base.html" %}
 {% block file_metadata %}
   <meta name="title" content="Software Carpentry Badges" />
-  <meta name="subfile" content="creator.html" />
-  <meta name="subfile" content="instructor.html" />
-  <meta name="subfile" content="organizer.html" />
 {% endblock file_metadata %}
 {% block navhighlight %}{{navhighlight('badges')}}{% endblock navhighlight %}
 {% block content %}
+<style type="text/css">
+  .badges-section {
+    margin-bottom:30px;
+  }
+  .badges-section .media {
+    margin-top: 30px;
+  }
+  h1.badge-title{
+    margin-top: 10px;
+  }
+  #modal-badge-img {
+    position:absolute;
+    right: 25px;
+    bottom: 25px;
+    opacity: 0.5;
+  }
+  #assertion-modal.in {
+    color: black;
+  }
+</style>
 <p>The web and other new learning spaces provide many ways to gain skills and experience&mdash;from online courses, learning networks, mentorship, and peer learning. Badges provide an open, portable, verifiable way for learners to get recognition for these skills.  Using Mozilla's <a href="http://openbadges.org">Open Badge Infrastructure</a>, Software Carpentry is issuing three kinds of badges, and more are being defined.</p>
 
+<div class="badges-section">
 <div class="media">
-  <a href="{{root_path}}/badges/creator.html"><img class="media-object pull-left" src="{{root_path}}/img/badges/creator.png" alt="Software Carpentry 'Creator' Badge" /></a>
-  <div class="media-body">Awarded for <a href="{{root_path}}/badges/creator.html">creating teaching materials</a> for Software Carpentry.</div>
+  <img class="media-object pull-left" 
+       src="{{root_path}}/img/badges/creator.png" 
+       alt="Software Carpentry 'Creator' Badge" />
+  <div class="media-body">
+    <a id="creator-badge"><h1 class="badge-title">Creator Badge</h1></a>
+    <h4>Awarded for creating teaching materials for Software Carpentry</h4>
+  </div>
 </div>
 
-<div class="media">
-  <a href="{{root_path}}/badges/instructor.html"><img class="media-object pull-left" src="{{root_path}}/img/badges/instructor.png" alt="Software Carpentry 'Instructor' Badge" /></a>
-  <div class="media-body">Awarded to individuals <a href="{{root_path}}/badges/instructor.html">qualified to lead</a> Software Carpentry boot camps.</div>
-</div>
+{% set creators = [
+    ('Richard "Tommy" Guy', 'guy.t', ''), 
+    ('Mike Jackson', 'jackson.m', ''), 
+    ('Jason Montojo', 'montojo.j', ''),
+    ('Jon Pipitone', 'pipitone.j', ''),
+    ('Ethan White', 'white.e', ''),
+    ('Greg Wilson', 'wilson.g', ''),
+]%}
+
+{{list_badges('creator', creators)}}
 
 <div class="media">
-  <a href="{{root_path}}/badges/organizer.html"><img class="media-object pull-left" src="{{root_path}}/img/badges/organizer.png" alt="Software Carpentry 'Organizer' Badge" /></a>
-  <div class="media-body">Awarded to <a href="{{root_path}}/badges/organizer.html">organizers</a> of Software Carpentry boot camps.</div>
+  <img class="media-object pull-left" 
+       src="{{root_path}}/img/badges/instructor.png" 
+       alt="Software Carpentry 'Instructor' Badge" />
+  <div class="media-body">
+    <a id="instructor-badge"><h1 class="badge-title">Instructor Badge</h1></a>
+    <h4>Awarded to individuals qualified to lead Software Carpentry boot
+    camps</h4>
+  </div>
 </div>
+
+{% set instructors = [
+  ('Aron Ahmadia', 'ahmadia.a', ''),
+  ('Carlos Anderson', 'anderson.c', ''),
+  ('Dhavide Aruliah', 'aruliah.d', ''),
+  ('Azalee Bostroem', 'bostroem.a', ''),
+  ('Erik Bray', 'bray.e', ''),
+  ('C. Titus Brown', 'brown.ct', ''),
+  ('Chris Cannam', 'cannam.c', ''),
+  ('Adina Chuang Howe', 'chuang-howe.a', ''),
+  ('Neil Chue Hong', 'chue-hong.n', ''),
+  ('Steve Crouch', 'crouch.s', ''),
+  ('Matt Davis', 'davis.m', ''),
+  ('Ross Dickson', 'dickson.r', ''),
+  ('Jonathan Dursi', 'dursi.j', ''),
+  ('Justin Ely', 'ely.j', ''),
+  ('Luis Figueira', 'figueira.l', ''),
+  ('Richard "Tommy" Guy', 'guy.t', ''),
+  ('Steve Haddock', 'haddock.s', ''),
+  ('Mike Hansen', 'hansen.m', ''),
+  ('Ted Hart', 'hart.t', ''),
+  ('Konrad Hinsen', 'hinsen.k', ''),
+  ('Katy Huff', 'huff.k', ''),
+  ('Mike Jackson', 'jackson.m', ''),
+  ('Justin Kitzes', 'kitzes.j', ''),
+  ('Karin Lagesen', 'lagesen.k', ''),
+  ('Ian Langmore', 'langmore.i', ''),
+  ('Stephen McGough', 'mcgough.s', ''),
+  ('Jessica McKellar', 'mckellar.j', ''),
+  ('Emily Jane McTavish', 'mctavish.ej', ''),
+  ('Ian Mitchell', 'mitchell.i', ''),
+  ('Lex Nederbragt', 'nederbragt.l', ''),
+  ('Aleksandra Pawlik', 'pawlik.a', ''),
+  ('Jason Pell', 'pell.j', ''),
+  ('Fernando Perez', 'perez.f', ''),
+  ('Ariel Rokem', 'rokem.a', ''),
+  ('Anthony Scopatz', 'scopatz.a', ''),
+  ('Jeff Shelton', 'shelton.j', ''),
+  ('Joshua Ryan Smith', 'smith.j', ''),
+  ('Sarah Supp', 'supp.s', ''),
+  ('Nelle Varoquaux', 'varoquaux.n', ''),
+  ('Alex Viana', 'viana.a', ''),
+  ('Ethan White', 'white.e', ''),
+  ('Lynne Williams', 'williams.l', ''),
+  ('Greg Wilson', 'wilson.g', ''),
+]%}
+
+{{list_badges('instructor', instructors)}}
+
+<div class="media">
+  <img class="media-object pull-left" 
+       src="{{root_path}}/img/badges/organizer.png" 
+       alt="Software Carpentry 'Organizer' Badge" />
+  <div class="media-body">
+    <a id="organizer-badge"><h1 class="badge-title">Organizer Badge</h1></a>
+    <h4>Awarded for organizing Software Carpentry boot camps</h4>
+  </div>
+</div>
+
+{% set organizers = [
+  ('Bruce Berriman', 'berriman.b', 'http://astrocompute.wordpress.com/'),
+  ('Shreyas Cholia', 'cholia.s', ''),
+  ('Stefano Cozzini', 'cozzini.s', 'http://www.democritos.it/~cozzini/'),
+  ('Ross Dickson', 'dickson.r', ''),
+  ('Philip Fowler', 'fowler.p', ''),
+  ('Chris Gray', 'gray.c', '' ),
+  ('Nic Kooyers', 'kooyers.n', 'http://pages.wustl.edu/olsen/people/nic-kooyers'),
+  ('Paul Lu', 'lu.p', 'http://www.cs.ualberta.ca/~paullu'),
+  ('Andrew Lumsdaine', 'lumsdaine.a', 'http://www.cs.indiana.edu/~lums/'),
+  ('Ian M. Mitchell', 'mitchell.i', ''),
+  ('Lex Nederbragt', 'nederbragt.l', 'http://contig.wordpress.com/'),
+  ('Chris Paciorek', 'paciorek.c', 'http://www.stat.berkeley.edu/~paciorek/'),
+  ('Jon Pipitone', 'pipitone.j', ''),
+  ('Mark Plumbley', 'plumbley.m', ''),
+  ('Rachel Schutt', 'schutt.r', '' ),
+  ('Jeff Shelton', 'shelton.j', ''),
+  ('Andrew Su', 'su.a', 'http://sulab.org/'),
+  ('Ben Waugh', 'waugh.b', ''),
+  ('Ethan White', 'white.e', ''),
+  ('Greg Wilson', 'wilson.g', ''),
+]%}
+
+{{list_badges('organizer', organizers)}}
+</div>
+
+{{badge_issuing()}}
 
 {% endblock content %}
