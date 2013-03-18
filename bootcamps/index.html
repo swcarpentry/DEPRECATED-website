@@ -41,8 +41,9 @@
     };
 
     var oldPin = MarkerPin("FE7569");
-    var newPin = MarkerPin("69FE86");
-    var newRestrictedPin = MarkerPin("6975FE");
+    var openPin = MarkerPin("69FE86");
+    var fullPin = MarkerPin("FEFE69");
+    var restrictedPin = MarkerPin("6975FE");
 
     var pinShadow = new google.maps.MarkerImage(
         "http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
@@ -65,9 +66,11 @@
         title: "{{bootcamp.venue}}, {{bootcamp.date}}",
     {% if bootcamp.startdate >= today %}
       {% if bootcamp.registration == 'restricted' %}
-        icon: newRestrictedPin,
+        icon: restrictedPin,
+      {% elif bootcamp.registration == 'full' %}
+        icon: fullPin,
       {% else %}
-        icon: newPin,
+        icon: openPin,
       {% endif %}
         visible: true,
     {% else %}
@@ -183,13 +186,16 @@
 <div style="margin-bottom: 20px;">
   <p>
     <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&amp;chld=%E2%80%A2|69FE86" />
-    upcoming open boot camps
+    open
+    |
+    <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&amp;chld=%E2%80%A2|FEFE69" />
+    full
     |
     <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&amp;chld=%E2%80%A2|6975FE" />
-    upcoming restricted boot camps
+    restricted
     |
     <img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&amp;chld=%E2%80%A2|FE7569" />
-    past boot camps
+    past
   </p>
 </div>
 
