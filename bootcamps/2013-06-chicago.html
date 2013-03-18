@@ -1,0 +1,17 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="University of Chicago" />
+  <meta name="date" content="June 2013" />
+  <meta name="startdate" content="2013-06-17" />
+  <meta name="enddate" content="2013-06-18" />
+  <meta name="latlng" content="41.7901128,-87.6007318" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> University of Chicago.</p>
+<p><strong>When:</strong> June 17-18, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{% endblock content %}
