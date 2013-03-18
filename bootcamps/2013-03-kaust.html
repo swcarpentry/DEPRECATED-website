@@ -6,6 +6,7 @@
   <meta name="enddate" content="2013-03-25" />
   <meta name="latlng" content="22.3101,39.1259" />
   <meta name="registration" content="full" />
+  <meta name="eventbrite_key" content="5790053205" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> Library Computer Laboratory, King Abdullah University of Science and Technology.</p>
@@ -37,4 +38,5 @@ general information about Software Carpentry bootcamps, local organizer
 <a href="mailto:david.ketcheson@kaust.edu.sa">Prof. David Ketcheson</a>, or instructor
 <a href="mailto:aron.ahmadia@gmail.com">Dr. Aron Ahmadia</a>.
 </p>
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
