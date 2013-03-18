@@ -1,1 +1,0 @@
-SELECT Project FROM Experiments;

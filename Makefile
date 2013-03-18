@@ -35,14 +35,6 @@ STATIC_SRC = $(wildcard ./3_0/*/*.jpg) \
              $(wildcard ./4_0/*/*/*.png) \
              $(wildcard ./badges/*/*.json) \
              $(wildcard ./badges/*/*.png) \
-             $(wildcard ./book/img/*/*.jpg) \
-             $(wildcard ./book/img/*/*.png) \
-             $(wildcard ./book/src/*/*.csv) \
-             $(wildcard ./book/src/*/*.html) \
-             $(wildcard ./book/src/*/*.py) \
-             $(wildcard ./book/src/*/*.sql) \
-             $(wildcard ./book/src/*/*.txt) \
-             $(wildcard ./book/src/*/*.xml) \
              $(wildcard ./css/*.css) \
              $(wildcard ./css/bootstrap/*.css) \
              $(wildcard ./css/bootstrap/img/*.png) \
@@ -57,36 +49,6 @@ STATIC_SRC = $(wildcard ./3_0/*/*.jpg) \
              $(wildcard ./js/*.js) \
              $(wildcard ./js/bootstrap/*.js)
 STATIC_DST = $(subst ./,$(OUT_DIR)/,$(STATIC_SRC))
-
-# Chapters in book version.
-BOOK_SUBJECTS_STEMS = \
-  shell \
-  svn \
-  python \
-  pymedia \
-  funclib \
-  db \
-  numpy \
-  quality \
-  setdict \
-  dev \
-  web \
-  teach
-
-BOOK_SUBJECTS_HTML = $(foreach stem,$(BOOK_SUBJECTS_STEMS),$(OUT_DIR)/book/$(stem).html)
-
-# All chapters in book.
-BOOK_CHAPTERS_STEMS = \
-  index \
-  intro \
-  $(BOOK_SUBJECTS_STEMS) \
-  concl \
-  ack \
-  extras \
-  bib \
-  ref
-
-BOOK_CHAPTERS_HTML = $(foreach stem,$(BOOK_CHAPTERS_STEMS),$(OUT_DIR)/book/$(stem).html)
 
 #------------------------------------------------------------
 
@@ -111,7 +73,6 @@ check : $(STATIC_DST) $(OUT_DIR)/.htaccess
 	@make ascii-chars
 	@make check-bare
 	@make check-links
-	@make book-figref
 	@make blog-journal
 
 ## check-bare   : rebuild entire site locally, but do not validate html 
@@ -146,78 +107,6 @@ $(STATIC_DST) : $(OUT_DIR)/% : %
 
 $(OUT_DIR)/.htaccess : _htaccess
 	cp $< $@
-
-#------------------------------------------------------------
-
-## book-bib     : check for undefined/unused bibliography references.
-book-bib :
-	@bin/book.py bibundef $(BOOK_CHAPTERS_HTML)
-	@bin/book.py bibunused $(BOOK_CHAPTERS_HTML)
-
-## book-book    : run all checks.
-book-book :
-	@for i in unknown gloss images source structure bib fig; do \
-	  echo '----' $$i '----'; \
-	  make book-$$i; \
-	done
-
-## book-classes : list all classes used in the generated HTML files.
-book-classes :
-	@bin/book.py classes $$(find $(OUT_DIR) -name '*.html' -print)
-
-## book-fig     : check figure formatting and for undefined/unused figures.
-book-fig :
-	@bin/book.py figformat $(BOOK_CHAPTERS_HTML)
-	@bin/book.py figundef $(BOOK_CHAPTERS_HTML)
-	@bin/book.py figunused $(BOOK_CHAPTERS_HTML)
-
-## book-figref  : patch cross-references in figures
-book-figref :
-	@python bin/fignumber.py $(BOOK_CHAPTERS_HTML)
-
-## book-fix     : count FIXME markers in files.
-book-fix :
-	@bin/book.py fix $(BOOK_CHAPTERS_HTML)
-
-## book-gloss   : check glossary formatting and for undefined/unused glossary entries.
-book-gloss :
-	@bin/book.py glossformat $(BOOK_CHAPTERS_HTML)
-	@bin/book.py glossundef $(BOOK_CHAPTERS_HTML)
-	@bin/book.py glossunused $(BOOK_CHAPTERS_HTML)
-
-## book-ideas   : extract key ideas.
-book-ideas :
-	@bin/book.py ideas $(BOOK_CHAPTERS_HTML)
-
-## book-images  : check for undefined/unused images.
-book-images :
-	@bin/book.py imgundef img $(BOOK_CHAPTERS_HTML)
-	@bin/book.py imgunused img $(BOOK_CHAPTERS_HTML)
-
-## book-source  : check for undefined/unused source code fragments.
-book-source :
-	@bin/book.py srcundef src $(BOOK_CHAPTERS_HTML)
-	@bin/book.py srcunused src $(BOOK_CHAPTERS_HTML)
-
-## book-struct  : check overall structure of files.
-book-struct :
-	@bin/book.py structure $(BOOK_CHAPTERS_HTML)
-
-## book-summary : extract section summaries (learning goals and keypoints).
-book-summary :
-	@bin/book.py summaries $(BOOK_CHAPTERS_HTML)
-
-## book-unknown : check for unexpected HTML files.
-book-unknown :
-	@bin/book.py unknown vol1 $(BOOK_CHAPTERS_HTML)
-
-## book-words-a : count words in files (report alphabetically).
-book-words-a :
-	@bin/book.py words $(BOOK_CHAPTERS_HTML)
-
-## book-words-n : count words in files (report numerically).
-book-words-n :
-	@bin/book.py words $(BOOK_CHAPTERS_HTML) | sort -n -r -k 2
 
 #------------------------------------------------------------
 
