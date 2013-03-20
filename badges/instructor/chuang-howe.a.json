@@ -1,8 +1,9 @@
 {
-  "recipient" : "adina.chuang@gmail.com",
-  "issued_on" : "2012-12-20",
+  "recipient" : "sha256$55cfd6d6b7e503745107e80cd345b804d552ef87d0342463bc401800de225750",
+  "salt": "software-carpentry",
+  "issued_on" : "2013-03-16",
   "badge" : {
-    "version" : "5.0",
+    "version" : "0.5.0",
     "name" : "Instructor",
     "image" : "/img/badges/instructor.png",
     "description" : "Teaching at workshops or online",

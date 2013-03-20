@@ -1,8 +1,9 @@
 {
-  "recipient" : "ejmctavish@utexas.edu",
-  "issued_on" : "2013-03-05",
+  "recipient" : "sha256$16f2394ed8360e2ddc5dc354d333132bb05936e854e5a6d085a54103d88fe3ff",
+  "salt": "software-carpentry",
+  "issued_on" : "2013-03-16",
   "badge" : {
-    "version" : "5.0",
+    "version" : "0.5.0",
     "name" : "Instructor",
     "image" : "/img/badges/instructor.png",
     "description" : "Teaching at workshops or online",

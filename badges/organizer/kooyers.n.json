@@ -1,8 +1,9 @@
 {
-  "recipient" : "nkooyers@gmail.com",
-  "issued_on" : "2012-12-20",
+  "recipient" : "sha256$3f29df5abbdde7a761c328abd8d52c3fec943153038768fa42e51ecb06a25af1",
+  "salt": "software-carpentry",
+  "issued_on" : "2013-03-16",
   "badge" : {
-    "version" : "5.0",
+    "version" : "0.5.0",
     "name" : "Organizer",
     "image" : "/img/badges/organizer.png",
     "description" : "Organizing workshops and learning groups",

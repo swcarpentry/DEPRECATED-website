@@ -1,8 +1,9 @@
 {
-  "recipient" : "ianlangmore@gmail.com",
-  "issued_on" : "2013-03-05",
+  "recipient" : "sha256$89f04609c2fc5c4c89e373e2c0b35a231c6fef1355fd48951a7466330dd221bb",
+  "salt": "software-carpentry",
+  "issued_on" : "2013-03-16",
   "badge" : {
-    "version" : "5.0",
+    "version" : "0.5.0",
     "name" : "Instructor",
     "image" : "/img/badges/instructor.png",
     "description" : "Teaching at workshops or online",

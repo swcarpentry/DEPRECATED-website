@@ -69,6 +69,13 @@ RewriteCond %{REQUEST_URI} !.html$
 RewriteCond %{SCRIPT_FILENAME} !-f 
 RewriteRule ^(.*?)/?$ $1.html [R,L]
 
+# Links to badge kind pages
+# Keep redirecting this for now, so as to not break old badges
+# but also incase we want to make individual badge criteria pages later on.
+RewriteCond %{REQUEST_URI} ^/badges/(.*).html
+RewriteCond %{REQUEST_URI} !^/badges/index.html
+RewriteRule ^.*/(.*).html /badges/index.html#$1-badge [NE,R,L]
+
 </IfModule>
 
 <Files "feed.xml">
