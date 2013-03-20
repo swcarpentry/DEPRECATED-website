@@ -1,1 +1,0 @@
-SELECT RANDOM() FROM Experiments;

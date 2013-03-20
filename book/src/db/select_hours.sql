@@ -1,1 +1,0 @@
-SELECT Hours FROM Experiment;
