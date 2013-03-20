@@ -1,8 +1,9 @@
 {
-  "recipient" : "s.crouch@software.ac.uk",
-  "issued_on" : "2012-12-20",
+  "recipient" : "sha256$38ea063053d57251c2476b4ad554d67d77497fe0dbda8971236076212afdb7ab",
+  "salt": "software-carpentry",
+  "issued_on" : "2013-03-16",
   "badge" : {
-    "version" : "5.0",
+    "version" : "0.5.0",
     "name" : "Instructor",
     "image" : "/img/badges/instructor.png",
     "description" : "Teaching at workshops or online",
