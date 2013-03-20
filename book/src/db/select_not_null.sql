@@ -1,1 +1,0 @@
-SELECT * FROM Experiments WHERE Hours IS NOT NULL;
