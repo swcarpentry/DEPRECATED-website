@@ -5,6 +5,8 @@
   <meta name="startdate" content="2013-05-20" />
   <meta name="enddate" content="2013-05-21" />
   <meta name="latlng" content="36.00283,-78.93827" />
+  <meta name="instructor" content="bryan.j" />
+  <meta name="instructor" content="morris.b" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> Duke University.</p>
@@ -12,6 +14,7 @@
 <p><em>Registration for this boot camp has not yet opened.</em> Note there is
  another camp at <a href="{{root_path}}/bootcamps/2013-05-unc.html">NESCent</a> 
  (in Durham) on May 16-17.</p>
+{% include "_instructors.html" %}
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}

@@ -6,11 +6,14 @@
   <meta name="enddate" content="2013-04-14" />
   <meta name="registration" content="restricted" />
   <meta name="latlng" content="37.8695,-122.258949" />
+  <meta name="instructor" content="kitzes.j" />
+  <meta name="instructor" content="ram.k" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> University of California Berkeley.</p>
-<p><strong>Note: Enrollment is restricted to the Energy and Resources Group and Department of Environmental Science, Policy, and Management.</strong></p>
 <p><strong>When:</strong> April 13-14, 2013.</p>
+{% include "_instructors.html" %}
+<p><strong>Note: Enrollment is restricted to the Energy and Resources Group and Department of Environmental Science, Policy, and Management.</strong></p>
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}
