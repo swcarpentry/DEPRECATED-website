@@ -99,7 +99,7 @@ USAGE = """compile.py [options] initial_file_path: rebuild Software Carpentry we
 -c calendar_file_name                   optional
 -d today's date                         YYY-MM-DD
 -h                                      show this help and exit
--m blog_metadata_json_file_path
+-m metadata_json_file_path
 -o output_directory_path
 -p jinja2_template_search_path          may be used multiple times
 -r blog_rss_file_path
@@ -196,7 +196,7 @@ class Application(object):
                 usage(0)
             elif opt == '-m':
                 assert self.metadata is None, \
-                       'Blog metadata specified multiple times'
+                       'Metadata specified multiple times'
                 self.metadata = arg
             elif opt == '-o':
                 assert self.output_dir is None, \
@@ -404,6 +404,14 @@ class GenericPage(object):
             child.next = None if (i == len(self.children)-1) \
                          else self.children[i+1].link()
 
+    def _app_meta(self, outer, inner):
+        """
+        Pull a value out of the application metadata.
+        """
+        assert outer in self.app.metadata and inner in self.app.metadata[outer], \
+               'No application metadata for [%s][%s]' % (outer, inner)
+        return self.app.metadata[outer][inner]
+
     def _render(self):
         """
         Render and save this page.
@@ -444,7 +452,7 @@ class BootCampPage(GenericPage):
 
     KEYS = GenericPage.KEYS + \
            ['venue', 'latlng', 'date', 'startdate', 'enddate',
-            'registration', 'eventbrite_key']
+            'registration', 'eventbrite_key', '*instructor']
 
     UPLINK = 'index.html'
 
@@ -464,6 +472,18 @@ class BootCampPage(GenericPage):
         self._merge_dates()
         self.slug = os.path.splitext(os.path.basename(self.filename))[0]
         self._sort_key = (self.startdate, self.venue)
+
+        self.instructor = [self._app_meta('author_id', x) for x in self.instructor]
+        if len(self.instructor) == 0:
+            self.instructor = None
+        elif len(self.instructor) == 1:
+            self.instructor = self.instructor[0]
+        elif len(self.instructor) == 2:
+            self.instructor = '%s and %s' % (self.instructor[0],
+                                             self.instructor[1])
+        else:
+            self.instructor = '%s, and %s' % (', '.join(self.instructor[:-1]),
+                                              self.instructor[-1])
 
     def _merge_dates(self):
         """
@@ -681,9 +701,6 @@ class BlogPostPage(GenericPage):
         Translate metadata.
         """
 
-        def _tx(key, value):
-            return self.app.metadata[key][value]
-
         self._sort_key = int(self.post_id)
         self.year, self.month, self.name = self.filename.split('/')[-3:]
 
@@ -696,9 +713,9 @@ class BlogPostPage(GenericPage):
             if key not in self.__dict__:
                 pass
             elif type(self.__dict__[key]) is str:
-                self.__dict__[key] = _tx(key, self.__dict__[key])
+                self.__dict__[key] = self._app_meta(key, self.__dict__[key])
             elif type(self.__dict__[key]) is list:
-                self.__dict__[key] = [_tx(key, v) for v in self.__dict__[key]]
+                self.__dict__[key] = [self._app_meta(key, v) for v in self.__dict__[key]]
             else:
                 assert False, 'Bad metadata translation setup'
 
