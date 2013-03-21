@@ -6,17 +6,17 @@
   <meta name="enddate" content="2013-05-10" />
   <meta name="latlng" content="51.759865,-1.258648" />
   <meta name="registration" content="restricted" />
+  <meta name="eventbrite_key" content="5656292122" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> University of Oxford.</p>
 <p><strong>Note: Enrolment is restricted to students of the Doctoral Training Centres at The University of Oxford.</strong></p>
-<p><strong>When:</strong> May 9-10, 2013. We will start at 9:00 and end at 17:00 each day.</p>
+<p><strong>When:</strong> May 9-10, 2013.</p>
 {% include "_what.html" %}
 {% include "_who.html" %}
 <p>
   <strong>Requirements:</strong>
-  Participants are strongly recommended to bring a laptop with a few specific software packages installed.
-  (The list will be sent to participants a week before the boot camp.)
+  Participants are strongly recommended to bring a laptop with a few specific software packages installed (see below).
   However there will be Windows desktops available in the teaching room for those without laptops.
 </p>
 <p>
@@ -31,8 +31,15 @@
   <li>applying Software Carpentry techniques in Matlab</li>
 </ul>
 <p>
+  <strong>More information:</strong>
+  For more information, including the timetable, and what software you 
+  need to install before you arrive, please visit our
+  <a href="http://jonc125.github.com/boot-camps/2013-05-09-oxford-dtc/">GitHub page</a>.
+</p>
+<p>
   <strong>Contact</strong>:
   Please contact <a href="http://www.cs.ox.ac.uk/people/jonathan.cooper">Jonathan Cooper</a>
-  for more information, or see <a href="http://jonc125.github.com/boot-camps/2013-05-09-oxford-dtc/">the boot camp website</a>.
+  with any questions.
 </p>
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
