@@ -8,17 +8,21 @@
   <meta name="instructor" content="bryan.j" />
   <meta name="instructor" content="cranston.k" />
   <meta name="instructor" content="morris.b" />
+  <meta name="eventbrite_key" content="5899249815" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> <a href="http://www.nescent.org/about/directions.php">National Evolutionary Synthesis Center</a>.</p>
 <p><strong>When:</strong> May 16-17, 2013. We will start at 9:00 and end at 4:30 each day.</p>
-<p><em>Registration for this boot camp has not yet opened.</em> Note there is
-    another camp at <a href="{{root_path}}/bootcamps/2013-05-duke.html">Duke
-        University</a> on May 20-21.</p>
+<!-- Removing until we know if registration at Duke is open to all.
+<p>Note there is another camp at <a
+    href="{{root_path}}/bootcamps/2013-05-duke.html">Duke University</a> on May
+    20-21.</p>
+    -->
 {% include "_instructors.html" %}
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}
 {% include "_content_r.html" %}
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
