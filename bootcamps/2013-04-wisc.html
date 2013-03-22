@@ -5,14 +5,36 @@
   <meta name="startdate" content="2013-04-29" />
   <meta name="enddate" content="2013-04-30" />
   <meta name="latlng" content="43.07718,-89.40399" />
+  <meta name="instructor" content="gidden.matt" />
+  <meta name="instructor" content="huff.k" />
+  <meta name="instructor" content="mcgough.s" />
+  <meta name="instructor" content="merrelli.aronne" />
+  <meta name="eventbrite_key" content="5915929705" />
 {% endblock file_metadata %}
 {% block content %}
-<p><strong>Where:</strong> University of Wisconsin - Madison</p>
+<p><strong>Where:</strong> University of Wisconsin-Madison. Union South "Fifth Quarter" room</p>
 <p><strong>When:</strong> April 29-30, 2013. We will start at 9:00 and end at 4:30 each day.</p>
-<p><em>Registration for this boot camp has not yet opened.</em></p>
-{% include "_what.html" %}
-{% include "_who.html" %}
-{% include "_requirements.html" %}
-{% include "_content.html" %}
+{% include "_instructors.html" %}
+<p><strong>What:</strong> Our goal is to help anyone using computing in their research to become
+ more productive by teaching them basic computing skills like progra design, version control,
+ testing, and task automation. In this two-day boot camp, short tutorials will alternate with
+ hands-on practical exercises. Participants will be encouraged both to help one another, and to
+ apply what they have learned to their own research problems during and between sessions. There
+ will be online follow-up sessions for 6 to 8 weeks extending the material from the boot camp.</p>
+<p><strong>Who:</strong> The course is aimed at graduate students, post-docs, staff, and faculty
+ who have basic familiarity with programming concepts (like loops, conditionals, arrays, and
+ functions), but need help translating this knowledge into practical tools to help them work
+ more productively.</p>
+<p><strong>Content:</strong> The syllabus for this boot camp will include:</p>
+<ul>
+<li>using the shell to do more in less time</li>
+<li>using version control to manage and share information</li>
+<li>workflow automation and scripting (with Python as example)</li>
+<li>how (and how much) to test programs</li>
+<li>documentation and debugging</li>
+</ul>
+<p><strong>Requirements:</strong> Participants must bring a laptop with a few specific software
+ packages installed. (The list will be sent to participants a week before the boot camp.)</p>
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}

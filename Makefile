@@ -77,7 +77,7 @@ check : $(STATIC_DST) $(OUT_DIR)/.htaccess
 
 ## check-bare   : rebuild entire site locally, but do not validate html 
 check-bare: $(STATIC_DST) $(OUT_DIR)/.htaccess
-	$(COMPILE) -m blog/metadata.json -r $(BLOG_RSS_FILE) -c $(ICALENDAR_FILE) index.html
+	$(COMPILE) -m metadata.json -r $(BLOG_RSS_FILE) -c $(ICALENDAR_FILE) index.html
 
 ## blog-next-id : find the next blog entry ID to use.
 blog-next-id :

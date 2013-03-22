@@ -6,11 +6,14 @@
   <meta name="enddate" content="2013-06-04" />
   <meta name="latlng" content="50.937716,-1.395599" />
   <meta name="registration" content="restricted" />
+  <meta name="instructor" content="jones.d" />
+  <meta name="instructor" content="varoquaux.n" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> University of Southampton.</p>
 <p><strong>Note: Enrolment is restricted to members of <a href="http://www.icss.soton.ac.uk/">ICSS</a>, The University of Southampton. If space permits, places will be made available to other staff and students within the University of Southampton.</strong></p>
 <p><strong>When:</strong> June 03-04, 2013. We will start at 9:00 and end at 17:00 each day. Coffee and lunches will be provided.</p>
+{% include "_instructors.html" %}
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}
