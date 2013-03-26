@@ -1,0 +1,42 @@
+{% extends "_blog.html" %}
+{% block file_metadata %}
+<meta name="post_id" content="5418" />
+<meta name="author_id" content="wilson.g" />
+<meta name="title" content="HTML, Markdown, and Structured Data" />
+<meta name="post_date" content="2013-03-19" />
+<meta name="category" content="content" />
+<meta name="category" content="opinion" />
+{% endblock file_metadata %}
+{% block content %}
+<p>A lot of my colleagues in the Software Carpentry project use Markdown for documents, and wonder why I still mostly write in HTML. The main reason is that I like consistency, and also like to have control over typography. For example, take a look at the following snippet from a book I'm working on:</p>
+<blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Of course, it's possible to have more than one<br/>dictionary in play at any time. We <em>could</em> say:</p>
+<pre>def alt_metrics(left, right, p=1.0):
+    '''Find max synchrony between two digrams.'''
+    return left.rescale(p) * right.rescale(log(p)).T</pre>
+<p>but that's not numerically stable. What we need to do is<br/>adjust the relative proprieties after multiplying the matrices.</p></blockquote>
+<p>Did you notice that the first block of text was indented (signalling that it's the start of a new paragraph) while the second isn't (to show that it's a continuation of the same paragraph)? The text would be readable without that clue, but I find it easier to follow the flow when it's present. Right now, I lay that out as:</p>
+<blockquote>&lt;p&gt;Of course, it's possible to have more than one dictionary in play at any time. We &lt;em&gt;could&lt;/em&gt; say:&lt;/p&gt;<br/>
+&lt;pre&gt;<br/>
+def alt_metrics(left, right, p=1.0):<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'''Find max synchrony between two digrams.'''<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;return left.rescale(p) * right.rescale(log(p)).T<br/>
+&lt;/pre&gt;<br/>
+&lt;p <strong>class="continue"</strong>&gt;but that's not numerically stable. What we need to do is adjust the relative proprieties after multiplying the matrices.&lt;/p&gt;</blockquote>
+<p>which uses a class (bolded) to signal that the second "paragraph" is really part of the first. The CSS used to render the page then knows which paragraphs to indent, and which to leave left-adjusted.</p>
+<p>This may sound like a small thing, but now consider what happens when we want to translate from one format to another&mdash;for example, from HTML to LaTeX. If I have the "continue" hint above, I can easily produce this:</p>
+<blockquote>Of course, it's possible to have more than one dictionary in play at any time. We \emph{could} say:<br/>
+<br/>
+\begin{code}<br/>
+def alt_metrics(left, right, p=1.0):<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'''Find max synchrony between two digrams.'''<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;return left.rescale(p) * right.rescale(log(p)).T<br/>
+\end{code}<br/>
+<br/>
+ \noindent<br/>
+but that's not numerically stable. What we need to do is adjust the relative proprieties after multiplying the matrices.</blockquote>
+<p>Without the hint, though, how would the HTML-to-LaTeX translator know which paragraphs were continuations and which weren't? How would it know which of my <code>div</code>'s were meant to be callout boxes, which were sets of exercises, and which were chapter summaries?</p>
+<p>The usual answer is, "Just use HTML for those bits," but as someone who used to be very into literate programming, that's not appealing. As soon as you mix two syntaxes&mdash;HTML and Markdown, Pascal and LateX, Python and C&mdash;the result is harder to read than either on its own. (There's lots of research behind this claim, but just try reading code written in a mix of CamelCaseNotation and pothole_case_notation and you'll see what I mean.)</p>
+<p>How big a deal is this? Well, of the 3143 paragraphs in the current draft of the instructors' guide for Software Carpentry, exactly 600 are continuations; of the <code>div</code> tags, there are 106 of class "understand", 102 of class "keypoints", 94 of class "box", and 21 of class "challenges", so there isn't really an obvious default.</p>
+<p>The wrong answer is to adopt some kind of convention: if you see a section heading titled "Summary", assume that everything up to the next section heading (or the end of the file) belongs in a section styled as a summary, while if a paragraph starts with a '+' on a line of its own, assume it's a continuation, and so on. In practice, that is the road to madness&mdash;exactly the special-cases-all-the-way-down madness that markup languages like HTML were invented to solve. The other wrong answer is to give up on styling things nicely. I <em>like</em> having continuations of paragraphs be visually distinct from actual paragraphs; I also like being able to write a ten-line script that extracts all the summary sections from an HTML page with 100% accuracy.</p>
+<p>Is this actually an important problem? No&mdash;but understanding what the problem is, and the pros and cons of the various solutions, definitely <em>is</em> important.  Point #3 in Jon Udell's <a href="http://blog.jonudell.net/2011/01/24/seven-ways-to-think-like-the-web/">Seven Ways to Think Like the Web</a> is, "Know the difference between structured and unstructured data." If we add a third day of training to our repertoire that focuses on managing and manipulating data, that will be one of the most important lessons.  I don't care (much) if someone disagrees with my assessment of the pros and cons of typing in HTML tags vs. mixing HTML and Markdown; I care a lot that they understand what the underlying problem is, and why ad-hoc'ing a solution is a bad idea.</p>
+{% endblock content %}
