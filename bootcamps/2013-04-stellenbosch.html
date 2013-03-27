@@ -1,0 +1,28 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Stellenbosch University" />
+  <meta name="date" content="April 2013" />
+  <meta name="startdate" content="2013-04-08" />
+  <meta name="enddate" content="2013-04-09" />
+  <meta name="latlng" content="-33.930075, 18.864725" />
+  <meta name="registration" content="open" />
+  <meta name="instructor" content="ahmadia.a" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Stellenbosch University, Room A306 of the Engineering
+Building</p>
+<p><strong>When:</strong> April 8-9, 2013. The camp will run from 1:00 pm to 6:00 pm on day one, and noon to 4:00 pm on day two.</p>
+{% include "_instructors.html" %}
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+<p>
+  <strong>Content:</strong> This boot camp will cover the following topics:
+</p>
+<ul>
+    <li>Introduction to scientific computing with Python</li>
+    <li>Collaboration and provenance with Git and Github</li>
+</ul>
+
+{% include "_contact.html" %}
+{% endblock content %}
