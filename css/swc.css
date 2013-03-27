@@ -309,3 +309,7 @@ table.bootcamps td.date {
     opacity: 0.5;
 }
 
+/* list with checkbox as bullet */
+ul.checklist {
+  list-style-image: url('/img/checkbox.png'); 
+}
