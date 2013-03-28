@@ -2,37 +2,8 @@
 {% block file_metadata %}
   <meta name="title" content="How to Run a Boot Camp" />
 {% endblock file_metadata %}
-
 {% block navhighlight %}{{navhighlight('bootcamps')}}{% endblock navhighlight %}
-
 {% block content %}
-
-
-<blockquote>
-<strong>
-<p>To Do:</p>
-<ul>
-  <li>
-    It <em>isn't</em> necessary for every instructor to know all of the material:
-    instructors frequently need to adapt their plans on the fly
-    based on learners' abilities and interests,
-  </li>
-  <li>
-    Section 12: link to explanation of what to clone on GitHub.
-  </li>
-  <li>
-    Section 13: where *do* we store setup information these days?
-  </li>
-  <li>
-    Mention team signup in Section 1.
-  </li>
-  <li>
-    Explain follow-up sessions.
-  </li>
-</ul>
-</strong>
-</blockquote>
-
 <p>
   A boot camp is an intensive hands-on workshop
   in which participants learn software skills
@@ -43,7 +14,7 @@
   This page documents our best practices
   for organising and running a bootcamp.
   We have divided advice according to
-  the major roles involved in putting on a bootcamp: 
+  the major roles involved in putting on a bootcamp:
 </p>
 
 <ul>
@@ -72,19 +43,31 @@
   which you may find useful as well.
 </p>
 
-<h3>We can help...</h3>
+<h3>We're Here To Help</h3>
 
-<!--TODO explain the role of SWC in putting on bootcamps, or assisting others in
-putting on bootcamps-->
-
-<p><em>
+<p>
   If you have any questions or would like help organising your boot camp,
   please email us at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.
-  Please note that as a condition of our support,
+  We can:
+</p>
+
+<ul>
+  <li>recruit instructors,</li>
+  <li>advertise your bootcamp,</li>
+  <li>handle registration,</li>
+  <li>tell you what's worked (and hasn't) in the past,</li>
+  <li>help you customize material for particular audiences,</li>
+  <li>support requests for funding,</li>
+</ul>
+
+<p>
+  and many other things as well&mdash;just ask.
+  Please note,
+  though,
+  that as a condition of our support,
   we require boot camp organizers, instructors, and attendees to adhere to our
   <a href="{{root_path}}/bootcamps/conduct.html">code of conduct</a>.
-</em></p>
-
+</p>
 
 <div id="organizer">
 
@@ -95,10 +78,10 @@ putting on bootcamps-->
     you are responsible for coordinating the entire event.
   <p>
 
-  <h3>1. Decide what sort of boot camp you want</h3>
+  <h3>1. Decide what kind of boot camp you want</h3>
 
   <p>
-    The first thing you need to decide is who your intended audience is.
+    The first thing you need to decide is your intended audience.
     Can anyone apply or is it restricted to a specific university or company?
     Do you want to target people in a particular discipline
     (or range of related disciplines),
@@ -130,7 +113,7 @@ putting on bootcamps-->
 
   <p>
     You also need to decide whether your boot camp is free or not.
-    Boot camps traditionally have been,
+    Boot camps traditionally have been free,
     but we are now frequently charging either a $20 deposit
     (refunded to everyone who attends both days),
     or a flat $20 fee,
@@ -138,12 +121,33 @@ putting on bootcamps-->
     We have found that both strategies reduce the number of no-shows from 20-25% to 5% or less,
     and in the case of a flat fee,
     the money can be used to cover coffee and snacks, local travel expenses, and so on.
+    Be careful if you want to do this, though:
+    as soon as you charge anything at all&mdash;even a refundable deposit&mdash;some
+    venues will charge <em>you</em> for use of the space.
   </p>
 
   <p>
-    Be careful if you want to do this:
-    as soon as you charge anything at all&mdash;even a refundable deposit&mdash;some
-    venues will charge <em>you</em> for use of the space.
+    While team signup is more difficult to manage than individual signup,
+    it also has many benefits,
+    including a lower no-show rate and more in-class peer support.
+    And while we don't yet have any solid data to report,
+    we believe it increases the likelihood of people using what they've learned
+    after the boot camp is over:
+    it's a lot easier for people to put what they've learned into practice
+    if everyone in their lab is doing so at the same time.
+  </p>
+
+  <p>
+    Finally,
+    you should decide <em>before</em> the boot camp
+    what kind of follow-up you're going to offer (if any).
+    Some groups have run weekly lunch-and-learn sessions for a couple of months after a boot camp
+    to help people put what they've learned into action.
+    Other groups have set up mailing lists,
+    and we've tried running online tutorials as well
+    (though with disappointing results).
+    Whatever you decide to do,
+    figure it out in advance so that you can tell learners about it at least a couple of times.
   </p>
 
   <h3>2. Secure funding</h3>
@@ -331,8 +335,7 @@ putting on bootcamps-->
     and also space for food and drink so that everyone can snack as they're working.
     Rooms usually aren't set up for the first,
     though,
-    and there are often rules against the second
-    (which you may choose to respect or not).
+    and there are often rules against the second.
   </p>
 
   <h3>6. Create your timetable</h3>
@@ -414,7 +417,7 @@ putting on bootcamps-->
       </tr>
     </tbody>
   </table>
-      
+
   <p>
     In almost all cases,
     learners want to use their own laptops during boot camps
@@ -621,9 +624,12 @@ putting on bootcamps-->
   <p>
     Make your materials available to both the helpers and the attendees.
     publishing your slides, code, and scripts to the helpers in advance
-    Having access to these materials allows learners to catch up in their own time if they fall behind,
+    Having access to these materials
+    allows learners to catch up in their own time if they fall behind,
     and lets helpers fill in gaps in their own understanding before the boot camp starts.
-    The easiest way to do this is to clone our boot camp repository on GitHub.
+    The easiest way to do this is to clone our
+    <a href="https://github.com/swcarpentry/boot-camps">boot camp repository</a>
+    on GitHub.
   </p>
 
   <h3>13. Publish attendee setup information</h3>
@@ -684,38 +690,10 @@ putting on bootcamps-->
 
   <h3>16. Gather your gear</h3>
 
-  <p>Collect the following equipment at least a day before the start of the boot camp:</p>
-
-  <ul class="checklist">
-    <li>
-      A projector (and a spare if you can find one, or a spare bulb if you can't).
-    </li>
-    <li>
-      A Mac VGA adapter if anyone is presenting with a Mac.
-    </li>
-    <li>
-      Extension cords if necessary so that everyone has access to power.
-    </li>
-    <li>
-      Two different colors of Post-It notes for use as flags and for feedback.
-    </li>
-    <li>
-      Guest WiFi or network usernames and passwords for everyone.
-    </li>
-    <li>
-      If possible, a couple of spare machines with the required already installed software
-      in case someone can't get access to the network, forgets their machine, has hardware problems, etc.
-    </li>
-    <li>
-      An attendance sheet to keep track of who actually attended.
-    </li>
-    <li>
-      Photo release forms (if required).
-    </li>
-    <li>
-      Name badges for instructors, helpers, and attendees.
-    </li>
-  </ul>
+  <p>
+    Collect the equipment listed in the checklist
+    at least a day before the start of the boot camp.
+  </p>
 
   <h3>Checklists</h3>
 
@@ -726,212 +704,231 @@ putting on bootcamps-->
     to help future organizers.
   </p>
 
-  <h4>The week before</h4>
+  <div class="well">
+    <h4>The week before</h4>
+    <ul class="checklist">
+      <li>
+	Request confirmation from attendees that they will be attending.
+      </li>
+      <li>
+	Let the people on the waiting list know if they can attend or not.
+	(You may want to invite ten or so locals from the waiting list to turn up.
+	If there are still empty seats at mid-morning on the first day, then they're welcome to stay.
+	If not, they're welcome to come back for the next one,
+	but make it clear <em>before </em>they arrive that their participation is not guaranteed.)
+      </li>
+      <li>
+	Remind attendees of the setup page,
+	and make it clear that they are expected to set up their computer <em>before</em> they attend the boot camp
+	and to email for help if they have a problem.
+      </li>
+      <li>
+	Send a pre-boot camp questionnaire if you are using one.
+      </li>
+      <li>
+	Ask your instructors to put their materials and practical exercises on your web pages
+	so that attendees can refer to them during the boot camp.
+	Data files or other useful information should also be made available for download.
+      </li>
+      <li>
+	Take your instructors and helpers to dinner the evening before the boot camp starts.
+      </li>
+      <li>
+	Contact your helpers to see if they have any questions
+	and remind them to arrive 10-15 minutes early so they can be briefed.
+      </li>
+      <li>
+	Remind instructors and helpers to familiarise themselves with all the material
+	(especially the instructors,
+	in case one has to cover for another)
+	and to set up the boot camp software on their laptops.
+      </li>
+      <li>
+	Identify a suitable venue nearby for socialising after the first day.
+      </li>
+    </ul>
+  </div>
 
-  <ul class="checklist">
-    <li>
-      Request confirmation from attendees that they will be attending.
-    </li>
-    <li>
-      Let the people on the waiting list know if they can attend or not.
-      (You may want to invite ten or so locals from the waiting list to turn up.
-      If there are still empty seats at mid-morning on the first day, then they're welcome to stay.
-      If not, they're welcome to come back for the next one,
-      but make it clear <em>before </em>they arrive that their participation is not guaranteed.)
-    </li>
-    <li>
-      Remind attendees of the setup page,
-      and make it clear that they are expected to set up their computer <em>before</em> they attend the boot camp
-      and to email for help if they have a problem.
-    </li>
-    <li>
-      Send a pre-boot camp questionnaire if you are using one.
-    </li>
-    <li>
-      Ask your instructors to put their materials and practical exercises on your web pages
-      so that attendees can refer to them during the boot camp.
-      Data files or other useful information should also be made available for download.
-    </li>
-    <li>
-      Take your instructors and helpers to dinner the evening before the boot camp starts.
-    </li>
-    <li>
-      Contact your helpers to see if they have any questions
-      and remind them to arrive 10-15 minutes early so they can be briefed.
-    </li>
-    <li>
-      Remind instructors and helpers to familiarise themselves with all the material
-      (especially the instructors,
-      in case one has to cover for another)
-      and to set up the boot camp software on their laptops.
-    </li>
-    <li>
-      Identify a suitable venue nearby for socialising after the first day.
-    </li>
-  </ul>
+  <div class="well">
+    <h4>The day before</h4>
+    <ul class="checklist">
+      <li>
+	Is the building and the room going to be unlocked on the day of the event?
+      </li>
+      <li>
+	Is the room clearly signposted?
+      </li>
+      <li>
+	Do you know where the toilets are?
+      </li>
+      <li>
+	Is there any noisy construction/cleaning going on and, if so, can you do something about it?
+      </li>
+      <li>
+	Is the network/WiFi working?
+      </li>
+      <li>
+	Have you set up network/WiFi guest accounts?
+      </li>
+      <li>
+	Do you have a contact number for maintenance and technical support?
+      </li>
+      <li>
+	Have you double-checked with catering?
+      </li>
+      <li>
+	Have you emailed a reminder to everyone?
+      </li>
+      <li>
+	Have you set up all the accounts, web sites, and repositories you will need?
+      </li>
+      <li>
+	Do you have name badges for learners, helpers, and instructors?
+      </li>
+      <li>
+	Do you have somewhere to socialise in after the first day?
+      </li>
+    </ul>
+  </div>
 
-  <h4>The day before</h4>
+  <div class="well">
+    <h4>Equipment</h4>
+    <ul class="checklist">
+      <li>
+	A projector (and a spare if you can find one, or a spare bulb if you can't).
+      </li>
+      <li>
+	A Mac VGA adapter if anyone is presenting with a Mac.
+      </li>
+      <li>
+	Extension cords if necessary so that everyone has access to power.
+      </li>
+      <li>
+	Two different colors of Post-It notes for use as flags and for feedback.
+      </li>
+      <li>
+	Guest WiFi or network usernames and passwords for everyone.
+      </li>
+      <li>
+	If possible, a couple of spare machines with the required already installed software
+	in case someone can't get access to the network, forgets their machine, has hardware problems, etc.
+      </li>
+      <li>
+	An attendance sheet to keep track of who actually attended.
+      </li>
+      <li>
+	Photo release forms (if required).
+      </li>
+      <li>
+	Name badges for instructors, helpers, and attendees.
+      </li>
+    </ul>
+  </div>
 
-  <ul class="checklist">
-    <li>
-      Is the building and the room going to be unlocked on the day of the event?
-    </li>
-    <li>
-      Is the room clearly signposted?
-    </li>
-    <li>
-      Do you know where the toilets are?
-    </li>
-    <li>
-      Is there any noisy construction/cleaning going on and, if so, can you do something about it?
-    </li>
-    <li>
-      Is the projector working, and do you have a spare bulb?
-    </li>
-    <li>
-      Do you have a Mac VGA adapter?
-    </li>
-    <li>
-      Do you have enough power cords?
-    </li>
-    <li>
-      Is the network/WiFi working?
-    </li>
-    <li>
-      Have you set up network/WiFi guest accounts?
-    </li>
-    <li>
-      Do you have a contact number for maintenance and technical support?
-    </li>
-    <li>
-      Have you double-checked with catering?
-    </li>
-    <li>
-      Have you emailed a reminder to everyone?
-    </li>
-    <li>
-      Have you set up all the accounts, web sites, and repositories you will need?
-    </li>
-    <li>
-      Do you have colored sticky notes?
-    </li>
-    <li>
-      Do you have name badges for learners, helpers, and instructors?
-    </li>
-    <li>
-      Do you have an attendance sheet?
-    </li>
-    <li>
-      Do you have a photo release form?
-    </li>
-    <li>
-      Do you have somewhere to socialise in after the first day?
-    </li>
-  </ul>
+  <div class="well">
+    <h4>Before welcoming people on the first day</h4>
+    <ul class="checklist">
+      <li>
+	Put up any signs to the room.
+      </li>
+      <li>
+	Give instructors and helpers their badges.
+      </li>
+      <li>
+	Remind helpers of their role: mingle, answer questions, and help attendees.
+      </li>
+      <li>
+	Ensure that helpers are seated around the room.
+      </li>
+      <li>
+	Give everyone a few minutes to plug-in, get on the network, and settle in.
+      </li>
+    </ul>
+  </div>
 
-  <h4>On the first day</h4>
+  <div class="well">
+    <h4>First-day welcome</h4>
+    <ul class="checklist">
+      <li>
+	Tell the attendees who the instructors and helpers are,
+	explain what they're there for,
+	and get them all to wave.
+      </li>
+      <li>
+	Make network connection instructions available on a hand-out or projector.
+      </li>
+      <li>
+	Tell everyone what Twitter hash tag you're using.
+      </li>
+      <li>
+	Circulate the attendance sheet and photo release form.
+      </li>
+      <li>
+	Remind everyone of the <a href="{{root_path}}/bootcamps/conduct.html">code of conduct</a>.
+      </li>
+      <li>
+	Give everyone sticky notes.
+      </li>
+      <li>
+	Quickly remind everyone of the schedule.
+      </li>
+    </ul>
+  </div>
 
-  <p>Before you welcome everyone:</p>
+  <div class="well">
+    <h4>During the boot camp</h4>
+    <ul class="checklist">
+      <li>
+	Collect feedback before every break.
+      </li>
+    </ul>
+  </div>
 
-  <ul class="checklist">
-    <li>
-      Put up any signs to the room.
-    </li>
-    <li>
-      Give instructors and helpers their badges.
-    </li>
-    <li>
-      Remind helpers of their role: mingle, answer questions, and help attendees.
-    </li>
-    <li>
-      Ensure that helpers are seated around the room.
-    </li>
-    <li>
-      Give everyone a few minutes to plug-in, get on the network, and settle in.
-    </li>
-  </ul>
+  <div class="well">
+    <h4>At the close of the last day</h4>
+    <ul class="checklist">
+      <li>
+	Ask attendees for more substantial feedback.
+      </li>
+      <li>
+	Collect the attendance sheet and photo release forms.
+      </li>
+      <li>
+	Remind attendees of any follow-up sessions you have planned.
+      </li>
+      <li>
+	Tell attendees that we are always looking for more helpers and instructors,
+	and that we run a short online training class for people who are interested,
+	then ask if they would like to join our team.
+	If so,
+	note down their contact details and forward them to us,
+	or have them contact us at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.
+      </li>
+    </ul>
+  </div>
 
-  <p>As part of your welcome:</p>
-
-  <ul class="checklist">
-    <li>
-      Tell the attendees who the instructors and helpers are,
-      explain what they're there for,
-      and get them all to wave.
-    </li>
-    <li>
-      Make network connection instructions available on a hand-out or projector.
-    </li>
-    <li>
-      Tell everyone what Twitter hash tag you're using.
-    </li>
-    <li>
-      Circulate the attendance sheet and photo release form.
-    </li>
-    <li>
-      Remind everyone of the <a href="{{root_path}}/bootcamps/conduct.html">code of conduct</a>.
-    </li>
-    <li>
-      Give everyone sticky notes.
-    </li>
-    <li>
-      Quickly remind everyone of the schedule.
-    </li>
-  </ul>
-
-  <h4>During the boot camp</h4>
-
-  <ul class="checklist">
-    <li>
-      Collect feedback before every break.
-    </li>
-  </ul>
-
-  <h4>At the close of the last day</h4>
-
-  <ul class="checklist">
-    <li>
-      Ask attendees for more substantial feedback.
-    </li>
-    <li>
-      Collect the attendance sheet and photo release forms.
-    </li>
-    <li>
-      Remind attendees of any follow-up sessions you have planned.
-    </li>
-    <li>
-      Tell attendees that we are always looking for more helpers and instructors,
-      and that we run a short online training class for people who are interested,
-      then ask if they would like to join our team.
-      If so,
-      note down their contact details and forward them to us,
-      or have them contact us at <a href="mailto:{{contact_email}}">{{contact_email}}</a>.
-    </li>
-  </ul>
-
-  <h4>The day after</h4>
-
-  <p>
-    Send one last email to:
-  </p>
-
-  <ul class="checklist">
-    <li>
-      send out a feedback questionnaire (if you have one);
-    </li>
-    <li>
-      remind attendees about follow-up sessions (if you have any);
-      and
-    </li>
-    <li>
-      remind attendees to get in touch if they'd like to join our team,
-    </li>
-  </ul>
-
-  <p>
-    then send us a blog post about how it all went,
-    and take the rest of the day off&mdash;you've earned it.
-  </p>
+  <div class="well">
+    <h4>The day after</h4>
+    <p>
+      Send one last email to:
+    </p>
+    <ul class="checklist">
+      <li>
+	distribute a feedback questionnaire (if you have one);
+      </li>
+      <li>
+	remind attendees about follow-up sessions (if you have any);
+	and
+      </li>
+      <li>
+	remind attendees to get in touch if they'd like to join our team,
+      </li>
+    </ul>
+    <p>
+      then send us a blog post about how it all went,
+      and take the rest of the day off&mdash;you've earned it.
+    </p>
+  </div>
 
 </div>
 
@@ -946,42 +943,57 @@ putting on bootcamps-->
     your helpers are there to help.
   </p>
 
-  <h3>Before</h3>
+  <p>
+    It <em>isn't</em> necessary for every instructor to know all of the material,
+    but it helps,
+    particularly if someone can't make it at the last minute.
+  </p>
 
-  <ul class="checklist">
-    <li>
-      Arrange travel to the boot camp site,
-      accommodation,
-      and transportation from wherever you're staying to wherever you're teaching.
-      Save your receipts!
-    </li>
-    <li>
-      Prepare your materials:
-      <ul>
-        <li>data sets</li>
-        <li>cheat sheets</li>
-        <li>exercises</li>
-        <li>repositories</li>
-        <li>Etherpad.</li>
-      </ul>
-    </li>
-    <li>
-      Do a practice run of your tutorials and practicals,
-      especially if you'll be coding live
-      (our recommended teaching approach).
-    </li>
-    <li>
-      Ensure you have the same setup as the attendees by working through your own setup pages.
-    </li>
-    <li>
-      Post your practical exercises on web pages to allow students to refer to them during the boot camp.
-      Data files or other useful information should also be added.
-    </li>
-    <li>
-      Familiarise yourself with the material your fellow instructors will be presenting,
-      just in case one of them pulls out.
-    </li>
-  </ul>
+  <p>
+    Finally,
+    remember that no lesson plan survives contact with the audience.
+    We try to keep boot camps small so that instructors can respond to learners' questions
+    puzzled looks,
+    and/or signs of impatience.
+  </p>
+
+  <div class="well">
+    <h3>Before</h3>
+    <ul class="checklist">
+      <li>
+	Arrange travel to the boot camp site,
+	accommodation,
+	and transportation from wherever you're staying to wherever you're teaching.
+	Save your receipts!
+      </li>
+      <li>
+	Prepare your materials:
+	<ul>
+          <li>data sets</li>
+          <li>cheat sheets</li>
+          <li>exercises</li>
+          <li>repositories</li>
+          <li>Etherpad.</li>
+	</ul>
+      </li>
+      <li>
+	Do a practice run of your tutorials and practicals,
+	especially if you'll be coding live
+	(our recommended teaching approach).
+      </li>
+      <li>
+	Ensure you have the same setup as the attendees by working through your own setup pages.
+      </li>
+      <li>
+	Post your practical exercises on web pages to allow students to refer to them during the boot camp.
+	Data files or other useful information should also be added.
+      </li>
+      <li>
+	Familiarise yourself with the material your fellow instructors will be presenting,
+	just in case one of them pulls out.
+      </li>
+    </ul>
+  </div>
 
   <p>
     Note:
@@ -994,89 +1006,91 @@ putting on bootcamps-->
     Alternatively,
     create an account on
     <a href="http://etherpad.mozilla.org">etherpad.mozilla.org</a>
-    to automatically track the pads you create. 
+    to automatically track the pads you create.
   </p>
 
-  <h3>On the day</h3>
+  <div class="well">
+    <h3>On the day</h3>
+    <ul class="checklist">
+      <li>
+	If you are using multiple windows (e.g., a command window and an editor window)
+	make sure they are both large enough to be visible by all attendees.
+	Remember to pause when switching from one window to the other
+	so that learners don't become confused.
+	If possible,
+	use different background colors for different text windows
+	to make it easier for learners to tell them apart
+	(but keep in mind red-green and blue-yellow color blindness).
+      </li>
+      <li>
+	As you type at the command line,
+	read out what you're typing.
+	Remember that most learners can only go half as fast as you,
+	because they have to watch you type,
+	then type it all in again themselves.
+      </li>
+      <li>
+	If possible,
+	use <a href="http://etherpad.org">Etherpad</a> or something similar
+	to share code snippets with learners.
+	We can help you set this up if needed.
+      </li>
+      <li>
+	Back up the material with your own anecdotes, experiences and evidence&mdash;it
+	makes you more credible,
+	helps learners understand how to apply what you're teaching to their own problems,
+	and prevents the lectures from becoming too dry.
+      </li>
+      <li>
+	Emphasise that good software development skills contribute to productive, reproducible, reusable research.
+      </li>
+      <li>
+	For every question with a binary answer (yes/no, have done/have not done, works/does not work),
+	ask learners to hold up green (yes) or red (no) sticky notes
+	so that you can gauge their level of understanding.
+	This also keeps them more engaged.
+      </li>
+      <li>
+	When you ask attendees to do a practical exercise,
+	have them post a red note on their laptop if they run into trouble
+	and a green one when they have a solution.
+	This lets you gauge how learners are progressing,
+	and lets helpers see who needs their assistance.
+      </li>
+      <li>
+	Just before each break,
+	have learners write down one good point on their green sticky
+	and one bad one on their red sticky
+	and hand them in.
+	It only takes a couple of minutes to sort through these,
+	and it quickly tells you whether you're going too fast or too slow,
+	whether you need to review some material after the break,
+	etc.
+	If you can,
+	put each batch of sticky notes into an envelope
+	and send them to us
+	so that we can look for patterns.
+      </li>
+      <li>
+	If people would rather not write on sticky notes,
+	ask each person in the room to give you one good point or one bad one
+	at the end of the final day
+	(without repeating anything someone else has already said).
+	Again,
+	please send us this feedback so that we can look for patterns.
+      </li>
+    </ul>
+  </div>
 
-  <ul class="checklist">
-    <li>
-      If you are using multiple windows (e.g., a command window and an editor window)
-      make sure they are both large enough to be visible by all attendees.
-      Remember to pause when switching from one window to the other
-      so that learners don't become confused.
-      If possible,
-      use different background colors for different text windows
-      to make it easier for learners to tell them apart
-      (but keep in mind red-green and blue-yellow color blindness).
-    </li>
-    <li>
-      As you type at the command line,
-      read out what you're typing.
-      Remember that most learners can only go half as fast as you,
-      because they have to watch you type,
-      then type it all in again themselves.
-    </li>
-    <li>
-      If possible,
-      use <a href="http://etherpad.org">Etherpad</a> or something similar
-      to share code snippets with learners.
-      We can help you set this up if needed.
-    </li>
-    <li>
-      Back up the material with your own anecdotes, experiences and evidence&mdash;it
-      makes you more credible,
-      helps learners understand how to apply what you're teaching to their own problems,
-      and prevents the lectures from becoming too dry.
-    </li>
-    <li>
-      Emphasise that good software development skills contribute to productive, reproducible, reusable research.
-    </li>
-    <li>
-      For every question with a binary answer (yes/no, have done/have not done, works/does not work),
-      ask learners to hold up green (yes) or red (no) sticky notes
-      so that you can gauge their level of understanding.
-      This also keeps them more engaged.
-    </li>
-    <li>
-      When you ask attendees to do a practical exercise,
-      have them post a red note on their laptop if they run into trouble
-      and a green one when they have a solution.
-      This lets you gauge how learners are progressing,
-      and lets helpers see who needs their assistance.
-    </li>
-    <li>
-      Just before each break,
-      have learners write down one good point on their green sticky
-      and one bad one on their red sticky
-      and hand them in.
-      It only takes a couple of minutes to sort through these,
-      and it quickly tells you whether you're going too fast or too slow,
-      whether you need to review some material after the break,
-      etc.
-      If you can,
-      put each batch of sticky notes into an envelope
-      and send them to us
-      so that we can look for patterns.
-    </li>
-    <li>
-      If people would rather not write on sticky notes,
-      ask each person in the room to give you one good point or one bad one
-      at the end of the final day
-      (without repeating anything someone else has already said).
-      Again,
-      please send us this feedback so that we can look for patterns.
-    </li>
-  </ul>
-
-  <h3>The day after</h3>
-
-  <ul class="checklist">
-    <li>
-      Tell us what worked and what didn't
-      so that we can improve future boot camps.
-    </li>
-  </ul>
+  <div class="well">
+    <h3>The day after</h3>
+    <ul class="checklist">
+      <li>
+	Tell us what worked and what didn't
+	so that we can improve future boot camps.
+      </li>
+    </ul>
+  </div>
 
 </div>
 
@@ -1090,50 +1104,54 @@ putting on bootcamps-->
     to teach it yourself in future if you choose to do so.
   </p>
 
-  <h3>Before</h3>
-  <ul class="checklist">
-    <li>
-      Ensure you're familiar with or have read over the material
-      that the instructors will cover in the sessions you're helping with.
-    </li>
-    <li>
-      If you have time,
-      try and work through the setup information for the boot camp before you come along.
-      Many of the questions you will get on the first day
-      will be related to installation issues.
-    </li>
-    <li>
-      Read the blog posts by <a href="{{root_path}}/blog/2012/10/how-to-help-at-a-boot-camp.html">Katy Huff</a>
-      and <a href="http://www.software.ac.uk/blog/2012-11-02-top-tips-helpers-software-carpentry-bootcamp">Aleksandra Pawlik</a>
-      on how to be a helper.
-    </li>
-  </ul>
+  <div class="well">
+    <h3>Before</h3>
+    <ul class="checklist">
+      <li>
+	Ensure you're familiar with or have read over the material
+	that the instructors will cover in the sessions you're helping with.
+      </li>
+      <li>
+	If you have time,
+	try and work through the setup information for the boot camp before you come along.
+	Many of the questions you will get on the first day
+	will be related to installation issues.
+      </li>
+      <li>
+	Read the blog posts by <a href="{{root_path}}/blog/2012/10/how-to-help-at-a-boot-camp.html">Katy Huff</a>
+	and <a href="http://www.software.ac.uk/blog/2012-11-02-top-tips-helpers-software-carpentry-bootcamp">Aleksandra Pawlik</a>
+	on how to be a helper.
+      </li>
+    </ul>
+  </div>
 
-  <h3>On the day</h3>
+  <div class="well">
+    <h3>On the day</h3>
+    <ul class="checklist">
+      <li>
+	Go round the room and look for attendees who need help.
+	They may be holding up a red sticky note,
+	but they may also just be sitting there looking despondent or peering intently at their laptop.
+      </li>
+      <li>
+	If you can't answer an attendee's question, tell them that and ask an instructor for help.
+	Do <em>not</em> dive into a 20-minute debugging session on their laptop...
+      </li>
+    </ul>
+  </div>
 
-  <ul class="checklist">
-    <li>
-      Go round the room and look for attendees who need help.
-      They may be holding up a red sticky note,
-      but they may also just be sitting there looking despondent or peering intently at their laptop.
-    </li>
-    <li>
-      If you can't answer an attendee's question, tell them that and ask an instructor for help.
-      Do <em>not</em> dive into a 20-minute debugging session on their laptop...
-    </li>
-  </ul>
-
-  <h3>The day after</h3>
-
-  <ul class="checklist">
-    <li>
-      Tell the organisers what you think worked and what didn't
-      so that we can improve future boot camps.
-    </li>
-    <li>
-      Let us know if you'd like to become an instructor yourself.
-    </li>
-  </ul>
+  <div class="well">
+    <h3>The day after</h3>
+    <ul class="checklist">
+      <li>
+	Tell the organisers what you think worked and what didn't
+	so that we can improve future boot camps.
+      </li>
+      <li>
+	Let us know if you'd like to become an instructor yourself.
+      </li>
+    </ul>
+  </div>
 
 </div>
 
@@ -1276,7 +1294,12 @@ putting on bootcamps-->
     Can everyone actually log in?
     And while we're here, does campus security know you're using the room over the weekend?
   </p>
-  
+
 </div>
+
+<div id="checklists">
+
+<h2>Checklists</h2>
+
 
 {% endblock content %}
