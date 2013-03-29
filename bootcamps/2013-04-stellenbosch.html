@@ -7,6 +7,7 @@
   <meta name="latlng" content="-33.929492, 18.865391" />
   <meta name="registration" content="open" />
   <meta name="instructor" content="ahmadia.a" />
+  <meta name="eventbrite_key" content="6014414275" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> Stellenbosch University, Room A306 of the Engineering
@@ -25,4 +26,5 @@ Building</p>
 </ul>
 
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
