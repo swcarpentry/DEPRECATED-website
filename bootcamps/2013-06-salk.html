@@ -1,0 +1,21 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Salk Institute" />
+  <meta name="date" content="June 2013" />
+  <meta name="startdate" content="2013-06-10" />
+  <meta name="enddate" content="2013-06-11" />
+  <meta name="latlng" content="32.887151, -117.246212" />
+  <meta name="instructor" content="kerr.j" />
+  <meta name="instructor" content="punch.bill" />
+  <meta name="registration" content="restricted" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Salk Institute for Biological Studies, La Jolla, California</p>
+<p><strong>When:</strong> June 10-11, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_instructors.html" %}
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{% endblock content %}
