@@ -1,0 +1,88 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Microsoft Research, Boston" />
+  <meta name="date" content="June 2013" />
+  <meta name="startdate" content="2013-06-24" />
+  <meta name="enddate" content="2013-06-25" />
+  <meta name="latlng" content="32.887151, -117.246212" />
+  <meta name="instructor"> content="chuang-howe.a" />
+  <meta name="instructor"> content="mckellar.j" />
+  <meta name="instructor"> content="supp.s" />
+  <meta name="instructor"> content="teal.t" />
+  <meta name="registration" content="open" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Microsoft Research, 1 Cambridge Center, Boston MA</p>
+<p><strong>When:</strong> June 24-25, 2013. We will start at 8:45 and end at 4:30 each day.</p>
+{% include "_what.html" %}
+
+<p><strong>Who:</strong> This boot camp is open to female graduate
+students, post-docs, faculty members, staff scientists, or equivalent
+in science, engineering, medicine, or a related field.  Participants
+should have some prior experience with basic programming.</p>
+
+<p><strong>Sponsors:</strong> We are very grateful for support from
+the following organizations, which has made this boot camp possible.</p>
+<div class="row">
+  <div class="span6">
+    <div class="media">
+      <img class="media-object pull-left" src="{{root_path}}/img/credits/microsoft.png" alt="Microsoft" />
+      <div class="media-body">FIXME</div>
+    </div>
+    <div class="media">
+      <img class="media-object pull-left" src="{{root_path}}/img/credits/intel.png" alt="Intel" />
+      <div class="media-body">FIXME</div>
+    </div>
+  </div>
+  <div class="span6">
+    <div class="media">
+      <img class="media-object pull-left" src="{{root_path}}/img/credits/psf.png" alt="Python Software Foundation" />
+      <div class="media-body">FIXME</div>
+    </div>
+  </div>
+</div>
+
+<p><strong>Instructors:</strong></p>
+<div class="row">
+  <div class="span6">
+    <div class="media">
+      <img class="media-object pull-left" src="{{root_path}}/img/people/howe-adina.jpg" alt="Adina Chuang Howe" />
+      <div class="media-body">Adina Chuang
+          Howe received her PhD in Environmental Engineering. She is currently
+        a postdoctoral research scientist at Michigan State University, where she
+        uses skills learned from Software Carpentry to study microbial communities
+        in the environment.</div>
+    </div>
+    <div class="media">
+      <img class="media-object pull-left" src="{{root_path}}/img/people/teal-tracy.jpg" alt="Tracy Teal" />
+      <div class="media-body"><span class="person">Tracy Teal</span> FIXME</div>
+    </div>
+  </div>
+  <div class="span6">
+    <div class="media">
+      <img class="media-object pull-left" src="{{root_path}}/img/people/supp-sarah.jpg" alt="Sarah Supp" />
+      <div class="media-body">Sarah Supp
+        is a Ph.D. student in Biology and Ecology at Utah State University. Her
+        research interests lie in combining field studies, macroecological analyses
+        and ecoinformatics to understand the dynamics that drive change at the
+        community and ecosystem level. She uses R, Python, MySQL, and version
+        control to handle the large datasets needed to explore ecological questions
+        focused at large spatiotemporal scales.</div>
+    </div>
+    <div class="media">
+      <img class="media-object pull-left" src="{{root_path}}/img/people/mckellar-jessica.jpg" alt="Jessica McKellar" />
+      <div class="media-body"><a href="http://jesstess.com/">Jessica
+        McKellar</a> is a kernel engineer living in Cambridge, MA. She is a
+        Python Software Foundation board member and an organizer for the largest
+        Python user group in the world. With that group she runs the Boston Python
+        Workshops for women and their friends&mdash;an introductory programming
+        pipeline that has brought hundreds of women into the local Python community
+        and is being replicated in cities across the US.</div>
+    </div>
+  </div>
+</div>
+
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{% endblock content %}
