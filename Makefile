@@ -22,7 +22,7 @@ COMPILE = \
 	python bin/compile.py \
 	-d $$(date "+%Y-%m-%d") \
 	-o $(OUT_DIR) \
-	-p . -p bootcamps -p 3_0 -p 4_0 -p blog \
+	-p . -p bootcamps -p sponsors -p 3_0 -p 4_0 -p blog \
 	-s $(SITE) \
 	-v
 
