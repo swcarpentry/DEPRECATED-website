@@ -1,5 +1,10 @@
 /* Customizations to Bootstrap's default styles */
 
+/* readability: darken the alert colour for contrast with background */
+.alert {
+  color: rgb(164,126,61);
+}
+
 /* Container for page contents. */
 .container {
     background-color: white;
