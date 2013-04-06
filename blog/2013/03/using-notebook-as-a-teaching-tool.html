@@ -79,10 +79,10 @@
       <li>No obvious place to add presenters' notes, since everything in the notebook is visible to everyone.  (However, the next release of the Notebook should allow authors to add CSS classes to cells. Once that lands, we'll be able to do show/hide buttons as an add-on, which will address this.)</li>
       <li>Easy for instructors to race through things faster than learners can follow (since they're not typing, just re-executing).  This is a minor issue compared to the next two problems.</li>
       <li>Makes "what if?" risky, because every execution of every cell modifies the server process's state, and a single divergence from the planned path can invalidate every subsequent cell's output.  This can be addressed by putting chunks of "reset" code into the notebook to get the interpreter's state back to where it needs to be before each example, but:
-	<ol>
-	  <li>that's an extra burden on learners, who have a hard time distinguishing "core example" code from "getting us back in order" code (particularly when the latter is usually not actually necessary); and</li>
-	  <li>there's the risk that learners will come away thinking that "reset" code is actually necessary, and will include it in their programs (because after all, that's what they've seen).</li>
-	</ol>
+        <ol>
+          <li>that's an extra burden on learners, who have a hard time distinguishing "core example" code from "getting us back in order" code (particularly when the latter is usually not actually necessary); and</li>
+          <li>there's the risk that learners will come away thinking that "reset" code is actually necessary, and will include it in their programs (because after all, that's what they've seen).</li>
+        </ol>
       </li>
       <li>It makes learning a passive experience once again: learners are hitting "shift-enter" once in a while, instead of just watching, but that's not much of a difference from just watching.</li>
     </ul>
