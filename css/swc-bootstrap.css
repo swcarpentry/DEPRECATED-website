@@ -2,7 +2,7 @@
 
 /* readability: darken the alert colour for contrast with background */
 .alert {
-  color: rgb(164,126,61);
+  color: rgb(0,0,0);
 }
 
 /* Container for page contents. */
