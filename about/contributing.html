@@ -11,10 +11,7 @@
 <p>Software Carpentry is an open project. Like all such projects, it needs your
 help to grow, and you can contribute in many ways, large and small.</p>
 
-<dl>
-
-  <dt id="teach">Teach</dt>
-  <dd>
+  <h3 id="teach">Teach</h3>
     <p>All of our slides, notes, and example programs are in our Git
     repository
     at <a href="https://github.com/swcarpentry/website">https://github.com/swcarpentry/website</a>,
@@ -29,31 +26,79 @@ help to grow, and you can contribute in many ways, large and small.</p>
     instructor or on your own) in one of these formats, or in one we haven't
     seen yet, please <a href="#discuss">let us know</a>&mdash;we'd be glad to
     provide you with training or advice.</p>
-  </dd>
 
-  <dt id="fix">Fix</dt>
-  <dd>
+  <h3 id="fix">Fix</h3>
     <p>If you see a mistake in on our website, please add a comment to the
     appropriate page, or <a href="mailto:{{contact_email}}">mail us</a>, and
     we'll fix it as quickly as we can.  And of course, we always welcome
     pull requests (see below).</p>
-  </dd>
 
-  <dt id="create">Create</dt>
-  <dd>
+  <h3 id="create">Create</h3>
     <p>If you are interested in developing the Software Carpentry
-    content, you can use <a href="http://git-scm.com/">Git</a> to get
-    the source for
-    our <a href="https://github.com/swcarpentry/website">website</a>,
-    and
-    our <a href="https://github.com/swcarpentry/boot-camps">teaching
-    materials</a>.  Pull requests for both are always welcome, or
-    <a href="mailto:{{contact_email}}">mail us</a> to talk about
-    what you'd like to do and how we can help.</p>
-  </dd>
+    content, we have organized our materials into a few different repositories
+    on <a href="https://github.com/swcarpentry">github</a>.</p> 
+    <table class="table table-striped">
+      <tr><th>Repository</th><th>Description</th><th>Contributing Docs</th></tr>
+      <tr>
+        <td><a href="https://github.com/swcarpentry/website">website</a></td>
+        <td>Holds the code to build most of our website content.</td>
+        <td> <a
+            href="https://github.com/swcarpentry/website/blob/master/README.md">README</a>,
+          <a
+            href="https://github.com/swcarpentry/website/blob/master/CONTRIBUTING.md">CONTRIBUTING</a>
+        </td>
+      </tr>
 
-  <dt id="discuss">Discuss</dt>
-  <dd>
+      <tr>
+        <td><a href="https://github.com/swcarpentry/4_0">4_0</a></td>
+        <td>Companion repository to <a
+            href="https://github.com/swcarpentry/website">website</a> holding
+          the 4.0 teaching materials: online video lectures and slides.</td>
+        <td> No longer under development</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/swcarpentry/3_0">3_0</a></td> 
+        <td>Companion repository to <a
+            href="https://github.com/swcarpentry/website">website</a> 
+          holding the 3.0 teaching materials: basic HTML pages
+          and slides. </td> 
+        <td>No longer under development</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/swcarpentry/boot-camps">boot-camps</a></td>
+        <td>Notes, teaching materials and webpages used to help run one of our
+          <a href="{{site}}/bootcamps/">Bootcamps</a>.  There is an
+          idiosyncratic development workflow for contributing to this repository
+          explained in the contributing docs.</td>
+        <td><a
+            href="https://github.com/swcarpentry/boot-camps/blob/master/CONTRIBUTING.md">CONTRIBUTING</a></td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/swcarpentry/assets">assets</a></td>
+        <td>Supporting files for the Software Carpentry organisation (e.g.
+          papers, logos, etc.)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/swcarpentry/notebooks">notebooks</a></td>
+        <td>A new repository to hold <a
+            href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">iPython
+            Notebook</a> versions of our teaching materials. </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/swcarpentry/guide">guide</a></td>
+        <td>This book aims to support Software Carpentry instructors as they
+          develop teaching material and course plans.</td>
+        <td>Send us <a href="email:admin@software-carpentry.org">email</a></td>
+      </tr>
+    </table>
+      
+    <p>Pull requests are always welcome, or <a
+      href="mailto:{{contact_email}}">mail us</a> to talk about what you'd like
+    to do and how we can help.</p>
+
+  <h3 id="discuss">Discuss</h3>
     <p>To stay up to date with us, you can follow <a
     href="{{root_path}}/blog">our blog</a> and sign up for our low-traffic
     announcement mailing list (approximately 2-3 emails a month):</p>
@@ -108,10 +153,8 @@ help to grow, and you can contribute in many ways, large and small.</p>
         </td>
       </tr>
     </table>
-  </dd>
 
-  <dt id="learn">Learn</dt>
-  <dd>
+  <h3 id="learn">Learn</h3>
     <p>
       We run an online training course to help people become
       instructors.  The course requires 2-4 hours/week for 8-10 weeks,
@@ -121,6 +164,4 @@ help to grow, and you can contribute in many ways, large and small.</p>
       visit <a href="http://teaching.software-carpentry.org">the
       course website</a>.
     </p>
-  </dd>
-</dl>
 {% endblock content %}
