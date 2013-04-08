@@ -17,6 +17,9 @@ BLOG_RSS_FILE = $(OUT_DIR)/feed.xml
 # iCalendar feed
 ICALENDAR_FILE = $(OUT_DIR)/bootcamps.ics
 
+# website user@hostname
+WEBSITE_USERHOST = swcarpentry@software-carpentry.org
+
 # Standard site compilation arguments.
 COMPILE = \
 	python bin/compile.py \
@@ -67,6 +70,16 @@ install :
 ## install-bare : rebuild entire site for real, without checks.
 install-bare :
 	@make OUT_DIR=$(HOME)/software-carpentry.org SITE=http://software-carpentry.org check-bare
+
+## install-rsync: rebuild entire site locally, and then rsync to the webhost
+install-rsync :
+	@make SITE=http://software-carpentry.org check
+	rsync -avz "$(OUT_DIR)/" "$(WEBSITE_USERHOST):software-carpentry.org/"
+
+## install-dev-rsync: rebuild entire site locally as (dev.s-c.org), and then rsync to the webhost
+install-dev-rsync :
+	@make SITE=http://dev.software-carpentry.org check
+	rsync -avz "$(OUT_DIR)/" "$(WEBSITE_USERHOST):dev.software-carpentry.org/"
 
 ## check        : rebuild entire site locally for checking purposes.
 check : $(STATIC_DST) $(OUT_DIR)/.htaccess
