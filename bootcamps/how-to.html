@@ -4,7 +4,18 @@
 {% endblock file_metadata %}
 {% block navhighlight %}{{navhighlight('bootcamps')}}{% endblock navhighlight %}
 {% block content %}
-<p>
+<div class="row-fluid">
+  <div class="span2" id="nav-sidebar">
+    <ul class="nav nav-tabs nav-stacked affix-bottom" data-spy="affix">
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#organizer">For Organizers</a></li>
+      <li><a href="#instructor">For Instructors</a></li>
+      <li><a href="#helper">For Helpers</a></li>
+      <li><a href="#mistake">What not to do</a></li>
+    </ul>
+  </div>
+  <div class="span10">
+<p id="introduction">
   A boot camp is an intensive hands-on workshop
   in which participants learn software skills
   based on shorts tutorials and practical exercises.
@@ -1378,5 +1389,6 @@
     </li>
   </ul>
 </div>
+</div> <!-- div.row -->
 
 {% endblock content %}
