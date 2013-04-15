@@ -7,14 +7,25 @@
   <meta name="latlng" content="50.060833, 19.932778" />
   <meta name="instructor" content="pawlik.a" />
   <meta name="instructor" content="lagesen.k" />
+  <meta name="registration" content="restricted" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> Jagiellonian University, Krakow, Poland</p>
 <p><strong>When:</strong> May 18-19, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+<p><strong>Note:</strong> This boot camp is restricted to students and staff
+of Jagiellonian University.</p>
 {% include "_instructors.html" %}
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}
-{% include "_content.html" %}
+<p>
+  <strong>Content:</strong> The syllabus for this boot camp will include:
+</p>
+<ul>
+   <li>using the shell to do more in less time</li>
+   <li>using version control to manage and share information</li>
+   <li>basic Python programming</li>
+   <li>task automation with Make</li>
+</ul>
 {% include "_contact.html" %}
 {% endblock content %}
