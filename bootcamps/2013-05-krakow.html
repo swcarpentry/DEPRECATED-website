@@ -11,7 +11,8 @@
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> Jagiellonian University, Krakow, Poland</p>
-<p><strong>When:</strong> May 18-19, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+<p><strong>When:</strong> May 18-19, 2013. We will start at 9:00 and end at 
+   4:30 each day.</p>
 <p><strong>Note:</strong> This boot camp is restricted to students and staff
 of Jagiellonian University.</p>
 {% include "_instructors.html" %}
@@ -27,5 +28,9 @@ of Jagiellonian University.</p>
    <li>basic Python programming</li>
    <li>task automation with Make</li>
 </ul>
-{% include "_contact.html" %}
+<p>
+  <strong>For More Information</strong>:
+  For more information, visit the <a href="http://www.doktoranci.uj.edu.pl/start/-/blogs/dobre-praktyki-informatyczne-warsztaty">Jagiellonian University boot camp page</a> or email
+  <a href="mailto:{{contact_email}}">{{contact_email}}</a>.
+</p>
 {% endblock content %}
