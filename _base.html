@@ -62,8 +62,8 @@
 <ul>
   {% for name, user, site in people %}
   <div class="pull-left" style="width:175px;">
-  <li><a badge-kind="{{badge_kind}}" 
-         badge-user="{{user}}" 
+  <li><a badge-kind="{{badge_kind}}"
+         badge-user="{{user}}"
          {% if site %}
          href="{{site}}">
          {% else %}
@@ -127,7 +127,7 @@
   <head>
     <link rel="shortcut icon" type="image/x-icon" href="{{root_path}}/img/favicon.ico" />
     <link rel="stylesheet" id="twentytwelve-fonts-css"
-      href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext" 
+      href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext"
       type="text/css" media="all">
     {% block css %}
     <link href="{{root_path}}/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -293,7 +293,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="{{root_path}}/js/bootstrap/bootstrap.min.js"></script>
 
     <!-- Google Analytics -->
