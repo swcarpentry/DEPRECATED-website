@@ -795,24 +795,24 @@ class PageFactory(object):
 
 #----------------------------------------
 
-class ContentEncodedRSSItem(RSSItem): 
-    def __init__(self, **kwargs): 
+class ContentEncodedRSSItem(RSSItem):
+    def __init__(self, **kwargs):
         self.content = kwargs.get('content', None)
-        if 'content' in kwargs: 
+        if 'content' in kwargs:
             del kwargs['content']
         RSSItem.__init__(self, **kwargs)
 
-    def publish_extensions(self, handler): 
+    def publish_extensions(self, handler):
         if self.content:
             handler._out.write('<%(e)s><![CDATA[%(c)s]]></%(e)s>' %
                 { 'e':'content:encoded', 'c':self.content})
-                
+
 #----------------------------------------
 
-class ContentEncodedRSS2(RSS2): 
+class ContentEncodedRSS2(RSS2):
     def __init__(self, **kwargs):
         RSS2.__init__(self, **kwargs)
-        self.rss_attrs['xmlns:content']='http://purl.org/rss/1.0/modules/content/' 
+        self.rss_attrs['xmlns:content']='http://purl.org/rss/1.0/modules/content/'
 
 #----------------------------------------
 
@@ -859,7 +859,8 @@ class ICalendarWriter(object):
             'LOCATION:{0}'.format(self.escape(bootcamp.venue)),
         ]
         if bootcamp.latlng:
-            lines.append('GEO:{0}'.format(bootcamp.latlng.replace(',', ';')))
+            latlng = re.sub(r'\s+', '', bootcamp.latlng).replace(',', ';')
+            lines.append('GEO:{0}'.format(latlng))
         lines.append('END:VEVENT')
         return lines
 
@@ -878,7 +879,7 @@ def create_rss(filename, site, posts):
     """
     Generate RSS2 feed.xml file for blog.
     """
-    
+
     items = []
     slice = posts[-BLOG_HISTORY_LENGTH:]
     slice.reverse()
