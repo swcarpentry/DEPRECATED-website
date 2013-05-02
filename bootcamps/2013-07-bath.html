@@ -8,6 +8,7 @@
   <meta name="registration" content="restricted" />
   <meta name="instructor" content="jackson.m" />
   <meta name="instructor" content="woods.c" />
+  <meta name="eventbrite_key" content="6059565323" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> University of Bath.</p>
@@ -23,4 +24,5 @@
   Please mail the
   <a href="mailto:host-bath@software-carpentry.org">local organiser</a> for more information.
 </p>
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
