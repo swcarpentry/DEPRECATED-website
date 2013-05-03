@@ -1,0 +1,20 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Virginia Tech" />
+  <meta name="date" content="July 2013" />
+  <meta name="startdate" content="2013-07-15" />
+  <meta name="enddate" content="2013-07-16" />
+  <meta name="latlng" content="37.2283843,-80.4234167" />
+  <meta name="instructor" content="guy.t" />
+  <meta name="registration" content="restricted" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Virginia Tech Sustainable Software for Chemistry and Materials Software Summer School</p>
+<p><strong>When:</strong> July 15-16, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_instructors.html" %}
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{% endblock content %}
