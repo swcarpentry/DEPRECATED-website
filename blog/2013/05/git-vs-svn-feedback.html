@@ -1,0 +1,19 @@
+{% extends "_blog.html" %}
+{% block file_metadata %}
+<meta name="post_id" content="5440" />
+<meta name="author_id" content="wilson.g" />
+<meta name="title" content="Git vs. Subversion and Feedback in General" />
+<meta name="post_date" content="2013-05-10" />
+<meta name="category" content="assessment" />
+<meta name="category" content="opinion" />
+{% endblock file_metadata %}
+{% block content %}
+<p>Joan Touzet did a great job teaching Git at the Toronto boot camp yesterday, but once again I think our learners would have absorbed more if we'd taught Subversion.  Why?  Well, take a look at this diagram by Oliver Steele (which I found on <a href="http://gitready.com/beginner/2009/01/21/pushing-and-pulling.html">this page</a> written by Nick Quaranto):</p>
+<p><a href="http://osteele.com/images/2008/git-transport.png"><img src="{{root_path}}/files/2013/05/git-transport.png" alt="Git Transport" /></a></p>
+<p>Four locations are in play, and eight different commands are used to move information around or compare what's in one place to another.  Now look at the corresponding diagram for Subversion:</p>
+<p><img src="{{root_path}}/files/2013/05/svn-transport.png" alt="Subversion Transport" /></p>
+<p>There are only three locations for people to keep track of, and the basic workflow involves only four commands.  If you believe complexity is partially multiplicative (because people have to keep track of the interactions between things, as well as the things themselves), Git is at least twice as complex for people to understand.  Slicing it another way, there are more opportunities for people to do the wrong thing with Git, and more they have to understand to undo it.</p>
+<p>And that's <em>before</em> we introduce branches...</p>
+<p>This is not an argument against distributed version control in general, or Git in particular (though the inconsistencies in Git's command syntax definitely make things worse than they need to be).  In the hands of a proficient user, every single one of Git's steps and stages serves a useful purpose.  The problem is, our users aren't yet proficient, and our job isn't just to show them how stuff works, but to persuade them that they're worth adopting.  I can easily teach people the basic Subversion workflow, <em>and convince them to adopt it</em>, in less than 90 minutes.  I'm still struggling to find a way to do that in two and a half hours with Git.</p>
+<p>But that's just my point of view.  Matt Davis and others believe they've been successful with Git in front of the same kinds of audiences. Our major goal for the next three months is to collect some follow-on data by interviewing and polling people who've attended boot camps in the last seventeen months to find out who was taught what, who tried what, who's still using what, and why.  Caitlyn Pickens will be leading this effort, and many of you will get email from her in the next few weeks.  When it arrives, please take a few minutes to tell us what you're actually doing, even if it's not what we told you to do&mdash;<em>especially</em> if it's not, because that'll tell us what we need to fix.</p>
+{% endblock content %}
