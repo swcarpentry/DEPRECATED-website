@@ -15,9 +15,9 @@
   and <a href="http://matplotlib.org/">matplotlib</a>,
   or a full-featured installation of R.
   You may also need
-  a simple database manager called <a href="http://www.sqlite.org/">SQLite</a>
-  and/or <a href="http://www.gnu.org/software/make/">GNU Make</a>
-  if your boot camp includes them.
+  a simple database manager called <a href="http://www.sqlite.org/">SQLite</a>,
+  <a href="http://www.gnu.org/software/make/">GNU Make</a>
+  or other software specific to your boot camp.
 </p>
 <p>
   This page explains how to install this software.
@@ -39,8 +39,9 @@
 <section id="vm">
   <h2>Using a Virtual Machine</h2>
   <p>
-    The easiest way to give everyone a consistent, pre-configured environment
-    is to use a Linux virtual machine.
+    The easiest way for us to provide you with a consistent, pre-configured environment
+    is to give you a Linux virtual machine.  You can use this virtual machine
+    from Windows, OS X, or even another Linux install.
     Install <a href="https://www.virtualbox.org/">VirtualBox</a>
     and download
     <a href="http://files.software-carpentry.org/swc_lubuntu.ova">this virtual machine image</a>
@@ -162,35 +163,14 @@
   </section>
   <section id="python">
     <h3>Python</h3>
-    <table class="table table-striped">
-      <tr>
-        <td>Linux</td>
-        <td>
-          We recommend the all-in-one scientific Python installer
-          <a href="http://continuum.io/downloads.html">Anaconda</a>.
-          Setting it up requires using the shell;
-          if you aren't comfortable doing this,
-          please download the installer <em>before</em> arriving
-          and your instructor will help you set it up.
-        </td>
-      </tr>
-      <tr>
-        <td>Mac</td>
-        <td>
-          As above.
-        </td>
-      </tr>
-      <tr>
-        <td>Windows</td>
-        <td>
-          We recommend the Enthought
-          <a href="https://www.enthought.com/downloads/">Canopy</a>
-          distribution,
-          since it seems to work well with
-          <a href="#bash-windows">Git Bash</a>.
-        </td>
-      </tr>
-    </table>
+    We recommend the all-in-one scientific Python distributions
+    <a href="http://continuum.io/downloads.html">Anaconda</a> and
+    <a href="https://www.enthought.com/products/canopy/">Canopy</a>.
+    Anaconda and Canopy Express are free to everyone, Canopy is free to academics.
+    Setting these packages up may require using the shell;
+    if you aren't comfortable doing this,
+    please download the installer corresponding to your operating system
+    <em>before</em> arriving and your instructor will help you set it up.
   </section>
   <section id="sqlite">
     <h3>SQLite</h3>
@@ -346,13 +326,6 @@ install.packages("plyr", dependencies = TRUE)</pre>
       <a href="http://yihui.name/knitr/">knitr</a>,
       which facilitates the creation of dynamic reports.
     </p>
-  </section>
-  <section id="nose">
-    <h3>Nose</h3>
-    Run:
-    <pre>$ easy_install nose</pre>
-    and test that it has installed correctly by running:
-    <pre>$ which nosetests</pre>
   </section>
   <section id="hg">
     <h3>Mercurial</h3>
