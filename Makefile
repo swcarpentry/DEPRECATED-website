@@ -86,7 +86,6 @@ check : $(STATIC_DST) $(OUT_DIR)/.htaccess
 	@make ascii-chars
 	@make check-bare
 	@make check-links
-	@make blog-journal
 
 ## check-bare   : rebuild entire site locally, but do not validate html 
 check-bare: $(STATIC_DST) $(OUT_DIR)/.htaccess
@@ -98,10 +97,6 @@ blog-next-id :
 	| sed -e 's:<meta name="post_id" content="::g' -e 's:" />::g' \
 	| sort -n \
 	| tail -1)
-
-## blog-journal : make journal-format version of blog
-blog-journal :
-	python bin/journal.py ${OUT_DIR}/blog/*/*/*.html > ${OUT_DIR}/blog/journal.html
 
 ## check-links  : check that local links resolve in generated HTML.
 check-links :
