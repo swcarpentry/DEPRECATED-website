@@ -451,7 +451,8 @@ class BootCampPage(GenericPage):
     """
 
     KEYS = GenericPage.KEYS + \
-           ['venue', 'latlng', 'date', 'startdate', 'enddate',
+           ['venue', 'latlng', 'country',
+            'date', 'startdate', 'enddate',
             'registration', 'eventbrite_key', '*instructor']
 
     UPLINK = 'index.html'
