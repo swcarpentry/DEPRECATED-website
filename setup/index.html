@@ -1,270 +1,361 @@
 {% extends "_base.html" %}
-
 {% block file_metadata %}
-  <meta name="title" content="Boot Camp Setup" />
-  <meta name="subfile" content="common.html" />
-  <meta name="subfile" content="osx.html" />
-  <meta name="subfile" content="redhatsl6.html" />
-  <meta name="subfile" content="terminal.html" />
-  <meta name="subfile" content="ubuntu.html" />
-  <meta name="subfile" content="windows.html" />
+  <meta name="title" content="Boot Camp Setup Instructions" />
 {% endblock file_metadata %}
-
 {% block content %}
-<p>This page lists the standard software used in many of our boot 
-camps and links to pages describing how to install this software on 
-various platforms.</p>
-
-<p>Your boot camp organizer will let you know exactly what software you 
-need to install before coming to your boot camp. You should ensure you 
-have the software installed <em>before</em> you arrive at the boot camp.
- This is so that practicals can proceed smoothly on the day. If you run 
-into any problems installing the software please let your boot camp 
-organizer know as soon as possible.</p>
-
-<p>After following the install instructions you can run through the check-list below to see you have the necessary software installed.</p>
-
-<h2>Installation Instructions</h2>
-
-<p>Please follow the appropriate operating system-specific installation instructions</p>
-<ul>
-<li><a href="common.html">Instructions common to all systems</a></li>
-<li><a href="windows.html">Windows</a></li>
-<li><a href="osx.html">Mac OSX</a></li>
-<li><a href="ubuntu.html">Ubuntu</a></li>
-<li><a href="redhatsl6.html">RedHat/Scientific Linux 6</a></li>
-</ul>
-
-<p>then return to this page to check that everything is installed correctly.</p>
-
-<h2>Getting a terminal window</h2>
-
-<p>Most of the checks below assume you're using a terminal window (also commonly called a command-line <a href="http://en.wikipedia.org/wiki/Shell_%28computing%29">shell</a> or <a href="http://en.wikipedia.org/wiki/Terminal_emulator">terminal emulator</a>). If you don't know what this is or how to get one then please go to our page <a href="terminal.html">on getting a terminal window</a>.</p>
-
-<h2>Bash shell, the UNIX shell we like to use</h2>
-
-<p>At the prompt, enter:</p>
-<pre>
-$ whoami
-</pre>
-<p>You should be told your user name, e.g.:</p>
-<pre>
-mjj
-</pre>
-
-<p><a href="http://www.gnu.org/software/bash/manual/bashref.html">http://www.gnu.org/software/bash/manual/bashref.html</a></p>
-
-<h2>Make for automating builds</h2>
-
-<p>At the prompt, enter
-<pre>
-$ make --version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-GNU Make 3.81
-</pre>
-
-<p><a href="http://www.gnu.org/software/make/">http://www.gnu.org/software/make/</a></p>
-
-<h2>A text editor for writing your code</h2>
-
-<p>Whatever editor you use is up to you. To see if your favourite is 
-installed try one of the following, or just try and create a text file.</p>
-
-<p>nano:</p>
-<ul>
-<li>At the prompt, enter
-<pre>
-$ nano --version
-</pre></li>
-<li>You should be given a version number, e.g.:
-<pre>
-GNU nano version 2.0.9 (compiled 14:28:54, Nov 23 2010)
-</pre></li>
-<li><a href="http://www.nano-editor.org/">http://www.nano-editor.org/</a></li>
-</ul>
-
-<p>Notepad (for Cygwin users):</p>
-<ul>
-<li>Edit files within your home directory under <code>C:\cygwin\home\user\</code>.</li>
-</ul>
-<p>TextEdit (for Mac OSX users):</p>
-<ul>
-<li>Edit files within your home directory under <code>/Users/user</code>.</li>
-</ul>
-
-<p>VI:</p>
-<ul>
-<li>At the prompt, enter
-<pre>
-$ vi --version
-</pre></li>
-<li>You should be given a version number, e.g.
-<pre>
-VIM - Vi IMproved 7.2 (2008 Aug 9, compiled Feb 25 2011 09:33:03)
-</pre></li>
-<li><a href="http://www.vim.org/">http://www.vim.org/</a></li>
-</ul>
-
-<p>Emacs:</p>
-<ul>
-<li>At the prompt, enter
-<pre>
-$ emacs --version
-</pre></li>
-<li>You should be given a version number, e.g.
-<pre>
-GNU Emacs 23.1.1
-</pre></li>
-<li><a href="http://www.gnu.org/software/emacs/">http://www.gnu.org/software/emacs/</a></li>
-</ul>
-
-<p>XEmacs:</p>
-<ul>
-<li>At the prompt, enter
-<pre>
-$ xemacs --version
-</pre></li>
-<li>You should be given a version number, e.g.
-<pre>
-XEmacs 21.5 (beta31) "ginger" [Lucid] (x86_64-redhat-linux, Mule)...
-</pre></li>
-<li><a href="http://www.gnu.org/software/emacs/">http://www.gnu.org/software/emacs/</a></li>
-</ul>
-
-<h2>Python for scripting</h2>
-
-<p>Any Python 2 version from 2.6 onwards is recommended. We have <em>not</em> yet tried Python 3 so please stick to Python 2.6 or 2.7 versions.</p>
-
-<p>To check that it's installed and what version you have, at the prompt, enter:</p>
-
-<pre>
-$ python --version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-Python 2.6.6
-</pre>
-
-<p>Now, check its behavior:</p>
-<pre>
-$ python
-&gt;&gt;&gt; print 2+2
-4
-</pre>
-
-<p>And, check it has the sqlite3 library if your boot camp is covering relational databases:</p>
-<pre>
-&gt; import sqlite3
-</pre>
-
-<p>If all is fine it won't complain.</p>
-<p><a href="http://www.python.org/">http://www.python.org/</a></p>
-
-<h2>Python setuptools for installing Python packages</h2>
-<p>At the prompt, enter:</p>
-<pre>
-$ easy_install --version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-distribute 0.6.10
-</pre>
-
-<p>or a warning:</p>
-<pre>
-usage: easy_install [options] requirement_or_url ...
-or: easy_install --help
-error: option --version not recognized
-</pre>
-
-<h2>Python nose for running unit tests</h2>
-
-<p>At the prompt, enter:</p>
-<pre>
-$ nosetests --version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-nosetests version 0.10.4
-</pre>
-
-<p>At the prompt, enter:</p>
-<pre>
-$ nosetests
-</pre>
-
-<p>You should be given a test report, e.g.:</p>
-<pre>
-........
-Ran 0 tests in 0.003s
-OK
-</pre>
-
-<h2>BitBucket for using remote version control repositories</h2>
-
-<p>For version control practicals, we use BitBucket to enable 
-repositories to be used remotely and to be shared. To get a BitBucket 
-account for version control practicals, just sign up for free at
-<a href="https://bitbucket.org/">https://bitbucket.org/</a>.</p>
-
-<h2>Mercurial for distributed version control</h2>
-
-<p>At the prompt, enter:</p>
-<pre>
-$ hg --version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-Mercurial Distributed SCM (version 1.4)
-</pre>
-<p><a href="http://mercurial.selenic.com/">http://mercurial.selenic.com/</a></p>
-
-<h2>EasyMercurial for version control via a GUI</h2>
-<ul>
-<li>Create a directory (folder) somewhere on your computer.</li>
-<li>Start EasyMercurial either by selecting it from a menu, double-clicking an icon or running:
-<pre>
-$ ./EasyMercurial
-</pre>
-at the command-line, depending upon your operating system</li>
-<li>Open Repository dialog will appear</li>
-<li>Click <strong>File folder</strong></li>
-<li>Click <strong>Browse...</strong> and select your directory</li>
-<li>Click <strong>OK</strong></li>
-</ul>
-<p><a href="http://easyhg.org/">http://easyhg.org/</a></p>
-
-<h2>SQLite for a lightweight relational database</h2>
-<p>At the prompt, enter:</p>
-<pre>
-$ sqlite3 -version
-</pre>
-
-<p>You should be given a version number, e.g.:</p>
-<pre>
-3.6.20
-</pre>
-<p><a href="http://www.sqlite.org/">http://www.sqlite.org/</a></p>
-
-<h2>Firefox for the SQLite manager below</h2>
-<p>Depending upon your operating system either start up Firefox from its menu or icon, or, at the prompt, enter:</p>
-<pre>
-$ firefox
-</pre>
-<p><a href="http://www.mozilla.org/en-US/firefox/new/">http://www.mozilla.org/en-US/firefox/new/</a></p>
-<h2>Firefox SQLite manager for a relational database</h2>
-<p>Once Firefox is running:</p>
-<ul>
-<li>Select <strong>Tools</strong> &rarr; <strong>SQLite Manager</strong></li>
-<li>SQLite Manager window appears</li>
-<li>Select <strong>Database</strong> &rarr; <strong>New database</strong></li>
-</ul>
-<p><a href="http://code.google.com/p/sqlite-manager/">http://code.google.com/p/sqlite-manager/</a></p>
+<p>
+  To complete the boot camp you will need
+  a web browser,
+  the Unix Bash shell,
+  the Git version control system (or Subversion or Mercurial, if your instructor is using them instead),
+  a code editor (though any plain text editor will work in a pinch),
+  and either a scientific Python installation that includes
+  the <a href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">IPython Notebook</a>,
+  <a href="http://numpy.scipy.org/">NumPy</a>,
+  and <a href="http://matplotlib.org/">matplotlib</a>,
+  or a full-featured installation of R.
+  You may also need
+  a simple database manager called <a href="http://www.sqlite.org/">SQLite</a>,
+  <a href="http://www.gnu.org/software/make/">GNU Make</a>
+  or other software specific to your boot camp.
+</p>
+<p>
+  This page explains how to install this software.
+  Please make sure you install everything before coming to your boot camp
+  so that teaching can begin right away.
+  (Wireless networks usually can't cope with 20 people trying to download these packages at the same time...)
+  If you run into any problems,
+  please let your boot camp organizer know as soon as possible.
+</p>
+<div align="center">
+  <strong>
+    You do <em>not</em> need to install everything listed below,
+    since some packages are alternatives to one another.
+    <br/>
+    Your instructor will let you know
+    exactly which packages will be used in the boot camp you are attending.
+  </strong>
+</div>
+<section id="vm">
+  <h2>Using a Virtual Machine</h2>
+  <p>
+    The easiest way for us to provide you with a consistent, pre-configured environment
+    is to give you a Linux virtual machine.  You can use this virtual machine
+    from Windows, OS X, or even another Linux install.
+    Install <a href="https://www.virtualbox.org/">VirtualBox</a>
+    and download
+    <a href="http://files.software-carpentry.org/swc_lubuntu.ova">this virtual machine image</a>
+    (<a href="http://is.gd/MosNIh">alternate download</a>).
+    Load the VM into VirtualBox by doing <code>Import Appliance</code>
+    and loading the <code>.ova</code> file.
+  </p>
+</section>
+<section id="native">
+  <h2>Native Installation</h2>
+  <p>
+    Many people prefer to install software directly on their machine
+    so that it is integrated with their usual desktop environment.
+    Even if you plan to do this,
+    please download VirtualBox and the virtual machine as a backup&mdash;it
+    can be difficult to get everything set up correctly on older machines.)
+  </p>
+  <p>
+    For Windows users:
+    The <a href="https://raw.github.com/swcarpentry/boot-camps/master/setup/swc-windows-installer.py">Software Carpentry Installer</a>
+    installs several of the packages described below.
+    Save the file to your hard drive,
+    then double-click on the file to run it.
+  </p>
+  <section id="bash">
+    <h3>The Unix Bash Shell</h3>
+    <table class="table table-striped">
+      <tr>
+        <td>Linux</td>
+        <td>
+          Bash is usually the default shell,
+          but if your Linux installation gives you something else
+          you can run Bash by opening a terminal and typing <code>bash</code>.
+        </td>
+      </tr>
+      <tr>
+        <td>Mac</td>
+        <td>
+          Bash is the default shell in Mac OS X.
+        </td>
+      </tr>
+      <tr id="bash-windows">
+        <td>Windows</td>
+        <td>
+          Follow <a href="https://openhatch.org/missions/windows-setup/install-git-bash">these instructions</a>
+          to install <a href="http://msysgit.github.com/">Git Bash</a>.
+      </tr>
+    </table>
+  </section>
+  <section id="git">
+    <h3>Git</h3>
+    <table class="table table-striped">
+      <tr>
+        <td>Linux</td>
+        <td>
+          Git should already be installed on your machine.
+          To check, type <code>which git</code> at the command line.
+          If it is not found,
+          install it via your distribution's package manager
+          (e.g., <code>apt-get</code>).
+        </td>
+      </tr>
+      <tr id="git-mac">
+        <td>Mac</td>
+        <td>
+          Use the <a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3">Git installer</a>
+          (the faster and simpler option)
+          or <a href="#xcode">install XCode</a>
+          and the command line tools (from the Download preferences pane).
+          Note that the XCode download is over a gigabyte...
+        </td>
+      </tr>
+      <tr>
+        <td>Windows</td>
+        <td>
+          Follow <a href="https://openhatch.org/missions/windows-setup/install-git-bash">these instructions</a>
+          to install <a href="http://msysgit.github.com/">Git Bash</a>.
+          (You may already have done this to <a href="#bash-windows">install Bash</a>.)
+        </td>
+      </tr>
+    </table>
+  </section>
+  <section id="editor">
+    <h3>Editor</h3>
+    <p>
+      <a href="http://www.sublimetext.com/">Sublime Text</a>
+      is an excellent editor that works on Mac, Windows, and most Linux distributions.
+      It's not free,
+      but it has an unlimited trial period.
+      Alternatively:
+    </p>
+    <table class="table table-striped">
+      <tr>
+        <td>Linux</td>
+        <td>
+          <a href="http://kate-editor.org/">Kate</a>
+          and
+          <a href="http://projects.gnome.org/gedit/">gedit</a>
+          are often pre-installed on Linux.
+        </td>
+      </tr>
+      <tr>
+        <td>Mac</td>
+        <td>
+          We recommend
+          <a href="http://www.barebones.com/products/textwrangler/">Text Wrangler</a>,
+          or
+          <a href="https://github.com/textmate/textmate">Text Mate 2</a>.
+        </td>
+      </tr>
+      <tr>
+        <td>Windows</td>
+        <td>
+          <a href="http://notepad-plus-plus.org/">Notepad++</a>
+          is a popular free code editor for Windows.
+        </td>
+      </tr>
+    </table>
+  </section>
+  <section id="python">
+    <h3>Python</h3>
+    We recommend the all-in-one scientific Python distributions
+    <a href="http://continuum.io/downloads.html">Anaconda</a> and
+    <a href="https://www.enthought.com/products/canopy/">Canopy</a>.
+    Anaconda and Canopy Express are free to everyone, Canopy is free to academics.
+    Setting these packages up may require using the shell;
+    if you aren't comfortable doing this,
+    please download the installer corresponding to your operating system
+    <em>before</em> arriving and your instructor will help you set it up.
+  </section>
+  <section id="sqlite">
+    <h3>SQLite</h3>
+    <p>
+      If you are using the SQLite Manager add-on for Firefox,
+      it can be installed through the "Add-ons Manager":
+    </p>
+    <ol>
+      <li>Start Firefox.</li>
+      <li>Select <strong>Tools</strong> &rarr;<strong> Add-ons</strong>.</li>
+      <li>In the search field, enter <code>sqlite</code>.</li>
+      <li>Click the search icon.</li>
+      <li>Double-click to select <strong>SQLite Manager 0.7.7</strong>.</li>
+      <li>Click <strong>Install</strong>.</li>
+      <li>Click <strong>restart now</strong>.</li>
+      <li>When Firefox restarts, select <strong>Tools&rarr;SQLite Manager</strong>.</li>
+    </ol>
+    Otherwise,
+    follow the instructions below:
+    <table class="table table-striped">
+      <tr>
+        <td>Linux</td>
+        <td>
+          SQLite may be pre-installed on your distribution.
+          To check, type <code>which sqlite3</code> in a shell.
+          If it is not present:
+          <ol>
+            <li>
+              Download the <a href="http://www.sqlite.org/download.html">SQLite Precompiled Binaries for Linux</a>.
+            </li>
+            <li>
+              Unzip the file.
+            </li>
+            <li>
+              Test the program using:
+              <pre>$ ./sqlite3 --version</pre>
+            </li>
+          </ol>
+        </td>
+      </tr>
+      <tr>
+        <td>Mac</td>
+        <td>
+          SQLite is pre-installed on Mac OS X.
+          Use <code>which sqlite3</code> to check that you have it.
+        </td>
+      </tr>
+      <tr>
+        <td>Windows</td>
+        <td>
+          <ol>
+            <li>
+              Download the <a href="http://www.sqlite.org/download.html">SQLite Precompiled Binaries for Windows</a>.
+            </li>
+            <li>
+              Unzip the file.
+            </li>
+            <li>
+              Copy <code>sqlite.exe</code> into <code>C:\Windows</code>.
+            </li>
+            <li>
+              Test the program using:
+              <pre>$ ./sqlite3 --version</pre>
+            </li>
+          </ol>
+        </td>
+      </tr>
+    </table>
+  </section>
+  <section id="make">
+    <h3>GNU Make</h3>
+    <table class="table table-striped">
+      <tr>
+        <td>Linux</td>
+        <td>
+          Make is pre-installed on all Linux distributions.
+        </td>
+      </tr>
+      <tr>
+        <td>Mac</td>
+        <td>
+          This should be pre-installed on Mac OS X.
+          If <code>which make</code> does not find it,
+          you will need to install XCode
+          (which you may already have done to <a href="#git-mac">install Git</a>).
+          Once that is done:
+          <ol>
+            <li>Click <strong>Applications</strong>.</li>
+            <li>Click <strong>XCode</strong>.</li>
+            <li>Select <strong>XCode&rarr;Preferences...</strong></li>
+            <li>Click <strong>Downloads</strong>.</li>
+            <li>Select <strong>Command Line Tools</strong>.</li>
+            <li>Click <strong>Install</strong>.</li>
+          </ol>
+        </td>
+      </tr>
+      <tr>
+        <td>Windows</td>
+        <td>
+          Make is installed by the
+          <a href="https://raw.github.com/swcarpentry/boot-camps/master/setup/swc-windows-installer.py">Software Carpentry Installer</a>.
+        </td>
+      </tr>
+    </table>
+  </section>
+  <section id="r">
+    <h3>R</h3>
+    <p>
+      You need to install and test R,
+      a free software environment for statistical computing and graphics,
+      along with RStudio and a few add-on packages.
+    </p>
+    <table class="table table-striped">
+      <tr>
+        <td>R</td>
+        <td>
+          Download and install <a href="http://www.r-project.org">R</a>
+          from <a href="http://cran.rstudio.com">CRAN</a>,
+          the Comprehensive R Archive Network.
+          It is <em>highly recommended</em> that you install a precompiled binary distribution
+          for your operating system&mdash;use the links up at the top of the CRAN page.
+        </td>
+      </tr>
+      <tr>
+        <td>RStudio</td>
+        <td>
+          Install <a href="http://www.rstudio.com/ide/download/">RStudio</a>.
+          Do whatever is appropriate for your OS to launch RStudio.
+          You should get a window similar to <a href="http://www.rstudio.com/ide/">this screenshot</a>,
+          but yours will be more boring because you haven't written any code or made any figures yet.
+          Put your cursor in the pane labelled Console,
+          which is where you interact with the live R process.
+          Create a simple object with code like
+          <code>x &lt;- 2 * 4</code>
+          (followed by enter or return),
+          then inspect the result by typing <code>x</code>
+          (again followed by enter or return).
+          If it displays 8,
+          you are good to go.
+        </td>
+      </tr>
+    </table>
+    <p>
+      R is an extensible system and many people share useful code they have developed as a package via CRAN and GitHub.
+      To install a package,
+      for example the <a href="http://plyr.had.co.nz"><code>plyr</code> package</a> for data aggregation,
+      here is one way to do it in the R console (there are others):
+    </p>
+<pre>{r, eval=FALSE, results="hide"}
+install.packages("plyr", dependencies = TRUE)</pre>
+    <p>
+      Another package you may wish to play around with is
+      <a href="http://yihui.name/knitr/">knitr</a>,
+      which facilitates the creation of dynamic reports.
+    </p>
+  </section>
+  <section id="hg">
+    <h3>Mercurial</h3>
+    Download and install <a href="http://mercurial.selenic.com/downloads/">Mercurial</a>.
+    If your boot camp is using the EasyMercurial GUI,
+    <a href="http://easyhg.org/download.html">download</a> and install it as well.
+  </section>
+  <section id="support">
+    <h3>Supporting Tools</h3>
+    <section id="support-mac">
+      <h4>Mac OS X</h4>
+      <table class="table table-striped">
+        <tr id="xcode">
+          <td>XCode</td>
+          <td>
+            <a href="https://developer.apple.com/xcode/">XCode</a>
+            is a set of free developer tools for Mac OS X.
+            To install it:
+            <ol>
+              <li>Go to the Apple app store.</li>
+              <li>Search for XCode.</li>
+              <li>Click <strong>Free</strong>.</li>
+              <li>Click <strong>Install App</strong>.</li>
+            </ol>
+            Note that the XCode download is over a gigabyte,
+            so please do this <em>before</em> arriving at the boot camp.
+          </td>
+        </tr>
+      </table>
+    </section>
+  </section>
+</section>
 {% endblock content %}
