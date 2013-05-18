@@ -1,0 +1,63 @@
+{% extends "_blog.html" %}
+{% block file_metadata %}
+<meta name="post_id" content="5442" />
+<meta name="author_id" content="arokem" />
+<meta name="title" content="Bootcamp Recap: Stanford" />
+<meta name="post_date" content="2013-05-16" />
+<meta name="category" content="venues/stanford" />
+<meta name="category" content="boot-camp" />
+{% endblock file_metadata %}
+{% block content %}
+
+<p>
+	On May 6th-7th, we hosted a Software Carpentry Bootcamp at Stanford University. Participants were students, post-docs and staff affiliated with the <a href="http://cni.stanford.ed/"> Center for Neurobiological and Cognitive Imaging</a> and the  <a href="http://biosciences.stanford.edu/neurosciences.html"> Neuroscience graduate program</a> and both programs provided support for the workshop. Bob Dougherty, the research director at the CNI, helped raise a substantial portion of the funds to support it. Prof. Miriam Goodman, from the Neurobiology Department, helped get the neuroscience program on board and helped secure additional funding from that program. Prof. Goodman was a participant in a SWC boot-camp at Berkeley last year and was eager to get SWC to Stanford. Instructors were Paul Ivanov, Bernhard Konrad and myself (Ariel Rokem, who also served as the local organizer/cat-herd).
+</p>
+
+<p>
+	When the bootcamp was announced in the local mailing lists for these programs, there was immediately a lot of interest: within a few days we had filled the 50 slots that were available and alread had more than 20 people on the waiting list.
+	On the first morning of the workshop, the room we had for the workshop - an underground lab classroom in the medical school, with students sitting in small groups around tables and two screens on either side of the room (see photograph below) - filled up with enthusiastic and slightly wary people. At the beginning of the workshop we had 47 participants and 33 of these stayed with us until the very end of day 2.
+</p>
+
+<table>
+  <tr>
+    <td>
+      <img src="{{root_path}}/files/2013/05/stanford.jpg" alt="SWC at Stanford"/>
+    </td>
+  </tr>
+</table>
+
+
+<p>
+	Considering that the students were a rather homegenous group in terms of their departmental affiliation, there was a large spread of backgrounds in terms of their knowledge about computers. Installation issues plagued the first day. Non-standard setups and Windows were a paricular PITA, but there were also many OS X users who had installed Anaconda and were still not set up to use Python at the beginning of the workshop, because they had not completed the final step of the installation, which required them to edit their <tt>.bash_profile</tt>, because the default installation puts Anaconda's bin directory in a non-PATH location. I think that many of the participants simply did not understand what they were asked to do. Which makes me think that the unix shell part of the workshop should maybe include more instruction on configuration. In my opinion, this could come at the cost of shortening the scripting part of that segment of the boot-camp. <br>
+	At any rate, I believe that the technical issue we had encountered is solved in the most recent version of Anaconda, which auto-edits the bash configuration.
+</p>
+
+<p>
+	In the last session of the work-shop we conducted a little experiment.  Adapting a lesson plan from Justin Kitzes' recent UC Berkeley work-shop, we taught a session aimed at teaching the students how to combine all the components of the previous parts (shell, git and programming) to create a reproducible work-flow. We used a data-set from neuroscience experiments, loaded the data and performed a rather basic calculation on it. Demonstrating one possible work-flow, we started by working interactively in the notebook, exploring the data as we went along and then, started writing functions from code cells that seemed useful. Finally, we showed how you would use the interactive bits of code exploration to write modules and tests and commit them as . We reached the end of this a little bit out-of-breath and its not obvious that everyone managed to follow through every step of this, but the major points came through, I believe
+
+</p>
+
+<p>
+	We used <a href="https://etherpad.mozilla.org/swc-stanford-052013">this etherpad</a> to comminucate with students througout the workshop and to gather feedback at the end of each half-day. You can see a list of the participants at the top. At the very end of the workshop, we asked them to write down their feedback for the entire workshop. Many took the time to write some thoughtful comments (for which we are grateful!). I have selected a couple of interesting points from the feedback we got. This one is quite encouraging:
+
+	<blockquote>
+	great workshop. i appreciated the backround and theory as well as the more practical examples. i think you did a nice job presenting this information to students of various levels. might be helpful to make it clear what level this class is for - some people had no coding backround, others were quite experienced. maybe a quick survey in the beginning and maybe some work in groups to accodmidate the different levels. i really appreciated your humor and positive attitude:)
+	</blockquote>
+
+	On the other hand, this one is a bit disparaging:
+	<blockquote>
+	I'm very grateful that you all volunteer your time to do this. But, I think you can/should be paid for it. There's money around for such things, many of our PIs would be happy to fork up a few hundred bucks, and in general I think the culture of doing good work for free in academia is deleterious to our collective financial well-bring.+4
+
+</blockquote>
+The '+4' at the end of that comment represents the fact that four additional people expressed their support to that point. I wonder whether this notion is due to the local hyper-capitalistic culture surrounding Stanford, and I am curious to hear what other instructors think about this. My personal response, also in line with some other aspects of the local culture, is that Software Carpentry is just one more way to <a href="http://www.youtube.com/watch?v=njpGH_IHjFg"> create more value than we capture </a>.
+</p>
+
+<p>
+	When the workshop was over, Paul, Bernhard and I took a long walk. Miriam Goodman had kindly invited us to her house in Menlo Park for post-workshop pizza and socializing. On the way over, we took the opportunity to go over the sessions one-by-one and reflect on them. Each one of us in turn said what worked and what didn't work in each of the sessions, both those that we had taught ourselves and those taught by the others. It was very useuful to get feedback from the other instructors, to rehash the mistakes and the successes and to be able to imagine what we would do differently in future workshops. One of the main sentiments in the air was that we were not sure whether we had really managed to "seal the deal", to get students to actually start using the things we had shown them in their day-to-day life.
+	Fortunately, I have the email addresses of participants. In a couple of months, I will circle back and ask them to fill another set of evaluations and see whether they have adopted any of the practices we introduced to them.
+</p>
+
+<p>
+</p>
+
+{% endblock content %}
