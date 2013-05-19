@@ -183,6 +183,7 @@
         "versions/version-3" : "Version 3",
         "versions/version-4" : "Version 4",
         "versions/version-4-1" : "Version 4.1",
-        "versions/version-5-0" : "Version 5.0"
+        "versions/version-5-0" : "Version 5.0",
+        "versions/version-5-1" : "Version 5.1"
     }
 }
