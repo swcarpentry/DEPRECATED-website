@@ -31,6 +31,7 @@ COMPILE = \
 
 # Static files.
 STATIC_SRC = $(wildcard ./3_0/*/*.jpg) \
+             $(wildcard ./3_0/*/*.JPG) \
              $(wildcard ./3_0/*/*.png) \
              $(wildcard ./4_0/*/*.odp) \
              $(wildcard ./4_0/*/*.pdf) \
