@@ -6,6 +6,7 @@
   <meta name="enddate" content="2013-06-07" />
   <meta name="latlng" content="49.276765,-122.917957" />
   <meta name="registration" content="open" />
+  <meta name="eventbrite_key" content="6744439801" />
   <meta name="instructor" content="williams.l" />
   <meta name="instructor" content="hart.t" />
   <meta name="instructor" content="konrad.b" />
@@ -20,4 +21,5 @@
 {% include "_requirements.html" %}
 {% include "_content.html" %}
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
