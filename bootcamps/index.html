@@ -171,6 +171,7 @@
 {% for bootcamp in page.children %}
   {% if bootcamp.startdate >= today %}
     <tr>
+      <td>{% if bootcamp.country %}<img src="{{root_path}}/img/flags/{{bootcamp.country}}-Flag-16.png" alt="{{bootcamp.country}}" />{% endif %}</td>
       <td class="link"><a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a></td>
       <td class="registration">
         {% if bootcamp.registration %}{{bootcamp.registration}}{% endif %}
@@ -218,6 +219,7 @@
 {% for bootcamp in page.children|reverse %}
   {% if bootcamp.startdate < today %}
     <tr>
+      <td>{% if bootcamp.country %}<img src="{{root_path}}/img/flags/{{bootcamp.country}}-Flag-16.png" alt="{{bootcamp.country}}" />{% endif %}</td>
       <td class="link"><a href="{{bootcamp.slug}}.html">{{bootcamp.venue}}</a></td>
       <td class="date">{{bootcamp.date}}</td>
     </tr>

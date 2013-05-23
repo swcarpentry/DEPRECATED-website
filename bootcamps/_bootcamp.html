@@ -43,7 +43,18 @@
       {{nav_left()}}
       {{nav_right()}}
     </ul>
-    <h1>{{page.venue}}:<br/>{{page.date}}</h1>
+    <div class="media">
+      {% if page.country %}
+      <img class="media-object pull-left" src="{{root_path}}/img/flags/{{page.country}}-Flag-64.png" alt="{{page.country}}" />
+      {% endif %}
+      <div class="media-body">
+	<strong>
+	  {{page.venue}}
+	  <br/>
+	  {{page.date}}
+	</strong>
+      </div>
+    </div>
   </div>
 {% endblock title %}
 
