@@ -1,0 +1,22 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="US Army Engineer Research and Development Center" />
+  <meta name="date" content="August 2013" />
+  <meta name="startdate" content="2013-08-27" />
+  <meta name="enddate" content="2013-08-29" />
+  <meta name="latlng" content="32.3019199,-90.8733522" />
+  <meta name="registration" content="restricted" />
+  <meta name="instructor" content="ahmadia.a" />
+  <meta name="instructor" content="terrel.a" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> US Army Engineer Research and Development Center, Vicksburg, MS</p>
+<p><strong>When:</strong> August 27-29, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+<p><strong>Note:</strong> This boot camp is restricted to staff of ERDC.
+{% include "_instructors.html" %}
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{% endblock content %}
