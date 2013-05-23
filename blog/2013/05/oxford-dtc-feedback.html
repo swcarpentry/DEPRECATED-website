@@ -1,0 +1,148 @@
+{% extends "_blog.html" %}
+{% block file_metadata %}
+<meta name="post_id" content="5446" />
+<meta name="author_id" content="jackson.m" />
+<meta name="title" content="Feedback from the Oxford DTCs" />
+<meta name="post_date" content="2013-05-23" />
+<meta name="category" content="boot-camp" />
+<meta name="category" content="venues/oxford" />
+{% endblock file_metadata %}
+{% block content %}
+<p>
+Here's the traditional good point-bad point round-the-room feedback from the <a href="http://software-carpentry.org/bootcamps/2013-05-oxford-dtc.html">Oxford boot camp </a> for UK doctoral training centre's, run by Jonathan Cooper, Mario Antonioletti and Shoaib Sufi, two weeks ago.
+</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Good</th>
+<th>Bad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lectures good - not too fast</td>
+<td>Issues getting pace correct for everyone</td>
+</tr>
+<tr>
+<td>Covered basics well and included advanced topics</td>
+<td>Some topics too easy</td>
+</tr>
+<tr>
+<td>Selection of topics covered</td>
+<td>Slightly too long on simple things in databases - more complex topics</td>
+</tr>
+<tr>
+<td>Python good solid foundation</td>
+<td>Intro Python too slow - too much basic programming</td>
+</tr>
+<tr>
+<td>Documentation for the topics good, so could read the material to catch up</td>
+<td>Version control too fast</td>
+</tr>
+<tr>
+<td>Lots of topics, didn't get bored</td>
+<td>Starting with version control - in at deep end - start simpler?</td>
+</tr>
+<tr>
+<td>Sticky notes good idea</td>
+<td>Version control not deep enough - need to explain concepts - what program actually does</td>
+</tr>
+<tr>
+<td>Tech support from helpers great</td>
+<td>Time management - wanted more Matlab</td>
+</tr>
+<tr>
+<td>Examples very practical - could think how to apply them to my work</td>
+<td>Include some theory behind Python - what important compared to other languages</td>
+</tr>
+<tr>
+<td>Access to all the materials from the start and afterwards</td>
+<td>Example used BitBucket but course materials on GitHub</td>
+</tr>
+<tr>
+<td>Having sample code, e.g. seeing how other people implement tests</td>
+<td>Databases needed more intro and context</td>
+</tr>
+<tr>
+<td>Exercises good to learn from</td>
+<td>Examples of big projects to explain the idea behind version control</td>
+</tr>
+<tr>
+<td>Good balance of trying it yourself and lecturing</td>
+<td>Using wrong programs on desktops - no cygwin</td>
+</tr>
+<tr>
+<td>Everyone could see the screens</td>
+<td>NumPy & SciPy not covered deeply enough</td>
+</tr>
+<tr>
+<td>Number of demonstrators good - didn't have to wait for help</td>
+<td>More comparison between Python and Matlab</td>
+</tr>
+<tr>
+<td>Generally very helpful</td>
+<td></td>
+</tr>
+<tr>
+<td>Awesome that this is free</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>
+Observations during the running of the boot camp included,
+</p>
+<p>
+Setup: 
+</p>
+<ul>
+<li>Enthought updated the EPD release between writing the instructions and running the boot camp! So the setup script doesn't work any more.</li>
+<li>There's an issue with pasting (<tt>%paste</tt>) in the new EPD ipython. Using <tt>%cpaste</tt> might work around this.</li>
+<li>ipython tab completion also wasn't working on some machines; not sure why.</li>
+</ul>
+<p>
+Logistics:
+</p>
+<ul>
+<li>It would be nicer if the room had space to walk along at the back.</li>
+<li>Some issues with eduroam (cross-University internet) access; not sure if resolved by shutting down unused machines.</li>
+<li>Having the desktops was helpful for people who couldn't get their machines to work.</li>
+</ul>
+<p>
+Git:
+</p>
+<ul>
+<li>Mario's recap slides were helpful.</li>
+<li>SSL certificate issues with Git and BitBucket on some machines - would be useful to have the solution handy (<tt>git config --global http.sslVerify 0</tt>).</li>
+</ul>
+<p>
+Python:
+</p>
+<ul>
+<li>Introduce ipython's <tt>var. help</tt> system in the notes.</li>
+<li>Don't use backslash to continue lines!</li>
+<li>Be more precise about <tt>is</tt> and <tt>is not</tt>.</li>
+</ul>
+<p>
+Testing:
+</p>
+<ul>
+<li>Lots of people had issues with setting the executable bit and shebang line correctly. Probably better to run with <tt>python dna.py</tt>.</li>
+<li>We also found many more people getting left behind. Not sure where improvement is needed yet.</li>
+</ul>
+<p>
+NumPy:
+</p>
+<ul>
+<li>Did list comprehensions baffle people?</li>
+<li>Much more time needed for the long exercise! But still think a larger exercise, that includes dealing with basic Python datatypes & functions, is valuable.</li>
+</ul>
+<p>
+SQL:
+</p>
+<ul>
+<li>Importing is quite hard to follow along with. Having a pre-canned database for anyone who gets too lost is really useful.</li>
+<li>(This is a general issue with following parts that involve button clicks and dialogs.)</li>
+</ul>
+
+{% endblock content %}
