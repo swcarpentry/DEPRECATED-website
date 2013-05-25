@@ -3,21 +3,20 @@
 <meta name="post_id" content="5443" />
 <meta name="author_id" content="wilson.g" />
 <meta name="title" content="Where We Are (More or Less)" />
-<meta name="post_date" content="2013-05-16" />
+<meta name="post_date" content="2013-05-24" />
 <meta name="category" content="opinion" />
 {% endblock file_metadata %}
 {% block content %}
 <p>
-  Software Carpentry's aim is to teach scientists basic computing concepts and skills
-  so that they can get more done in less time and with less pain.
-  As context, Bob Bixby recently wrote that:
+In January 2012,
+John Cook posted <a href="http://blog.codekills.net/">this</a> to his widely-read blog:
 </p>
 <blockquote>
-  Three orders of magnitude in machine speed
-  and three orders of magnitude in algorithmic speed
-  add up to six orders of magnitude in solving power.
-  A model that might have taken a year to solve 10 years ago
-  can now solve in less than 30 seconds.
+  In a review of linear programming solvers from 1987 to 2002,
+  Bob Bixby says that solvers benefited as much from algorithm improvements as from Moore's law:
+  "Three orders of magnitude in machine speed
+  and three orders of magnitude in algorithmic speed add up to six orders of magnitude in solving power.
+  A model that might have taken a year to solve 10 years ago can now solve in less than 30 seconds."
 </blockquote>
 <p>
   A million-fold speedup is pretty impressive,
@@ -31,11 +30,13 @@
   is now a bigger bottleneck than its running time.
 </p>
 <p>
-  That's where we come in.
+  That's where Software Carpentry comes in.
   We teach scientists
-  (usually grad students, since they have both need and time)
+  (usually grad students, since they have both the need and the time)
   what they ought to know
-  before they tackle anything with "peta" or "cloud" in its name.
+  <em>before</em> they start working on large programs,
+  creating web services,
+  or any other leading-edge work.
   Our hope is that if we give people basic skills,
   they'll be better able to take advantage of more sophisticated things.
 </p>
@@ -46,7 +47,7 @@
 </p>
 <ul>
   <li>
-    <strong>Day 1 a.m.</strong>:
+    <strong>Day 1 morning</strong>:
     Introduction to Unix shell.
     We show participants a dozen basic commands,
     but the real aim is to introduce them to pipes,
@@ -54,7 +55,7 @@
     and the idea of scripting.
   </li>
   <li>
-    <strong>Day 1 p.m.</strong>:
+    <strong>Day 1 afternoon</strong>:
     Version control,
     with an emphasis on collaboration and reproducibility.
     If time permits,
@@ -62,7 +63,7 @@
     or something else that's relatively easy.
   </li>
   <li>
-    <strong>Day 2 a.m.</strong>:
+    <strong>Day 2 morning</strong>:
     An introduction to Python,
     the real goal of which is to show them
     when and why to develop code as a set of comprehensible,
@@ -71,7 +72,7 @@
     and we expect that to become more common.
   </li>
   <li>
-    <strong>Day 2 p.m.</strong>:
+    <strong>Day 2 afternoon</strong>:
     Testing,
     focusing on the idea of tests
     as a way to specify what a program is supposed to do,
@@ -81,14 +82,14 @@
     but the "what" for scientific software is still very much up in the air.
   </li>
   <li>
-    <strong>Day 2 p.m.</strong>:
+    <strong>Day 2 afternoon</strong>:
     Number crunching using NumPy,
     basic SQL,
     or some other "beyond mere programming" topic that suits the audience.
   </li>
 </ul>
 <p>
-  As you may gather from the comments above,
+  As the comments above suggest,
   our real aim isn't to teach Python, Git, or any other specific tool:
   it's to teach <em>computational competence</em>.
   What we've found,
@@ -143,9 +144,9 @@
 <p>
   Results have been very good:
   we had two independent evaluations done last spring
-  (one by Prof. Julie Libarkin at Michigan State,
-  the other by Dr. Jorge Aranda at U. Victoria),
-  and both found that people actually do learn a lot.
+  (one by Prof. Julie Libarkin at Michigan State University,
+  the other by Dr. Jorge Aranda at the University of Victoria),
+  and both found that people actually are learning useful things.
   What we're struggling with now is
   showing that this translates into them doing more and/or better science
   (the holy trinity of "novelty, efficiency, and trust").
@@ -184,7 +185,7 @@
     how to create security holes...
   </li>
   <li>
-    We need to persuade the powers that be&mdash;the NSF,
+    We need to persuade the powers that be&mdash;funding agencies,
     departmental chairs, etc.&mdash;that this stuff deserves institutional backing.
     Many believe it's important;
     what's hard is persuading them that it's <em>more</em> important than
@@ -200,4 +201,14 @@
     have to show they have at least basic computational competence.
   </li>
 </ul>
+<p>
+  We're pausing to catch our breath from mid-July to the end of August this year,
+  during which time we'll clean up our GitHub repositories,
+  finish the <a href="http://guide.software-carpentry.org">instructors' guide</a>,
+  and generally get ready for another round of boot camps in the fall.
+  Before then,
+  though,
+  we will have some exciting news to announce,
+  so please keep an eye on this blog&mdash;we think you'll like what you see.
+</p>
 {% endblock content %}
