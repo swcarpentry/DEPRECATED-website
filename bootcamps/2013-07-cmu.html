@@ -1,0 +1,21 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Carnegie Mellon University" />
+  <meta name="date" content="July 2013" />
+  <meta name="startdate" content="2013-07-27" />
+  <meta name="enddate" content="2013-07-28" />
+  <meta name="latlng" content="41.74080,-111.81416" />
+  <meta name="registration" content="closed" />
+  <meta name="instructor" content="bray.e" />
+  <meta name="instructor" content="smith.j" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> Carnegie Mellon University, Pittsburgh.</p>
+<p><strong>When:</strong> July 27-28, 2013. We will start at 9:00 and end at 4:30 each day.</p>
+{% include "_instructors.html" %}
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{% endblock content %}
