@@ -4,19 +4,21 @@
   <meta name="date" content="July 2013" />
   <meta name="startdate" content="2013-07-18" />
   <meta name="enddate" content="2013-07-19" />
+  <meta name="registration" content="open" />
   <meta name="latlng" content="41.70522,-86.23531" />
   <meta name="instructor" content="olson.r" />
   <meta name="instructor" content="blischak.j" />
   <meta name="instructor" content="hansen.m" />
+  <meta name="eventbrite_key" content="7012698169" />
   {% endblock file_metadata %}
 {% block content %}
-<p><strong>Where:</strong> University of Notre Dame</p>
+<p><strong>Where:</strong> University of Notre Dame; 140 DeBartolo Hall</p>
 <p><strong>When:</strong> July 18-19, 2013. We will start at 9:00 and end at 4:30 each day.</p>
-<p><em>Registration for this boot camp has not yet opened.</em></p>
 {% include "_instructors.html" %}
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}
 {% include "_content.html" %}
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
