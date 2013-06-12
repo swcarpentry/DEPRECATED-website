@@ -805,7 +805,7 @@ class ContentEncodedRSSItem(RSSItem):
     def publish_extensions(self, handler):
         if self.content:
             if hasattr(handler, '_out'):
-                writer = handler._out
+                writer = handler._out.write
             elif hasattr(handler, '_write'):
                 writer = handler._write
             else:
