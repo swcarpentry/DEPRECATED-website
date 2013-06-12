@@ -805,14 +805,14 @@ class ContentEncodedRSSItem(RSSItem):
     def publish_extensions(self, handler):
         if self.content:
             if hasattr(handler, '_out'):
-                handler._out.write('<%(e)s><![CDATA[%(c)s]]></%(e)s>' %
-                    { 'e':'content:encoded', 'c':self.content})
+                writer = handler._out
             elif hasattr(handler, '_write'):
-                handler._write('<%(e)s><![CDATA[%(c)s]]></%(e)s>' %
-                    { 'e':'content:encoded', 'c':self.content})
+                writer = handler._write
             else:
                 assert False, \
                        'XML handler does not have _out or _write'
+            writer('<%(e)s><![CDATA[%(c)s]]></%(e)s>' %
+                   { 'e':'content:encoded', 'c':self.content})
 
 #----------------------------------------
 
