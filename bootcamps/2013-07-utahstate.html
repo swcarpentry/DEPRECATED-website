@@ -13,13 +13,35 @@
 {% block content %}
 <p><strong>Where:</strong> Utah State University Engineering Building (ENGR) Room 302. See <a href="http://www.usu.edu/map/index.cfm?id=32">the map</a></p>
 <p><strong>When:</strong> July 16-17, 2013. We will start at 9:00 and end at 4:30 each day.</p>
-<p><em>Please note, the
-boot camp content listed below is subject to change.</em></p>
 {% include "_instructors.html" %}
 {% include "_what.html" %}
 {% include "_who.html" %}
-{% include "_requirements.html" %}
-{% include "_content.html" %}
+
+<p><strong>Requirements:</strong> Participants must bring a laptop with a few
+specific software packages installed. (Please see <a
+    href="http://swcarpentry.github.io/boot-camps/2013-07-16-cuahsi/">http://swcarpentry.github.io/boot-camps/2013-07-16-cuahsi/</a>
+for installation instructions and more information.) <strong>Participants for
+    this boot camp will be expected to know basic Python.</strong> If you are
+not familiar with Python please work through <a
+    href="http://software-carpentry.org/4_0/python/index.html">this
+    material</a> before the boot camp.
+</p>
+
+<p>
+  <strong>Content:</strong> The syllabus for this boot camp will include:
+</p>
+<ul>
+  <li>Using classes and objects with examples using Python</li>
+  <li>Program design with examples using Python</li>
+  <li>How (and how much) to test programs</li>
+  <li>Using the shell to do more in less time</li>
+  <li>Using version control to manage and share information</li>
+  <li>Working with relational databases</li>
+</ul>
+<p>
+A daily schedule is available at <a href="http://swcarpentry.github.io/boot-camps/2013-07-16-cuahsi/">http://swcarpentry.github.io/boot-camps/2013-07-16-cuahsi/</a>.
+</p>
+
 {% include "_contact.html" %}
 {{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
