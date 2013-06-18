@@ -263,8 +263,8 @@
         <h1 class="title">{{page.title}}</h1>
         {% endblock title %}
 
-        {% block content %}{% endblock content %}
         {% block details %}{% endblock details %}
+        {% block content %}{% endblock content %}
         {% block comments %}{{disqus(page.title, page.filename)}}{% endblock comments %}
         </div>
       </div>
