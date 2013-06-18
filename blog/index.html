@@ -17,9 +17,11 @@
     <h3><a href="{{site}}/blog/{{post.index_link()}}">{{post.title}}</a></h3>
     <div class="row-fluid">
       <span class="span11">
-        {{post.excerpt(page.filename)|safe}}
+        <p>
+          (Posted {{post.post_date}}{% if post.author_id %} by {{post.author_id}}{% endif %})
+	</p>
         <br/>
-        &mdash; {{post.post_date}}{% if post.author_id %} by {{post.author_id}}{% endif %}.
+        {{post.excerpt(page.filename)|safe}}
       </span>
     </div>
   {% endfor %}
