@@ -5,14 +5,14 @@
   <meta name="startdate" content="2013-09-12" />
   <meta name="enddate" content="2013-09-13" />
   <meta name="latlng" content="51.457971,-2.601474" />
-  <meta name="registration" content="restricted" />
+  <meta name="registration" content="open" />
+  <meta name="eventbrite_key" content="7033416137" />
   <meta name="instructor" content="ram.k" />
   <meta name="instructor" content="woods.c" />
 {% endblock file_metadata %}
 {% block content %}
 <p><strong>Where:</strong> University of Bristol</p>
 <p><strong>When:</strong> September 12-13, 2013. We will start at 9:00 and end at 17:00 each day.</p>
-<p><strong>Note: This boot camp is by invite only. Requests for places will not be considered until we know whether spaces will be available, at which point a registration link will be added to this page.</strong></p>
 {% include "_instructors.html" %}
 {% include "_what.html" %}
 {% include "_who.html" %}
@@ -23,4 +23,5 @@
   Please mail the
   <a href="mailto:host-bristol@software-carpentry.org">local organiser</a> for more information.
 </p>
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
