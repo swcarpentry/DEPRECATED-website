@@ -19,8 +19,8 @@
   because they don't have to spend time thinking about the things that aren't.
 </p>
 <p>
-  Open science (or digital research, or whatever you want to call it)
-  isn't there yet.
+  Open science&mdash;by which I mean all the new ways of doing science
+  that the web has inspired&mdash;isn't there yet.
   Many people have tools and techniques that work well for them,
   but every setup is one-of-a-kind,
   and everyone has had to assemble the pieces for themselves.
@@ -32,8 +32,9 @@
   a mass of extensions and auxiliary tools,
   but when it first appeared in 2004,
   it was a minor revolution.
-  One reason was that it emphasized <em>convention over configuration</em>,
-  i.e.,
+  One reason was the "create a blog in 15 minutes" screencast
+  that showed people just how easy simple things could be.
+  Another was its emphasis on <em>convention over configuration</em>:
   instead of letting web developers do things however they wanted,
   it said,
   "Here's where stuff is and here's how it works."
@@ -54,7 +55,7 @@
   that would let scientists do science our way with near-zero startup overhead?
   (Note that I'm <em>not</em> asking,
   "What web programming framework should they use?")
-  A few of the features I have in mind are:
+  A few things I want are:
 </p>
 <ol>
   <li>
@@ -77,7 +78,7 @@
     and be invokeable in uniform ways.
   </li>
   <li>
-    <em>Everything automatically web-accessible.</em>
+    <em>Everything automatically accessible on the web, for the long term.</em>
     As soon as I create a project,
     other scientists should be able to query my data&mdash;not just download it,
     but query it.
@@ -89,6 +90,10 @@
     should automatically generate the wrappers needed to pull a project's data and metadata.
     Everything else should automatically be accessible too:
     every paper, figure, or table should have a DOI and be searchable and fetchable.
+    And note that "accessible" doesn't just mean "the bits are available":
+    without correct documentation of formats and semantics&mdash;which most scientists
+    never quite get around to writing by hand&mdash;data rusts
+    almost as quickly as code.
   </li>
   <li>
     <em>Standard commands to tie it all together.</em>
@@ -99,13 +104,13 @@
     Science projects should have something similar for adding new data sets, producing new results, etc.
   </li>
   <li>
-    <em>Pluginnable.</em>
+    <em>Pluggable.</em>
     Rails didn't just put the application code and data in particular places;
     it also provided slots for adding new management commands and analysis tools.
   </li>
   <li>
     <em>Forkable and mergeable.</em>
-    Whatever Rails-like system scientists use <em>must</em> place nicely with version control,
+    Whatever Rails-like system scientists use <em>must</em> play nicely with version control,
     because as I wrote <a href="{{root_path}}/blog/2013/05/what-does-victory-look-like.html">a couple of weeks ago</a>,
     future scientists won't submit, publish, and download papers:
     they will fork and merge projects.
@@ -117,9 +122,13 @@
     Wikipedia, Facebook, and GitHub are effectively all single points of failure:
     one court order,
     change of policy,
-    or (as we recently discovered with Mendeley) ideologically incompatible acquisition
+    or
+    (as we recently discovered with
+    <a href="http://www.newyorker.com/online/blogs/elements/2013/04/elsevier-mendeley-journals-science-software.html">Mendeley</a>)
+    ideologically incompatible acquisition
     can have wide-reaching impact.
-    We know how to build truly distributed systems, like BitTorrent;
+    We know how to distribute information so that it can survive
+    the disappearance of its initial host&mdash;BitTorrent is just one example.
     I hope that whatever else "Science on Rails" is,
     it will be robustly federated from the ground up.
   </li>
