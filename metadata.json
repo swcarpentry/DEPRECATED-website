@@ -94,6 +94,7 @@
         "wilson.p" : "Paul Wilson",
         "wilson.r" : "Robin Wilson",
         "woods.c" : "Christopher Woods",
+        "yu.terri" : "Terri Yu",
         "yunis.enas" : "Enas Yunis",
         "zarrabeitia.l" : "Luis Zarrabeitia"
     },
@@ -183,6 +184,7 @@
         "venues/uc-san-diego" : "University of California - San Diego",
         "venues/uc-san-francisco" : "University of California - San Francisco",
         "venues/ukmo" : "UK Met Office",
+        "venues/umass-amherst" : "University of Massachusetts (Amherst)",
         "venues/university-college-london" : "University College London",
         "venues/university-of-alberta" : "University of Alberta",
         "venues/university-of-arizona" : "University of Arizona",
