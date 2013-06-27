@@ -13,12 +13,24 @@
 {% block content %}
 <p><strong>Where:</strong> Carnegie Mellon University, Pittsburgh.</p>
 <p><strong>When:</strong> July 27-28, 2013. We will start at 9:00 and end at 4:30 each day.</p>
-<p><strong>Note:</strong> This boot camp is restricted to CMU grad students. Please take the <a href=https://docs.google.com/spreadsheet/viewform?formkey=dFNmZmxGd0Z2c1BwcE1kMVlfR3UzWHc6MA#gid=0>pre-assesment survey</a></p>
+<p><strong>Note:</strong> This boot camp is restricted to CMU grad students.
+After registering, please take the <a
+    href="https://docs.google.com/spreadsheet/viewform?formkey=dFNmZmxGd0Z2c1BwcE1kMVlfR3UzWHc6MA#gid=0">pre-assessment
+    survey</a>.</p>
 {% include "_instructors.html" %}
 {% include "_what.html" %}
 {% include "_who.html" %}
 {% include "_requirements.html" %}
 {% include "_content.html" %}
-{% include "_contact.html" %}
+
+<p>
+  <strong>Contact</strong>:
+  Please mail
+  <a href="mailto:{{contact_email}}">{{contact_email}}</a> or
+  the boot camp organizer, <a href="mailto:patrick.egan.foley@gmail.com">Patrick
+      Foley</a>,
+  for more information.
+</p>
+
 {{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
