@@ -1,0 +1,46 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="University of Wisconsin - Madison" />
+  <meta name="date" content="August 2013" />
+  <meta name="startdate" content="2013-08-28" />
+  <meta name="enddate" content="2013-08-29" />
+  <meta name="latlng" content="43.07718,-89.40399" />
+<!--  The commented lines below are old and will need to be updated. -->
+<!--  <meta name="instructor" content="gidden.matt" /> -->
+<!--  <meta name="instructor" content="mcgough.s" /> -->
+<!--  <meta name="instructor" content="merrelli.aronne" /> -->
+<!--  <meta name="instructor" content="wilson.p" -->
+<!--  <meta name="eventbrite_key" content="5915929705" /> -->
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> University of Wisconsin-Madison. Wisconsin Institutes
+ for Discovery, 3rd Floor Teaching Lab</p>
+<p><strong>When:</strong> April 28-29, 2013. We will start at 8:30 and end at 4:30 each day.</p>
+{% include "_instructors.html" %}
+<p><strong>What:</strong> Our goal is to help UW-Madison researchers using computing in their
+ research to become
+ more productive by teaching basic computing skills like program design, version control,
+ testing, and task automation. In this two-day boot camp, short tutorials will alternate with
+ hands-on practical exercises. Participants will be encouraged both to help one another, and to
+ apply what they have learned to their own research problems during and between sessions. There
+ will be online follow-up sessions for 6 to 8 weeks extending the material from the boot camp.</p>
+<p><strong>Who:</strong> The course is aimed at graduate students, post-docs, staff, and faculty
+ who have basic familiarity with programming concepts (like loops, conditionals, arrays, and
+ functions), but need help translating this knowledge into practical tools to help them work
+ more productively.</p>
+<p><strong>Content:</strong> The syllabus for this boot camp will include:</p>
+<ul>
+<li>using the shell to do more in less time</li>
+<li>using version control to manage and share information</li>
+<li>workflow automation and scripting (with Python as example)</li>
+<li>how (and how much) to test programs</li>
+<li>documentation and debugging</li>
+</ul>
+<p><strong>Requirements:</strong> Participants must bring a laptop with a few specific software
+ packages installed. Please visit the 
+ <a href="http://uw-madison-aci.github.io/boot-camps/2013-08-28-uwmadison/index.html">
+ boot camp web page</a> for installation instructions. Note: we'll be relying on the Union South 
+ wireless network.</p>
+{% include "_contact.html" %}
+<!--{{eventbrite(page.eventbrite_key, page.venue, page.date)}}-->
+{% endblock content %}
