@@ -5,7 +5,7 @@
   <meta name="startdate" content="2013-09-26" />
   <meta name="enddate" content="2013-09-27" />
   <meta name="latlng" content="49.261111,-123.253056" />
-  <meta name="eventbrite_key" content="" />
+  <meta name="eventbrite_key" content="7405051709" />
   <meta name="instructor" content="gustavsen.j" />
   <meta name="instructor" content="latornell.doug" />
 {% endblock file_metadata %}
@@ -19,4 +19,5 @@
 {% include "_requirements.html" %}
 {% include "_content.html" %}
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
