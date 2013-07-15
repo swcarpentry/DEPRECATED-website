@@ -1,0 +1,23 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="University of British Columbia" />
+  <meta name="date" content="September 2013" />
+  <meta name="startdate" content="2013-09-26" />
+  <meta name="enddate" content="2013-09-27" />
+  <meta name="latlng" content="49.261111,-123.253056" />
+  <meta name="eventbrite_key" content="7405051709" />
+  <meta name="instructor" content="gustavsen.j" />
+  <meta name="instructor" content="latornell.doug" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> University of British Columbia, ESB-5108</p>
+<p><strong>When:</strong> September 26-27, 2013. We will start at 9:00 on both days, and end at 4:00 on the 26th, and 4:30 on the 27th.</p>
+<p><strong>Note:</strong> Registration for this camp will be restricted to grad students, postdocs and faculty in the UBC EOAS department. <em>Registration for this boot camp has not yet opened.</em></p>
+{% include "_instructors.html" %}
+{% include "_what.html" %}
+{% include "_who.html" %}
+{% include "_requirements.html" %}
+{% include "_content.html" %}
+{% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
+{% endblock content %}
