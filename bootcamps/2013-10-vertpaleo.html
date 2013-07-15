@@ -1,0 +1,35 @@
+{% extends "_bootcamp.html" %}
+{% block file_metadata %}
+  <meta name="venue" content="Society of Vertebrate Paleontology Annual Meeting" />
+  <meta name="date" content="October 2013" />
+  <meta name="startdate" content="2013-10-29" />
+  <meta name="latlng" content="34.052778,-118.255833" />
+  <meta name="instructor" content="ram.k" />
+  <meta name="instructor" content="wright.april" />
+  <meta name="registration" content="restricted" />
+{% endblock file_metadata %}
+{% block content %}
+<p><strong>Where:</strong> The Westin Bonaventure Hotel, Los Angeles</p>
+<p><strong>When:</strong> October 29. We will start at 10:00 and end at 4:00.</p>
+<p><strong>Note:</strong> Participation in this boot camp is restricted to attendees of the Society of Vertebrate Paleontology Annual Meeting.</p>
+{% include "_instructors.html" %}
+{% include "_what.html" %}
+<p>
+  <strong>Who:</strong>
+  The course is aimed at postgraduate students and other scientists
+  who want to learn how to use simple but powerful programming tools
+  and techniques to make their research more
+  repeatable, more tractable and more efficient. No prior programming
+  experience necessary.
+</p>
+{% include "_requirements.html" %}
+<p>
+  <strong>Content:</strong> The syllabus for this boot camp will include:
+</p>
+<ul>
+  <li>using the shell to do more in less time</li>
+  <li>basic Python programming</li>
+  <li>documentation and debugging</li>
+</ul>
+{% include "_contact.html" %}
+{% endblock content %}
