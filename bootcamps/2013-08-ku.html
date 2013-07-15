@@ -6,6 +6,7 @@
   <meta name="enddate" content="2013-08-23" />
   <meta name="latlng" content="38.9584551,-95.2432842" />
   <meta name="registration" content="restricted" />
+  <meta name="eventbrite_key" content="6905790405" />
   <meta name="instructor" content="mctavish.ej" />
   <meta name="instructor" content="cranston.k" />
 {% endblock file_metadata %}
@@ -19,4 +20,5 @@
 {% include "_requirements.html" %}
 {% include "_content.html" %}
 {% include "_contact.html" %}
+{{eventbrite(page.eventbrite_key, page.venue, page.date)}}
 {% endblock content %}
